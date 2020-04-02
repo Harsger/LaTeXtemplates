@@ -1,0 +1,3193 @@
+\documentclass[
+a4paper,                                %Papierformat
+twoside,                                %Oneside oder twoside, je nach dem, wie man die Arbeit ausdrucken möchte.
+BCOR1.4cm,                      %Bindungskorrektur
+ngerman,                                %Sprache: Deutsch nach "neuer" Rechtschreibung
+10pt,                           %Schriftgröße
+headings=normal,                %Größe der Überschriften: Standard ist big, auch möglich sind normal und small
+headsepline,                    %Trennlinie zwischen Kopfzeile und Text
+clearplainpage, %Leere Seiten ohne Kopf- und Fußzeilen, bei twoside wird immer auf einer rechten Seite wieder mit Text begonnen
+final,                                  % Ausgabe der Grafiken: draft für Kästen statt Bildern, final für normale Ausgabe
+div=14,
+parskip=full
+]{scrbook}
+
+         
+%\documentclass[10pt,a4paper]{article}
+\usepackage[a4paper,head=60mm,headsep=10mm,height=232mm,bottom=40mm,left=3.4cm,right=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{subfigure} 
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{caption}
+
+\usepackage{float}
+\usepackage[usenames,dvipsnames]{xcolor}
+
+\usepackage{tikz}
+\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+
+
+
+\colorlet{fermioncol}{blue}
+\colorlet{topcol}{black}
+\colorlet{bcol}{SeaGreen}
+\colorlet{Wcol}{LimeGreen}
+\colorlet{gluoncol}{Orange}
+\colorlet{photoncol}{Dandelion}
+
+\graphicspath{{BALatexBilder/}{BALatexHistogramme/}{BALatexHistogrammeAnhang/}}
+
+\begin{document}
+
+   \tikzset{
+      W/.style={decorate, decoration={snake}, draw=Wcol},
+      photon/.style={decorate, decoration={snake, amplitude = .5mm, segment length = 2mm, post length = 0.5mm}, draw=photoncol},
+      gluon/.style={decorate, draw=gluoncol, decoration={coil,amplitude=4pt, segment length=5pt}},     
+      fermion/.style={draw=fermioncol, postaction={decorate}, decoration={markings,mark=at position .55 with {\arrow[scale=1.5, draw=fermioncol]{>}}}},
+      antifermion/.style={draw=fermioncol, postaction={decorate}, decoration={markings,mark=at position .55 with {\arrow[scale=1.5, draw=fermioncol]{<}}}},
+      top/.style={draw=topcol, postaction={decorate}, decoration={markings,mark=at position .55 with {\arrow[scale=1.5, draw=topcol]{>}}}},
+      antitop/.style={draw=topcol, postaction={decorate}, decoration={markings,mark=at position .55 with {\arrow[scale=1.5, draw=topcol]{<}}}},
+      b/.style={draw=bcol, postaction={decorate}, decoration={markings,mark=at position .55 with {\arrow[scale=1.5, draw=bcol]{>}}}},
+      antib/.style={draw=bcol, postaction={decorate}, decoration={markings,mark=at position .55 with {\arrow[scale=1.5, draw=bcol]{<}}}}    
+   }
+
+\thispagestyle{empty}
+        \begin{center}
+                \vspace*{0.5cm}
+                \sffamily\bfseries\huge Untersuchung einer neuen Methode zur Bestimmung der top-Quarkmasse\\   
+                \vspace*{0.5cm}
+                \sffamily\bfseries\huge Investigation of a new methode to determine of the top-quarkmass\\     
+        \end{center}
+        \vspace*{3mm}
+        \begin{center}
+                \includegraphics[width=9cm]{siegel1.png}%
+        \end{center}
+        \vspace*{8mm}
+
+        \begin{center}
+                 \large Bachelorarbeit an der Fakult\"at f\"ur Physik\\
+                 \large der\\
+                 \large Ludwig-Maximilians-Universit\"at M"unchen\\
+        \vspace*{8mm}
+                 vorgelegt von \\
+        \vspace*{1mm}
+                 {\Large Maximilian Herrmann}\\
+                 geboren in Aschaffenburg\\
+        \vspace*{8mm}
+                 M\"unchen, den 30.07.2014
+        \end{center}
+\thispagestyle{empty}
+
+        \newpage
+        
+        \thispagestyle{empty}
+        \cleardoublepage
+        
+        \vspace*{\stretch{2}}
+        \begin{flushleft}
+        \large Gutachter:  Prof. Dr. Otmar Biebel \\[1mm]
+        \end{flushleft}
+        
+        \thispagestyle{empty}
+        \cleardoublepage
+
+
+\chapter*{Zusammenfassung}
+
+Ziel dieser Arbeit war es eine Methode zu untersuchen bei der die Masse des top-Quarks nur aus den Impulsen und den Winkeln zwischen seinen Zerfallsprodukten bestimmt wird, ohne deren Energien messen zu m\"ussen. Hierbei wurde ien top - Anti-top - Quark - System betrachtet, welches semileptonisch zerf\"allt. Die Zerfallsprodukte des top-Quarks, dessen W-Boson hadronisch weiterzerf\"allt, sind genutzt worden, um damit die Masse zu bestimmen. Getestet wurden die im Theorieteil hergeleiteten Formeln mit zehntausend Ereignissen aus Simulationen von HERWIG und PYTHIA.
+
+
+\begin{figure}[b]
+(Anmerkung: In dieser Arbeit wird ausschlie\ss lich mit nat\"urlichen Einheiten, das hei\ss t $\textit c = \hbar = 1 $, gearbeitet)
+\end{figure}
+
+\thispagestyle{empty}
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\chapter{Einleitung}
+
+Als das schwerste Elementarteilchen im Standardmodell nimmt das top-Quark eine Sonderrolle ein. Da es eine sehr geringe Halbwertszeit besitzt, hadronisiert es im Gegensatz zu den anderen Quarks nicht, das bedeutet man kann Eigenschaften wie die Ladung oder den Spin gut Untersuchen. Zudem koppelt es durch seine hohe Masse am st\"arksten an das Higgsfeld, womit Voraussagen und Tests zur Masse des zugeh\"origen Bosons m\"oglich sind. 
+
+Von daher ist die genaue Messung der Masse, welche einen freien Parameter des Standardmodells darstellt von gro\ss em Interesse. Meine Arbeit soll eine neue M\"oglichkeit vorstellen aus den Winkeln und Impulsen der rekonstruierten Jets der Zerfallsprodukte des top-Quarks auf dessen Masse zu schlie\ss en. 
+
+Die gr\"o\ss ten Unsicherheiten der bisherigen Messungen ergeben sich aus den Energiebestimmugen der Jets, da die Parameter zur Skalierung der gemessenen Energien aus den Kalorimetern nicht genau genug bestimmt werden k\"onnen. Die Methode, welche ich untersucht habe, nutzt die Kinematik des top-Quark - Zerfalls aus, um aus den Winkeln und Impulsen der Tochterteilchen, welche man gut messen kann, die Masse zu berechnen, ohne Energiemessungen zu ben\"otigen.
+
+Hierzu wird der Zerfallskanal des top-Quarks betrachtet bei dem, nachdem es in ein W-Boson und ein bottom-Quark zerfallen ist, das W-Boson in ein Quark - Anti-Quark - Paar weiterzerf\"allt. Diese beiden Quakrs erzeugen zusammen mit dem bottom-Quark durch Hadronisierung Jets, von denen die Winkel und Impulse vermessen werden.
+
+\newpage
+
+\chapter{Standardmodell}
+
+Das Standardmodell der Teilchenphysik ist eine Theorie, die Elementarteilchen und deren Wechselwirkungen beschreibt. Bisher spiegelt es die Messungen und Ergebnisse sehr gut wider, allerdings bleiben einige Fragen ungekl\"art. So wird die Gravitation komplett au\ss er Acht gelassen, da sie im Vergleich zu den anderen Kr\"aften erst bei sehr viel h\"oheren Energien, als die, welche wir heute zu Erreichen schaffen, zu Tragen kommt. Auch die Frage nach Dunkler Materie und Dunkler Energie kann das Standardmodell nicht beantworten. Zudem besitzt es eine Reihe von Parametern, welche die Theorie nicht festlegt, sondern die gemessen werden m\"ussen, wobei sich die Frage stellt, ob in einer \"ubergeordneten Theorie diese Parameter bestimmt w\"aren. Nichtsdestoweniger ist es eine der erfolgreichsten Theorien der Physik und soll im Folgenden kurz schematisch aufgezeigt werden.
+
+\section{Bestandteile}
+
+Eine \"Ubersicht des Standardmodells bietet Abbildung \ref{SM}
+
+\begin{figure}
+	\includegraphics[width=14cm]{standardmodell.png}
+	\caption{\"Uberblick der Bestandteile des Standardmodells (Bildquelle: http://de.wikipedia.org/wiki/Standardmodell)}
+	\label{SM}
+\end{figure}
+
+\subsection{Wechselwirkungen}
+
+Als Quantenfeldtheorie werden die Wechselwirkungen durch Bosonen, Teilchen mit ganzzahligem Spin, vermittelt. F\"ur die elektromagnetische Wechselwirkung entspricht diesem Boson das Photon, f\"ur die schwache dem W- und Z-Boson und f\"ur die starke dem Gluon.  (Symbole: $ \gamma $, $ W^{\pm} $, $ Z $ und $ g $)
+
+\paragraph*{Elektromagnetische Wechselwirkung :}
+
+Alle elektrisch geladenen Teilchen wechselwirken elektromagnetisch, das hei\ss t Photonen koppeln an alle  Quarks, an W-Bosonen und an die geladenen Leptonen, aber nicht an Neutrinos. Photonen sind masselos und bewegen sich mit Lichtgeschwindigkeit.
+
+\paragraph*{Schwache Wechselwirkung :}
+
+Es gibt ein positiv und ein negativ geladenes W-Boson. Beide zeichnen sich dadurch aus, dass sie nur an linksh\"andige Fermionen und rechtsh\"andige Anit-Fermionen koppeln. Den W- und Z-Bosonen wird \"uber das Higgsfeld, mit seinem korrespondierenden Boson, die Masse vermittelt.
+
+\paragraph*{Starke Wechselwirkung :}
+
+Gluonen tragen zwei sogenannte Farbladungen. Die eine Farbe ist entweder \textit{rot}, \textit{gr\"un} oder \textit{blau}, w\"ahrend die andere, eine Anti-Farbe, entweder \textit{antirot}, \textit{antigr\"un} oder \textit{antiblau} ist. Zusammen sind die drei Farben farbneutral, genauso wie die Kombination einer Farbe mit ihrer Antifarbe. Hierdurch k\"onnen sie mit sich selbst wechselwirken. Sonst koppeln nur Quarks im Standardmodell stark an Gluonen.
+
+\subsection{Materie}
+
+Die Materie besteht aus Fermionen, also Spin-$ \tfrac{1}{2} $-Teilchen, die in Quarks und Leptonen unterschieden werden. Diese werden wiederum jeweils in drei Generationen mit zwei Mitgliedern unterteilt. 
+
+\paragraph*{Quarks :}
+
+In jeder Generation gibt es up-type Quarks (up-, charm- und top-Quark; Symbole: 
+$ u $, $ c $, $ t $) mit Ladung 
+$ +\tfrac{2}{3} $ 
+und down-type Quarks (down-, strange- und bottom-Quark; Symbole: 
+$ d $, $ s $, $ b $ ) mit Ladung 
+$ -\tfrac{1}{3} $. Deren Antiteilchen tragen entgegengesetzte Ladungen und werden durch einen Strich \"uber dem Symbol gekennzeichnet. Die erste Generation der Quarks besitzt einen schwachen Isospin, welcher 
+$ +\tfrac{1}{2} $ 
+f\"ur das up-Quark und 
+$ -\tfrac{1}{2} $ 
+f\"ur das down-Quark ist. Zudem besitzten Quarks eine Flavorquantenzahl, welche nur f\"ur das entsprechende Quark nicht null und f\"ur up-type Quarks +1, f\"ur down-type Quarks -1 ist. F\"ur Antiquarks sind die Vorzeichen umgekehrt. Aufgrund ihrer Farbladung unterliegen Quarks, im Gegensatz zu Leptonen, der starken Wechselwirkung. Ein Quark tr\"agt hierbei eine der drei Farben und Anti-Quark eine Antifarbe. \cite{Griffiths}
+
+\paragraph*{Leptonen :}
+
+Zu den Leptonen z\"ahlen au\ss er den einfach negativ geladenen Elektronen, Myonen und Tauonen noch die entsprechenden Neutrinos, welche sehr leicht und ausschlie\ss lich schwach wechselwirkend sind. (Symbole: $ e^{-} $, $ \mu^{-} $, $ \tau^{-} $, $ \nu_{e} $, $ \nu_{\mu} $ und  $ \nu_{\tau} $) Zu jedem negativ geladenen Lepton gibt es ein positiv geladenes Antiteilchen, diese werden mit einem Plus gekennzeichnet. Im Falle des Elektron Antiteilchen wird dieses Positron genannt. Die Antineutrinos werden wieder durch einen Strich \"uber dem Symbol kenntlich gemacht. Das Standardmodell nimmt an, dass  Neutrinos masselos sind, dies steht aber im Widerspruch zu den Neutrino-Oszillationen, welche zwischen den Generationen beobachtet wurden.
+
+\section{Confinement und Hadronisierung}
+
+Quarks hat man, wie Gluonen,  bisher noch nicht frei beobachtet. Sie wurden lediglich als Partonen, also Bestandteile, der farbneutralen Hadronen nachgewiesen.
+Diesen Umstand, dass man keine farbgeladenen Teilchen frei beobachtet, bezeichnet man als Confinement.
+Da bei diversen Teilchenprozessen Quarks aber in unterschiedliche Richtungen gestreut werden, w\"are es zu erwarten sie separat anzutreffen. Hier greift der Prozess der Hadronisierung ein, bei dem Teilchenkaskaden von Mesonen, bestehend aus einem Quark und einem Antiquark, und Baryonen, welche aus drei Quarks oder Antiquarks zusammengesetzt sind, entstehen. 
+Erkl\"aren kann man das mit der Selbstwechselwirkung des Gluonfeldes. Dieses steigt mit einem linearen Term mit dem Abstand, den Quarks auseinander gehen, an und erzeugt bei gen\"ugend Energie ein weiteres Quark - Antiquark - Paar. Dieses bildet mit den anderen Quarks Mesonen oder Baryonen oder f\"uhrt zu weiteren Paaren. \cite{dipljbehr}
+
+\section{top-Quark}
+
+Als das up-type-Quark der dritten Generation hat das top-Quark eine Ladung von $ +\tfrac{2}{3} $. 
+Der Mittelwert der weltweiten top-Quark - Massen - Messungen betr\"agt zurzeit 
+$ 173{,}34 \pm 0{,}76\ \text{GeV}\text{/c}^{2} $. \cite{massaverage}
+ 
+\subsection{top-Quark Produktion}
+
+Da top-Quarks, im Gegensatz zu up- und down-Quarks, welche die Protonen bilden, nicht von Natur aus vorliegen, m\"ussen sie erst durch bestimmte Reaktionen erzeugt werden. Dabei kann entweder ein einzelnes top-Quark oder ein top - Anti-top - Paar entstehen. 
+
+\subsubsection{Single-top Produktion}
+
+Einzelne top-Quarks entstehen in mehreren Kan\"alen durch schwache Wechselwirkung. Diese Kan\"ale beschreiben wie die Anfangs- und End-Teilchen der Reaktion miteinander wechselwirken.
+
+   \begin{minipage}[h]{\textwidth}
+            \centering \begin{tikzpicture} [thick, font=\Large, xscale =0.5, yscale= 0.33]
+                     \begin{scope}[shift={(0,8)}] 
+   %                 title
+                        \node[ font=\normalsize] at (5,5.5) {s-Kanal}; 
+   %                 first s-Kanal   
+   %                 left part   
+                        \draw [antifermion] (0,0) -- (3.5,2);
+                        \node[anchor=east, fermioncol] at (0,0) {$\bar{q}$}; 
+                        \draw [fermion] (0,4) -- (3.5,2);
+                        \node[anchor=east, fermioncol] at (0,4) {$q$};
+   %                  middle part
+                        \draw [W] (3.5,2) -- (6.5,2);
+                        \node[anchor=south, Wcol] at (5,2.2) {$W^{+}$}; 
+   %                 upper part
+                        \draw [top] (6.5,2) -- (10,4);
+                        \node[anchor=west, topcol] at (10,4) {$t$};
+                        \draw [antib] (6.5,2) -- (10,0);
+                        \node[anchor= west, bcol] at (10,0) {$\bar{b}$}; 
+                     \end{scope}                 
+                     \begin{scope}[shift={(-15,-1)}]                      
+   %                 Wts-Kanal   
+   %                 title                   
+                        \node[ font=\normalsize] at (20,6.5) {Wt-Kanal}; 
+   %                 left part   
+                        \draw [b] (15,0) -- (18.5,2);
+                        \node[anchor=east, bcol] at (15,0) {$b$}; 
+                        \draw [gluon] (15,4) -- (18.5,2);
+                        \node[anchor=east, gluoncol] at (15,4) {$g$};
+   %                  middle part
+                        \draw [b] (18.5,2) -- (21.5,2);
+                        \node[anchor=south, bcol] at (20,2.2) {$b$}; 
+   %                 upper part
+                        \draw [top] (21.5,2) -- (25,4);
+                        \node[anchor=west, topcol] at (25,4) {$t$};
+                        \draw [W] (21.5,2) -- (25,0);
+                        \node[anchor= west, Wcol] at (25,0) {$W^{+}$};     
+                     \end{scope} 
+   %                 t-Kanal
+                     \begin{scope}[shift={(15,17)}]
+   %                     title
+                        \node[ font=\normalsize] at (5,-3.5) {t-Kanal}; 
+   %                 upper part
+                        \draw [b] (0,-5) -- (5,-6);
+                        \node[anchor=east, bcol] at (0,-5) {$b$}; 
+                        \draw [W] (5,-6) -- (5,-8);
+                        \node[anchor=east, Wcol] at (5,-7) {$W$};
+                        \draw [top] (5,-6) -- (10,-5);
+                        \node[anchor= west, topcol] at (10,-5) {$t$};
+   %                 lower part
+                        \draw [fermion] (0,-9) -- (5,-8);
+                        \node[anchor=east, fermioncol] at (0,-9) {$q$}; 
+                        b bbar from gluon
+                        \draw [fermion] (5,-8) -- (10,-9);
+                        \node[anchor=west, fermioncol] at (10,-9) {$q'$};
+                     \end{scope} 
+                     \begin{scope}[shift={(0,8)}]            
+   %                 second t-Kanal
+   %                 title
+                        \node[ font=\normalsize] at (20,-2.5) {t-Kanal}; 
+   %                 upper part
+                        \draw [gluon] (15,-4) -- (20,-5);
+                        \node[anchor=east, gluoncol] at (15,-4) {$g$}; 
+                        \draw [b] (20,-5) -- (25,-4);
+                        \node[anchor= west, bcol] at (25,-4) {$\bar{b}$};
+   %                 middle part
+                        \draw [b] (20,-5) -- (20,-7);
+                        \node[anchor=east, bcol] at (20,-6) {$b$};
+                        \draw [top] (20,-7) -- (25,-7);
+                        \node[anchor=west, topcol] at (25,-7) {$t$};
+                        \draw [W] (20,-7) -- (20,-9);
+                        \node[anchor=east, Wcol] at (20,-8) {$W$};
+   %                 lower part
+                        \draw [fermion] (15,-10) -- (20,-9);
+                        \node[anchor=east, fermioncol] at (15,-10) {$q$}; 
+                        b bbar from gluon
+                        \draw [fermion] (20,-9) -- (25,-10);
+                        \node[anchor=west, fermioncol] at (25,-10) {$q'$};              
+                     \end{scope}   
+            \end{tikzpicture}
+    \captionof{figure}{Feynman-Diagramme : Single-top Produktion}
+   \end{minipage}
+
+\paragraph{s-Kanal :}
+
+Im s-Kanal werden einzelne top-Quarks durch die elektroschwache Fusion eines Quark - Anti-Quark - Paares zusammen mit einem Anti - bottom-Quark produziert.
+
+\paragraph{t-Kanal :}
+
+Durch den elektroschwachen Austausch eines W-Bosons von einem bottom-Quark mit einem anderem Quark, kann das top-Quark im t-Kanal entstehen. Wenn zuvor ein Gluon in ein bottom - Anti-bottom - Paar zerf\"allt, kann dieser Prozess mit einem weiteren Jet beobachtet werden.
+
+\paragraph{Wt - Kanal :}
+
+Indem ein bottom-Quark ein Gluon einf\"angt, zerf\"allt es m\"oglicherweise in ein W-Boson und ein top-Quark.
+
+\subsubsection{Paarproduktion}
+
+top-Quark - Paare enstehen durch starke Wechselwirkung. Diese Reaktionen kommen am LHC vermehrt vor, da Protonen zur Kollision gebracht werden und damit Quarks und Gluonen miteinander wechselwirken.
+
+   \begin{minipage}[h]{\textwidth}
+            \centering \begin{tikzpicture} [thick, font=\Large, xscale =0.5, yscale= 0.33]
+                     \begin{scope}[shift={(0,8)}]                    
+   %                 title
+                        \node[ font=\normalsize] at (5,5.5) {s-Kanal}; 
+   %                 first s-Kanal   
+   %                 left part   
+                        \draw [antifermion] (0,0) -- (3.5,2);
+                        \node[anchor=east, fermioncol] at (0,0) {$\bar{q}$}; 
+                        \draw [fermion] (0,4) -- (3.5,2);
+                        \node[anchor=east, fermioncol] at (0,4) {$q$};
+   %                  middle part
+                        \draw [gluon] (3.5,2) -- (6.5,2);
+                        \node[anchor=south, gluoncol] at (5,2.2) {$g$}; 
+   %                 upper part
+                        \draw [top] (6.5,2) -- (10,4);
+                        \node[anchor=west, topcol] at (10,4) {$t$};
+                        \draw [antitop] (6.5,2) -- (10,0);
+                        \node[anchor= west, topcol] at (10,0) {$\bar{t}$}; 
+                     \end{scope}                 
+                     \begin{scope}[shift={(-15,0)}]                      
+   %                 second s-Kanal   
+   %                 title
+                        \node[ font=\normalsize] at (20,5.5) {s-Kanal}; 
+   %                 left part   
+                        \draw [gluon] (15,0) -- (18.5,2);
+                        \node[anchor=east, gluoncol] at (15,0) {$g$}; 
+                        \draw [gluon] (15,4) -- (18.5,2);
+                        \node[anchor=east, gluoncol] at (15,4) {$g$};
+   %                  middle part
+                        \draw [gluon] (18.5,2) -- (21.5,2);
+                        \node[anchor=south, gluoncol] at (20,2.2) {$g$}; 
+   %                 upper part
+                        \draw [top] (21.5,2) -- (25,4);
+                        \node[anchor=west, topcol] at (25,4) {$t$};
+                        \draw [antitop] (21.5,2) -- (25,0);
+                        \node[anchor= west, topcol] at (25,0) {$\bar{t}$};     
+                     \end{scope} 
+   %                 t-Kanal
+                     \begin{scope}[shift={(15,17)}]
+   %                     title
+                        \node[ font=\normalsize] at (5,-3.5) {t-Kanal}; 
+                     
+   %                 upper part
+                        \draw [gluon] (0,-5) -- (5,-6);
+                        \node[anchor=east, gluoncol] at (0,-5) {$g$}; 
+                        \draw [antitop] (5,-6) -- (5,-8);
+                        \draw [top] (5,-6) -- (10,-5);
+                        \node[anchor= west, topcol] at (10,-5) {$t$};
+   %                 lower part
+                        \draw [gluon] (0,-9) -- (5,-8);
+                        \node[anchor=east, gluoncol] at (0,-9) {$g$}; 
+                        b bbar from gluon
+                        \draw [antitop] (5,-8) -- (10,-9);
+                        \node[anchor=west, topcol] at (10,-9) {$\bar{t}$};
+                     \end{scope} 
+                     \begin{scope}[shift={(0,9)}]            
+   %                 u Kanal
+   %                 title
+                        \node[ font=\normalsize] at (20,-3.5) {u-Kanal}; 
+                     
+   %                 upper part
+                        \draw [gluon] (15,-5) -- (20,-6);
+                        \node[anchor=east, gluoncol] at (15,-5) {$g$}; 
+                        \draw [antitop] (20,-6) -- (20,-8);
+                        \draw [top] (20,-6) -- (25,-9);
+                        \node[anchor= west, topcol] at (25,-9) {$\bar{t}$};
+   %                 lower part
+                        \draw [gluon] (15,-9) -- (20,-8);
+                        \node[anchor=east, gluoncol] at (15,-9) {$g$}; 
+                        b bbar from gluon
+                        \draw [antitop] (20,-8) -- (25,-5);
+                        \node[anchor=west, topcol] at (25,-5) {$t$};              
+                     \end{scope}   
+            \end{tikzpicture}
+    \captionof{figure}{Feynman-Diagramme : top-Paar Produktion}
+   \end{minipage}
+
+\paragraph{Quark - Anti-Quark - Fusion :} 
+
+Die Quarks fusionieren im s-Kanal zu einem Gluon das in ein top - Anti-top Paar zerf\"allt.
+
+\paragraph{Gluon-Gluon-Wechselwirkung :}
+
+Bei der Gluon-Gluon-Wechselwirkung entsteht entweder ein Gluon das in ein top - Anti-top  - Paar zerf\"allt (s-Kanal) oder die Gluonen tauschen ein virtuelles top-Quark aus, wodurch das top - Anti-top - Paar entsteht (t- und u-Kanal).
+
+\subsection{top-Quark Zerfall}
+
+top-Quarks zerfallen elektroschwach. Mit einer Wahrscheinlichkeit von 99{,}8\% in ein W-Boson und ein bottom-Quark. Ebenso ist es m\"oglich, dass es, statt in ein bottom-, in ein strange- (mit 0,17\%) oder in ein down-Quark (mit 0,018\%) zerf\"allt. Dies liegtam Unterschied zwischen Massne- und Eigenzust\"anden der schwachen Wechselwirkung, was durch die CKM-Matrix beschrieben wird. In dieser Arbeit wird nur der Zerfall in das bottom-Quark betrachtet. Nun wird unterschieden wie das W-Boson weiterzerf\"allt. \cite{Griffiths} \cite{Vorlesung}
+
+Es kann entweder leptonisch, das hei\ss t in ein Lepton und das entsprechende Anti-Neutrino, oder hadronisch, in ein Quark - Anti-Quark - Paar (etwa zu 33\%), zerfallen. \cite{Vorlesung}
+
+   \begin{minipage}[h]{\textwidth}
+            \centering \begin{tikzpicture} [thick, font=\Large, xscale =0.5, yscale= 0.33]
+   %                 leptonisch  
+                     \begin{scope}[shift={(0,8)}]                    
+   %                 title
+                        \node[ font=\normalsize] at (5,5.5) {Leptonisch};  
+   %                 left part   
+                        \draw [top] (0,0) -- (3.5,0);
+                        \node[anchor=east, topcol] at (0,0) {$t$}; 
+   %                  middle part
+                        \draw [b] (3.5,0) -- (8,-2);
+                        \node[anchor=west, bcol] at (8,-2) {$b$};
+                        \draw [W] (3.5,0) -- (7,2);
+                        \node[anchor=south, Wcol] at (5.25,1) {$W^{+}$}; 
+   %                 right part
+                        \draw [fermion] (7,2) -- (10,4);
+                        \node[anchor=west, fermioncol] at (10,4) {$\bar{l}$};
+                        \draw [antifermion] (7,2) -- (10,0);
+                        \node[anchor= west, fermioncol] at (10,0) {$\nu_{l}$}; 
+                     \end{scope}  
+   %                 hadronisch
+                     \begin{scope}[shift={(15,8)}]
+   %                     title
+                        \node[ font=\normalsize] at (5,5.5) {Hadronisch};  
+   %                 left part   
+                        \draw [top] (0,0) -- (3.5,0);
+                        \node[anchor=east, topcol] at (0,0) {$t$}; 
+   %                  middle part
+                        \draw [b] (3.5,0) -- (8,-2);
+                        \node[anchor=west, bcol] at (8,-2) {$b$};
+                        \draw [W] (3.5,0) -- (7,2);
+                        \node[anchor=south, Wcol] at (5.25,1) {$W^{+}$}; 
+   %                 right part
+                        \draw [fermion] (7,2) -- (10,4);
+                        \node[anchor=west, fermioncol] at (10,4) {$q$};
+                        \draw [antifermion] (7,2) -- (10,0);
+                        \node[anchor= west, fermioncol] at (10,0) {$\bar{q}$}; 
+                     \end{scope}   
+            \end{tikzpicture}
+   \captionof{figure}{Feynman-Diagramme : top-Quark - Zerfall}
+   \end{minipage}
+
+Zur Charakterisierung der Zerf\"alle eines top - Anti-top - Paares werden diese beiden M\"oglichkeiten kombiniert. Zerfallen beide W-Bosonen hadronisch spricht man vom vollhadronischen Zerfall. Dileptonisch nennt man den Zerfall bei dem beide W-Bosonen in ein Lepton-Neutrino-Paar \"ubergehen. Durch die Anzahl und Art der Jets kann man nach einer bestimmten Zerfallskombination suchen. Deshalb ist der semileptonische Zerfall, bei dem das eine W-Boson hadronisch und das andere leptonisch zerf\"allt, bedeutend, da dieser sowohl gut aus vielen Ereignissen herausgefiltert werden kann, als auch ein hohes Verzweigungsverh\"altnis besitzt. \cite{Vorlesung} \cite{Griffiths}
+
+\newpage
+
+\chapter{Untersuchungen von Elementarteilchen}
+
+Zur Identifikation eines Teilchen werden im allgemeinen mehrere Gr\"o\ss en herangezogen. Die Masse und die Ladung sind hierbei die markantesten. Im Weiteren ist charakteristisch wie gut oder schlecht das jeweilige Teilchen Materie durchdringt. Dies gibt R\"uckschl\"usse auf dessen Wechselwirkungen und Geschwindigkeit.
+Au\ss er der Identifikation eines Teilchens ist auch meistens von Interesse, welche konkreten kinematischen Werte es beim Detektordurchgang hatte. Das hei\ss t man versucht Impuls und Energie so gut wie m\"oglich bestimmen zu k\"onnen. 
+Um bestimmte Teilchen zu erzeugen und daraufhin all diese Informationen zu gewinnen, ist es n\"otig gro\ss e Anlagen und Messeinrichtungen, wie den LHC und den ATLAS, zu errichten, die es erm\"oglichen mit einer gen\"ugend hohen Rate und Pr\"azission Eigenschaften zu untersuchen.
+
+\section{LHC: Ein Teilchenbeschleuniger}
+
+\begin{figure}[h]
+	%\centering
+	\includegraphics[width=14cm]{lhcatlasuntergrund.png}
+	\caption{LHC : Beschleunigerring mit den Experimenten ALICE, ATLAS, CMS und LHCb (ATLAS Experiment © 2014 CERN)}
+\end{figure}
+
+Der Large Hadron Collider (kurz: LHC) am CERN (Europ\"aische Organisation für Kernforschung) ist der zurzeit gr\"o\ss te Teilchenbeschleuniger der Welt. Mit einem Umfang von 27\;km beschleunigt er Protonen auf Energien bis zu 4\;TeV, welche in Teilchenpaketen, sogenannten Bunches zur Kollision gebracht werden. Hierbei werden Magnete, welche auf wenige Kelvin gek\"uhlt werden m\"ussen, verwendet um die Teilchen auf ihrer Bahn zu halten, indem sie Felder von mehreren Tesla erzeugen. \cite{Vorlesung} \cite{lhctdr}
+
+\section{ATLAS: Ein Teilchendetektor}
+
+\begin{figure}[h]
+	%\centering
+	\includegraphics[width=14cm]{atlasdetektorkomponenten.png}
+	\caption{ATLAS : Aufschnitt mit Detektorkomponenten (ATLAS Experiment © 2014 CERN)}
+\end{figure}
+
+ATLAS (A Toroidal Lhc ApparatuS) ist ein Mehrzweckdetektor. Er kann sowohl Flugbahn, Impulse, als auch Energien der Teilchen messen und es ist m\"oglich diese zu identifizieren. Dies geschieht durch ein ausgekl\"ugeltes System von verschiedenen Messeinrichtungen.
+
+\subsection{Aufbau}
+
+Der Wechselwirkungspunkt befindet sich zentral innerhalb des Detektors. Hier treffen die Strahlr\"ohren aufeinander, worin sich die Bunches bewegen.
+
+\paragraph*{Spurdetektoren}
+
+Als erste Schicht um den Wechselwirkungspunkt befinden sich Detektoren, welche es erm\"oglichen genaue Spurpunkte der Teilchenbahn zu registrieren, um damit die Bahn zu rekonstruieren. Diese befinden sich in einem solenoiden Magnetfeld, wodurch die Bahn von geladenen Teilchen gekr\"ummt wird. Durch die Richtung und st\"arke der Kr\"ummung l\"asst sich das Verh\"altnis Impuls pro Ladung des Teilchen bestimmen. 
+
+\paragraph*{Elektromagnetisches Kalorimeter}
+
+Danach kommt das elektromagnetsiche Kalorimeter. Hier sollen Elektronen beziehungsweise Positronen und Photonen den Hauptteil ihrer Energie abgeben. Durch die Menge der Ionisation und L\"ange des entstehenden Teilchenschauers l\"asst sich deren Energie bestimmen. Auch andere geladene Teilchen hinterlassen hier eine Spur.
+
+\paragraph*{Hadronisches Kalorimeter}
+
+Im darauffolgenden hadronischen Kalorimeter wird die Energie der aus der Hadronisierung der Quarks entstehenden Jets gemessen. \"Ahnlich wie im Elektromagnetischen Kalorimeter wird versucht \"uber die Ionisation und die L\"ange des Teilchenschauers auf die Energie zu schlie\ss en. Allerdings zerfallen hier nicht nur Photonen und Elektronen, sondern auch Mesonen und Baryonen deren Zerf\"alle unterschiedlich und komplizierter sind.
+
+\paragraph*{Myonsystem}
+
+Die \"au\ss erste Schicht ist das Myonsystem. Myonen durchdringen die anderen Schichten fast ungehindert, hinterlassen aber aufgrund ihrer Ladung Spuren. Zur Impulsbestimmung herrscht hier ein toroidales Magnetfeld. Durch Ladungsvervielfachung in den mit Hochspannung versorgten Gasdetektoren wird der Durchgang von Myonen registriert und damit die Bahn rekonstruiert. Damit l\"asst sich wieder der Impuls ermitteln.
+\\
+\begin{figure}[h]
+	%\centering
+	\includegraphics[width=14cm]{atlasdetektorteilchenspuren.png}
+	\caption{ATLAS : Querschnitt-Segment mit Teilchenspuren (ATLAS Experiment © 2014 CERN)}
+	\label{spuren}
+\end{figure}
+
+\subsection{Teilchenidentifikation bei ATLAS}
+
+Wie man in Abbildung \ref{spuren} erkennt, hinterlassen die meisten Teilchen Spuren in unterschiedlichen Detektorkomponenten, wodurch sie identifiziert werden k\"onnen. Neutrinos hingegen werden normalerweise \"uber die fehlende transversale Energie erkannt. Die kollidierenden Protonen sollten haupts\"achlich Impuls entlang der Strahlachse haben, wodurch ihre Kollisionsprodukte als Summe ihrer Transversalenergien null aufweisen m\"ussten. Ist dies nicht der Fall, kann man bei gr\"o\ss eren Energien mit einer gewissen Wahrscheinlichkeit davon ausgehen, dass Neutrinos beteiligt waren. \cite{atlastdr}
+
+\subsection{Koordinatensystem}
+
+Zur Konvention wird ein einheitliches Koordinatensystem vorgegeben, welches dem Laborsystem entspricht, und f\"ur alle Rechnungen verwendet wird. Die z-Achse wird durch die Strahlrichtung vorgegeben. Die x-y-Ebene liegt senkrecht dazu am Wechselwirkungspunkt, wobei die positive x-Achse in die Mitte des LHC-Ring und die positive y-Achse nach oben zeigt. Der Azimutal-Winkel $ \phi $ wird in der x-y-Ebene gemessen ( $ \tan\phi\;=\;\tfrac{p_{y}}{p_{x}} $ ). Mit dem Polarwinkel $ \theta $, welcher bez\"uglich der z-Achse bestimmt wird ( durch 
+$ \cot\theta\;=\;\tfrac{p_{z}}{p_{T}} $, mit $\textstyle p_{T}\;=\;\sqrt{p_{x}^{2} + p_{y}^{2}} $), l\"asst sich die Pseudorapidit\"at $\textstyle \eta\;=\;-\ln\left[\tan\left(\tfrac{\theta}{2}\right)\right] $ bestimmen. \cite{atlastdr}
+
+\newpage
+
+\chapter{Berechnung der top-Quark - Masse}
+
+Die nachfolgenden Rechnungen gehen auf Papiere zur\"uck, welche mir Herr Prof. Dr. Otmar Biebel zur \"Uberpr\"ufung und Korrektur gegeben hat. Diese habe ich, soweit n\"otig, verbessert und als Rechnung zusammengestellt, die schrittweise zu einer Formel f\"ur die top-Quark - Masse f\"uhrt.
+
+Zun\"achst werden einige Grundlagen gekl\"art, um dann mit der Herleitung der Formel f\"ur die top-Quark - Masse fortzufahren, wobei l\"angere Rechenschritte im jeweiligen Abschnitt des Anhangs zu finden sind.
+
+\section{Allgemeine Lorentztransformation}
+
+Impuls-Vierervektoren lassen sich analog zu gew\"ohnlichen Vierervektoren dar\"uber definieren, dass man in den ersten Eintrag die Energie mit $ c $ skaliert schreibt um auf die Einheit Impuls zu kommen. Die anderen Eintr\"age werden vom Dreier-Impuls gef\"ullt. Zur Berechnung der Lorentzinvaranten wird die Minkowski-Metrik verwendet.
+
+\begin{align}
+	p
+\;&=\;
+	\begin{pmatrix}
+			E \\ \vec{p}
+	\end{pmatrix}
+\;=\;
+	\begin{pmatrix}
+			E \\ p_{x} \\ p_{y} \\ p_{z}
+	\end{pmatrix}
+\\
+	p^{2}
+\;&=\;
+	m^{2}\;=\;E^{2}\;-\;\vec{p}^{2}
+\label{loinv}
+\end{align}
+
+Gr\"o\ss en, die bei einer Lorentztransformation von Bedeutung sind, ergeben sich durch:
+
+\begin{align}
+	\vec{\beta}
+\;&=\;
+	\dfrac{\vec{v}}{c}
+,\qquad
+	|\vec{\beta}|
+  \;=\;
+  	\beta
+\label{beta}
+\\
+	\gamma
+\;&=\;
+	\dfrac{1}{\sqrt{1 - \vec{\beta}^2}}
+\label{gamma}
+\\
+	\vec{p}
+\;&=\;
+	\gamma m \vec{v}\;=\;\gamma m c \vec{\beta}
+\end{align}
+
+Mit (\ref{loinv}) kann man folgern (siehe Abschnitt \ref{anhanglorentz}):
+
+\begin{align}
+\Rightarrow
+	\vec{\beta}
+\;&=\;
+	\dfrac{\vec{p}}{E}
+\label{betapE}
+\\
+\Rightarrow
+	\gamma
+\;&=\;
+	\dfrac{E}{m}
+\\
+\Rightarrow
+	\vec{\beta} \gamma
+\;&=\;
+	\dfrac{\vec{p}}{m}
+\label{betagamma}
+\end{align}
+
+Um die Koordinaten, also den Impuls und die Energie, in ein Bezugssystem (*) zu wechseln, welches sich relativ zum urspr\"unglichen mit der Geschwindigkeit $ \vec{v} $ bewegt, nutzt man die Lorentztransformation nach:
+
+\begin{align}
+	\vec{p}^{*}
+\;&=\;
+	\vec{p}\;+\;\gamma
+	\left(
+		\dfrac{\gamma \vec{\beta} \vec{p}}{1 + \gamma} + E
+	\right)
+	\vec{\beta}
+\label{lorentz_allg_p}
+\\
+	E^{*}
+\;&=\;
+	\gamma E\;+\;
+	\gamma \vec{\beta} \vec{p}
+\label{lorentz_allg_E}
+\\
+\nonumber
+\end{align}
+
+Ist $ \vec{v} $ entlang einer Koordinatenachse, \"andert sich nur in dieser Richtung der Impuls, wodurch sich (\ref{lorentz_allg_p}) und (\ref{lorentz_allg_E}) vereinfachen zu (siehe Abschnitt \ref{anhanglorentz}):
+
+\begin{align}
+	\vec{p}_{\perp Achse}^{*}
+\;&=\;
+	\vec{p}_{\perp Achse}
+\\
+	p_{Achse}^{*}
+\;&=\;
+	\gamma p_{Achse}\;+\;
+	\gamma \beta E
+\label{lorentz_spez_p}
+\\
+	E^{*}
+\;&=\;
+	\gamma E\;+\;
+	\gamma \beta p_{Achse}
+\label{lorentz_spez_E}
+\end{align}
+
+\section{Lorentzinvarinate zweier Teilchen}
+
+Die lorentzinvariante Masse eines Teilchens ist durch (\ref{loinv}) gegeben. Betrachtet man nun zwei Teilchen ($ a $ und $ b $), l\"asst sich \"uber die Summe ihrer Vierervektoren eine gemeinsame Lorentzinvariante bestimmen.
+
+\begin{align}
+	m_{a b}^{2}
+\;&=\;
+	\left(
+	p_{a}\;+\;p_{b}
+	\right)^{2}
+\nonumber
+\\
+\;&=\;
+	\left[
+		\begin{pmatrix}
+			E_{a} \\ \vec{p}_{a}
+		\end{pmatrix}
+		\;+\;
+		\begin{pmatrix}
+			E_{b} \\ \vec{p}_{b}
+		\end{pmatrix}
+	\right]^{2}
+\label{loinvzwei}
+\\
+\;&=\;
+	\left(E_{a}\;+\;E_{b}\right)^{2}
+	\;-\;
+	\left(\vec{p}_{a}\;+\;\vec{p}_{b}\right)^{2}
+\nonumber
+\\
+\;&=\;
+	\underbrace{E_{a}^{2}\;-\;\vec{p}_{a}^{2}}_{\;=\;m_{a}^{2}}
+	\;+\;
+	2 E_{a} E_{b}\;-\;
+	2\underbrace{\vec{p_{a}}\;\;\;\vec{p_{b}}}
+	_{\;=\;|\vec{p_{a}}| |\vec{p_{b}}| \cos\theta_{ab}}
+	+\;
+	\underbrace{E_{b}^{2}\;-\;\vec{p}_{b}^{2}}_{\;=\;m_{b}^{2}}
+\nonumber
+\end{align}
+
+Bei Prozessen mit hohen Energien ist h\"aufig die Ruhemasse der Teilchen zu vernachl\"assigen, d.h. es gilt
+$ \;m_{a}<<E_{a}\; $ 
+und 
+$ \;m_{b}<<E_{b}\; $ 
+. Hiermit folgt  nach 
+$ \;m^{2}=E^{2}-\vec{p}^2 $ 
+$ \;\left(\Rightarrow \;\vec{p}^{2} = E^{2}-m^{2} \approx E^{2}\right)\; $:
+
+\begin{align}
+	m_{a b}^{2}
+\;&\approx\;
+	0^{2}\;+\;
+	2\left(
+		E_{a} E_{b}\;-\;E_{a} E_{b} \cos\theta_{ab}
+	\right)
+	\;+\;0^{2}
+\;=\;
+	2 E_{a} E_{b}
+	\left(
+		1\;-\;\cos\theta_{ab}
+	\right)
+\label{inv_ab}
+\end{align}
+
+\newpage
+
+\section{Zweik\"orperzerfall}
+
+Betrachtet man den Zerfall eines Teilchens in zwei weitere Teilchen in seinem Ruhesystem, kann man Relationen zwischen Energien, Impulsen und Massen der Teilchen aufstellen.
+
+Zur \"Ubersichtlichkeit ist es g\"unstig einige Abk\"urzungen einzuf\"uhren:
+
+\begin{align}
+	\text{Mutterteilchen} &\mathrel{\hat=} M
+\nonumber
+\\
+	\text{Tochterteilchen 1} &\mathrel{\hat=} T1
+\nonumber
+\\
+	\text{Tochterteilchen 2} &\mathrel{\hat=} T2
+\nonumber
+\end{align}
+
+Aus der Energieerhaltung folgt nun:
+
+\begin{align}
+	E_{M}
+\;&=\;
+	m_{M}
+\;=\;
+	E_{T1}\;+\;E_{T2}
+\nonumber
+\\
+\;&\stackrel{\mathrm{(\ref{loinv})}}=\;
+	\sqrt{m_{T1}^{2}
+	\;+\;\vec{p}_{T1}^{2}}
+	\;+\;
+	\sqrt{m_{T2}^{2}
+	\;+\;\vec{p}_{T2}^{2}}
+\label{zweiK_E}
+\end{align}
+
+Ebenso erh\"alt man aus der Impulserhaltung :
+
+\begin{align}
+	\vec{p}_{M}
+\;&=\;
+	\vec{0}
+\;=\;
+	\vec{p}_{T1}+\;\vec{p}_{T2}
+\nonumber
+\\
+\Rightarrow\;
+	\vec{p}_{T1}
+\;&=\;
+	-\;\vec{p}_{T2}
+\nonumber
+\\
+\Rightarrow\;
+	\vec{p}_{T1}^{2}\;&=\;
+	\vec{p}_{T2}^{2}\;\stackrel{\mathrm{def}}=\;
+	\vec{p}^{2}
+\nonumber
+\end{align}
+
+Zusammengenommen ergibt sich somit (siehe Abschnitt \ref{anhangzweikoerper}):
+
+\begin{align}
+	|\vec{p}|
+\;=\;
+	\dfrac{1}{2 m_{M}}
+	&\sqrt{
+		\left[
+		m_{M}^{2}\;-\;
+			\left(
+				m_{T1}\;+\;m_{T2}
+			\right)^{2}
+		\right]
+		\left[
+		m_{M}^{2}\;-\;
+			\left(
+				m_{T1}\;-\;m_{T2}
+			\right)^{2}
+		\right]
+	}	
+\label{zweiK_p}
+\end{align}
+
+Dieses Ergebnis kann man jetzt wiederum nutzen, um mit (\ref{zweiK_E}) eine Relation f\"ur die Energie der Tochterteilchen zu bekommen  (siehe Abschnitt \ref{anhangzweikoerper}):
+
+\begin{align}
+	E_{T1}
+\;&=\;
+	\dfrac{1}{2 m_{M}}
+	\left(
+		m_{M}^{2}\;+\;m_{T1}^{2}\;-\;m_{T2}^{2}
+	\right)
+\end{align}
+
+F\"ur das zweite Tochterteilchen m\"ussen lediglich die Indizes von $ T1 $ und $ T2 $ vertauscht werden, da die Formeln symmetrisch bez\"uglich der T\"ochterteilchen sind. 
+
+\newpage
+
+\section{top-Quark - Zerfall}
+
+Das Ziel meiner Arbeit ist es eine Formel f\"ur die top-Quark - Masse zu finden, welche nur von den Impulsen und den Winkeln zwischen seinen Tochterteilchen abh\"angt. Dies erreicht man durch Ausnutzen der bekannten Beziehungen in den jeweiligen Ruhesystemen, mit der Impuls- und Energieerhaltung. Transformiert man diese in das Laborsystem erh\"alt man Relationen f\"ur den Winkel zwischen dem top-Quark - und dem W-Boson - Impuls, wie auch f\"ur den Betafaktor des top-Quark. 
+
+Hierzu betrachtet man den Zerfall  des top-Quarks, bei dem das W-Boson in ein Quark - Anti-Quark - Paar weiterzerf\"allt, weil die Jets der Quarks im Gegensatz zum Neutrino aus dem leptonischen Zerfall gut vermessen werden k\"onnen.  
+
+Da man zwischen verschiedenen Ruhesystemen wechselt und mehrere Teilchen unterscheiden muss, ist die Einf\"uhrung einiger Abk\"urzungen praktisch:
+
+\begin{align}
+\text{Laborsystem} &\mathrel{\hat=} lab
+\nonumber
+\\
+\text{top\! - \! Quark-Ruhesystem} &\mathrel{\hat=} tr\!f
+\nonumber
+\\
+\text{W\! - \! Boson-Ruhesystem} &\mathrel{\hat=} Wr\!f
+\nonumber
+\end{align}
+(rf $ \mathrel{\hat=} $ rest frame $ \stackrel{\mathrm{engl}}= $ Ruhesystem)
+
+Die meisten Gr\"o\ss en werden im Laborsystem gemessen, zur \"Ubersichtlichkeit wird deshalb die Kennzeichnung lab nur bei Winkeln verwendet.
+
+Nur die Jets aus dem bottom- und der beiden Quarks aus dem W-Boson - Zerfall sind direkt messbar. Deshalb werden diese Teilchen mit den Ziffern 1 bis 3 indiziert. Hierbei bezeichnet 2 das Anti-Quark, 3 das Bottom-Quark und 1 das \"ubrige Quark. Gr\"o\ss en des top-Quarks werden mit t, des W-Bosons mit W gekennzeichnet.
+
+Damit kann man als Vorraussetzung annehmen, dass die Impulse 
+$ |\vec{p}_{1}| $, $ |\vec{p}_{2}| $, $ |\vec{p}_{3}| $ und Winkel
+$ \theta_{12}^{lab} $, $ \theta_{13}^{lab} $, $ \theta_{23}^{lab} $ gegeben sind. 
+
+Aus diesen Werten l\"asst sich der Winkel zwischen W-Boson - und bottom-Quark - Impuls bestimmen:
+
+\begin{align}
+	\cos \theta_{W3}^{lab}
+\;&=\;
+	\dfrac{\vec{p}_{W}\;\vec{p}_{3}}{|\vec{p}_{W}| |\vec{p}_{3}|}
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	\dfrac{\left(\vec{p}_{1} + \vec{p}_{2}\right) \vec{p}_{3}}
+	{\sqrt{\left|\vec{p}_{1}\right|^{2} + 
+	2 \left|\vec{p}_{1}\right| \left|\vec{p}_{2}\right| 
+	\cos \theta_{12}^{lab}
+	+ \left|\vec{p}_{2}\right|^{2}} \left|\vec{p}_{3}\right|}
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	\dfrac{\left|\vec{p}_{1}\right| \left|\vec{p}_{3}\right| 
+	\cos \theta_{13}^{lab}
+	+ \left|\vec{p}_{2}\right| \left|\vec{p}_{3}\right| 
+	\cos \theta_{23}^{lab}}
+	{\sqrt{\left|\vec{p}_{1}\right|^{2} + 
+	2 \left|\vec{p}_{1}\right| \left|\vec{p}_{2}\right| 
+	\cos \theta_{12}^{lab}
+	+ \left|\vec{p}_{2}\right|^{2}} \left|\vec{p}_{3}\right|}
+\label{costhetaW3labmessung}
+\end{align}
+
+\newpage
+
+\subsection{Zerfallswinkel im top-Quark-Ruhesystem}
+
+\begin{figure}[h]
+	%\centering
+	\includegraphics[width=14cm]{topzerfalltrf.png}
+	\caption{top-Quark - Zerfall im top-Quark - Ruhesystem}
+\end{figure}
+
+Mit (\ref{inv_ab}) findet man eine Beziehung f\"ur die Lorentzinvarianten Massen der Zerfallspaare und deren Winkel im Ruhesystem des top-Quark:
+
+\begin{align}
+	\dfrac{m_{1 3}^{2}}{m_{2 3}^{2}}
+\;&\approx\;
+	\dfrac{E_{1}^{trf}}{E_{2}^{trf}}\;
+	\dfrac{\left(1\;-\;\cos\theta_{13}^{trf}\right)}
+	{\left(1\;-\;\cos\theta_{23}^{trf}\right)}
+\label{m13m23anfang}
+\end{align}
+
+Um die Energieabh\"angigkeit auf der rechten Seite der Formel zu beseitigen nutzt man die Kinematik des top-Quark - Zerfalls aus und bestimmt diese Energien, wie ebenso die Winkel $ \theta_{13}^{trf} $ und $ \theta_{23}^{trf} $.
+
+Im Ruhesystem des top-Quarks liegen die Zerf\"alle des top-Quark nach W-Boson - Bottom-Quark und des W-Bosons nach Quark - Antiquark in einer Ebene. Damit lassen sich die Impulse der Quarks im W-Boson - Ruhesystem schreiben als:
+
+\begin{align}
+	\vec{p}_{1}^{Wrf}
+\;&=\;
+	p_{1}^{Wrf}\cdot
+	\begin{pmatrix}
+		\cos \theta \\ \sin \theta
+	\end{pmatrix}
+\nonumber
+\\
+	\vec{p}_{2}^{Wrf}
+\;&=\;
+	-\vec{p}_{1}^{Wrf}
+\;=\;	
+	p_{2}^{Wrf}\cdot
+	\begin{pmatrix}
+		-\cos \theta \\ -\sin \theta
+	\end{pmatrix}
+\nonumber
+\\
+\end{align}
+mit : $ \theta\;\stackrel{\mathrm{def}}=\;\theta^{Wrf}_{W1} $
+
+\begin{figure}[h]
+	%\centering
+	\includegraphics[width=14cm]{WBosonzerfallWrf.png}
+	\caption{W-Boson - Zerfall im W-Boson - Ruhesystem}
+\end{figure}
+
+Durch diese Koordinatenwahl zeigt der Impuls des W-Bosons im top-Quark - Ruhesystem in Positive x-Richtung (
+$ \vec{e}_{x}\;=\;\bigl( \begin{smallmatrix}
+			1 \\ 0
+	\end{smallmatrix} \bigr) $
+), weshalb sich der Impuls des bottom-Quarks durch Impulserhaltung ergibt als:
+
+\begin{align*}
+	\vec{p}_{3}^{trf}
+\;&=\;
+	p_{3}^{trf} \cdot
+	\begin{pmatrix}
+			-1 \\ 0
+	\end{pmatrix}
+\end{align*}
+
+Transformiert man die Impulse der Quarks aus dem W-Boson - Zerfall in das Ruhesystem des top-Quarks \"andern sich diese nach (\ref{lorentz_spez_p}). Allerdings ist zu beachten, dass $ \beta = -\beta_{W}^{trf} $ eingesetzt werden muss, da aus dem W-Boson - Ruhesystem heraustransformiert wird. Ebenso \"andern sich nach (\ref{lorentz_spez_E}) die Energien. Damit l\"asst sich das Energieverh\"altnis vereinfachen zu (siehe Abschnitt \ref{anhangwinkeltrf}):
+
+\begin{align}
+	\dfrac{E_{1}^{trf}}{E_{2}^{trf}}
+\;&=\;
+	\dfrac{1\;-\;\beta_{W}^{trf} \cos \theta}
+	{1\;+\;\beta_{W}^{trf} \cos \theta}
+\end{align}
+
+F\"ur die Winkel im Ruhesystem des top-Quarks zwischen den Impulsen der Zerfallsprodukte ergibt sich mit %(\ref{skalarp})
+$ \;m_{1}<<E_{1}^{trf}\; $ 
+bzw. 
+$ \;m_{2}<<E_{2}^{trf}\; $ 
+ (siehe Abschnitt \ref{anhangwinkeltrf}):
+
+\begin{align}
+	\cos \theta_{13}^{trf}
+\;&=\;
+	\dfrac{- \cos \theta + \beta_{W}^{trf}}
+	{1 - \beta_{W}^{trf} \cos \theta}
+\qquad \text{bzw.} \qquad
+	\cos \theta_{23}^{trf}
+\;=\;
+	\dfrac{\cos \theta + \beta_{W}^{trf}}
+	{1 + \beta_{W}^{trf} \cos \theta}
+\end{align}
+
+Damit l\"asst sich der Winkelfaktor aus (\ref{m13m23anfang}) schreiben als (siehe Abschnitt \ref{anhangwinkeltrf}):
+
+\begin{align}
+	\dfrac{\left( 1\;+\;\cos \theta_{13}^{trf} \right)}
+	{\left( 1\;-\;\cos \theta_{23}^{trf} \right)}
+\;&=\;
+	\dfrac{\left( 1\;+\;\beta_{W}^{trf} \cos \theta \right)}
+	{\left( 1\;-\;\beta_{W}^{trf} \cos \theta \right)}
+	\cdot
+	\dfrac{\left( 1\;+\;\cos \theta \right)}
+	{\left( 1\;-\;\cos \theta \right)}
+\end{align}
+
+Zusammengenommen ergibt sich somit f\"ur das Verh\"altnis der lorentzinvarianten Massen:
+
+\begin{align}
+	\dfrac{m_{1 3}^{2}}{m_{2 3}^{2}}
+\;&=\;
+	\dfrac{1\;+\;\cos \theta}{1\;-\;\cos \theta}
+\label{m13m23}
+\\
+\nonumber
+\end{align}
+
+Umgestellt nach dem Cosinus des Winkels $ \theta $:
+
+\begin{align}
+	\cos \theta
+\;&=\;
+	\dfrac{m_{1 3}^{2}\;-\;m_{2 3}^{2}}{m_{1 3}^{2}\;+\;m_{2 3}^{2}}
+\label{costheta}
+\\
+\nonumber
+\end{align}
+
+\subsection{W-Boson Geschwindigkeit}
+
+Um auf die W-Boson Geschwindigkeit zu kommen, stellt man das Skalarprodukt der Impulse seiner Zerfallsteilchen im Ruhesystem des top-Quarks durch deren Lorentztransformierten aus dem W-Boson - Ruhesystem dar und bestimmt damit den Winkel zwischen diesen. Hierbei gilt:
+
+$ |\vec{p}_{1}^{Wrf}|\;=\;|\vec{p}_{2}^{Wrf}|
+\;\stackrel{\mathrm{def}}=\;p^{Wrf}\qquad ; \qquad \vec{p}_{1}^{Wrf}\;=\;-\vec{p}_{2}^{Wrf} 
+\qquad ; \qquad p^{Wrf}\;\approx\;E^{Wrf} $
+
+(Herleitung siehe Abschnitt \ref{anhangbetaW})
+
+\begin{align}
+	\vec{p}_{1}^{trf} \cdot \vec{p}_{2}^{trf}
+\;&=\;
+	\left[
+		\vec{p}_{1}^{Wrf}\;+\;\gamma_{W}^{trf} 
+		\left(
+			\dfrac{\gamma_{W}^{trf} \vec{\beta}_{W}^{trf}\vec{p}_{1}^{Wrf}}
+			{1+\gamma_{W}^{trf}}\;+\;E
+		\right) \vec{\beta}_{W}^{trf}
+	\right] 
+\nonumber
+\\	
+&\qquad\cdot
+	\left[
+		\vec{p}_{2}^{Wrf}\;+\;\gamma_{W}^{trf} 
+		\left(
+			\dfrac{\gamma_{W}^{trf} \vec{\beta}_{W}^{trf}\vec{p}_{2}^{Wrf}}
+			{1+\gamma_{W}^{trf}}\;+\;E
+		\right) \vec{\beta}_{W}^{trf}
+	\right]
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	\left(p^{Wrf}\right)^{2}\;
+	\left[ 
+		-1\;-\;\left( \gamma_{W}^{trf} \beta_{W}^{trf} \cos \theta \right)^{2}
+		\;+\;\left( \gamma_{W}^{trf} \beta_{W}^{trf} \right)^{2} 
+	\right]
+	\label{skalp1p2}
+\\
+\nonumber
+\end{align}
+
+Damit ergibt sich der Winkel zwischen den Quarks mit 
+%nach (\ref{skalarp}) und
+$ |\vec{p}_{1/2}^{trf}|\;\approx\;E_{1/2}^{trf} $
+ zu (siehe Abschnitt \ref{anhangbetaW}):
+
+\begin{align}
+	\Rightarrow \qquad \cos \theta_{1 2}^{trf}
+\;&=\;%\stackrel{\mathrm{(\ref{skalarp})}}
+	\dfrac{\vec{p}_{1}^{trf}\;\vec{p}_{2}^{trf}}{|\vec{p}_{1}^{trf}|\;|\vec{p}_{2}^{trf}|}
+\nonumber
+\\
+\;&\approx\;
+	- \dfrac{1\;-\;\left(\beta_{W}^{trf}\right)^{2} \left[2\;-\;\left(\cos \theta \right)^{2}\right]}
+	{1\;-\;\left(\beta_{W}^{trf}\right)^{2} \left(\cos \theta \right)^{2}}
+\\
+\nonumber
+\end{align}
+
+Die W-Boson - Geschwindigkeit errechnet sich somit aus:
+
+\begin{align}
+	\left(\beta_{W}^{trf}\right)^{2}
+\;&=\;
+	\dfrac{1\;+\;\cos \theta_{1 2}^{trf}}
+	{\left(\cos \theta \right)^{2} \left(\cos \theta_{1 2}^{trf}\;-\;1\right)\;+\;2}
+\label{betaW}
+\\
+\nonumber
+\end{align}
+
+Diese Formel gilt f\"ur $ \beta_{W} $ und $ \cos \theta_{1 2} $ im top-Quark - Ruhesystem. Mit den Daten aus den Simulationen, mit welchen ich sp\"ater die Formeln getestet habe ich, pr\"ufte ich  sie auch f\"ur $ \beta_{W} $ und $ \cos \theta_{1 2} $ im Laborsystem. Hierbei hat sich gezeigt hat, dass sie als N\"aherung brauchbare Ergebnisse liefert (siehe Abschnitt \ref{betaWtest}). 
+Der Cosinus $ \theta $ wurde in beiden F\"allen durch (\ref{costheta}) bestimmt.
+
+\subsection{Zerfallswinkel im Laborsystem}
+
+\begin{figure}[h]
+	%\centering
+	\includegraphics[width=14cm]{topzerfalllaballes.png}
+	\caption{top-Quark - Zerfall im Laborsystem}
+\end{figure}
+
+Da man eine Beziehung zwischen den Winkeln und der Geschwindigkeit des top-Quarks, also dessen Beta- bzw. Gammafaktor sucht, ist es sinnvoll das Skalarprodukt der Impulse im Laborsystem durch die lorentztransformierten  Impulse aus dem top-Quark - Ruhesystem zu beschreiben.
+
+Hierbei gilt (siehe Abschnitt \ref{anhangwinkellab}):
+
+\begin{align}
+	\vec{p}_{W}^{trf}
+\;&=\;
+	\vec{p}_{W}^{trf}\;+\;
+	\left(\dfrac{\gamma_{t} \vec{\beta}_{t} \vec{p}_{W}^{trf}}{1 + \gamma_{t}}
+	\;+\;E_{W}^{trf} \right) \gamma_{t} \vec{\beta}_{t}	
+\;=\;
+	-\vec{p}_{3}^{trf}
+\label{pWtrf}
+\\
+	\vec{p}_{3}
+\;&=\;
+	\vec{p}_{3}^{trf}\;-\;
+	\left(-\dfrac{\gamma_{t} \vec{\beta}_{t} \vec{p}_{3}^{trf}}{1 + \gamma_{t}}
+	\;+\;E_{3}^{trf} \right) \gamma_{t} \vec{\beta}_{t}
+\nonumber
+\\
+\;&=\;
+	-\vec{p}_{W}\;-\;\left[
+		\gamma_{t} \left(\vec{\beta}_{t}\;\vec{p}_{W}\right)
+		\;+\;\gamma_{t} E_{W}\;+\;E_{3}^{trf}
+	\right]\gamma_{t} \vec{\beta}_{t}
+\label{pb}
+\\
+\nonumber
+\end{align}
+
+Damit ergibt sich f\"ur das Skalarprodukt der Impulse von bottom-Quark und W-Boson (siehe Abschnitt \ref{anhangwinkellab}):
+
+\begin{align}
+	\vec{p}_{3}\;\vec{p}_{W}
+\;&=\;
+	-p_{W}^{2} \left[
+		1\;+\;\left(\gamma_{t} \beta_{t} \cos \theta_{Wt}^{lab}
+			\;+\;\dfrac{\gamma_{t}}{\beta_{W}}
+			\;+\;\dfrac{p_{3}^{trf}}{p_{W}}
+		\right) \gamma_{t} \beta_{t} \cos \theta_{Wt}^{lab}
+	\right]
+\label{skal_pbpW}
+\end{align}
+
+Zur \"Ubersichtlichkeit wird im Folgenden eine Abk\"urzung verwendet:
+
+\begin{align}
+	\kappa
+\;&=\;
+	\left(\gamma_{t} \beta_{t} \cos \theta_{Wt}^{lab}
+		\;+\;\dfrac{\gamma_{t}}{\beta_{W}}
+		\;+\;\dfrac{p_{3}^{trf}}{p_{W}}
+	\right)
+\end{align}
+
+Hiermit bestimmt sich die Norm von $ \vec{p}_{3} $ aus (\ref{pb}) als (siehe Abschnitt \ref{anhangwinkellab}):
+
+\begin{align}
+	|\vec{p}_{3}|
+\;&=\;
+	p_{W} \sqrt{
+		\left(1\;+\;\kappa \gamma_{t} \beta_{t} \cos \theta_{Wt}^{lab}\right)^{2}
+		\;+\;\left(\kappa \gamma_{t} \beta_{t} \sin \theta_{Wt}^{lab}\right)^{2} 
+	}
+\\
+\nonumber
+\end{align}
+
+Den Cosinus des Winkels zwischen W-Boson - und Bottom-Quark - Impuls bestimmt man dann mit:% (\ref{skalarp})
+
+\begin{align}
+	\cos \theta_{W3}^{lab}
+\;&=\;
+	\dfrac{\vec{p}_{3}\;\vec{p}_{W}}{|\vec{p}_{3}|\;|\vec{p}_{W}|}
+\nonumber
+\\
+\;&=\;
+	-\dfrac{1\;+\;\kappa \gamma_{t} \beta_{t} \cos \theta_{Wt}^{lab}}
+		{\sqrt{
+				\left(1\;+
+				\;\kappa \gamma_{t} \beta_{t} \cos \theta_{Wt}^{lab}\right)^{2}
+				\;+\;\left(\kappa \gamma_{t} \beta_{t} 
+				\sin \theta_{Wt}^{lab}\right)^{2} 
+			}
+		}
+\label{costhetaWblab}
+\end{align} 
+
+\"Uber 
+$ \left(\sin \theta\right)^{2}
+\;+\;\left(\cos \theta\right)^{2}\;=\;1 $
+l\"asst sich ebenso der Sinus dieses Winkels berechnen:
+
+\begin{align}
+	\sin \theta_{W3}^{lab}
+\;&=\;
+	\dfrac{\kappa \gamma_{t} \beta_{t} \sin \theta_{Wt}^{lab}}
+		{\sqrt{
+				\left(1\;+
+				\;\kappa \gamma_{t} \beta_{t} \cos \theta_{Wt}^{lab}\right)^{2}
+				\;+\;\left(\kappa \gamma_{t} \beta_{t} 
+				\sin \theta_{Wt}^{lab}\right)^{2} 
+			}
+		}
+\nonumber
+\\
+\nonumber
+\end{align} 
+
+Durch Division der Gleichungen f\"ur den Cosinus und den Sinus f\"allt der Wurzelfaktor im Nenner heraus und man erh\"alt eine Relation f\"ur den Cotangens:
+
+\begin{align}
+	\dfrac{\cos \theta_{W3}^{lab}}{\sin \theta_{W3}^{lab}}
+\;&=\;
+	\cot \theta_{W3}^{lab}
+\nonumber
+\\
+\;&=\;
+	\dfrac{-1\;-\;\kappa \gamma_{t} \beta_{t} \cos \theta_{Wt}^{lab}}
+	{\kappa \gamma_{t} \beta_{t} \sin \theta_{Wt}^{lab}}
+\nonumber
+\\
+\;&=\;
+	\dfrac{-1}{\kappa \gamma_{t} \beta_{t} \sin \theta_{Wt}^{lab}}
+	\;-\;\cot \theta_{Wt}^{lab}
+\nonumber
+\\
+\nonumber
+\end{align}
+
+Es ergibt sich eine Beziehung, welche auf der rechten Seite nur noch von Winkeln abh\"angt:
+
+\begin{align}
+	\kappa \gamma_{t} \beta_{t} \sin \theta_{Wt}^{lab}
+\;&=\;
+	\dfrac{-1}{\cot \theta_{W3}^{lab}\;+\;\cot \theta_{Wt}^{lab}}
+\label{cot}
+\end{align}
+
+Dies kann man in (\ref{skal_pbpW}) einsetzen um die Abh\"angigkeit von $ \kappa $ zu eliminieren:
+
+\begin{align}
+	p_{3} p_{W} \cos \theta_{W3}^{lab}
+\;&=\;
+	-p_{W}^{2}\bigg(
+		1\;+\;
+		\dfrac{-1}{\cot \theta_{W3}^{lab}\;+\;\cot \theta_{Wt}^{lab}}\cdot
+		\underbrace{\dfrac{\cos \theta_{Wt}^{lab}}{\sin \theta_{Wt}^{lab}}}
+		_{\cot \theta_{Wt}^{lab}}
+	\bigg)
+\nonumber
+\\
+\nonumber
+\end{align}
+
+Aufgel\"ost nach dem Kotangens des Winkels zwischen W-Boson - und top-Quark - Impuls im Laborsystem:
+
+\begin{align}
+	\cot \theta_{Wt}^{lab}
+\;&=\;
+	-\left(\cot \theta_{W3}^{lab}
+	\;+\;\dfrac{p_{W}}{p_{3}}\dfrac{1}{\sin \theta_{W3}^{lab}}\right)
+\label{cotthetaWtlab}
+\\
+\nonumber
+\end{align}
+\\
+Damit hat man eine Formel f\"ur den Winkel zwischen top-Quark - und W-Boson - Impuls welche nur von Messgr\"o\ss en abh\"angt.
+
+\subsection{top-Quark - Geschwindigkeit}
+
+Jetzt ben\"otigt man $ p_{3}^{trf} $, was sich \"uber (\ref{pWtrf}) errechnet (siehe Abschnitt \ref{anhangbetat}):
+
+\begin{align}
+	\left(p_{3}^{trf}\right)^{2}
+\;&=\;
+	|\vec{p}_{3}^{trf}|^{2}
+\;=\;
+	p_{W}^{2} \left[
+		-\dfrac{1}{\gamma_{W}^{2} \beta_{W}^{2}}
+		\;+\;\gamma_{t}^{2} \left(
+			\beta_{t} \cos \theta_{Wt}^{lab}
+			\;+\;\dfrac{1}{\beta_{W}} 
+		\right)^{2}
+	\right]
+\label{pbtrf}
+\\
+\nonumber
+\end{align}
+
+Um auf den Betafaktor des top-Quark zu kommen, nutzt man (\ref{cot}). Zun\"achst l\"ost man dies nach $ p_{3}^{trf} $ auf und quadriert um (\ref{pbtrf}) einzusetzen. Hierbei k\"urzen sich Terme, welche h\"oher als Ordnung zwei in $ \beta_{t} $ sind, heraus.
+
+Zur \"Ubersichtlichkeit wird eine Abk\"urzung f\"ur den Bruch mit den Winkelfunktionen eingef\"uhrt:
+
+\begin{align}
+	\xi
+\;&=\;
+	\dfrac{1}
+	{\cot \theta_{W3}^{lab} \sin \theta_{Wt}^{lab}\;+\;\cos \theta_{Wt}^{lab}}
+\\
+\nonumber
+\end{align}
+
+Damit ergibt sich (sieh Abschnitt \ref{anhangbetat}):
+
+\begin{align}
+&\stackrel{\mathrm{(\ref{cot})}}\Rightarrow\qquad
+	\left(\gamma_{t} \beta_{t} \cos \theta_{Wt}^{lab}
+	\;+\;\dfrac{\gamma_{t}}{\beta_{W}}\right)
+	\gamma_{t} \beta_{t}\;+\;\xi
+\;=\;
+	-\gamma_{t} \beta_{t} \dfrac{p_{3}^{trf}}{p_{W}}
+\nonumber
+\\
+\nonumber
+\\
+&\Rightarrow\qquad
+	\beta_{t}^{2} \left[
+		-\left(\xi\right)^{2}\;+\;2 \cos \theta_{Wt}^{lab} \xi
+		\;+\;\dfrac{1}{\left(\gamma_{W} \beta_{W}\right)^{2}}
+	\right]
+	\;+\;\beta_{t}^{1} \left[\dfrac{2}{\beta_{W}} \xi \right]
+	\;+\;\beta_{t}^{0} \left[\left(\xi\right)^{2} \right]
+\;=\;0
+\end{align}
+
+Mit der L\"osungsformel f\"ur quadratische Gleichungen ergibt sich f\"ur 
+$ \beta_{t} $:
+
+\begin{align}
+	\beta_{t, 1/2}
+\;&=\;
+	\xi\;
+	\dfrac{-\dfrac{1}{\beta_{W}}\pm\sqrt{1\;+\;\left(\xi\right)^{2}
+	\;-\;2 \cos \theta_{Wt}^{lab} \xi}}
+	{\dfrac{1}{\beta_{W}^{2}}\;-\;\left[
+	1\;+\;\left(\xi\right)^{2}\;-\;2 \cos \theta_{Wt}^{lab} \xi \right]}
+\nonumber
+\\
+\;&=\;
+	\dfrac{-\xi}{\dfrac{1}{\beta_{W}}\mp
+	\sqrt{\left(\sin \theta_{Wt}^{lab}\right)^{2}
+	\;+\;\left[\xi\;-\;\cos \theta_{Wt}^{lab}\right]^{2}}}
+\label{betat}
+\end{align}
+
+Ob Fall eins oder zwei betrachtet werden muss, wurde lediglich getestet, indem gepr\"uft wurde, ob nur physikalisch sinnvolle Werte f\"ur $ \beta_{t} $ (zwischen null und eins) berechnet wurden. Es hat sich gezeigt, dass Fall zwei gew\"ahlt werden sollte, da ansonsten unphysikalisch Werte berechnet werden. [siehe (\ref{betattest})]
+
+\subsection{top-Quark - Masse}
+
+Die top-Quark - Masse bestimmt man mit Hilfe von (\ref{betagamma}). F\"ur den Impuls des top-Quark nutzt man die Impulserhaltung:
+
+\begin{align}
+	\vec{p}_{t}
+\;&=\;
+	\vec{p}_{3}\;+\;\vec{p}_{W}
+\nonumber
+\\
+	|\vec{p}_{t}|
+\;&=\;
+	\sqrt{|\vec{p}_{3}|^{2}\;+\;2 \vec{p}_{3} \vec{p}_{W}\;+\;|\vec{p}_{W}|^{2}}
+\nonumber
+\\
+\;&=\;
+	\sqrt{|\vec{p}_{3}|^{2}
+		\;+\;2 |\vec{p}_{3}| |\vec{p}_{W}| \cos \theta_{W3}^{lab}
+		\;+\;|\vec{p}_{W}|^{2}}
+\label{topimpuls}
+\end{align}
+
+Den Betafaktor des top-Quark kann man mit Hilfe der Messgr\"o\ss en \"uber (\ref{betat}) bestimmen. Diese beiden gehen wie folgt in die top-Quark - Masse ein:
+
+\begin{align}
+\stackrel{\mathrm{(\ref{betagamma})}}\Rightarrow\qquad
+	m_{t}
+\;&=\;
+	\dfrac{|\vec{p}_{t}|}{\gamma_{t} \beta_{t}}
+\;=\;
+	|\vec{p}_{t}|\;\sqrt{\dfrac{1}{\beta_{t}^{2}}\;-\;1}
+\label{topmasse}
+\end{align}
+
+Somit geht formeltechnisch wesentlich (\ref{cotthetaWtlab}) f\"ur den Winkel zwischen W-Boson - und top-Quark - Impuls und (\ref{betaW}) f\"ur die W-Boson - Geschwindigkeit \"uber (\ref{betat}) in die top-Quark - Masse ein.
+
+\newpage
+
+\chapter{Test der gefundenen Formeln anhand von Simulationen}
+
+\section{Teilchensimulationen}
+
+Die Simulationen wurden mit POWHEG und PYTHIA erstellt, wobei Zehntausend Ereignisse betrachtet wurden. Bei diesen Ereignissen wurde zun\"achst ein Protonpaar im Laborsystem mit entgegengesetzten Impulsen von $ 3,5\ \text{TeV}\text{/c} $ simuliert, deren Gluonen dann zu einem top - Anti-top - Paar fusionieren. Das W-Boson des einen top-Quarks ist daraufhin hadronisch zerfallen, das des anderen leptonisch.  Durch Auswahl der richtigen Zerfallsprodukte habe ich den hadronischen Zerfall betrachtet. Hierbei wurden die Histogramme mit Root bearbeitet und erstellt. \cite{pythiamanual}
+
+\section{Test der Zwischenschritte}
+
+Um sicherszustellen, dass die Annahmen, N\"aherungen und Umformungen innerhalb der Herleitung sinnvoll sind, wurden die wichtigsten Formeln aus den Zwischenschritten graphisch dargestellt. Durch Einsetzen der gefundenen Werte in die Formel und Auftragen der berechneten gegen die tats\"achlichen Gr\"o\ss en, konnten die Formeln auf ihre Tauglichkeit \"uberpr\"uft werden. Bei guter \"Ubereinstimmung sollten die Wertepaare auf der Ursprungsgeraden mit Steigung eins liegen. Zudem wurden die Differenzen zwischen diesen Werten betrachtet, um den Grad der Abweichung zu bestimmen.
+
+\paragraph{Anmerkung zu den Histogrammen und Plots :}
+
+"`Entries"' entspricht der Zahl der Eintr\"age. In einem Kasten sind das alle Eintr\"age im jeweiligen Histogramm. Falls es auf einer Achse angetragen ist, gibt die H\"ohe \"uber einem Bin (kleiner Wertebereich in dem Eintr\"age zusammengefasst werden) die Anzahl der Werte in diesem an. Bei den Korrelationsplots gibt die Zahl der Farbe die Anzahl der Eintr\"age des entsprechenden Bins an. "`MEAN"' bezeichnet den von Root mit einer Gau\ss funktion gefitteten Mittelwert und "`RMS"' deren Standardabweichung. "`Underflow"' gibt an, wie viele Werte niedriger, "`Overflow"', wie viele Werte gr\"o\ss er als der betrachtete Bereich des Histogramms sind. Auf \"ahnliche Weise wird zweidimensional in den Korrelationsplots angezeigt in welche Richtung Werte au\ss erhalb des Histogramms liegen. Da die komplette Formel auf eine Achse zu schreiben in den meisten F\"allen aufgrund ihrer L\"ange nicht m\"oglich war, habe ich stattdessen "`Winkelfunktion"' als Kennzeichnung f\"ur die Werte der entsprechenden Formel verwendet. "`LHS"' (Left Hand Side) beziehungsweise "`RHS"' (Right Hand Side) kennzeichnet die linke oder die rechte Seite einer Gleichung.
+
+\newpage
+
+\subsection{Verh\"altnis der Lorentzinvarianten Massen}
+
+Zun\"achst habe ich die beiden Lorentzinvarianten Massen nach (\ref{loinvzwei}) der drei Quarks berechnen lassen, um einen Wert f\"ur die linke Seite von (\ref{m13m23}) zu erhalten.
+
+Daraufhin transformierte ich den Impuls des W-Bosons nach (\ref{lorentz_allg_p}) in das top-Quark -  und den Impuls des Nicht - Anti-Quarks in das W-Boson - Ruhesystem. Damit konnte ich $ \cos \theta $ berechnen und einen Wert f\"ur die rechte Seite bestimmen.% nach (\ref{skalarp})
+\\
+\begin{figure}[h]
+    \subfigure[ Korrelation ]{\includegraphics[width=0.49\textwidth]{massenverhaeltnistrf.pdf}}
+    \subfigure[ Differenz ]{\includegraphics[width=0.49\textwidth]{massenverhaeltnistrfdiff.pdf}}
+    \caption{Massenverh\"altnis aus Winkelfunktion (\ref{m13m23})}
+\end{figure}
+\\
+Die starken Abweichungen lassen sich, unter anderem, durch die Approximation der geringen Quark-Massen aus dem W-Boson - Zerfall erkl\"aren, welche gemacht wurden um (\ref{m13m23}) herzuleiten. Wenn die Quarks aus dem W-Boson - Zerfall geringe Energien aufweisen ist die Vernachl\"assigung ihrer Massen nicht mehr zutreffend. Auch die Abstrahlung von Energie durch das W-Boson vor seinem Zerfall f\"uhrt zu Schwankungen.
+
+Man erkennt, dass f\"ur niedrige Werte des Verh\"altnisses der lorentzinvarianten Massen die Abweichungen deutlich geringer sind als f\"ur gr\"o\ss ere Werte. Dies deutet daraufhin, dass in diesem Bereich die Annahmen der Formeln besser zutreffen, womit erste \"Uberlegungen f\"ur Schnitte einer sp\"ateren Analyse m\"oglich sind.
+
+\newpage
+
+\subsection{W-Boson - Geschwindigkeit}\label{betaWtest}
+
+F\"ur den Test von (\ref{betaW}) nutzte ich (\ref{costheta}) um $ \cos \theta $ zu bestimmen. 
+$ \cos \theta_{12} $ berechnete ich indem ich die Impulse der Quarks aus dem W-Boson - Zerfall in das top - Ruhesystem, wieder nach (\ref{lorentz_allg_p}) berechnen lie\ss. Hiermit konnte ich auch den Impuls des W-Bosons in das Ruhesystem des top-Quarks transformieren, um mit dessen Energie nach (\ref{lorentz_allg_E}) den Betafaktor nach (\ref{betapE}) zu bestimmen.
+
+\begin{figure}[h]
+    \subfigure[ Korrelation ]{\includegraphics[width=0.49\textwidth]{betaWtrf.pdf}}
+    \subfigure[ Differenz ]{\includegraphics[width=0.49\textwidth]{betaWtrfdiff.pdf}}
+    \caption{Geschwindigkeit des W-Bosons im top-Quark - Ruhesystem (\ref{betaW})}
+\end{figure}
+
+Es zeigt sich, dass ein Gro\ss teil der W-Bosonen einen Betafaktor von nahezu eins aufweisen. Dies erkl\"art sich damit, dass das W-Boson im top-Quark - Ruhesystem eine charakteristische Energie durch den Zweik\"orperzerfall des top-Quarks erhalten sollte, die offenbar so hoch ist, dass es sich stark relativistisch bewegt. 
+Die Abweichungen bestehen darin, dass das W-Boson bevor es in Quarks zerf\"allt Energie abstrahlen kann, wodurch der Winkel zwischen diesen Quarks sich anders verh\"alt als von der Formel angenommen.
+
+Da die Formel f\"ur $ \beta_{W} $ approximativ auch f\"ur den Betafaktor im Laborsystem genutzt werden soll, habe ich den Winkel zwischen den Quarks des W-Bosons darin berechnet und damit die rechte Seite von (\ref{betaW}) bestimmt. Diesen Wert habe ich gegen den tats\"achlichen aufgetragen.
+
+\begin{figure}[h]
+    \subfigure[ Korraltion ]{\includegraphics[width=0.49\textwidth]{betaWlab.pdf}}
+    \subfigure[ Differenz ]{\includegraphics[width=0.49\textwidth]{betaWlabdiff.pdf}}
+    \caption{Geschwindigkeit des W-Bosons im Laborsystem}
+    \label{betaWlabhist}
+\end{figure}
+
+Es zeigt sich eine einigerma\ss en gute \"Ubereinstimmung, was darauf zur\"uckzuf\"uhren ist, dass die top-Quarks aus der Simulation keine all zu gro\ss en Energien aufweisen. Zu beachten ist die Skalierung der Plots der Differenzen in beiden Systemen. Der Peak im Histogramm der Differnzen im top-Quark - Ruhesystem ist um einiges schmaler, als der im Laborsystem. Dies ist aber auf eine Anh\"aufung der Werte in einem kleinem Bereich zur\"uckzuf\"uhren. Auch erkennt man, dass in beiden F\"allen vermehrt zu niedrige Werte f\"ur $ \beta_{W} $ berechnet werden.
+
+\newpage
+
+Im Folgenden wurden alle Werte au\ss er $ \beta_{W} $ direkt aus den Partoninformationen berechnet, woran sich zeigen l\"asst, wie stark diese Formeln aufgrund ihrer Abh\"angigkeit von $ \beta_{W} $ streuen. Im Anhang (siehe Abschnitt \ref{histogrammeanhang}) finden sich die Histogramme bei denen $ \beta_{W} $ aus den Partoninformationen direkt, ohne Berechnung durch (\ref{betaW}), in die Rechnungen eingegangen ist.
+
+\subsection{Skalarprodukt der Impulse von W-Boson und bottom-Quark}
+
+Da man den Impuls des bottom-Quark im top-Quark - Ruhesystem nicht direkt aus der Simulation ausgeben lassen kann, wurde als Wert der bottom-Quark - Impuls lorentztransformiert nach (\ref{lorentz_allg_p}) mit den Daten aus der Simulation.
+
+\begin{figure}[h]
+    \subfigure[ Korrelation ]{\includegraphics[width=0.49\textwidth]{skalp3pW.pdf}}
+    \subfigure[ Differenz ]{\includegraphics[width=0.49\textwidth]{skalp3pWdiff.pdf}}
+    \caption{Skalarprodukt der Impulse von W-Boson und bottom-Quark (\ref{skal_pbpW})}
+\end{figure}
+
+In diesem Fall werden zu gro\ss e Werte f\"ur das Skalarprodukt berechnet. Da in der Formel $ \beta_{W} $ im Nenner auftaucht, kann man dies mit den zu klein ermittelten Werten f\"ur dessen Beitrag erkl\"aren. Wieder erkennt man die Konzentration der Werte in einem kleinem Bereich und starke Streuungen weiter entfernt davon. Dies deutet daraufhin, dass die gemachte Annahmen nur in einem bestimmten Rahmen g\"ultig sind.
+
+\subsection{Betrag des bottom-Quark - Impulses}
+
+\begin{figure}[h]
+    \subfigure[ Korrelation ]{\includegraphics[width=0.49\textwidth]{betragp3.pdf}}
+    \subfigure[ Differenz ]{\includegraphics[width=0.49\textwidth]{betragp3diff.pdf}}
+    \caption{Betrag des bottom-Quark - Impulses (\ref{pb})}
+\end{figure}
+
+Wie zuvor f\"uhrt die $ \beta_{W} $-Abh\"angigkeit im Nenner einiger Terme von (\ref{pb}) dazu, dass zu gro\ss e Werte berechnet werden. Die Impulse wurden im Bereich zwischen null und $ 100\ \text{GeV}\text{/c} $ besser berechnet, als bei gro\ss en Werten. Dies l\"asst sich bei sp\"ateren Analysen dazu nutzen, dass man cuts (englisch: Schnitte) f\"ur den bottom-Quark - Impuls setzt, sodass nur mit bestimmten Werten weiter gerechnet wird.
+
+\subsection{Cosinus des Winkels zwischen W-Boson und bottom-Quark}
+
+\begin{figure}[h]
+    \subfigure[ Korrealtion ]{\includegraphics[width=0.49\textwidth]{costhetaWb.pdf}}
+    \subfigure[ Differenz ]{\includegraphics[width=0.49\textwidth]{costhetaWbdiff.pdf}}
+    \caption{Cosinus des Winkels zwischen W-Boson und bottom-Quark (\ref{costhetaWblab})}
+\end{figure}
+
+Man erkennt, die Ergebnisse  h\"aufen sich bei extremen Cosinus Werten (das hei\ss t -1 oder 1). Zum einen kann man das darauf zur\"uckf\"uhren, dass die Berechnung hier gute Ergebnisse liefert. Zum anderen zeigt dies aber auch wie der Boost durch das top-Quark entweder dazu f\"uhrt, dass das W-Boson und das bottom-Quark sich in gleicher Richtung ausbreiten ($ \cos \theta_{W3}^{lab} \approx 1 $) oder entgegengesetzt ($ \cos \theta_{W3}^{lab} \approx -1 $).
+
+\subsection{Gleichung mit kompletter Winkelabh\"angigkeit auf der rechten Seite}
+
+\begin{figure}[h]
+    \subfigure[ Korrelation ]{\includegraphics[width=0.49\textwidth]{winkelfunktion.pdf}}
+    \subfigure[ Differenz ]
+    {\includegraphics[width=0.49\textwidth]{winkelfunktiondiff.pdf}}
+    \caption{Winkelfunktion (\ref{cot})}
+\end{figure}
+
+Auch hier erh\"alt man, diesmal auf der linken Seite der Gleichung, zu gro\ss e Werte aufgrund des $ \beta_{W} $ im Nenner von (\ref{cot}) ( dieses ist in $ \kappa $ enthalten ). Zudem erkennt man wieder, dass f\"ur einen bestimmten Bereich die Rechnungen besser \"ubereinstimmen als f\"ur andere.
+
+\newpage
+
+\subsection{Cotangens des Winkels zwischen W-Boson und top-Quark}
+
+Die Formel f\"ur den Cotangens des Winkels zwischen W-Boson und top-Quark (\ref{cotthetaWtlab}) h\"angt nicht von $ \beta_{W} $ ab, sondern kann direkt aus den Messgr\"o\ss en berechnet werden.
+
+\begin{figure}[h]
+    \subfigure[ Korrealtion ]
+    {\includegraphics[width=0.49\textwidth]{cotthetaWt.pdf}}
+    \subfigure[ Differenz ]{\includegraphics[width=0.49\textwidth]{cotthetaWtdiff.pdf}}
+    \caption{Cotangens des Winkels zwischen W-Boson und top-Quark (\ref{cotthetaWtlab})}
+    \label{cotthetaWtlabhist}
+\end{figure}
+
+Hier zeigt sich eine gute Korrelation, wobei darauf zu achten ist, dass die Werte wieder in einem bestimmten Bereich geh\"auft sind. Die tendenziellen zu gro\ss berechneten Werte, lassen sich durch Stellenausl\"oschung bei der Berechnung von $\textstyle \sin \theta_{W3}^{trf} $ im Nenner erkl\"aren.
+
+\subsection{Betrag des bottom-Quark - Impulses im top-Quark - Ruhesystem}
+
+Der bisherige Wert f\"ur den Betrag des bottom-Quark - Impulses im top-Quark - Ruhesystem wurde als direkter Wert genutzt und f\"ur den Wert der Formel die berechneten Gr\"o\ss en eingesetzt in (\ref{pbtrf}) herangezogen.
+
+\begin{figure}[h]
+    \subfigure[ Korrealtion ]
+    {\includegraphics[width=0.49\textwidth]{betragp3trf.pdf}}
+    \subfigure[ Differenz ]{\includegraphics[width=0.49\textwidth]{betragp3trfdiff.pdf}}
+    \caption{Betrag des bottom-Quark - Impulses im top-Quark - Ruhesystem nach (\ref{pbtrf})}
+\end{figure}
+
+Die Streuung zu gr\"o\ss eren Werten erkl\"art sich mit der Abh\"angigkeit von $ \beta_{W} $ im Nenner von (\ref{pbtrf}). Wie es aufgrund des Zweik\"orperzerfall anzunehmen ist, finden sich im Ruhesystem des top-Quark die Impulse des bottom-Quark um einen bestimmten Wert konzentriert. Mit einer top-Quark - Masse von $ m_{t} = 172{,}5\ \text{GeV}\text{/c}^{2} $ und den Literaturwerten von W-Boson und bottom-Quark ($ m_{W} = 80{,}4\ \text{GeV}\text{/c}^{2} $ und $ m_{b} = 4{,}2\ \text{GeV}\text{/c}^{2} $ \cite{RPP}, ohne Fehler, da nur zur Sch\"atzung genutzt) bin ich durch (\ref{zweiK_p}) auf einen Impuls der Zerfallsprodukte im Ruhesystem des top-Quark von $ |\vec{p}| = 67\ \text{GeV/c} $ gekommen, welcher gut mit den Mittelwerten der Verteilungen \"ubereinstimmt.
+
+\newpage
+
+\subsection{top-Quark - Geschwindigkeit}\label{betattest}
+
+Um schlie\ss lich die top-Quark - Geschwindigkeit zu berechnen, ben\"otigte ich die Ergebnisse f\"ur $ \beta_{W} $ im Laborsystem aus (\ref{betaWlabhist}) und f\"ur $ \cot \theta_{Wt}^{lab} $ aus (\ref{cotthetaWtlabhist}). Damit konnte ich $ \beta_{t} $ \"uber (\ref{betat}) bestimmen.
+
+\begin{figure}[h]
+    \subfigure[ Korrealtion ]
+    {\includegraphics[width=0.49\textwidth]{betat.pdf}}
+    \subfigure[ Differenz ]{\includegraphics[width=0.49\textwidth]{betatdiff.pdf}}
+    \caption{Geschwindigkeit des top-Quark (\ref{betat})}
+\end{figure}
+
+Es hat sich gezeigt, dass (\ref{betat}) nur dann sinnvolle Ergebnisse f\"ur $ \beta_{t} $ liefert, wenn der zweite Fall betrachtet wird.
+
+Wie aus dem ann\"ahernd linearen Zusammenhang der Formeln zu erwarten ist, werden wie bei $ \beta_{W} $, vermehrt zu kleine Werte berechnet.
+
+\section{Jet - Parton - Identifikation}
+
+Um die Rechnung zur top-Quark - Masse aussagekr\"aftiger auf tats\"achliche Rekonstruktionen am Detektor zu machen, habe ich, nachdem ich die Tests auf Parton-Niveau abgeschlossen habe, mit rekonstruierten Jets die Veteilungen weiter untersucht.
+
+Das Programm FastJet hat hierbei die Teilchen, welche innerhalb der Simulation nicht mehr weiter zerfallen sind, also ann\"ahernd stabil sind, mit dem Anti-$ k_{T} $-Algorithmus im inclusive mode zu Jets zusammengefasst. \cite{fastjetmanual}
+
+\subsection{Anti-$ k_{T} $-Algorithmus (inclusive mode)}
+
+Im Gegensatz zum $ k_{T} $- sammelt der Anti-$ k_{T} $-Algorithmus zun\"achst Teilchen beziehungsweise Jets zusammen die gro\ss e transversale Impulse habe und ordnet dann weitere hinzu sofern ihr Abstand untereinander klein genug ist. Dieser Abstand wird geometrisch mit dem Azimutal-Winkel $ \phi $ und der Pseudorapidit\"at $ \eta $ bestimmt. Dabei werden Teilchen beziehungsweise Jets (i und j) verglichen.
+
+\begin{align}
+	\left(\bigtriangleup\!R_{ij}\right)^{2}
+\;&=\;
+	\left(\eta_{i} - \eta_{j}\right)^{2}\;+\;
+	\left(\phi_{i} - \phi_{j}\right)^{2}
+\label{deltaR}
+\end{align}
+
+Dieser Wert wird mit einem Faktor $ R $ gewichtet, um die Gr\"o\ss e und Ausbreitung der Jets zu ber\"ucksichtigen. $ R $ liegt typischerweise zwischen 0,1 und 1,0. Bei ATLAS wird $ R\;=\;0,4 $ verwendet, weshalb auch bei mir diese Einstellung Gebrauch findet.
+
+Zudem betrachtet man das Minimum der Kehrwerte von den transversalen Impulsen der beiden zu vergleichenden Teilchen.
+
+\begin{align*}
+	d_{ij}
+\;&=\;
+	\min \left(\dfrac{1}{p_{Ti}^{2}}, \dfrac{1}{p_{Tj}^{2}}\right)
+	\dfrac{\left(\bigtriangleup\!R_{ij}\right)^{2}}{R^{2}}
+\\
+	d_{iB}
+\;&=\;
+	\dfrac{1}{p_{Ti}^{2}}
+\end{align*}
+
+Dies wird f\"ur alle Teilchen-Kombinationen berechnet und von allen Werten das Minimum bestimmt. Ist dieses Minimum ein $ d_{iB} $, wird das Teilchen oder der Jet i zu einem Jet erkl\"art und nicht weiter verglichen. Ist es hingegen ein $ d_{ij} $, werden  i und j kombiniert. Jetzt wird wieder von vorne angefangen. Beendet ist der Algorithmus, wenn keine einzelnen Teilchen, sondern nur noch endg\"ultige Jets vorhanden sind. \cite{fastjetmanual}
+
+Zu beachten ist, dass Neutrinos bei diesen Jetrekonstruktionen nicht mit betrachtet werden d\"urfen, da diese vorraussichtlich nicht mit dem Detektor wechselwirken und deshalb nicht gemessen werden k\"onnen.
+
+\subsection{Zuordnung \"uber Differenz der Vierervektoren}
+
+Um mit den richtigen Jets zu rechnen, musste ich jedem Parton einen Jet zuweisen. Diese Zuordnung habe ich dadurch erreicht, indem ich mir den Betrag der Differenzen der Vierervektoren von Jets und Partonen berechnet habe. Diejenige Kombination von Jet und Parton mit dem kleinsten Wert wurden einander zugeordnet.
+
+\begin{align}
+	q^{2}
+\;&=\;
+	|\left(p_{Jet}\;-\;p_{Parton}\right)^{2}|
+\nonumber
+\\
+\;&=\;
+	|\left(E_{Jet} - E_{Parton}\right)^{2}
+	\;-\;\left(\vec{p}_{Jet} - \vec{p}_{Parton}\right)^{2}|
+\end{align} 
+
+Zur Kontrolle habe ich ebenso eine geometrische Zuordnung mit $ \bigtriangleup R_{Jet, Parton} $ aus dem Anti-$ k_{T} $-Algorithmus (\ref{deltaR}) betrachtet und die Zuordnung dieser beiden verglichen. Es hat sich gezeigt, dass bei mehr als zwei Dritteln der Events die Jets aller drei Partonen in beiden F\"allen \"ubereinstimmend waren.
+
+\newpage
+
+\section{top-Quark - Masse}
+
+F\"ur den Betrag des top-Quark - Impulses wurde (\ref{topimpuls}) verwendet und mit $ \beta_{t} $, aus (\ref{betat}) mit $ \beta_{W} $ nach (\ref{betaW}) und $ \cos \theta_{Wt}^{lab} $ nach (\ref{cotthetaWtlab}), in (\ref{topmasse}) eingesetzt.
+
+\subsection{Simulation}
+
+In der Simulation war die nat\"urlich Breite der top-Quark - Massenverteilung ber\"ucksichtigt und hatte ihre Mitte bei $ m_{t} = 172,5\ \text{GeV}\text{/c}^{2} $.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=12cm]{mtopsim.pdf}
+	\caption{Verteilung der top-Quark - Masse durch die Simulation}
+\end{figure}
+
+\newpage
+
+\subsection{Parton-Niveau}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=12cm]{mtopparton.pdf}
+	\caption{Verteilung der top-Quark - Masse nach der Rechnung (Parton-Niveau)}
+\end{figure}
+
+Auf Parton Niveau zeigt sich eine deutliche Verbreiterung der Verteilung. Auch ist der Fit des Mittelwertes gr\"o\ss er, als der durch die Simulation vorgegebenen Wert und die Verteilung hat einen langen Ausl\"aufer zu gro\ss en Massen. Trotzdem zeigt sich ein klarer Peak um die aus der Simulation erwartete Position.
+
+\begin{figure}[h]
+    \subfigure[ Korrelation ]
+    {\includegraphics[width=0.49\textwidth]{mtoppartonrs.pdf}}
+    \subfigure[ Differenz zum Simulationswert ]{\includegraphics[width=0.49\textwidth]{mtoppartondiff.pdf}}
+    \caption{Masse des top-Quark, Rechnung gegen Simulation (Parton-Niveau)}
+    \label{topmassepartonhist}
+\end{figure}
+
+Es zeigt sich eine leichte Korrelation, die Werte streuen aber sehr stark um den tats\"achlichen Wert.
+
+\newpage
+
+\subsection{Jet-Niveau}
+
+\begin{figure}[h]
+	\centering
+    \includegraphics[width=12cm]{mtopjet.pdf}
+    \caption{Masse des top-Quark (Jet-Niveau)}
+    \label{topmassejethist}
+\end{figure}
+
+Auf Jet-Niveau werden zu niedrige top-Quark - Massen durch die Berechnungen mit den Jets rekonstruiert. Zudem streuen die Werte noch st\"arker als auf Parton-Niveau. Dies ist aufgrund der Hadronisierungseffekte zu erwarten, da die Teilchenschauer hierbei sich aufweiten und die Winkel, wie auch die Impulse sich ver\"andern. Trotzdem ist auch hier ein deutlicher Peak zu erkennen. Dieses Ergebnis deutet darauf hin, dass man die Ergebnisse mit dieser Rechnung skalieren m\"usste. Um weiter zu untersuchen wie die Rekonstruktion der Jets sich auswirkt, betrachtete ich die Unterschiede zwischen Parton- und Jet-Niveau.
+
+\newpage
+
+\section{Differenzen zwischen Parton- und Jet-Niveau}
+
+\subsection{Impulsbetragdifferenzen}
+
+Die Impulse der Quarks aus dem W-Boson - Zerfall gehen haupts\"achlich \"uber ihre Kombination als W-Boson - Impuls in die Rechnung ein. Ebenso geht wesentlich der Impuls des bottom-Quarks ein, weshalb ich die Betr\"age zwischen Parton- und Jet-Niveau verglichen habe. 
+
+\begin{figure}[h]
+	\subfigure[ Korrelation ]
+	{\includegraphics[width=0.49\textwidth]
+	{pbpartonjet.pdf}}
+	\subfigure[ Differenz ]
+	{\includegraphics[width=0.49\textwidth]
+	{pbpartonjetdiff.pdf}}
+	\caption{Impulsbetr\"age des bottom-Quark - Parton und - Jet}
+	\subfigure[ Korrelation ]
+	{\includegraphics[width=0.49\textwidth]
+	{pWpartonjet.pdf}}
+	\subfigure[ Differenz ]
+	{\includegraphics[width=0.49\textwidth]
+	{pWpartonjetdiff.pdf}}
+	\caption{Impulsbetr\"age des W-Boson - Parton und - Jet}
+\end{figure}
+
+Wie man erkennt, werden die Impulse zu niedrig rekonstruiert. Dies ist darauf zur\"uckzuf\"uhren, dass die Jets auff\"achern und nicht mehr richtig zusammengesetzt werden. Entweder es werden zu viele, zu kleine oder Jets in andere Richtungen erzeugt, wodurch Impuls und Energie im Jet fehlen. 
+
+\subsection{Winkeldifferenzen}
+
+Da die Messung der Winkel bei dieser Methode der top-Quark - Massenbestimung entscheidend ist, habe ich die Winkel zwischen Partonen und Jets verglichen. Zudem habe ich die Differenzen mit der Summe zweier Gau\ss funktionen gefittet, um ein Ma\ss\;  daf\"ur zu erhalten, wie stark die Schwankungen sind. Hierbei beschreibt eine der Funktionen den zentralen Bereich mit dem hohen Peak und die andere die flachen Ausl\"aufer.
+
+\newpage
+
+\begin{figure}[H]
+    \subfigure[ Korrealtion ]
+    {\includegraphics[width=0.49\textwidth]
+    {ct12jetparton.pdf}}
+    \subfigure[ Differenz des Parton mit dem Jet Wert ]
+    {\includegraphics[width=0.49\textwidth]
+    {ct12diffdoppelgaus.pdf}}
+    \caption{Cosinus des Winkels zwischen Quark und Anti-Quark aus dem W-Boson - Zerfall (Jet gegen Parton)}
+    \subfigure[ Korrelation ]
+    {\includegraphics[width=0.49\textwidth]
+    {ct13jetparton.pdf}}
+    \subfigure[ Differenz des Parton mit dem Jet Wert ]
+    {\includegraphics[width=0.49\textwidth]
+    {ct13diffdoppelgaus.pdf}}
+    \caption{Cosinus des Winkels zwischen Quark aus dem W-Boson - Zerfall und dem bottom-Quark (Jet gegen Parton)}
+    \subfigure[ Korrelation ]
+    {\includegraphics[width=0.49\textwidth]
+    {ct23jetparton.pdf}}
+    \subfigure[ Differenz des Parton mit dem Jet Wert ]
+    {\includegraphics[width=0.49\textwidth]
+    {ct23diffdoppelgaus.pdf}}
+    \caption{Cosinus des Winkels zwischen Anti-Quark aus dem W-Boson - Zerfall und dem bottom-Quark (Jet gegen Parton)}
+\end{figure}
+
+\newpage
+
+Die Parameter der Fits sind mit pX (mit X einer ganzen Zahl) gekennzeichnet. Hierbei bezeichnen
+
+\begin{align*}
+	\text{pX mit (X}\;modulo\;3) = 0\qquad &:\qquad \text{Normierung}
+\\
+	\text{pX mit (X}\;modulo\;3) = 1\qquad &:\qquad \text{Mittelwert}
+\\
+	\text{pX mit (X}\;modulo\;3) = 2\qquad &:\qquad \text{Standardabweichung}
+\end{align*}
+
+der jeweiligen Gau\ss funktion. Die Gau\ss funktion, welche den hohen Peak beschreibt, wird hierbei zuerst beschrieben.
+
+Zu achten ist bei den Fits auch auf den $\textstyle \chi^{2} / ndf $ - Wert. Bei allen Plots ist dieser deutlich gr\"o\ss er eins, was anzeigt, dass die Fits nicht gut sind. Da die Schl\"usse aus den Ergebnissen aber nur qualitatv sind, sind diese Werte ausreichend.
+
+Die zwei gefitteten Gau\ss-Verteilungen entsprechen zwei unterschiedlichen Quellen der Abweichungen f\"ur den Winkel. Statistische Schwankungen um den tats\"achlichen Wert beschreibt die zentrale Funktion, w\"ahrend die breitere darauf hinweist, dass die Rekonstruktion der Jets anders verlaufen ist, als erwartet. So ist anzunehmen, dass die Jets entweder aufgespalten oder mit anderen Teilen zusammengefasst wurden, woraus sich die st\"arkeren Abweichungen ergeben.
+
+\newpage
+
+\section{top-Quark - Masse aus Rechnungen auf Jet-Niveau mit verschiedenen $ R $-Parametern des Anti-$ k_{T} $-Algorithmus}
+
+Da die Rekonstruktion der Jets wesentlich die Ergebnisse beeinflusst, habe ich die top-Quark - Masse bei verschiedenen $ R $-Parametern des Anti-$ k_{T} $-Algorithmus berechnen lassen. Dies sorgt daf\"ur, dass die Jets unterschiedlich gro\ss\; zusammengefasst werden.
+
+\begin{figure}[H]
+    \subfigure[ $ R = 0,1 $ ]
+    {\includegraphics[width=0.49\textwidth]
+    {mtopjetRnulleins.pdf}}
+    \subfigure[ $ R = 0,3 $ ]
+    {\includegraphics[width=0.49\textwidth]
+    {mtopjetRnulldrei.pdf}}
+    \subfigure[ $ R = 0,6 $ ]
+    {\includegraphics[width=0.49\textwidth]
+    {mtopjetRnullsechs.pdf}}
+    \subfigure[ $ R = 1,0 $ ]
+    {\includegraphics[width=0.49\textwidth]
+    {mtopjetReinsnull.pdf}}
+    \caption{top-Quark - Masse aus Rechnungen auf Jet-Niveau mit verschiedenen $ R $-Parametern des Anti-$ k_{T} $-Algorithmus}
+\end{figure}
+
+Man erkennt, dass bei kleinen Werten des Parameters zu kleine Massen berechnet werden. Hingegen werden bei gr\"o\ss eren Werten die Ausl\"aufer zu gro\ss en Massen l\"anger und die Verteilung wird breiter. Der Fall f\"ur $ R = 0,6 $ den schmalsten Peak, der Mittelwert liegt allerdings nur deshalb so gut, weil es einen langen Ausl\"aufer zu hohen Massen gibt, was man am Overflow erkennt. Der Wert des Peaks liegt trotzdem zu niedrig. 
+
+\chapter{Zusammenfassung und Ausblick}
+
+Es wurde eine Rechnung vorgestellt, bei der am Ende die Masse des top-Quarks aus den Impulsen und Winkeln seiner Zerfallsprodukte bestimmt werden konnte. Diese Rechnung wurde daraufhin Schritt f\"ur Schritt mit einer Simulation zun\"achst auf Parton-Niveau getestet. Es hat sich gezeigt, dass trotz Streuungen die Gleichungen ihre G\"ultigkeit besitzen. Auf Jet-Niveau wurden die Streuungen gr\"o\ss er, weshalb untersucht wurde, welche Werte streuen und wie sich eine Ver\"anderung des $ R $-Parameters vom Anti-$ k_{T} $-Algorithmus auf die Verteilung der berechneten top-Quark - Masse auswirkt.
+
+Durch die Tests auf Jet-Niveau hat sich au\ss erdem gezeigt, wie stark diese Methode der top-Quark - Massenbestimmung von der Rekonstruktion der Jets abh\"angt. Deshalb ist es entscheidend, welche Schnitte auf eine sp\"atere Analyse mit dieser Methode gesetzt werden. Der semileptonische Zerfall macht es sinnvoll auf fehlende transversale Energie, die auf das Neutrino hindeuten w\"urde und auf die Anzahl der Jets zu schneiden, da vier hadronisierende Quarks im Endzustand enthalten sind. 
+
+Die gr\"o\ss ten Schwankungen entstanden allerdings durch die Berechnung von $ \beta_{W} $. Von daher w\"are es interessant, bei welchen Werten, der zu messenden Gr\"o\ss en dies besser ermittelt wird und eventuell Korrelationen zu finden, bei denen gute Ergebnisse m\"oglich sind. Ebenso w\"are zu untersuchen wann die Abweichungen der Winkel zwischen den Jets von denen der Partonen besonders gro\ss\; sind, wie auch die Impulsdifferenzen, sodass man diese Effekte durch Schnitte beheben k\"onnte.
+
+Wie sich beim Betrag des bottom-Quark - Impulses gezeigt hat, wird dieser besonders gut berechnet bei Werten unterhalb von etwa $ 100\ \text{GeV}\text{/c} $, womit man einen weiteren Schnitt-Parameter nutzen k\"onnte, um die Berechnungen zu verbessern.
+
+\newpage
+
+\chapter{Anhang}
+
+\section{Mathematische Grundlagen}
+
+\subsection{Gau\ss verteilung}
+
+Sowohl in der Mathematik, wie auch in der Physik nimmt die Gau\ss verteilung eine herausragende Rolle ein. Da sie unter anderem ben\"otigt wird, um Wahrscheinlichkeiten und Fehler beziehungsweise deren Abweichungen zu beschreiben, stelle ich sie hier kurz vor.
+
+\begin{align}
+	f(x, \mu , \sigma ,N)
+\;&=\;
+	\dfrac{N}{\sqrt{2 \pi \sigma^{2}}}
+	\exp\left[-\dfrac{\left(x - \mu\right)^{2}}
+	{2 \sigma^{2}}\right]
+\end{align}
+mit
+\begin{align*}
+	N\;&\mathrel{\hat=}\;\text{Normierung}
+\\
+	\mu\;&\mathrel{\hat=}\;\text{Mittelwert}
+\\
+	\sigma\;&\mathrel{\hat=}\;\text{Standardabweichung}
+\end{align*}
+
+\subsection{Trigonometrische Funktionen}
+
+\begin{align}
+	\left[\sin (\phi)\right]^{2}\;+\;\left[\cos (\phi)\right]^{2}
+\;&=\;1
+\\
+	\cos (\phi)
+\;&=\;
+	\dfrac{\cot (\phi)}
+	{\sqrt{1\;+\;\left[\cot (\phi) \right]^{2}}}
+\\
+\nonumber
+\end{align}
+
+\subsection{Vektorrechnung}
+
+Das Skalarprodukt zwischen Vektoren l\"asst sich durch deren Betr\"age und den Winkel zwischen ihnen ausdr\"ucken:
+
+\begin{align}
+	\vec{a}\;\vec{b}
+\;&=\;
+	|\vec{a}| |\vec{b}| \cos \phi_{ab}
+\label{skalarp}
+\end{align}
+
+\section{Zu den Rechnungen}
+
+\subsection{Zu allgemeine Lorentztransformation}\label{anhanglorentz}
+
+Sei 
+$ \vec{v}\;=\;|\vec{v}| \cdot \vec{e}_{Achse} $
+, dann ist nach (\ref{beta}) auch 
+$ \vec{\beta}\;=\;\beta\;\vec{e}_{Achse} $
+. Mit 
+$ \vec{p} \cdot \vec{e}_{Achse}\;=\;p_{Achse} $
+folgt aus (\ref{lorentz_allg_p}):
+
+\begin{align}
+	\vec{p}^{*}
+\;&=\;
+	\vec{p}\;+\;\gamma
+	\left(
+		\dfrac{\gamma \beta p_{Achse}}{1 + \gamma} + E
+	\right)
+	\beta \vec{e}_{Achse}
+\nonumber
+\\
+\;&=\;
+	\vec{p}_{\perp Achse}\;+\;p_{Achse}\cdot \vec{e}_{Achse}\;+\;
+	\left(
+		\dfrac{\gamma^{2} \beta^{2} p_{Achse}}{1 + \gamma} + \beta \gamma E
+	\right)
+	\vec{e}_{Achse}
+\nonumber
+\\
+\;&=\;
+	\vec{p}_{\perp Achse}\;+\;
+	\left[
+		\left(
+			\dfrac{\gamma^{2} \beta^{2} }{1 + \gamma} + 1
+		\right) p_{Achse}
+		+ \beta \gamma E
+	\right]
+	\vec{e}_{Achse}
+\nonumber
+\end{align}
+
+Mit (\ref{gamma}) kann man zeigen:
+
+\begin{align}
+	1 + \dfrac{\gamma^{2} \beta^{2} }{1 + \gamma}
+\;&=\;
+	\gamma\;\dfrac{1 + \dfrac{1}{\gamma} + \gamma \beta^{2}}{1 + \gamma}
+\nonumber
+\\	
+\;&=\;
+	\gamma\;
+	\dfrac{1 + \gamma \left(\dfrac{1}{\gamma^{2}} + \beta^{2}\right)}
+	{1 + \gamma}	
+\nonumber
+\\
+\;&=\;
+	\gamma\;
+	\dfrac{1 + \gamma \left[\left(1 - \beta^{2}\right) + \beta^{2}\right]}
+	{1 + \gamma}		
+\;=\;\gamma
+\label{gamma_rel1}
+\end{align}
+
+\begin{align}
+\Rightarrow
+	\vec{p}^{*}_{\perp Achse}
+\;&=\;
+	\vec{p}_{\perp Achse}
+\nonumber
+\\
+	\vec{p}^{*}_{Achse}
+\;&=\;
+	\gamma \vec{p}_{Achse}
+	\;+\;
+	\beta \gamma E \vec{e}_{Achse}
+\end{align}
+
+\subsection{Zu Zweik\"orperzerfall}\label{anhangzweikoerper}
+
+Um auf den Impulsbetrag der Tochterteilchen zu kommen quadriert man zun\"achst (\ref{zweiK_E}):
+
+\begin{align}
+	m_{M}^{2}
+\;&=\;
+	\left(m_{T1}^{2}\;+\;\vec{p}^{2}\right)\;+\;
+	\left(m_{T2}^{2}\;+\;\vec{p}^{2}\right)
+\;+\;
+	2\sqrt{
+		\left(
+			m_{T1}^{2}\;+\;
+			m_{T1}^{2}
+		\right)\vec{p}^{2}
+		\;+\;\vec{p}^{4}\;+\;
+		m_{T1}^{2}
+		m_{T1}^{2}
+	}
+\nonumber
+\end{align}
+
+Jetzt ist es sinnvoll die Wurzel auf eine Seite der Gleichung zu bringen, sodass diese beim Quadrieren aufgel\"ost wird:
+
+\begin{align}
+\;\Rightarrow\;
+4 &\left[
+		\left(
+			m_{T1}^{2}\;+\;m_{T2}^{2}
+		\right) \vec{p}^{2}
+		\;+\;\vec{p}^{4}
+		\;+\;m_{T1}^{2} m_{T2}^{2}
+	\right]
+\nonumber
+\\
+\;&=\;
+	\left(
+		m_{M}^{2}\;-\;m_{T1}^{2}\;-\;m_{T2}^{2}
+		\;-\;2\vec{p}^{2}
+	\right)^{2}
+\nonumber
+\\
+\;&=\;
+	\left(m_{M}^{2}\;-\;m_{T1}^{2}\;-\;m_{T2}^{2}\right)^{2}
+\;-\;
+	4 \left(m_{M}^{2}\;-\;m_{T1}^{2}\;-\;m_{T2}^{2}\right)
+	\vec{p}^{2} 
+	\;+\;
+	4 \vec{p}^{4}
+\nonumber
+\end{align}
+
+Umstellen und Wurzelziehen liefert damit den Betrag f\"ur den Impuls:
+
+\begin{align}
+\Rightarrow\;
+	\vec{p}^{2}
+\;=\;
+	\dfrac{1}{4 m_{M}^{2}}
+	&\left[
+		\left(
+			m_{M}^{2}\;-\;m_{T1}^{2}\;-\;m_{T2}^{2}
+		\right)^{2}
+		\;-\;
+		4 m_{T1}^{2} m_{T2}^{2}
+	\right]
+\nonumber
+\\
+\nonumber
+\\
+\Rightarrow\;
+	|\vec{p}|
+\;=\;
+	\dfrac{1}{2 m_{M}}
+	&\sqrt{
+		m_{M}^{4}\;-\;
+		m_{M}^{2}
+		\left(
+			m_{T1}^{2}\;+\;m_{T2}^{2}
+		\right)
+		\;+\;m_{T1}^{4}
+		\;-\;2 m_{T1}^{2} m_{T2}^{2}
+		\;+\;m_{T2}^{4}
+		}
+\nonumber	
+\\
+\nonumber
+\\
+\;=\;
+	\dfrac{1}{2 m_{M}}
+	&\sqrt{
+		m_{M}^{4}
+		\;+\;\left(
+			m_{T1}^{2}\;-\;m_{T2}^{2}
+		\right)^{2}
+		\;-\;m_{M}^{2}
+		\left[
+			\left(
+				m_{T1}\;+\;m_{T2}
+			\right)^{2}
+			\;+\;
+			\left(
+				m_{T1}\;-\;m_{T2}
+			\right)^{2}
+		\right]
+		}
+\nonumber
+\\
+\nonumber
+\\
+\;=\;
+	\dfrac{1}{2 m_{M}}
+	&\sqrt{
+		m_{M}^{4}
+		\;+\;\left(
+			m_{T1}\;-\;m_{T2}
+		\right)^{2}
+		\left(
+			m_{T1}\;-\;m_{T2}
+		\right)^{2}
+	}
+\nonumber
+\\
+&\;\;\;\overline{
+		\;-\;m_{M}^{2}
+		\left[
+			\left(
+				m_{T1}\;+\;m_{T2}
+			\right)^{2}
+			\;+\;
+			\left(
+				m_{T1}\;-\;m_{T2}
+			\right)^{2}
+		\right]
+		}
+\nonumber
+\end{align}
+
+Hiermit kann man wieder mit (\ref{zweiK_E}) die Energie der Tochterteilchen bestimmen:
+
+\begin{align}
+	E_{T1}
+\;&=\;
+	m_{M}\;-\;
+	\sqrt{
+		m_{T2}^{2}
+		\;+\;\dfrac{1}{4 m_{M}^{2}}
+		\left[
+			m_{M}^{2}\;-\;
+			\left(
+				m_{T1}\;+\;m_{T2}
+			\right)^{2}
+		\right]
+		\left[
+				m_{M}^{2}\;-\;
+				\left(
+					m_{T1}\;-\;m_{T2}
+				\right)^{2}
+			\right]	
+		}
+\nonumber
+\\
+\nonumber
+\\	
+\;&=\;
+	\dfrac{1}{2 m_{M}}
+		\bigg\{
+			2 m_{M}^{2}\;-\;
+			\sqrt{4 m_{M}^{2} m_{T2}^{2}\;+\;m_{M}^{4}
+			\;-\;
+			2 m_{M}^{2}
+			\left(
+				m_{T1}^{2}\;+\;m_{T2}^{2}
+			\right)
+			\;-\;
+			\left(
+				m_{T1}^{2}\;+\;m_{T2}^{2}
+			\right)^{2}}
+		\bigg\}
+\nonumber
+\\
+\nonumber
+\\	
+\;&=\;
+	\dfrac{1}{2 m_{M}}
+		\bigg\{
+			2 m_{M}^{2}\;-\;
+			\sqrt{
+				m_{M}^{4}
+				\;-\;2 m_{M}^{2}
+				\left(
+					m_{T1}^{2}\;-\;m_{T2}^{2}
+				\right)
+				\;-\;
+				\left(
+					m_{T1}^{2}\;+\;m_{T2}^{2}
+				\right)^{2}
+			}
+		\bigg\}
+\nonumber
+\\
+\nonumber
+\\	
+\;&=\;
+	\dfrac{1}{2 m_{M}}
+	\bigg\{
+		2 m_{M}^{2}\;-\;
+		\left[
+			m_{M}^{2}\;-\;
+			\left(
+				m_{T1}^{2}\;-\;m_{T2}^{2}
+			\right)
+		\right]
+	\bigg\}
+\nonumber
+\\
+\nonumber
+\\	
+\;&=\;
+	\dfrac{1}{2 m_{M}}
+	\left(
+		m_{M}^{2}\;+\;m_{T1}^{2}\;-\;m_{T2}^{2}
+	\right)
+\end{align}
+
+\newpage
+
+\subsection{Zu Zerfallswinkel im top-Quark - Ruhesystem}\label{anhangwinkeltrf}
+
+Durch die Lorentztransformation \"andern sich die Impulse der Quarks aus dem W-Boson - Zefall zu:
+
+\begin{align}
+	\vec{p}_{1}^{trf}
+\;&=\;
+	\begin{pmatrix}
+		\gamma_{W}^{trf} p_{1}^{Wrf} \cos \theta
+		\;-\;\beta_{W}^{trf} \gamma_{W}^{trf} E_{1}^{Wrf}
+		\\ 
+		p_{1}^{Wrf} \sin \theta
+	\end{pmatrix}
+\nonumber
+\\
+\nonumber
+\\
+	\vec{p}_{2}^{trf}
+\;&=\;
+	\begin{pmatrix}
+		- \gamma_{W}^{trf} p_{2}^{Wrf} \cos \theta
+		\;-\;\beta_{W}^{trf} \gamma_{W}^{trf} E_{2}^{Wrf}
+		\\ 
+		- p_{2}^{Wrf} \sin \theta
+	\end{pmatrix}
+\nonumber
+\end{align}
+
+Ebenso \"andern sich deren Energien nach (\ref{lorentz_spez_E}):
+
+\begin{align}
+	E_{1}^{trf}
+\;&=\;
+	- \gamma_{W}^{trf} \beta_{W}^{trf} p_{1}^{Wrf} \cos \theta
+	\;+\;\gamma_{W}^{trf} E_{1}^{Wrf}
+\nonumber
+\\
+	E_{2}^{trf}
+\;&=\;
+	\gamma_{W}^{trf} \beta_{W}^{trf} p_{2}^{Wrf} \cos \theta
+	\;+\;\gamma_{W}^{trf} E_{2}^{Wrf}
+\nonumber
+\end{align}
+
+Damit kann man das Energieverh\"altnis schreiben als:
+
+\begin{align}
+	\dfrac{E_{1}}{E_{2}}
+\;&=\;
+	\dfrac{-\beta_{W}^{trf} \gamma_{W}^{trf} p_{1}^{Wrf} \cos \theta
+	\;+\;\gamma_{W}^{trf} E_{1}^{Wrf}}
+	{\beta_{W}^{trf} \gamma_{W}^{trf} p_{2}^{Wrf} \cos \theta
+	\;+\;\gamma_{W}^{trf} E_{2}^{Wrf}}
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	\dfrac{-\beta_{W}^{trf} p_{1}^{Wrf} \cos \theta\;+\;E_{1}^{Wrf}}
+	{\beta_{W}^{trf} p_{2}^{Wrf} \cos \theta\;+\;E_{2}^{Wrf}}
+\nonumber
+\\
+\nonumber
+\\
+\;&\underset{m_{2} \approx 0}{\stackrel{m_{1} \approx 0}\approx}\;
+	\dfrac{-\beta_{W}^{trf} \cos \theta\;+\;1}
+	{\beta_{W}^{trf} \cos \theta\;+\;1}
+\end{align}
+
+Mit den Lorentztransformierten Impulsen ergibt sich f\"ur die Winkel:
+
+\begin{align}
+	\cos \theta_{13}^{trf}
+\;&=\;
+	\dfrac{\vec{p}_{1}^{trf}\;\vec{p}_{3}^{trf}}
+	{|\vec{p}_{1}^{trf}|\;|\vec{p}_{3}^{trf}|}
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	\dfrac{-\gamma_{W}^{trf} p_{1}^{Wrf} \cos \theta\; p_{3}^{trf}
+	\;+\;\beta_{W}^{trf} \gamma_{W}^{trf} E_{1}^{Wrf} p_{3}^{trf}}
+	{|\vec{p}_{1}^{trf}|\;|\vec{p}_{3}^{trf}|}
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	\dfrac{-\gamma_{W}^{trf} p_{1}^{Wrf} \cos \theta
+	\;+\;\beta_{W}^{trf} \gamma_{W}^{trf} E_{1}^{Wrf}}
+	{\sqrt{\left( \gamma_{W}^{trf} p_{1}^{Wrf} \cos \theta
+	\;-\;\beta_{W}^{trf} \gamma_{W}^{trf} E_{1}^{Wrf} \right)^{2}
+	\;+\;\left( p_{1}^{Wrf} \sin \theta \right)^{2}}}
+\nonumber
+\\
+\nonumber
+\\
+\;&\stackrel{\mathrm{E_{1}^{trf}\approx |\vec{p}_{1}^{trf}|}}\approx\;
+	\dfrac{-\gamma_{W}^{trf} \cos \theta
+	\;+\;\beta_{W}^{trf} \gamma_{W}^{trf} }
+	{\sqrt{\left( \gamma_{W}^{trf} \cos \theta
+	\;-\;\beta_{W}^{trf} \gamma_{W}^{trf} \right)^{2}
+	\;+\;\left( \sin \theta \right)^{2}}}
+\nonumber
+\end{align}
+
+\begin{align}
+	\cos \theta_{23}^{trf}
+\;&=\;
+	\dfrac{\vec{p}_{2}^{trf}\;\vec{p}_{3}^{trf}}
+	{|\vec{p}_{2}^{trf}|\;|\vec{p}_{3}^{trf}|}
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	\dfrac{\gamma_{W} p_{2}^{Wrf} \cos \theta\; p_{3}^{trf}
+	\;+\;\beta_{W} \gamma_{W} E_{2}^{Wrf} p_{3}^{trf}}
+	{|\vec{p}_{2}^{trf}|\;|\vec{p}_{3}^{trf}|}
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	\dfrac{\gamma_{W} p_{2}^{Wrf} \cos \theta
+	\;+\;\beta_{W} \gamma_{W} E_{2}^{Wrf}}
+	{\sqrt{\left( \gamma_{W} p_{2}^{Wrf} \cos \theta 
+	\;-\;\beta_{W} \gamma_{W} E_{2}^{Wrf} \right)^{2}
+	\;+\;\left( p_{2}^{Wrf} \sin \theta \right)^{2}}}
+\nonumber
+\\
+\nonumber
+\\
+\;&\stackrel{\mathrm{E_{2}^{trf}\approx |\vec{p}_{2}^{trf}|}}\approx\;
+	\dfrac{\gamma_{W} \cos \theta
+	\;+\;\beta_{W} \gamma_{W} }
+	{\sqrt{\left( \gamma_{W} \cos \theta
+	\;+\;\beta_{W} \gamma_{W} \right)^{2}
+	\;+\;\left( \sin \theta \right)^{2}}}
+\nonumber
+\\
+\nonumber
+\end{align}
+
+Dies l\"asst sich vereinfachen mit:
+
+\begin{align}
+	( \gamma \cos \theta
+	\;&\pm\;\beta \gamma )^{2}
+	\;+\;\left( \sin \theta \right)^{2}
+\;=\;
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	\gamma^{2}\;\bigg[
+	\left( \cos \theta \right)^{2}
+	\;\pm\;2 \beta \cos \theta
+	\;+\;\beta^{2} 
+	\;+\;\underbrace{\dfrac{1}{\gamma^{2}}}
+	_{\stackrel{\mathrm{(\ref{gamma})}}=1-\beta^{2}}
+	\left( \sin \theta \right)^{2}
+	\bigg]
+\nonumber
+\\
+\;&=\;
+	\gamma^{2}\;\bigg \{
+	\underbrace{\left( \cos \theta \right)^{2}
+	\;+\;\left( \sin \theta \right)^{2}}_{=1}
+	\;\pm\;2 \beta \cos \theta
+	\;+\;\beta^{2} \underbrace{\left[1
+	\;-\;\left( \sin \theta \right)^{2}\right]}_{=\left( \cos \theta \right)^{2}}
+	\bigg \}
+\nonumber
+\\
+\;&=\;
+	\gamma^{2}\;\left(
+	1\;\pm\;\beta \cos \theta \right)^{2}
+\nonumber
+\\
+\nonumber
+\end{align} 
+
+Es ergibt sich:
+
+\begin{align}
+	\cos \theta_{13}^{trf}
+\;&\stackrel{\mathrm{E_{1}^{trf}\approx p_{1}^{trf}}}\approx\;
+	\dfrac{- \cos \theta + \beta_{W}^{trf}}{1 - \beta_{W}^{trf} \cos \theta}
+\\
+\nonumber
+\\
+	\cos \theta_{23}^{trf}
+\;&\stackrel{\mathrm{E_{2}^{trf}\approx p_{2}^{trf}}}\approx\;
+	\dfrac{\cos \theta + \beta_{W}^{trf}}{1 + \beta_{W}^{trf} \cos \theta}
+\\
+\nonumber
+\end{align}
+
+Den Winkelfaktor vereinfacht man wie folgt:
+
+\begin{align}
+	\dfrac{\left( 1\;-\;\cos \theta_{13}^{trf} \right)}
+	{\left( 1\;-\;\cos \theta_{23}^{trf} \right)}
+\;&=\;
+	\dfrac{ 1\;-\;\dfrac{- \cos \theta + \beta_{W}^{trf}}
+	{1 - \beta_{W}^{trf} \cos \theta} }
+	{ 1\;-\;\dfrac{\cos \theta + \beta_{W}^{trf}}
+	{1 + \beta_{W}^{trf} \cos \theta} }
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	\dfrac{\left( 1\;+\;\beta_{W}^{trf} \cos \theta \right)}
+	{\left( 1\;-\;\beta_{W}^{trf} \cos \theta \right)}
+	\cdot
+	\dfrac{\left( 1\;-\;\beta_{W}^{trf} \cos \theta
+	\;+\;\cos \theta\;-\;\beta_{W}^{trf} \right)}
+	{\left( 1\;+\;\beta_{W}^{trf} \cos \theta
+	\;-\;\cos \theta\;-\;\beta_{W}^{trf} \right)}
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	\dfrac{\left( 1\;+\;\beta_{W}^{trf} \cos \theta \right)}
+	{\left( 1\;-\;\beta_{W}^{trf} \cos \theta \right)}
+	\cdot
+	\dfrac{\left[ \left( 1-\beta_{W}^{trf} \right)
+	\;+\;\left( 1-\beta_{W}^{trf} \right) \cos \theta \right]}
+	{\left[ \left( 1-\beta_{W}^{trf} \right)
+	\;-\;\left( 1-\beta_{W}^{trf} \right) \cos \theta \right]}
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	\dfrac{\left( 1\;+\;\beta_{W}^{trf} \cos \theta \right)}
+	{\left( 1\;-\;\beta_{W}^{trf} \cos \theta \right)}
+	\cdot
+	\dfrac{\left( 1\;+\;\cos \theta \right)}
+	{\left( 1\;-\;\cos \theta \right)}
+\end{align}
+
+\subsection{Zu W-Boson - Geschwindigkeit}\label{anhangbetaW}
+
+Nach Definition von $ \theta $ folgt:
+
+\begin{align*}
+\vec{p}_{1}^{Wrf}\;\vec{\beta}_{W}^{trf}
+\;&=\; p^{Wrf} \beta_{W}^{trf} \cos\theta
+\\ 
+\vec{p}_{2}^{Wrf}\;\vec{\beta}_{W}^{trf}
+\;&=\; -p^{Wrf} \beta_{W}^{trf} \cos\theta 
+\end{align*}
+
+Damit ergibt sich das Skalarprodukt der Impulse zu:
+
+\begin{align}
+	\vec{p}_{1}^{trf} \cdot \vec{p}_{2}^{trf}
+\;&\stackrel{\mathrm{(\ref{lorentz_allg_p})}}=\;
+	\left[
+		\vec{p}_{1}^{Wrf}\;+\;\gamma_{W}^{trf} 
+		\left(
+			\dfrac{\gamma_{W}^{trf} 
+			\left(\vec{\beta}_{W}^{trf} \vec{p}_{1}^{Wrf}\right)}
+			{1+\gamma_{W}^{trf}}\;+\;E^{Wrf}
+		\right) \vec{\beta}_{W}^{trf}
+	\right] 
+\nonumber
+\\
+&\qquad\;\cdot \left[
+		\vec{p}_{2}^{Wrf}\;+\;\gamma_{W}^{trf} 
+		\left[
+			\dfrac{\gamma_{W}^{trf} 
+			\left(\vec{\beta}_{W}^{trf}\vec{p}_{2}^{Wrf}\right)}
+			{1+\gamma_{W}^{trf}}\;+\;E^{Wrf}
+		\right] \vec{\beta}_{W}^{trf}
+	\right]
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	\vec{p}_{1}^{Wrf}\;\vec{p}_{2}^{Wrf}
+	\;+\;\gamma_{W}^{trf} \left[
+		\dfrac{\gamma_{W}^{trf} 
+		\left(\vec{\beta}_{W}^{trf} \vec{p}_{1}^{Wrf}\right) }
+		{1+\gamma_{W}^{trf}}\;+\;E^{Wrf}	
+	\right]\;\left(\vec{\beta}_{W}^{trf}\;\vec{p}_{1}^{Wrf}\right)
+\nonumber
+\\	
+	&\qquad\;+\;\gamma_{W}^{trf} \left[
+		\dfrac{\gamma_{W}^{trf} 
+		\left(\vec{\beta}_{W}^{trf} \vec{p}_{2}^{Wrf}\right) }
+		{1+\gamma_{W}^{trf}}\;+\;E^{Wrf}	
+	\right]\;\left(\vec{\beta}_{W}^{trf}\;\vec{p}_{2}^{Wrf}\right)
+\nonumber
+\\	
+	&\qquad\;+\;\left(\gamma_{W}^{trf} \beta_{W}^{trf}\right)^{2} \left[
+			\dfrac{\gamma_{W}^{trf} 
+			\left(\vec{\beta}_{W}^{trf} \vec{p}_{1}^{Wrf}\right) }
+			{1+\gamma_{W}^{trf}}\;+\;E^{Wrf}	
+		\right]
+		\left[
+				\dfrac{\gamma_{W}^{trf} 
+				\left(\vec{\beta}_{W}^{trf} \vec{p}_{2}^{Wrf}\right) }
+				{1+\gamma_{W}^{trf}}\;+\;E^{Wrf}	
+		\right]
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	\left(p^{Wrf}\right)^{2}\bigg[
+		-1\;+\;
+		\left(\dfrac{-\gamma_{W}^{trf} \beta_{W}^{trf} \cos \theta}
+		{1 + \gamma_{W}^{trf}}\;+\;1\right) 
+		\gamma_{W}^{trf} \beta_{W}^{trf} \cos \theta
+\nonumber
+\\	
+&\qquad\qquad\qquad\;\;\;\;\;\;\;-\;
+		\left(\dfrac{\gamma_{W}^{trf} \beta_{W}^{trf} \cos \theta}
+		{1 + \gamma_{W}^{trf}}\;+\;1\right) 
+		\gamma_{W}^{trf} \beta_{W}^{trf} \cos \theta
+\nonumber
+\\	
+&\qquad\qquad\qquad\;\;\;\;\;\;\;+\;
+		\left(\gamma_{W}^{trf} \beta_{W}^{trf}\right)^{2} 
+		\left(-\dfrac{\left(\gamma_{W}^{trf} 
+		\beta_{W}^{trf} \cos \theta \right)^{2}}
+		{\left(1 + \gamma_{W}^{trf}\right)^{2}}\;+\;1\right)
+	\bigg]
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	\left(p^{Wrf}\right)^{2}\left\{
+		-1\;-\;2\dfrac{\left(\gamma_{W}^{trf} 
+		\beta_{W}^{trf} \cos \theta\right)^{2}}
+		{1 + \gamma_{W}^{trf}}
+		\;+\;\left(\gamma_{W}^{trf} \beta_{W}^{trf}\right)^{2}\left[
+			1\;-\;\dfrac{\left(\gamma_{W}^{trf} 
+			\beta_{W}^{trf} \cos \theta\right)^{2}}
+			{\left(1 + \gamma_{W}^{trf}\right)^{2}}
+		\right]
+	\right\}
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	\left(p^{Wrf}\right)^{2}\left\{
+		-1\;-\;\left(\gamma_{W}^{trf} \beta_{W}^{trf} \cos \theta\right)^{2}
+		\left[\dfrac{2}{1 + \gamma_{W}^{trf}}
+			\;+\;\dfrac{\left(\gamma_{W}^{trf} \beta_{W}^{trf}\right)^{2}}
+			{\left(1 + \gamma_{W}^{trf}\right)^{2}}
+		\right]\;+\;\left(\gamma_{W}^{trf} \beta_{W}^{trf}\right)^{2}
+	\right\}
+\nonumber
+\\
+\nonumber
+\\
+\nonumber
+\end{align}
+
+Mit (\ref{gamma_rel1}) kann man zeigen:
+
+\begin{align}
+	\dfrac{2}{\left(1 + \gamma \right)}
+	\;+\;\dfrac{\gamma^{2} \beta^{2}}{\left(1 + \gamma \right)^{2}}
+\;&=\;
+	\dfrac{1}{\left(1 + \gamma \right)} \left\{
+		1\;+\;
+		\left[
+			1\;+\;\dfrac{\gamma^{2} \beta^{2}}{\left(1 + \gamma \right)}
+		\right]
+	\right\}
+\nonumber
+\\
+\;&\stackrel{\mathrm{(\ref{gamma_rel1})}}=\;
+	\dfrac{1}{\left(1 + \gamma \right)}\;\left(1 + \gamma \right)
+	\;=\; 1
+\label{gamma_rel2}
+\end{align}
+
+Damit erh\"alt man f\"ur das Skalarprodukt:
+
+\begin{align}
+	\vec{p}_{1}^{trf} \cdot \vec{p}_{2}^{trf}
+\;&=\;
+	\left(p^{Wrf}\right)^{2}\;
+	\left[ 
+		-1\;-\;\left( \gamma_{W}^{trf} \beta_{W}^{trf} \cos \theta \right)^{2}
+		\;+\;\left( \gamma_{W}^{trf} \beta_{W}^{trf} \right)^{2} 
+	\right]
+\\
+\nonumber
+\\
+\nonumber
+\\
+\;&\stackrel{\mathrm{(\ref{gamma})}}=\;
+	\left(p^{Wrf} \gamma_{W}^{trf} \right)^{2}\;
+	\bigg[ 
+		\underbrace{\dfrac{-1}{\left(\gamma_{W}^{trf}\right)^{2}}}
+		_{= \left(\beta_{W}^{trf}\right)^{2} - 1}
+		\;+\;\left(\beta_{W}^{trf}\right)^{2}
+		\;-\;\left( \beta_{W}^{trf} \cos \theta \right)^{2}
+	\bigg]
+\end{align}
+
+F\"ur die Betr\"age der Impulse nutzt man die Energien:
+
+\begin{align}
+	|\vec{p}_{1}^{trf}|\;|\vec{p}_{2}^{trf}|
+\;&\approx\;
+	E_{1}^{trf}\;E_{2}^{trf}
+\nonumber
+\\
+\;&\stackrel{\mathrm{(\ref{lorentz_allg_E})}}=\;
+	\left(\gamma_{W}^{trf}\right)^{2} \left(E^{Wrf}
+	\;+\;\beta_{W}^{trf} p^{Wrf} \cos \theta \right) 
+	\cdot \left(E^{Wrf}\;-\;\beta_{W}^{trf} p^{Wrf} \cos \theta \right)
+\nonumber
+\\
+\;&\approx\;
+	\left(p^{Wrf} \gamma_{W}^{trf} \right)^{2}\;
+	\left( 1\;-\;\left(\beta_{W}^{trf}\right)^{2} (\cos \theta)^{2} \right)
+\\
+\nonumber
+\end{align}
+
+Somit kann man den Cosinus des Winkels zwischen den Quarks bestimmen durch: 
+
+\begin{align}
+	&\;\;\;\;\qquad \cos \theta_{1 2}^{trf}
+\;=\;
+	- \dfrac{1\;-\;\left(\beta_{W}^{trf}\right)^{2} \left[2
+	\;-\;\left(\cos \theta \right)^{2}\right]}
+	{1\;-\;\left(\beta_{W}^{trf}\right)^{2} \left(\cos \theta \right)^{2}}
+\nonumber
+\\
+\nonumber
+\\
+	&\Rightarrow \qquad \cos \theta_{1 2}^{trf}
+	\;\left[\left(\beta_{W}^{trf}\right)^{2} 
+	\left(\cos \theta \right)^{2}\;-\;1\right]
+\;=\;
+	1\;-\;\left(\beta_{W}^{trf}\right)^{2} 
+	\left[2\;-\;\left(\cos \theta \right)^{2}\right]
+\nonumber
+\\
+\nonumber
+\\
+	&\Rightarrow \qquad \left(\beta_{W}^{trf}\right)^{2} \cos \theta_{1 2}^{trf} 
+	\left(\cos \theta \right)^{2}
+	\;+\;\left(\beta_{W}^{trf}\right)^{2} 
+	\left[2\;-\;\left(\cos \theta \right)^{2}\right]
+\;=\;
+	1\;+\;\cos \theta_{1 2}^{trf}
+\nonumber
+\\
+\nonumber
+\\
+	&\Rightarrow \qquad \left(\beta_{W}^{trf}\right)^{2}
+\;=\;
+	\dfrac{1\;+\;\cos \theta_{1 2}^{trf}}
+	{\left(\cos \theta \right)^{2} 
+	\left(\cos \theta_{1 2}^{trf}\;-\;1\right)\;+\;2}
+\end{align}
+
+\subsection{Zu Zerfallswinkel im Laborsystem}\label{anhangwinkellab}
+
+\begin{align}
+	\vec{p}_{3}
+\;&=\;
+	\vec{p}_{3}^{trf}\;-\;
+	\left[-\dfrac{\gamma_{t} \left(\vec{\beta}_{t} \vec{p}_{3}^{trf}\right)}
+	{1 + \gamma_{t}}
+	\;+\;E_{3}^{trf} \right] \gamma_{t} \vec{\beta}_{t}
+\nonumber
+\\
+\nonumber
+\\
+\;&\stackrel{\mathrm{(\ref{pWtrf})}}=\;
+	-\vec{p}_{W}\;-\;\left[
+		\dfrac{\gamma_{t} \left(\vec{\beta}_{t} \vec{p}_{W}\right)}{1 + \gamma_{t}}
+		\;+\;E_{W} 
+	\right] \gamma_{t} \vec{\beta}_{t}
+\nonumber
+\\
+&\qquad\;+\;
+	\left\{
+		\dfrac{1}{1 + \gamma_{t}} \gamma_{t} \vec{\beta}_{t} \left[
+				-\vec{p}_{W}\;-\;\left[
+					\dfrac{\gamma_{t} \left(\vec{\beta}_{t} \vec{p}_{W}\right)}
+					{1 + \gamma_{t}}
+					\;+\;E_{W}
+				\right] \gamma_{t} \vec{\beta}_{t} 
+			\right]
+		\;-\;E_{3}^{trf}
+	\right\} \gamma_{t} \vec{\beta}_{t}
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	-\vec{p}_{W}\;-\;
+	\Bigg\{\dfrac{\gamma_{t}\left(\vec{\beta}_{t}\;\vec{p}_{W}\right)}
+		{1 + \gamma_{t}}
+		\;+\;E_{W}
+\nonumber
+\\
+&\qquad\qquad\;-\;
+		\dfrac{1}{1 + \gamma_{t}}\left[ 
+			-\gamma_{t} \vec{\beta}_{t}\;\vec{p}_{W}\;-\;
+			\dfrac{\gamma_{t}^{3} \beta_{t}^{2} 
+			\left(\vec{\beta}_{t}\;\vec{p}_{W}\right)}
+			{1 + \gamma_{t}}
+			\;-\;\gamma_{t}^{2} \beta_{t}^{2} E_{W} 
+		\right]
+		\;+\;E_{3}^{trf}
+	\Bigg\} \gamma_{t} \vec{\beta}_{t}
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	-\vec{p}_{W}\;-\;\bigg[
+		\dfrac{\gamma_{t}\left(\vec{\beta}_{t}\;\vec{p}_{W}\right)}
+		{1 + \gamma_{t}}\;+\;E_{W}
+\nonumber
+\\
+&\qquad\qquad\qquad\;+\;
+		\dfrac{\gamma_{t} \left(\vec{\beta}_{t}\;\vec{p}_{W}\right)}
+		{1 + \gamma_{t}}
+		\;+\;\dfrac{\gamma_{t}^{3} \beta_{t}^{2} 
+		\left(\vec{\beta}_{t}\;\vec{p}_{W}\right)}
+		{\left(1 + \gamma_{t}\right)^{2}}
+		\;+\;\dfrac{\beta_{t}^{2} \gamma_{t}^{2} E_{W}}{1 + \gamma_{t}}
+		\;+\;E_{3}^{trf}
+	\bigg]\gamma_{t} \vec{\beta}_{t}
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	-\vec{p}_{W}\;-\;\bigg\{
+		\left[\dfrac{2}{1 + \gamma_{t}}
+			\;+\;\dfrac{\gamma_{t}^{2} \beta_{t}^{2}}
+			{\left(1 + \gamma_{t}\right)^{2}}
+		\right]\gamma_{t}\left(\vec{\beta}_{t}\;\vec{p}_{W}\right)
+\nonumber
+\\
+&\qquad\qquad\qquad\;+\;
+		\left[
+			1\;+\;\dfrac{\beta_{t}^{2} \gamma_{t}^{2}}{1 + \gamma_{t}}
+		\right] E_{W}\;+\;E_{3}^{trf}
+	\bigg\}\gamma_{t} \vec{\beta}_{t}
+\nonumber
+\\
+\nonumber
+\\
+\;&\stackrel{\mathrm{(\ref{gamma_rel1})\;\&\;(\ref{gamma_rel2}})}=\;
+	-\vec{p}_{W}\;-\;\left[
+		\gamma_{t} \left(\vec{\beta}_{t}\;\vec{p}_{W}\right)
+		\;+\;\gamma_{t} E_{W}\;+\;E_{3}^{trf}
+	\right]\gamma_{t} \vec{\beta}_{t}
+\\
+\nonumber
+\end{align}
+
+Damit ergibt sich das Skalarprodukt zu:
+
+\begin{align}
+	\vec{p}_{3}\;\vec{p}_{W}
+\;&=\;
+	-p_{W}^{2}\;-\;\left[
+		\gamma_{t} \left(\vec{\beta}_{t}\;\vec{p}_{W}\right)
+		\;+\;\gamma_{t} E_{W}\;+\;E_{3}^{trf}
+	\right]\gamma_{t} \left(\vec{\beta}_{t}\;\vec{p}_{W}\right)
+\nonumber
+\end{align}
+
+Mit (\ref{betapE}),  
+$ E_{3}^{trf}\;\approx\;p_{3}^{trf} $
+  und 
+$ E_{W}\;\approx\;p_{W} $
+kann man dies umschreiben:
+
+\begin{align}
+	\vec{p}_{3}\;\vec{p}_{W}
+\;&=\;
+	-p_{W}^{2} \left[
+		1\;+\;\left(
+			\gamma_{t} \beta_{t} \cos \theta_{Wt}^{lab}
+			\;+\;\dfrac{\gamma_{t}}{\beta_{W}}
+			\;+\;\dfrac{p_{3}^{trf}}{p_{W}}	
+		\right)\gamma_{t} \beta_{t} \cos \theta_{Wt}^{lab}
+	\right]
+\end{align}
+
+Die Norm von $ \vec{p}_{3} $ bestimmt man mit (\ref{pb}):
+
+\begin{align}
+	|\vec{p}_{3}|^{2}
+\;&=\;
+	\vec{p}_{3}\;\vec{p}_{3}
+\;=\;
+	\left(-\vec{p}_{W}\;-\;p_{W} \kappa \gamma_{t} \vec{\beta}_{t} \right)^{2}
+\nonumber
+\\
+\;&=\;
+	p_{W}^{2} \left(1\;+\;2 \kappa \gamma_{t} \beta_{t} \cos \theta_{Wt}^{lab}
+		\;+\;\kappa^{2} \gamma_{t}^{2} \beta_{t}^{2} \right)
+\nonumber
+\\
+\nonumber
+\end{align}
+
+Jetzt verwendet man 
+$ \left(\sin \theta_{Wt}^{lab}\right)^{2}
+\;+\;\left(\cos \theta_{Wt}^{lab}\right)^{2}\;=\;1 $
+ und fasst zusammen:
+
+\begin{align}
+	|\vec{p}_{3}|^{2}
+\;&=\;
+	p_{W}^{2} \left[
+		\left(1\;+\;\kappa \gamma_{t} \beta_{t} \cos \theta_{Wt}^{lab}\right)^{2}
+		\;+\;\left(\kappa \gamma_{t} \beta_{t} \sin \theta_{Wt}^{lab}\right)^{2} 
+	\right]
+\\
+\nonumber
+\end{align}
+
+Das Skalarprodukt l\"ost man wie folgt nach dem Kotangens auf:
+
+\begin{align}
+	\vec{p}_{3}\;\vec{p}_{W}
+\;&=\;%\stackrel{\mathrm{(\ref{skalarp})}}
+	p_{3} p_{W} \cos \theta_{W3}^{lab}
+\nonumber
+\\
+\;&=\;
+	-p_{W}^{2} \left[
+		1\;+\;\kappa \gamma_{t} \beta_{t} \cos \theta_{Wt}^{lab}
+	\right]
+\nonumber
+\\
+\;&\stackrel{\mathrm{(\ref{cot})}}=\;
+	-p_{W}^{2}\bigg(
+		1\;+\;
+		\dfrac{-1}{\cot \theta_{W3}^{lab}\;+\;\cot \theta_{Wt}^{lab}}\cdot
+		\underbrace{\dfrac{\cos \theta_{Wt}^{lab}}{\sin \theta_{Wt}^{lab}}}
+		_{\cot \theta_{Wt}^{lab}}
+	\bigg)
+\nonumber
+\\
+\nonumber
+\\
+\end{align}
+
+\begin{align}
+\Rightarrow\;\;\;\; &
+	\dfrac{p_{3}}{p_{W}} \cos \theta_{W3}^{lab}
+\;=\;
+	\dfrac{\cot \theta_{Wt}^{lab}}{cot \theta_{Wt}^{lab}\;+\;cot \theta_{W3}^{lab}}
+	\;-\;1
+\nonumber
+\\
+\nonumber
+\\
+\Rightarrow\;\;\;\; &
+	\cot \theta_{Wt}^{lab}
+\;=\;
+	\left(\cot \theta_{W3}^{lab}\;+\;\cot \theta_{Wt}^{lab}\right)\cdot
+	\left(\dfrac{p_{3}}{p_{W}} \cos \theta_{W3}^{lab}\;+\;1\right)
+\nonumber
+\\
+\nonumber
+\\
+\Rightarrow\;\;\;\; &
+	\cot \theta_{Wt}^{lab} 
+	\left(1\;-\;\dfrac{p_{3}}{p_{W}} \cos \theta_{W3}^{lab}\;-\;1\right)
+\;=\;
+	\cot \theta_{W3}^{lab} 
+	\left(\dfrac{p_{3}}{p_{W}} \cos \theta_{W3}^{lab}\;+\;1\right)
+\nonumber
+\\
+\nonumber
+\\
+\Rightarrow\;\;\;\; &
+	\cot \theta_{Wt}^{lab} 
+\;=\;
+	-\left(\cot \theta_{W3}^{lab}
+	\;+\;\dfrac{p_{W}}{p_{3}} \dfrac{1}{\sin \theta_{W3}^{lab}}\right)
+\end{align}
+
+\subsection{Zu top-Quark - Geschwindigkeit}\label{anhangbetat}
+
+$ |\vec{p}_{3}^{trf}|\;=\;p_{3}^{trf} $ l\"asst sich bestimmen durch:
+
+\begin{align}
+	|\vec{p}_{3}^{trf}|^{2}
+\;&\stackrel{\mathrm{(\ref{pWtrf}})}=\;
+	\left[
+		\vec{p}_{W}\;+\;\left(
+			\dfrac{\gamma_{t} \left(\vec{\beta}_{t} \vec{p}_{W}\right)}
+			{1 + \gamma_{t}}\;+\;E_{W}
+		\right) \gamma_{t} \vec{\beta}_{t}
+	\right]^{2}
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	p_{W}^{2}\;+\;2 \left[
+		\dfrac{\gamma_{t} \left(\vec{\beta}_{t} \vec{p}_{W}\right)}
+		{1 + \gamma_{t}}\;+\;E_{W}
+	\right] \gamma_{t} \left(\vec{\beta}_{t} \vec{p}_{W}\right)
+\nonumber
+\\
+&\qquad\;\;\;\;\;+\;
+	\left[
+		\dfrac{\gamma_{t} \left(\vec{\beta}_{t} \vec{p}_{W}\right)}
+		{1 + \gamma_{t}}\;+\;E_{W}
+	\right]^{2} \gamma_{t}^{2} \beta_{t}^{2}
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	p_{W}^{2}\;+\;
+	2 \dfrac{\gamma_{t}^{2} \left(\vec{\beta}_{t} \vec{p}_{W}\right)^{2}}
+	{1 + \gamma_{t}}\;+\;
+	2 \gamma_{t} \left(\vec{\beta}_{t} \vec{p}_{W}\right) E_{W}
+\nonumber
+\\	
+&\qquad\;\;\;\;\;+\;
+	\left[
+		\dfrac{\gamma_{t}^{2} \left(\vec{\beta}_{t} \vec{p}_{W}\right)^{2}}
+		{\left(1 + \gamma_{t}\right)^{2}}\;+\;
+		\dfrac{\gamma_{t} \left(\vec{\beta}_{t} \vec{p}_{W}\right)}
+		{1 + \gamma_{t}} E_{W}\;+\;E_{W}^{2}
+	\right] \gamma_{t}^{2} \beta_{t}^{2}
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	p_{W}^{2}\;+\;
+	\dfrac{\gamma_{t}^{2} \left(\vec{\beta}_{t} \vec{p}_{W}\right)^{2}}
+	{\left(1 + \gamma_{t}\right)^{2}} 
+	\left[2 \left(1 + \gamma_{t}\right) + \gamma_{t}^{2} \beta_{t}^{2} \right]
+\nonumber
+\\	
+&\qquad\;\;\;\;\;+\;
+	2 \dfrac{\gamma_{t} \left(\vec{\beta}_{t} \vec{p}_{W}\right)}
+	{1 + \gamma_{t}}E_{W}
+	\left[1 + \gamma_{t} + \gamma_{t}^{2} \beta_{t}^{2} \right]
+	\;+\;E_{W}^{2} \gamma_{t}^{2} \beta_{t}^{2}
+\nonumber
+\end{align}
+
+Dies kann man wie folgt vereinfachen:
+
+\begin{align}
+	2 \left(1 + \gamma \right)\;+\;\gamma^{2} \beta^{2}
+\;&\stackrel{\mathrm{(\ref{gamma})}}=\;
+	2\;+\;2 \gamma\;+\;\gamma^{2} \left(1 - \dfrac{1}{\gamma^{2}} \right)
+\nonumber
+\\
+\;&=\;
+	1\;+\;2 \gamma \;+\;\gamma^{2}
+\nonumber
+\\
+\;&=\;
+	\left(1\;+\;\gamma \right)^{2}
+\nonumber
+\end{align}
+
+\begin{align}
+	1\;+\;\gamma\;+\;\gamma^{2} \beta^{2}
+\;&\stackrel{\mathrm{(\ref{gamma})}}=\;
+	1\;+\;\gamma\;+\;\gamma^{2} \left(1 - \dfrac{1}{\gamma^{2}} \right)
+\nonumber
+\\
+\;&=\;
+	\gamma\;+\;\gamma^{2}
+\nonumber
+\\
+\;&=\;
+	\gamma \left(1\;+\;\gamma \right)
+\nonumber
+\end{align}
+
+Damit und mit (\ref{betapE}) folgt:
+
+\begin{align}
+	\left(p_{3}^{trf} \right)^{2}
+\;&=\;
+	p_{W}^{2}\;+\;
+	\gamma_{t}^{2} \left(\vec{\beta}_{t} \vec{p}_{W}\right)^{2}
+	\;+\;2 \gamma_{t}^{2} \left(\vec{\beta}_{t} \vec{p}_{W}\right) 
+	\dfrac{p_{W}}{\beta_{W}}
+	\;+\; \left(\dfrac{p_{W}}{\beta_{W}}\right)^{2} \gamma_{t}^{2} \beta_{t}^{2}
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	p_{W}^{2} \left\{1\;+\;
+		\gamma_{t}^{2} \left[
+			\left(\beta_{t} \cos \theta_{Wt}^{lab} \right)^{2}
+			\;+\;2 \dfrac{\beta_{t}}{\beta_{W}} 
+			\left(\cos \theta_{Wt}^{lab} \right) 
+			\;+\; \left(\dfrac{\beta_{t}}{\beta_{W}}\right)^{2} 
+		\right]
+	\right\}
+\nonumber
+\\
+\nonumber
+\\
+\;&\stackrel{\mathrm{(\ref{gamma})}}=\;
+	p_{W}^{2} \left\{1\;-\;\dfrac{1}{\beta_{W}^{2}}\;+\;
+		\gamma_{t}^{2} \left[
+			\left(\beta_{t} \cos \theta_{Wt}^{lab} \right)^{2}
+			\;+\;2 \dfrac{\beta_{t}}{\beta_{W}} 
+			\left(\cos \theta_{Wt}^{lab} \right) 
+			\;+\; \left(\dfrac{1}{\beta_{W}}\right)^{2} 
+		\right]
+	\right\}
+\nonumber
+\\
+\nonumber
+\\
+\;&=\;
+	p_{W}^{2} \bigg\{
+		\underbrace{\frac{\beta_{W}^{2} - 1}{\beta_{W}^{2}}}
+		_{ = \dfrac{-1}{\gamma_{W}^{2} \beta_{W}^{2}}}
+		\;+\;\gamma_{t}^{2} \left[
+			\beta_{t} \cos \theta_{Wt}^{lab}
+			\;+\;\dfrac{1}{\beta_{W}} 
+		\right]^{2}
+	\bigg\}
+\\
+\nonumber
+\\
+\nonumber
+\end{align}
+
+Die Gleichung f\"ur die top-Quark - Geschwindigkeit ergibt sich dann mit:
+
+\begin{align}
+&\stackrel{\mathrm{(\ref{cot})}}\Rightarrow\qquad
+	\left(\gamma_{t} \beta_{t} \cos \theta_{Wt}^{lab}
+	\;+\;\dfrac{\gamma_{t}}{\beta_{W}}\right)
+	\gamma_{t} \beta_{t}\;+\;\xi
+\;=\;
+	-\gamma_{t} \beta_{t} \dfrac{p_{3}^{trf}}{p_{W}}
+\nonumber
+\\
+\nonumber
+\\
+&\stackrel{\mathrm{(\ref{pbtrf})}}\Rightarrow\qquad
+	\left[ \left(\gamma_{t} \beta_{t} \cos \theta_{Wt}^{lab}
+	\;+\;\dfrac{\gamma_{t}}{\beta_{W}}\right)
+	\gamma_{t} \beta_{t}\;+\;\xi \right]^{2}
+\nonumber
+\\
+&\qquad\qquad\;=\;
+	\left(\gamma_{t} \beta_{t}\right)^{2} \left[
+		-\dfrac{1}{\gamma_{W}^{2} \beta_{W}^{2}}
+		\;+\;\gamma_{t}^{2} \left(
+			\beta_{t} \cos \theta_{Wt}^{lab}
+			\;+\;\dfrac{1}{\beta_{W}} 
+		\right)^{2}
+	\right]
+\nonumber
+\\
+\nonumber
+\\
+&\Rightarrow\qquad
+	\left(\xi\right)^{2}\;+\;
+	2 \left(\gamma_{t} \beta_{t} \cos \theta_{Wt}^{lab}\;+\;
+	\dfrac{\gamma_{t}}{\beta_{W}}\right) \gamma_{t} \beta_{t} \xi
+\;=\;
+	\left(\gamma_{t} \beta_{t}\right)^{2} 
+	\left(-\dfrac{1}{\left(\gamma_{W} \beta_{W}\right)^{2}}\right)
+\nonumber
+\\
+\nonumber
+\\
+&\stackrel{\mathrm{(\ref{gamma})}}\Rightarrow\qquad
+	\left(1\;-\;\beta_{t}^{2}\right) \left(\xi\right)^{2}
+	\;+\;2 \beta_{t}^{2} \cos \theta_{Wt}^{lab} \xi
+	\;+\;2 \dfrac{\beta_{t}}{\beta_{W}} \xi
+	\;+\;\dfrac{\beta_{t}^{2}}{\left(\gamma_{W} \beta_{W}\right)^{2}}
+\;=\;0
+\nonumber
+\\
+\nonumber
+\\
+&\Rightarrow\qquad
+	\beta_{t}^{2} \left[
+		-\left(\xi\right)^{2}\;+\;2 \cos \theta_{Wt}^{lab} \xi
+		\;+\;\dfrac{1}{\left(\gamma_{W} \beta_{W}\right)^{2}}
+	\right]
+	\;+\;\beta_{t}^{1} \left[\dfrac{2}{\beta_{W}} \xi \right]
+	\;+\;\beta_{t}^{0} \left[\left(\xi\right)^{2} \right]
+\;=\;0
+\end{align}
+
+\newpage
+
+\section{Zus\"atzliche Rechnungen}
+
+Man findet allgemein f\"ur den Zweik\"orperzerfall im Laborsystem eine Formel \"ahnlich zu (\ref{cotthetaWtlab}):
+
+\begin{align*}
+	\vec{p}_{T1}\;\vec{p}_{M}
+\;&=\;
+	\vec{p}_{T1} \left(\vec{p}_{T1}\;+\;\vec{p}_{T2}\right)
+\\
+\;&=\;
+	p_{T1}^{2}\;+\;p_{T1} p_{T2} \cos \theta_{T1 T2}
+\\
+\;&\stackrel{\mathrm{!}}=\;
+	p_{T1} p_{M} \cos \theta_{T1 M}
+\\
+\;&=\;
+	p_{T1} 
+	\sqrt{p_{T1}^{2}
+	\;+\;2 p_{T1} p_{T2} \cos \theta_{T1 T2}\;+\;p_{T2}^{2}} 
+	\cos \theta_{T1 M}
+\\
+\Rightarrow \qquad \cos \theta_{T1 M}
+\;&=\;
+	\dfrac{p_{T1}\;+\;p_{T2} \cos \theta_{T1 T2}}{\sqrt{p_{T1}^{2}
+	\;+\;2 p_{T1} p_{T2} \cos \theta_{T1 T2}\;+\;p_{T2}^{2}}}
+\\
+\Rightarrow \qquad \cot \theta_{T1 M}
+\;&=\;
+	\dfrac{\cos \theta_{T1 M}}{\sin \theta_{T1 M}}
+\;=\;
+	\dfrac{\cos \theta_{T1 M}}
+	{\sqrt{1 - \left(\cos \theta_{T1 M}\right)^{2}}}
+\\
+\;&=\;
+	\dfrac{p_{T1}\;+\;p_{T2} \cos \theta_{T1 T2}}
+	{\sqrt{p_{T1}^{2}\;+\;2 p_{T1} p_{T2} \cos \theta_{T1 T2}
+	\;+\;p_{T2}^{2}
+	\;-\;\left(p_{T1}\;+\;p_{T2} \cos \theta_{T1 T2}\right)^{2}}}
+\\
+\;&=\;
+	\dfrac{p_{T1}\;+\;p_{T2} \cos \theta_{T1 T2}}
+	{\sqrt{p_{T2}^{2}
+	\;-\;\left(p_{T2} \cos \theta_{T1 T2}\right)^{2}}}
+\\
+\;&=\;
+	\dfrac{p_{T1}}{p_{T2}} \dfrac{1}{\sin \theta_{T1 T2}}
+	\;+\;\cot \theta_{T1 T2}
+\end{align*}
+
+Das negative Vorzeichen von (\ref{cotthetaWtlab}) kommt durch die Lorentztransformation aus dem top-Quark - Ruhesystem in das Laborsystem, da hierbei 
+$ \vec{\beta_{t}} = -\tfrac{\vec{p}_{t}}{E_{t}} $
+gesetzt werden muss.
+
+\newpage
+
+\section{Zus\"atzliche Histogramme zu den Formeln}\label{histogrammeanhang}
+
+Wenn man die Formeln benutzt und nur die Partoninformationen einsetzt, ohne die Gleichung f\"ur $ \beta_{W} $ zu verwenden, ergeben sich die folgenden Diagramme.
+
+\begin{figure}[h]
+    \subfigure[ Korrelation ]{\includegraphics[width=0.49\textwidth]{skalp3pWanhang.pdf}}
+    \subfigure[ Differenz ]{\includegraphics[width=0.49\textwidth]{skalp3pWdiffanhang.pdf}}
+    \caption{Skalarprodukt der Impulse von W-Boson und bottom-Quark (\ref{skal_pbpW}) ohne Berechnung von $ \beta_{W} $}
+\end{figure}
+
+\begin{figure}[h]
+    \subfigure[ Korrelation ]{\includegraphics[width=0.49\textwidth]{betragp3anhang.pdf}}
+    \subfigure[ Differenz ]{\includegraphics[width=0.49\textwidth]{betragp3diffanhang.pdf}}
+    \caption{Betrag des bottom-Quark - Impulses (\ref{pb}) ohne Berechnung von $ \beta_{W} $}
+\end{figure}
+
+\newpage
+
+\begin{figure}[h]
+    \subfigure[ Korrealtion ]{\includegraphics[width=0.49\textwidth]{costhetaWblabanhang.pdf}}
+    \subfigure[ Differenz ]{\includegraphics[width=0.49\textwidth]{costhetaWblabdiffanhang.pdf}}
+    \caption{Cosinus des Winkels zwischen W-Boson und bottom-Quark (\ref{costhetaWblab}) ohne Berechnung von $ \beta_{W} $}
+\end{figure}
+
+\begin{figure}[h]
+    \subfigure[ Korrelation ]{\includegraphics[width=0.49\textwidth]{winkelfunktionanhang.pdf}}
+    \subfigure[ Differenz ]
+    {\includegraphics[width=0.49\textwidth]{winkelfunktiondiffanhang.pdf}}
+    \caption{Winkelfunktion (\ref{cot}) ohne Berechnung von $ \beta_{W} $}
+\end{figure}
+
+\newpage
+
+\begin{figure}[h]
+    \subfigure[ Korrealtion ]
+    {\includegraphics[width=0.49\textwidth]{betragp3trfanhang.pdf}}
+    \subfigure[ Differenz ]{\includegraphics[width=0.49\textwidth]{betragp3trfdiffanhang.pdf}}
+    \caption{Betrag des bottom-Quark - Impulses im top-Quark - Ruhesystem nach (\ref{pbtrf}) ohne Berechnung von $ \beta_{W} $}
+\end{figure}
+
+Hier ergeben sich sehr geringe Abweichungen, da beide Seiten aus Formeln berechnet werden, die im Grunde Umformungen voneinander sind.
+
+\begin{figure}[h]
+    \subfigure[ Korrealtion ]
+    {\includegraphics[width=0.49\textwidth]{betatanhang.pdf}}
+    \subfigure[ Differenz ]{\includegraphics[width=0.49\textwidth]{betatdiffanhang.pdf}}
+    \caption{Geschwindigkeit des top-Quark ( ohne Berechnung von $ \beta_{W} $) (\ref{betat})}
+\end{figure}
+
+\newpage
+
+F\"ur die top-Quark - Masse wurde die Formel f\"ur $ \cot \theta_{Wt}^{lab} $ (\ref{cotthetaWtlab}) und f\"ur $ \beta_{t} $ (\ref{betat}), um daraus die Werte f\"ur (\ref{topmasse}) zu erhalten.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=12cm]{mtopanhang.pdf}
+	\caption{Verteilung der top-Quark - Masse ohne Berechnung von $ \beta_{W} $ (Parton-Niveau)}
+\end{figure}
+
+\begin{figure}[h]
+    \subfigure[ Korrelation ]
+    {\includegraphics[width=0.49\textwidth]{mtopkorranhang.pdf}}
+    \subfigure[ Differenz zum Simulationswert ]{\includegraphics[width=0.49\textwidth]{mtopdiffanhang.pdf}}
+    \caption{Masse des top-Quark, Rechnung ohne Berechnung von $ \beta_{W} $ gegen Simulation (Parton-Niveau)}
+\end{figure}
+
+\newpage
+
+\section{W-Boson - Masse und $ \boldsymbol{R_{32}} $}
+
+Ebenso wie die top-Quark - Masse kann man die W-Boson - Masse aus (\ref{topmasse}) bestimmen.
+
+\begin{align}
+	m_{W}
+\;&=\;
+	|\vec{p}_{W}|\;\sqrt{\dfrac{1}{\beta_{W}^{2}}\;-\;1}
+\label{WBosonMasse}
+\end{align}
+
+Durch Bilden des Verh\"altnisses der top-Quark - gegen W-Boson - Masse und Auftragen dieser Werte, ist es m\"oglich die top-Quark - Masse mit dem Literaturwert der W-Boson - Masse aus dem H\"ochstwert dieser Verteilung zu bestimmen.
+
+\begin{align}
+	R_{32}
+\;&=\;
+	\dfrac{m_{t}}{m_{W}}
+\;=\;
+	\dfrac{\sqrt{p_{1}^{2} + p_{2}^{2} + p_{3}^{2}}}
+	{\sqrt{p_{1}^{2} + p_{2}^{2}}}
+\label{R32}
+\end{align}
+
+\subsection*{W-Boson - Masse}
+
+Um die Masse des W-Bosons zu berechnen, nutzte (\ref{WBosonMasse}), worin ich $ \beta_{W} $ aus (\ref{betaW}) eingesetzt habe. Damit hat sich eine Massenverteilung f\"ur das W-Boson ergeben von:
+
+\begin{figure}[h]
+	\centering
+    \includegraphics[width=12cm]{mWjet.pdf}
+    \caption{Masse des W-Boson (Jet-Niveau)}
+    \label{WBosonmassejethist}
+\end{figure}
+
+Wie auch die top-Quark - Masse wurde die W-Boson - Masse zu gering berechnet. Haupts\"achlich tr\"agt dazu der zu gering rekonstruierte Impuls des W-Bosons bei, wie auch die tendenziell zu gering berechnete W-Boson - Geschwindigkeit.
+
+\newpage
+
+\subsection*{$ \boldsymbol{R_{32}} $}
+
+Durch Bilden des Verh\"altnisses der beiden berechneten Massen l\"asst sich der eine Teil von (\ref{R32}) berechnen. Aus den Jets ist es nun auch m\"oglich die rechte Seite zu bestimmen. Die Verteilungen dieser beiden Berechnungsarten lassen sich vergleichen und mit ihnen lie\ss e sich jeweils top-Quark - Masse bestimmen.
+
+\begin{figure}[h]
+    \subfigure[ $ R_{32} $ LHS ]
+    {\includegraphics[width=0.49\textwidth]{R32LHS.pdf}}
+    \subfigure[ $ R_{32} $ RHS ]{\includegraphics[width=0.49\textwidth]{R32RHS.pdf}}
+    \caption{$ R_{32} $ nach (\ref{R32})}
+\end{figure}
+
+Beim Verh\"altnis der Lorentzinvarianten ergibt sich eine ausgepr\"agtere Verteilung, das hei\ss t schmaler und mit einem h\"oheren Mittelwert. Dies folgt aus den Ann\"aherungen und Unsicherheiten der Rechnungen.
+
+\begin{thebibliography}{xx}
+	\bibitem{biebel} Pers\"onliche Mitteilungen von Herrn Prof.Dr.Biebel zu den Berechnungen und der Implementation f\"ur die Bachelorarbeit	
+	\bibitem{Vorlesung} http://www.etp.physik.uni-muenchen.de/kurs/TeVLHC14/
+	\bibitem{Griffiths} David Griffiths, "`Introduction in Elementary Particle Physics"' , Second, Revised Edition 2008
+   	\bibitem{dipljbehr} Janna Katharina Behr, "`Measurement of the Top-Quark Mass in the Semileptonic Decay Channel at the ATLAS Experiment"', 2012
+   	\bibitem{RPP} J. Beringer et al. (Particle Data Group), Phys. Rev. D86, 010001 (2012)
+   	\bibitem{lhctdr} O. Br\"uning, P. Collier, P. Lebrun, S. Myers, R. Ostojic, J. Poole, P. Proudlock, "`LHC Design Report"', 2004
+   	\bibitem{atlastdr} ATLAS Collaboration, "`ATLAS DETECTOR AND PHYSICS PERFORMANCE - Technical Design Report"', ATLAS TDR 14, CERN/LHCC 99-14
+   	\bibitem{pythiamanual} Torbj\"orn Sj\"ostrand - Theory Division, CERN, "`PYTHIA 5.7 and JETSET 7.4, Physics and Manual"', CERN-TH.7112/93
+   	\bibitem{fastjetmanual} Matteo Cacciari, Gavin P. Salam1 and Gregory Soyez, "`FastJet 2.4.2 user manual"', 
+   	\bibitem{massaverage} https://atlas.web.cern.ch/Atlas/GROUPS/PHYSICS/CONFNOTES/ATLAS-CONF-2014-008/
+\end{thebibliography}
+
+\listoffigures
+
+\chapter*{Erkl\"arung}
+
+Ich erkl\"are hiermit, dass Ich meine Bachelorarbeit mit dem Titel
+\vspace*{0.5cm}
+\\
+\textbf{"`Untersuchung einer neuen Methode zur
+Bestimmung der top-Quark - Masse"'}
+\vspace*{0.5cm}
+\\
+selbst\"andig verfasst und keine anderen als die angegebenen Hilfsmittel verwendet habe.
+\vspace*{2cm}
+\\
+M\"unchen, den 30.06.2014
+\vspace*{0.5cm}
+\\
+\line(1,0){110}
+\\
+Maximilian Herrmann
+\thispagestyle{empty}
+
+\end{document}

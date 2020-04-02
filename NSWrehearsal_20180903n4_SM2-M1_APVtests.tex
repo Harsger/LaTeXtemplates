@@ -1,0 +1,349 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{spruce}
+\definecolor{green(pigment)}{rgb}{0.0, 0.65, 0.31}
+\setbeamercolor*{item}{fg=green(pigment)}
+\definecolor{Green}{rgb}{0.00, 1.00, 0.00}
+\definecolor{Red}{rgb}{1.00, 0.00, 0.00}
+\definecolor{Blue}{rgb}{0.00, 0.00, 1.00}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{textcomp}
+\usepackage{multirow,bigdelim,dcolumn,booktabs}
+%\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+\usepackage{siunitx}
+\usepackage{appendixnumberbeamer}
+\usepackage{hyperref}
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\beamertemplatenavigationsymbolsempty
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+
+\graphicspath{
+	{pictures/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/plots/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/sketches/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/pictures/}
+}
+
+\begin{document}
+\title[SM2 Module 1 APV tests]{Performance of SM2 Module 1 \\ with APV25 Frontend Electronics}
+\author[M. Herrmann]{speaker : Maximilian Herrmann}
+\institute[LMU Munich]{Ludwig-Maximilians-Universit\"at M\"unchen - Lehrstuhl Schaile}
+\date[03.09.2018]{03.09.2018, NSW Micromegas Rehearsal} 
+
+\frame{
+	\centering
+	\vspace{2mm}
+
+	\titlepage
+	\vspace{-6mm}
+	
+	\includegraphics[width=0.35\textwidth]{LMUlogo.jpg}
+	\hspace{4cm}
+	\includegraphics[width=0.3\textwidth]{BMBFlogo.png}
+} 
+
+\frame{\frametitle{SM2 Module 1 Measurements with APV25 Electronics}
+		
+	\begin{itemize}
+		\item
+			Cosmic Ray Facility (Munich) \hfill 30.05. - 16.06.
+			\vspace{2mm}
+			
+			\begin{tabular}{ll}
+			whole active area & $\sim$ 21 million events
+			\\
+			reference & 2 $\times$ Monitored Drift Tube Chambers 
+			\\
+			readout & 96 APVs $\rightarrow$ 6 FECs
+			\\
+			raw data & {\color{red}not available} 
+			\end{tabular}
+			
+			\vspace{5mm}
+		\item
+			H8 Beamline \hfill 28.06. - 25.07.
+			\vspace{2mm}
+			
+			\begin{tabular}{ll}
+			9 $\times$ 9 \SI{}{\square\cm} spots & $\sim$ 1 million events
+			\\
+			reference & 4 $\times$ two dimensional MM chambers 
+			\\
+			readout & 28 APVs $\rightarrow$ 2 FECs
+			\\
+			raw data & {\color{green} available} 
+			\end{tabular}
+	\end{itemize}
+	
+}
+
+\frame{\frametitle{APV25 Raw Event (H8 Testbeam)}
+
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=1.2\textwidth]{H8jun18_eta_woZS_eventdisplay.pdf}
+		\column{.50\textwidth}
+			\centering
+			\textbf{signal}
+			
+			\hspace{10mm}\includegraphics[width=0.7\textwidth]{H8jun18_eta_woZS_eventdisplay_signal3D.pdf}
+			
+			\textbf{noise} 
+			
+			\hspace{10mm}\includegraphics[width=0.7\textwidth]{H8jun18_eta_woZS_eventdisplay_noise.pdf}
+	\end{columns}
+	
+	\begin{itemize}
+		\item
+			horizontal slices $\rightarrow$ common mode noise (per timebin)
+		\item
+			vertical groups $\rightarrow$ APVs (128 channels)
+	\end{itemize}
+				
+}
+
+\frame{\frametitle{Offset Correction and Zerosuppression Algorithm}
+	
+	\textbf{loop} APVs
+	
+	\hspace{5mm} \textbf{loop} channels
+	\vspace{1mm}
+	
+	\hspace{5mm} \hspace{5mm} \textbf{loop} timebins 
+	\vspace{1mm}
+	
+	\hspace{5mm} \hspace{5mm} $\Rightarrow$ $\sigma_{q}$ : charge standard deviation (separate for strips) 
+	\vspace{1mm}
+	
+	\hspace{5mm} $\Rightarrow$ $\overline{\sigma_{q}}$ : mean charge standard deviation ($ = \sum\limits_{\mathrm{strips}} \sigma_{q}$)
+	\vspace{1mm}
+	
+	\hspace{5mm} \textbf{loop} channels
+	\vspace{1mm}
+		
+	\hspace{5mm} \hspace{5mm} signal \textbf{if} $\sigma_{q} > \; \overline{\sigma_{q}} \;\cdot\;${\color{red}$f_{\mathrm{zerosuppression}}$} (= 3 , commonly)
+	\vspace{1mm}
+		
+	\hspace{5mm} \textbf{loop} timebins
+	\vspace{1mm}
+		
+	\hspace{5mm} \hspace{5mm} \textbf{loop} channels 
+	\vspace{1mm}
+		
+	\hspace{5mm} \hspace{5mm} $\Rightarrow$  $c_{q}$ : common mode ($ = \sum\limits_{\mathrm{strips}} q\;\;\;$ \textbf{if} strip \textbf{not} signal)
+	\vspace{1mm}
+			
+	\hspace{5mm} \hspace{5mm} \textbf{loop} channels 
+	\vspace{1mm}
+			
+	\hspace{5mm} \hspace{5mm} \hspace{5mm} $q_{cor} = q - c_{q} $
+	\vspace{1mm}
+	
+	$\Rightarrow$ discard all non signal channels
+				
+}
+
+\frame{\frametitle{APV25 Event - Offset Corrected and Zerosuppressed}
+
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=1.2\textwidth]{H8jun18_eta_ZS_eventdisplay.pdf}
+		\column{.50\textwidth}
+			\centering
+			\textbf{signal}
+			
+			\hspace{10mm}\includegraphics[width=0.7\textwidth]{H8jun18_eta_ZS_eventdisplay_signal3D.pdf}
+			
+			\textbf{noise} 
+			
+			\hspace{10mm}\includegraphics[width=0.7\textwidth]{H8jun18_eta_ZS_eventdisplay_noise.pdf}
+	\end{columns}
+	
+	\begin{itemize}
+		\item
+			good signal properties
+		\item
+			noise not completely rejected
+			
+			$\Rightarrow$ problematic APV channels
+	\end{itemize}
+				
+}
+
+\frame{\frametitle{Reconstructed Track Intersection (respective excluded)}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\textbf{Tmm1} (35845)
+			
+			\includegraphics[width=0.6\textwidth]{h8jun18_Tmm1_trackHits.pdf}
+			
+			\textbf{Tmm3} (35815)
+			
+			\includegraphics[width=0.6\textwidth]{h8jun18_Tmm3_trackHits.pdf}
+		\column{.50\textwidth}
+			\centering
+			\textbf{Tmm2} (41121)
+			
+			\includegraphics[width=0.6\textwidth]{h8jun18_Tmm2_trackHits.pdf}
+			
+			\textbf{Tmm4} (41080)
+			
+			\includegraphics[width=0.6\textwidth]{h8jun18_Tmm4_trackHits.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{Exclusion of Inefficient Tracker (Tmm2, Tmm4)}
+
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			track intersections
+			
+			\includegraphics[width=\textwidth]{h8jun18_trackHits_woTmm2n4.pdf}
+		\column{.50\textwidth}
+			\centering
+			residual Tmm3 - Tmm1
+			
+			\includegraphics[width=\textwidth]{h8jun18_residualVSpos_Tmm3nTmm1.pdf}
+	\end{columns}
+	
+	\vspace{5mm}
+	\centering
+	$\Rightarrow$ only 28648 events of 49111 in 3 sigma band ($\pm$ \SI{0.6}{mm}) ?
+	
+}
+
+\frame{\frametitle{SM2 M1 Cosmics - Whole Area Pulse Height \\ One Day Measurement at $U_{\mathrm{amp}} = \;$\SI{570}{V} (01.06.)}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\textbf{eta out}
+			
+			\includegraphics[width=0.6\textwidth]{m1_eo_MPVcluQ_570V_180601.pdf}
+			
+			\vspace{-2mm}
+			\textbf{stereo in}
+			
+			\includegraphics[width=0.6\textwidth]{m1_si_MPVcluQ_570V_180601.pdf}
+		\column{.50\textwidth}
+			\centering
+			\textbf{eta in}
+			
+			\includegraphics[width=0.6\textwidth]{m1_ei_MPVcluQ_570V_180601.pdf}
+			
+			\vspace{-2mm}
+			\textbf{stereo out}
+			
+			\includegraphics[width=0.6\textwidth]{m1_so_MPVcluQ_570V_180601.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{SM2 M1 Cosmics - Whole Area Pulse Height \\ All Measurements at $U_{\mathrm{amp}} = \;$\SI{570}{V} (30.05. - 16.06.)}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\textbf{eta out}
+			
+			\includegraphics[width=0.6\textwidth]{m1_eo_MPVcluQ_all570V.pdf}
+			
+			\vspace{-2mm}
+			\textbf{stereo in}
+			
+			\includegraphics[width=0.6\textwidth]{m1_si_MPVcluQ_all570V.pdf}
+		\column{.50\textwidth}
+			\centering
+			\textbf{eta in}
+			
+			\includegraphics[width=0.6\textwidth]{m1_ei_MPVcluQ_all570V.pdf}
+			
+			\vspace{-2mm}
+			\textbf{stereo out}
+			
+			\includegraphics[width=0.6\textwidth]{m1_so_MPVcluQ_all570V.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{SM2 M1 Cosmics - Amplification Scan}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\textbf{150 V}
+			
+			\includegraphics[width=\textwidth]{m1_MPVclusterQvsAmpVolt_drift150V.pdf}
+			
+%			\vspace{-2mm}
+%			\textbf{stereo in}
+%			
+%			\includegraphics[width=0.6\textwidth]{m1_si_MPVcluQ_all570V.pdf}
+		\column{.50\textwidth}
+			\centering
+			\textbf{300V}
+			
+			\includegraphics[width=\textwidth]{m1_MPVclusterQvsAmpVolt_drift300V.pdf}
+			
+			\vspace{-2mm}
+			\textbf{stereo out}
+			
+			\includegraphics[width=\textwidth]{m1_5mmEfficiency_C300V_selectedPartitions.pdf}
+	\end{columns}
+}
+
+
+
+\frame{\frametitle{Summary}
+	\footnotesize
+	investigation of the SM2 module 1 in the Cosmic Ray Facility in Garching
+	\begin{itemize}
+		\footnotesize
+		\item
+			pulse height is not homogeneous over area and layers
+			
+			$\Rightarrow$ has to be further investigated
+			
+			lower APV saturation values for the type 7 boards
+			
+			$\Rightarrow$ closer look on APV/FEC interplay with the board capacity is needed
+		\item
+			efficiency $>$ 90\% observed, but regions with considerably lower efficiency exit
+			
+			$\Rightarrow$ closer look at cuts and zerosuppression
+		\item
+			efficiency spoiled by rare trips of a few HV sectors (P. Arruba $\Rightarrow$ HV Monitoring) and zebra connection
+		\item
+			calibration shows smaller defects due to humidity,
+			
+			misalignment during gluing reconstructible
+		\item
+			some boards show ``Saclay banana shape'' 
+			
+			(preliminary, systematics have to be excluded)
+		\item
+			resolution for perpendicular incident near expectation
+		
+			$\Rightarrow$ resolution for inclined incident has to be further investigated
+		\item
+			measurements and investigations ongoing
+	\end{itemize}
+}
+
+\appendix
+
+\frame{\centering \Huge Backup}
+
+\end{document}

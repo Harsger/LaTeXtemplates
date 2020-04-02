@@ -1,0 +1,310 @@
+\documentclass{beamer}
+\usetheme{Montpellier}
+\usecolortheme{spruce}
+\definecolor{green(pigment)}{rgb}{0.0, 0.65, 0.31}
+\setbeamercolor*{item}{fg=green(pigment)}
+\definecolor{Green}{rgb}{0.00, 1.00, 0.00}
+\definecolor{Red}{rgb}{1.00, 0.00, 0.00}
+\definecolor{Blue}{rgb}{0.00, 0.00, 1.00}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{multirow,bigdelim,dcolumn,booktabs}
+%\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+\usepackage{siunitx}
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\beamertemplatenavigationsymbolsempty
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+
+\graphicspath{
+	{LatexPics/}
+}
+\begin{document}
+\title{Calibration of a \SI{1}{\m\squared} sized Resistive Strip Micromegas in a Test Facility with Cosmic Mouns}  
+\author{ Maximilian Herrmann}
+\date{21.10.2016} 
+
+\frame{\titlepage} 
+
+\frame{\frametitle{Outline}\tableofcontents}
+
+\section{Test Facility in Graching}
+
+\frame{\frametitle{Cosmic Ray Facility (CRF)}
+
+	Two MDT chambers for tracking in precision direction (y).
+	
+	Scintillator hodoskop for triggering and a coarse information in x direction. 
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{CRFpictureLoesel.png}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{CRFsketchLoesel.png}						
+	\end{columns}
+	
+}
+
+\section{Large Area Micromegas}
+
+\frame{\frametitle{A \SI{1}{\m\squared} sized Resistive Strip Micromegas}
+
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{RS_MM_principle.png}
+			
+			\tiny
+			\begin{itemize}
+				\item
+					MICROMEsh GAseous Structure
+				\item
+					high electric fields leads to an avalanche of electrons
+					after primary ionization by incident charged particles
+				\item
+					resistive strips collect electrons and prevent discharges
+			\end{itemize}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{L1_schematic.png}	
+				
+			\tiny			
+			\begin{itemize}
+				\item
+					128 readout strips (pitch \SI{450}{\micro\m}) are connected to an APV
+				\item
+					16 APV are needed for all strips (2048), connected in Master-Slave pairs 
+				\item
+					in orthogonal direction a coarse position information is given 
+					by the trigger scintillators
+					
+					$\rightarrow$ 10 divisions
+			\end{itemize}					
+	\end{columns}
+
+}
+
+\section{Quality of the Readout Structure}
+
+\frame{\frametitle{Dead Strips}
+
+	\centering
+	\includegraphics[width=0.6\textwidth]{deadStripInCluster-crop.pdf}
+	
+	\vspace{8mm}
+
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{deadstrips.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{deadcounts.pdf}						
+	\end{columns}
+
+}
+
+\frame{\frametitle{Noisy Strips}
+
+	\begin{columns}
+		\column{.50\textwidth}
+		
+			\begin{itemize}
+				\item
+					$ 100 < q_{\mathrm{max}} < 2000 $
+				\item
+					$ \bigtriangleup t > 0.1 $ timebins
+				\item
+					$ 3 < t_{0} < 15 $ timebins
+				\item
+					$ \chi^{2}/\mathrm{NDF} < 100 $
+			\end{itemize}
+		
+			\centering
+			\includegraphics[width=\textwidth]{noisystrips.pdf}
+		\column{.50\textwidth}
+			\vspace{6mm}
+					
+			\centering		
+			$\rightarrow$ if one condition is not fulfilled, the signal is counted as noise
+			
+			\vspace{15mm}
+		
+			\centering
+			\includegraphics[width=\textwidth]{noisecounts.pdf}					
+	\end{columns}
+
+}
+
+\section{Properties of the Readout Electronics}
+
+\frame{\frametitle{Maximal Charge During a Signal on a Strip}
+
+	\centering
+	\includegraphics[width=0.6\textwidth]{maxQ_vs_strip.pdf}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{maxQ_APV12.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{maxQ_APV7.pdf}					
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Crosstalk between succesive Channels}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			Master APV
+			
+			\includegraphics[width=\textwidth]{chargeVSchargeNext_APV0.pdf}
+		\column{.50\textwidth}
+			\centering
+			Slave APV
+			
+			\includegraphics[width=\textwidth]{chargeVSchargeNext_APV1.pdf}					
+	\end{columns}
+	
+	\vspace{8mm}
+	
+	\centering
+	$\rightarrow$ correction of this has no visible effect on timing
+	
+}
+
+\section{Signal Properties}
+
+\frame{\frametitle{Signal Propagation}
+
+	\centering
+	\includegraphics[width=0.7\textwidth]{timingCut25ns_vs_x_scin20_5cm_fit.pdf}
+	
+	signal propagation time on strips : $ t / s = \mathrm{fitted\;slope} \cdot 25 \mathrm{ns} / 5 \mathrm{cm} \simeq 2 \tfrac{\mathrm{ns}}{\mathrm{m}}  $
+	
+}
+
+\section{Position Reconstruction}
+
+\subsection{Centroid Method}
+
+\frame{\frametitle{Positiondependent Residual}
+	
+	\centering
+	10 divisions in x direction
+	
+	\includegraphics[width=0.4\textwidth]{res_y_vs_x_scin10_fitPol5.pdf}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			20 divisions in x direction
+				
+			\includegraphics[width=0.8\textwidth]{res_y_vs_x_scin20.pdf}
+		\column{.50\textwidth}
+			\centering
+			40 divisions in x direction
+			
+			\includegraphics[width=0.8\textwidth]{res_y_vs_x_scin40.pdf}					
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Correction Schemes}
+
+	\centering
+	\includegraphics[width=0.7\textwidth]{snakeLineCorrectionsComparison.pdf}
+
+}
+
+\frame{\frametitle{Systematics of the MDT Referenze Chambers}
+
+	\centering
+	\includegraphics[width=0.7\textwidth]{MDTinterceptDif_vs_x_scin_10to40divisions.pdf}
+	
+	\vspace{5mm}
+	
+	\centering
+	$\rightarrow$ unexpected behavior for 40 Divisions
+
+}
+
+\subsection{$\mu$TPC Method}
+
+\frame{\frametitle{Position Dependent Timing}
+
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			fastest strip in cluster
+				
+			\includegraphics[width=\textwidth]{fastest_time_APV0_scin0.pdf}
+		\column{.50\textwidth}
+			\centering
+			slowest strip in cluster
+			
+			\includegraphics[width=\textwidth]{slowest_time_APV0_scin0.pdf}					
+	\end{columns}
+	
+	\vspace{5mm}
+	
+	\centering
+	$\rightarrow \;\;\; t_{\mathrm{mean}} = \tfrac{1}{2} \cdot \Big[ \big( \mathrm{Mean}_{\mathrm{fast}} - \mathrm{Sigma}_{\mathrm{fast}} \big) + \big( \mathrm{Mean}_{\mathrm{slow}} + \mathrm{Sigma}_{\mathrm{slow}} \big) \Big]$ 
+
+}
+
+\frame{\frametitle{Mean Timing for 20$\times$16 Partitions}
+
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{mean_timing_for_det_scin20.pdf}
+		\column{.45\textwidth}
+			\small
+			$\mu$TPC position :
+			
+			\vspace{5mm}
+			
+			$\left( t_{\mathrm{mean}} - \mathrm{intercept}_{\mu\mathrm{TPC}} \right) / \mathrm{slope}_{\mu\mathrm{TPC}} $	
+						
+			\vspace{5mm}
+			
+			$\rightarrow$ use position dependent $t_{\mathrm{mean}}$
+	\end{columns}
+		
+}
+
+\frame{\frametitle{Improvement of Resolution}
+
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			constant mean timing
+				
+			\includegraphics[width=\textwidth]{residual_y_vs_angle_uTPC.pdf}
+		\column{.50\textwidth}
+			\centering
+			position dependent timing
+			
+			\includegraphics[width=\textwidth]{residual_y_vs_angle_uTPC_positionTime.pdf}					
+	\end{columns}	
+
+}
+
+\end{document}

@@ -1,0 +1,432 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{spruce}
+\definecolor{green(pigment)}{rgb}{0.0, 0.65, 0.31}
+\setbeamercolor*{item}{fg=green(pigment)}
+\definecolor{Green}{rgb}{0.00, 1.00, 0.00}
+\definecolor{Red}{rgb}{1.00, 0.00, 0.00}
+\definecolor{Blue}{rgb}{0.00, 0.00, 1.00}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{multirow,bigdelim,dcolumn,booktabs}
+%\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+\usepackage{siunitx}
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\beamertemplatenavigationsymbolsempty
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+
+\graphicspath{
+	%{pictures/}
+	{/home/m/Maximilian.Herrmann/Bilder/forLatex/plots/}
+	{/home/m/Maximilian.Herrmann/Bilder/forLatex/sketches/}
+	{/home/m/Maximilian.Herrmann/Bilder/forLatex/pictures/}
+}
+\begin{document}
+\title[Muon Tomography]{Muon Tomography using a Detector Test Facility}  
+\author[M. Herrmann]{Maximilian Herrmann}
+\institute[LMU Munich]{Ludwig-Maximilians-Universit\"at M\"unchen - Lehrstuhl Schaile}
+\date{28.03.2017, M\"unster} 
+
+\frame{\titlepage
+	\centering
+	Fr\"uhjahrstagung der Deutschen Physikalischen Gesellschaft
+	
+	\includegraphics[width=0.5\textwidth]{LMUlogo.jpg}
+	\hspace{2cm}
+	\includegraphics[width=0.3\textwidth]{BMBFlogo.png}
+} 
+
+\frame{\frametitle{Outline}
+	\tableofcontents
+}
+
+\section{Cosmic Ray Facility}
+
+\frame{\frametitle{Test Facility Scheme}
+	
+	\centering
+	\only<1>{\includegraphics[width=0.8\textwidth]{CRFprinciple2-crop.pdf}}
+	\only<2>{\includegraphics[width=0.8\textwidth]{CRFprinciple2_scattered-crop.pdf}}
+	
+	\begin{itemize}
+		\item
+			coinciding trigger by scintillators
+		\item
+			track reconstruction by reference detectors
+			
+			$\Rightarrow$ \bf{\color{blue}residual} = difference to measured hit position of detector 
+		\item<2> 
+			possible : track 1 $\ne$ track 2
+	\end{itemize}
+}
+
+\frame{\frametitle{Position and Track Reconstruction with Gas Detectors}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\vspace{5 mm}
+						
+			\includegraphics[width=\textwidth]{MDT_principle3-crop.pdf}
+			
+			\vspace{9 mm}
+								
+			\includegraphics[width=\textwidth]{RSMM_principle6-crop.pdf}
+		\column{.50\textwidth}
+			\small
+		
+			MDT - Monitored Drift Tube chambers
+			\begin{itemize}
+				\item
+					distance reconstruction by time distribution
+					
+					\vspace{3 mm}
+				\item
+					reconstruction of tracks with multilayer of tubes 
+										
+					\vspace{3 mm}
+			\end{itemize}
+			MICROMEGAS 
+			
+			- MICROMEesh GAseous Structure
+			\begin{itemize}
+				\item
+					gas amplification of electrons 
+					
+					from primary ionization
+					
+					\vspace{3 mm}
+				\item
+					position reconstruction by charge weighted position of hit strips 
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{Cosmic Ray Facility in Garching}
+	\centering
+	%scheme of test facility in Garching near Munich
+	%\vspace{1mm}
+	
+	\includegraphics[width=\textwidth]{CRF_sketch3-crop.pdf}
+	
+	\begin{itemize}
+		\item
+			precision direction along y axis
+			
+			$\Rightarrow$ Micromegas aligned for position reconstruction
+			
+			\vspace{3mm}
+		\item
+			\SI{10}{\cm} resolution of scintillator hodoscope
+			
+			$\Rightarrow$ coarse segmentation along x axis 
+	\end{itemize}
+}
+
+\frame{\frametitle{Cosmic Ray Facility in Garching}
+	\centering
+	facility to test detectors in Garching near Munich
+	\vspace{1mm}
+	
+	\includegraphics[width=0.8\textwidth]{CRF_small.JPG}
+	
+	\vspace{1mm}
+	MDT chambers : \SI{2.2}{\m} $\times$ \SI{4}{\m} $\Rightarrow$ active area : \SI{9}{\m\squared}
+	
+	angular acceptance : $\pm30^{\circ}$
+}
+
+\section{Spatial Resolution limited by Multiple Scattering}
+
+\frame{\frametitle{Spatial Resolution limited by Multiple Scattering}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{doppelGausCut-crop_bunt.pdf}
+			
+			\includegraphics[width=0.9\textwidth]{residualVSangle_cutMDTslopeNewest.pdf}
+		\column{.50\textwidth}
+		\centering
+		\begin{itemize}
+			\item
+				residual distribution separate for each angle
+				
+				$\Rightarrow$ fit with double Gaussian
+									
+				\vspace{1 mm}
+			\item
+				weighted sigma 
+				
+				as function of angle
+			\item
+				cut on slope difference of reference tracks
+				
+				$\Rightarrow$ decrease of width
+				
+				\hspace{4mm} of residual distribution
+		\end{itemize}
+					
+		\includegraphics[width=0.6\textwidth]{CRFscattering3-crop.pdf}
+	\end{columns}
+}
+
+\section{Muon Tomography by Reconstruction of Scattering Position}
+
+\frame{\frametitle{Reconstruction of Scattering Position}
+	\centering
+	\includegraphics[width=0.9\textwidth]{CRFscattering_withTrackSystem2-crop.pdf}
+	
+%	\begin{align*}
+%		y_{\mathrm{scattered}} 
+%			&= t_{\mathrm{track1}} + m_{\mathrm{track1}} \cdot z_{\mathrm{scattered}}
+%		\\
+%			&= t_{\mathrm{track2}} + m_{\mathrm{track2}} \cdot z_{\mathrm{scattered}}
+%	\end{align*}
+	
+	\vspace{5mm}
+	
+	$\Rightarrow \;\;\; z_{\mathrm{scattered}} = \dfrac{t_{\mathrm{track1}} - t_{\mathrm{track2}}}{m_{\mathrm{track2}} - m_{\mathrm{track1}}} $
+	
+	\vspace{5mm}
+	
+	$\Rightarrow \;\;\; y_{\mathrm{scattered}} = t_{\mathrm{track1/2}} + m_{\mathrm{track1/2}} \cdot z_{\mathrm{scattered}}	$
+}
+
+\frame{\frametitle{Material Reconstruction by Muon Tomography}
+	\begin{itemize}
+		\item
+			reconstruct track intersection points (y and z)
+		\item
+			consider only events with track slope difference larger than $3 \cdot 10^{-2}$
+	\end{itemize}
+
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{trackIntercept_yz_3e-2_1e-1_blackWhite.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{CRFmounTomography_yz-crop.pdf}
+	\end{columns}
+	\vspace{5mm}
+	
+	\centering
+	$\Rightarrow$ better y than z resolution, as expected
+}
+
+\frame{\frametitle{Material Reconstruction by Muon Tomography}
+	\begin{itemize}
+		\item
+			coarse segmentation of the scintillator hodoscope enables reconstruction in x-y-plane
+		\item
+			only slice in z direction around Micromegas is considered
+	\end{itemize}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{scatteredFraction_xy_blackWhite.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{L1inCRF_muonTomoTop-crop.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{Improvement of Residual Width by Track Selection}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{resWidth_vs_angle__compareSingleVSaverageTracks800_refTrack.pdf}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{scatteredabove2-crop.pdf}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{scatteredbelow2-crop.pdf}
+	\end{columns}
+	
+	\begin{itemize}
+		\item
+			reconstruction of track intersection point
+		\item
+			right track depending on position relative to the Micromegas
+	\end{itemize}
+	
+	$\Rightarrow$ improvement of residual distribution without loss of statistics
+}
+
+\frame{\frametitle{Summary}
+	\begin{itemize}
+		\item
+			Cosmic Ray Facility for detector testing and calibration
+			
+			\vspace{3mm}
+		\item
+			improvement of spatial resolution by cut on multiple scattering
+			
+			\vspace{3mm}
+		\item
+			muon tomography by reconstruction of scattering position 
+			
+			\vspace{3mm}
+		\item
+			improvement of spatial resolution by proper selection of reference tracks
+	\end{itemize}
+}
+
+\appendix
+
+\frame[noframenumbering]{
+	\Huge
+	\centering
+	Backup
+}
+
+\frame[noframenumbering]{\frametitle{Material Reconstruction by Muon Tomography}
+	\begin{itemize}
+		\item
+			reconstruct track intersection points (y and z)
+		\item
+			consider only events with track slope difference larger than $3 \cdot 10^{-2}$
+	\end{itemize}
+
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{trackIntercept_yz_3e-2_1e-1_persquare.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{CRFmounTomography_yz-crop.pdf}
+	\end{columns}
+	\vspace{5mm}
+	
+	\centering
+	$\Rightarrow$ better y than z resolution, as expected
+}
+
+\frame[noframenumbering]{\frametitle{Material Reconstruction by Muon Tomography}
+	\begin{itemize}
+		\item
+			coarse segmentation of the scintillator hodoscope enables reconstruction in x-y-plane
+		\item
+			only slice in z direction around Micromegas is considered
+	\end{itemize}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{scatteredFraction_xy.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{L1inCRF_muonTomoTop-crop.pdf}
+	\end{columns}
+}
+
+\frame[noframenumbering]{\frametitle{Material Reconstruction by Muon Tomography}
+	\centering
+	reconstructed track intersection points (y and z)
+	\vspace{5mm}
+
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			without test detector
+						
+			\includegraphics[width=\textwidth]{muontomo_yz_allReconstructed_woL1.pdf}
+		\column{.50\textwidth}
+			\centering	
+			with test detector
+						
+			\includegraphics[width=\textwidth]{muontomo_yz_allReconstructed.pdf}
+	\end{columns}
+	\vspace{5mm}
+	
+	\centering
+	$\Rightarrow$ no obvious structure can be reconstructed
+	
+	$\Rightarrow$ more scattering due to test detector
+}
+
+\frame[noframenumbering]{\frametitle{Material Reconstruction by Muon Tomography}
+	\centering
+	impact of slope difference on material reconstruction
+	\vspace{5mm}
+
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			looser cut
+						
+			\includegraphics[width=\textwidth]{trackIntercept_yz_4e-2_1e-1_cut.pdf}
+			
+			differences between
+			
+			$4 \cdot 10^{-2}$ and $1 \cdot 10^{-1}$
+		\column{.50\textwidth}
+			\centering	
+			tighter cut
+						
+			\includegraphics[width=\textwidth]{trackIntercept_yz_5e-2_1e-1_newest.pdf}
+						
+			differences between
+			
+			$5 \cdot 10^{-2}$ and $1 \cdot 10^{-1}$
+	\end{columns}
+	
+}
+
+\frame[noframenumbering]{\frametitle{Material Reconstruction by Muon Tomography}
+	\centering
+	impact of slope difference on material reconstruction
+	\vspace{5mm}
+
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			without test detector
+						
+			\includegraphics[width=\textwidth]{trackIntercept_yz_more1e-1_woL1.pdf}
+		\column{.50\textwidth}
+			\centering	
+			with test detector
+						
+			\includegraphics[width=\textwidth]{trackIntercept_yz_more1e-1.pdf}
+	\end{columns}
+	
+}
+
+\frame[noframenumbering]{\frametitle{Properties of the Tracks in the Cosmic Ray Facility }
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{MDTslopeDif.pdf}
+		\column{.50\textwidth}
+			\centering	
+			\includegraphics[width=0.8\textwidth]{MDTinterceptDif.pdf}
+	\end{columns}
+	\vspace{2mm}
+	
+	\centering	
+	\includegraphics[width=0.4\textwidth]{MDTslopeDifVSinterceptDif.png}
+}
+
+\frame[noframenumbering]{\frametitle{Combination of Cut and Selection}
+	\centering
+
+	\includegraphics[width=0.8\textwidth]{resVSangle_improve_slopeCutNbestTrack.pdf}
+	
+	$\Rightarrow$ improvement of residual width distribution by a factor 3
+}
+
+\end{document}

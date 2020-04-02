@@ -1,0 +1,1041 @@
+\documentclass[usenamees,dvipsnames]{beamer}
+\usetheme{Madrid}
+\usecolortheme{spruce}
+\definecolor{green(pigment)}{rgb}{0.0, 0.65, 0.31}
+\setbeamercolor*{item}{fg=green(pigment)}
+\definecolor{Green}{rgb}{0.00, 1.00, 0.00}
+\definecolor{Red}{rgb}{1.00, 0.00, 0.00}
+\definecolor{Blue}{rgb}{0.00, 0.00, 1.00}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{textcomp}
+\usepackage{multirow,bigdelim,dcolumn,booktabs}
+%\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+\usepackage{siunitx}
+\usepackage{appendixnumberbeamer}
+\usepackage{hyperref}
+\usepackage{mdframed}
+\usepackage{xcolor}
+\usepackage[absolute,overlay]{textpos}
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\beamertemplatenavigationsymbolsempty
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.text}
+%\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+
+\graphicspath{
+	{pictures/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/plots/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/sketches/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/pictures/}
+}
+
+\begin{document}
+\title[SM2 in CRF]{SM2 Micromegas Modules in the Cosmic Ray Facility}  
+\author[M. Herrmann]{Maximilian Herrmann}
+\institute[LMU Munich]{Ludwig-Maximilians-Universit\"at M\"unchen - Lehrstuhl Schaile}
+\date[04.09.2019]{NSW Software and Detector Integration 04.09.2019} 
+
+\frame{
+	\titlepage
+	
+	\centering
+	\includegraphics[width=0.5\textwidth]{hardwareGroupWithM5.png}
+} 
+
+%\frame{\frametitle{Outline}
+%	\tableofcontents
+%}
+
+\frame{\frametitle{SM2 Micromegas Modules for the NSW}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.78\textwidth]{sectorsNsides_SM2marked.png}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{ROboardsAligned2-crop.png}
+	\end{columns}
+	
+	\vspace{3mm}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{moduleLayers.jpg}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{quadrupletStripOrientation3-crop.pdf}
+	\end{columns}
+} 
+
+\section{Cosmic Ray Facility}
+
+\frame{\frametitle{Cosmic Ray Facility}
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=1.0\textwidth]{CRFprinciple7-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{CRF_small.JPG}
+	\end{columns}
+	
+	\vspace{2mm}
+	\centering
+	\footnotesize
+	\begin{tabular}{ll}
+		trigger & 2 $\times$ scintillator hodoscopes
+		\\
+		track reconstruction & 2 $\times$ Monitored Drift Tube chambers (MDTs)
+		\\
+		active area & \SI{2}{m} $\times$ \SI{4}{m}
+		\\
+		angular acceptance & $\pm$ \SI{30}{\degree} to zenith
+		\\
+		energy cut (hardware) & iron absorber (\SI{34}{cm}) $\to E_{\mu} >$ \SI{600}{MeV} 
+		\\
+		readout & 12288 channels
+		\\
+		 & $\to$ 96 APVs (frontend electronics)
+		\\
+		 & $\to$ 6 FECs (scalable readout system)
+		\\
+		readout rate & 100 Hz (muon rate)
+	\end{tabular}
+}
+
+\frame{\frametitle{\large Charge and Time Resolved Readout using APV25 Electronics}
+	\scriptsize
+	
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			96 $\times$ APV25-chips
+			
+			\includegraphics[width=0.95\textwidth]{APV25.jpg}
+		\column{.32\textwidth}
+			\centering
+			6 $\times$ FEC-cards
+			
+			\includegraphics[width=0.82\textwidth]{FECcabling.jpg}
+		\column{.32\textwidth}
+			\centering
+			strips parallel to MDT-wires
+			
+			\includegraphics[width=0.95\textwidth]{moduleInCRF.jpg}
+	\end{columns}
+		
+	\vspace{3mm}
+	\begin{columns}
+		\column{.32\textwidth}
+			128 channel 
+			
+			charge sensitive preamplifier
+			
+			\SI{40}{MHz} signal sampling
+		\column{.32\textwidth}
+			jitter recorded individually 
+			
+			$\Rightarrow$ unbiased time-evaluation
+		\column{.32\textwidth}
+			reference track
+			
+			$\Rightarrow$ efficiency and resolution
+	\end{columns}
+	
+	\vspace{3mm}
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{eventdisplay_m5_570V.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{FECjitter.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{trackFitFourLayers.png}
+	\end{columns}
+} 
+
+\frame{\frametitle{Measurement Overview}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{CRFintegratedCountsActiveArea.pdf}
+			
+			\includegraphics[width=\textwidth]{temperatureNpressure_Garching2018to19_edited.png}
+		\column{.5\textwidth}
+			\small
+					
+			\begin{itemize}
+				\small
+				\item
+					central part of active area
+					
+					$\Rightarrow$ \SI[product-units = repeat]{96 x 78}{cm}
+					
+					overall more than $\tfrac{1}{2}$ billion trigger
+				\item
+					counts integrated over all amplification voltages
+					
+					$\Rightarrow$ also low gain measurements
+				\item
+					CRF average {\color{blue}pressure} :  \SI{960}{\hecto\pascal} 
+					
+					ATLAS-cavern : \SI{980}{\hecto\pascal} 
+					
+					$\Rightarrow$ different gain
+				\item
+					CRF {\color{red}temperature} : \SI{21}{\degreeCelsius} 
+					
+					controlled to about $\pm$\SI{2}{\degreeCelsius}
+				\item
+					modules measured:
+					
+%					0, 1, 3, 6, 7, 5, 8, 12, 11, 9, 16, 15, 14, 13, 12
+					0, 1, 3, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16
+			\end{itemize}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Efficiency Turn On Curves (Module 1)}
+	\scriptsize
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			H8 testbeam 2018
+			
+			\SI[product-units = repeat]{9 x 9}{cm}
+		\column{.5\textwidth}
+			\centering
+			CRF
+			
+			\SI[product-units = repeat]{32 x 18.6}{\cm}
+	\end{columns}
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{m1_H8_2018_board7efficiency.png}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{m1_board7right_coinEffi.pdf}
+	\end{columns}
+	\vspace{2mm}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{m1_H8_2018_board8efficiency.png}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{m1_board8left_coinEffi.pdf}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{\small Pulse Height and Efficiency Maps (Module 1, eta-layers @ $U_{\mathrm{amp}} = $ \SI{580}{V})}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			pulse height map
+		\column{.5\textwidth}
+			\centering
+			efficiency map
+	\end{columns}
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{MMS200001L1gain.png}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{MMS200001L1efficiency.png}
+	\end{columns}
+	\vspace{2mm}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{MMS200001L2gain.png}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{MMS200001L2efficiency.png}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Efficiency Turn On Curve (Module 3, eta-in)}
+
+	\begin{columns}
+		\column{.65\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{m3_ei_ampScan_woLayer.png}
+		\column{.35\textwidth}
+			\centering
+			\includegraphics[width=0.65\textwidth]{RSMM_principle_bare-crop.pdf}
+			\vspace{3mm}
+			
+			\includegraphics[width=0.65\textwidth]{ROboardsHVsectorNamesRectangle.pdf}
+	\end{columns}
+	\vspace{5mm}
+	
+	central parts of active area for single High-Voltage Sectors
+	
+	$\Rightarrow$ \SI[product-units = repeat]{32 x 18.6}{\cm}
+	
+}
+
+\frame{\frametitle{\normalsize Efficiency spoiled by Noise of Preliminary Electronics (Module 7)}
+
+	\only<4>{
+		\begin{textblock*}{5cm}(1.75cm,3.6cm) 
+			\begin{tikzpicture}
+				\draw[red,->, line width=1mm] (0,0) -- (0,3.6);
+			\end{tikzpicture}
+		\end{textblock*}
+		\begin{textblock*}{5cm}(2.85cm,2.9cm) 
+			\begin{tikzpicture}
+				\draw[red,->, line width=1mm] (0,0) -- (0,4.6);
+			\end{tikzpicture}
+		\end{textblock*}
+		\begin{textblock*}{5cm}(3.4cm,2.7cm) 
+			\begin{tikzpicture}
+				\draw[red,->, line width=1mm] (0,0) -- (0,4.9);
+			\end{tikzpicture}
+		\end{textblock*}
+		\begin{textblock*}{5cm}(4.3cm,3.6cm) 
+			\begin{tikzpicture}
+				\draw[red,->, line width=1mm] (0,0) -- (0,3.5);
+			\end{tikzpicture}
+		\end{textblock*}
+	}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\only<1>{efficiency map - stereo-in}
+			\only<2>{efficiency map - stereo-out}
+			\only<1,2>{\vspace{-4mm}}
+			\only<3->{efficiency per readout chip}
+			
+			\includegraphics<1>[angle=-90,width=0.7\textwidth]{m7_si_570V_5mmEffi.pdf}
+			\includegraphics<2>[angle=-90,width=0.7\textwidth]{m7_so_570V_5mmEffi.pdf}
+			\includegraphics<3->[width=0.85\textwidth]{m7_so_570V_5mmEffi_perAPV.pdf}
+			
+			\vspace{2mm}
+						
+			electronic noise per readout chip
+			
+			\includegraphics<1>[width=0.7\textwidth]{m7_si_sigmas_perAPV.pdf}
+			\includegraphics<2>[width=0.7\textwidth]{m7_so_sigmas_perAPV.pdf}
+			\includegraphics<3->[width=0.85\textwidth]{m7_so_sigmas_perAPV.pdf}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[angle=-90,width=0.5\textwidth]{ROboardWithAPV-crop.pdf}
+				
+			\vspace{4mm}
+				
+			efficiency VS electronic noise
+			
+			\includegraphics[width=0.9\textwidth]{m7_5mmEffiVSsigmaPerAPV_wFit.png}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Efficiency influenced by Pulse Height}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			pulse height map -
+			\only<1>{m3, eta out}
+			\only<2>{m12, eta in}
+			
+			\includegraphics<1>[width=0.6\textwidth]{m3_eo_clusterQmpv_20180911.pdf}
+			\includegraphics<2>[width=0.6\textwidth]{m12_ei_570V_MPVclusterQmap.pdf}
+		\column{.5\textwidth}
+			\centering
+			efficiency map -
+			\only<1>{m3, eta out}
+			\only<2>{m12, eta in}
+			
+			\includegraphics<1>[width=0.6\textwidth]{m3_eo_coinEffi_20180911.pdf}
+			\includegraphics<2>[width=0.6\textwidth]{m12_ei_570V_coincidenceEfficiency.pdf}
+	\end{columns}
+	
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			mean pulse height VS pillar height
+			
+			\includegraphics[width=\textwidth]{meanClusterQvsPillarHeight_etaNstereo_wFit.png}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.6\textwidth]{RSMM_principle_bare-crop.pdf}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Cluster Charge Evaluation - M8 eta-out (=L1) board 8}
+	\footnotesize
+
+	\only<2>{
+		\begin{textblock*}{5cm}(8.7cm,4.47cm) 
+			\begin{tikzpicture}
+				\draw[green,-, line width=0.4mm] (0,1) -- (2.7,1);
+			\end{tikzpicture}
+		\end{textblock*}
+		\begin{textblock*}{5cm}(8.7cm,3.24cm) 
+			\begin{tikzpicture}
+				\draw[green,-, line width=0.4mm] (0,1) -- (2.9,1);
+			\end{tikzpicture}
+		\end{textblock*}
+		\begin{textblock*}{5cm}(8.7cm,3.24cm) 
+			\begin{tikzpicture}
+				\draw[orange,-, line width=0.4mm] (0,0) -- (0,2.3);
+			\end{tikzpicture}
+		\end{textblock*}
+		\begin{textblock*}{5cm}(10.45cm,3.24cm) 
+			\begin{tikzpicture}
+				\draw[orange,-, line width=0.4mm] (0,0) -- (0,2.3);
+			\end{tikzpicture}
+		\end{textblock*}
+		\begin{textblock*}{5cm}(10.28cm,4.47cm) 
+			\begin{tikzpicture}
+				\draw[orange,-, line width=0.4mm] (0,0) -- (0,1.1);
+			\end{tikzpicture}
+		\end{textblock*}
+		\begin{textblock*}{5cm}(11.60cm,3.24cm) 
+			\begin{tikzpicture}
+				\draw[orange,-, line width=0.4mm] (0,0) -- (0,2.3);
+			\end{tikzpicture}
+		\end{textblock*}
+		\begin{textblock*}{5cm}(11.4cm,4.47cm) 
+			\begin{tikzpicture}
+				\draw[orange,-, line width=0.4mm] (0,0) -- (0,1.1);
+			\end{tikzpicture}
+		\end{textblock*}
+	}
+		
+	\begin{columns}
+		\column{.45\textwidth}
+			\centering
+			Ar:CO$_{2}$ 93:7 vol\% 
+			
+			$U_{\mathrm{amp}}$ = \SI{570}{V} , $U_{\mathrm{drift}}$ = \SI{300}{V}
+			
+			\includegraphics[width=0.85\textwidth]{m8_eo_b8_A570V_C300V_20190528_1223_clusterQ_perStrip.png}
+		\column{.55\textwidth}
+			\centering
+			\textbf{93:7} , \hspace{8mm} {\color{red}\textbf{85:15}} , \hspace{3mm} {\color{blue}\textbf{80:20}}
+			
+			\includegraphics[width=\textwidth]{m8_eo_b8_gasNampScan_clusterQposition.pdf}
+	\end{columns}
+	
+	\vspace{4mm}
+	
+	$\Rightarrow$ for higher fractions of CO$_{2}$, larger gains ($\sim$ efficiency) can be reached
+		
+	\vspace{2mm}
+	
+	dependence on board quality (e.g. pillar height)?
+	
+	$\Rightarrow$ compare \only<1>{voltages} \only<2>{{\color{orange} voltages}} 
+	at \only<1>{same pulse height} \only<2>{{\color{green} same pulse height}}
+			
+	\vspace{1mm}
+	
+	\centering
+	
+	\begin{tabular}{cccc}
+		\hline
+		\hline
+		[V] & 93:7 & {\color{red}85:15} & {\color{blue}80:20}
+		\\
+		\hline
+		mean & 570 & 615 & 645
+		\\
+		MPV & 570 & 610 & 640
+		\\
+		\hline
+		\hline
+	\end{tabular}
+	
+}
+
+\frame{\frametitle{Pulse Height Dependence on Pillar Height (M8 , eta3)}
+		
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ \textbf{93:7} vol\% 
+			
+			$U_{\mathrm{amp}}$ = \SI{570}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{300}{V}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ {\color{red}\textbf{85:15}} vol\% 
+			
+			$U_{\mathrm{amp}}$ = \SI{615}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{300}{V}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ {\color{blue}\textbf{80:20}} vol\% 
+			
+			$U_{\mathrm{amp}}$ = \SI{645}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{475}{V}
+	\end{columns}
+	
+	\vspace{3mm}
+			
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{m8_9307_A570V_C300V_clusterQvsPillarHeight.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{m8_8515_A615V_C300V_clusterQvsPillarHeight.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{m8_8020_A645V_C475V_clusterQvsPillarHeight.pdf}
+	\end{columns}
+			
+	\vspace{3mm}
+	\centering
+	\begin{tabular}{cccc}
+		\hline
+		\hline
+		Ar:CO$_{2}$ vol\% & \textbf{93:7} & {\color{red}\textbf{85:15}} & {\color{blue}\textbf{80:20}}
+		\\
+		\hline
+		mean \%/\textmu m & -(6.0$\pm$0.6) & -(5.7$\pm$0.6) & -(6.7$\pm$0.8)
+		\\
+		MPV \%/\textmu m & -(9.8$\pm$1.0) & -(10.4$\pm$1.1) & -(10.7$\pm$1.1)
+		\\
+		\hline
+		\hline
+	\end{tabular}
+	
+}
+
+\frame{\frametitle{\large Cluster Properties (M8, eta-out, board 8)}
+		
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ \textbf{93:7} vol\% 
+			
+			$U_{\mathrm{drift}}$ = \SI{300}{V}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ {\color{red}\textbf{85:15}} vol\% 
+			
+			$U_{\mathrm{drift}}$ = \SI{300}{V}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ {\color{blue}\textbf{80:20}} vol\% 
+			
+			$U_{\mathrm{drift}}$ = \SI{475}{V}
+	\end{columns}
+	
+	\vspace{4mm}
+
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eo_b8_meanNstripsVSslope_woCCC_ampScan9307_C300V.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eo_b8_meanNstripsVSslope_woCCC_ampScan8515_C300V.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eo_b8_meanNstripsVSslope_woCCC_ampScan8020_C475V.pdf}
+	\end{columns}
+	
+	\vspace{4mm}
+	
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eo_b8_9307_C300V_ampScan_clusterQ_logy_scale.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eo_b8_8515_C300V_ampScan_clusterQ_logy_scale.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eo_b8_8020_C475V_ampScan_clusterQ_logy_scale.pdf}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{\normalsize Efficiency Dependence on Cluster Charge (M8, eta-out = L1)}
+	\scriptsize
+	\centering
+	amplification scan (HV sector L7)
+		
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			MPV cluster charge
+			
+			\includegraphics[width=0.9\textwidth]{m8_L1L7_ampScanMPV_gasScan.pdf}
+		\column{.5\textwidth}
+			\centering
+			coincidence efficiency
+						
+			\includegraphics[width=0.9\textwidth]{m8_L1L7_coincidenceTurnOnCurve_gasScan.pdf}
+	\end{columns}
+	
+	\vspace{2mm}
+			
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ \textbf{93:7} vol\% 
+			
+			$U_{\mathrm{amp}}$ = \SI{570}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{300}{V}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ {\color{red}\textbf{85:15}} vol\% 
+			
+			$U_{\mathrm{amp}}$ = \SI{610}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{300}{V}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ {\color{blue}\textbf{80:20}} vol\% 
+			
+			$U_{\mathrm{amp}}$ = \SI{640}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{475}{V}
+	\end{columns}
+					
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics<1>[width=\textwidth]{m8_eo_9307_A570V_C300V_gainMap.pdf}
+			\includegraphics<2->[width=\textwidth]{m8_eo_9307_A570V_C300V_5mmEfficiencyMap.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics<1>[width=\textwidth]{m8_eo_8515_A610V_C300V_gainMap.pdf}
+			\includegraphics<2->[width=\textwidth]{m8_eo_8515_A610V_C300V_5mmEfficiencyMap.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics<1>[width=\textwidth]{m8_eo_8020_A640V_C475V_gainMap.pdf}
+			\includegraphics<2->[width=\textwidth]{m8_eo_8020_A640V_C475V_5mmEfficiencyMap.pdf}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Efficiency Dependence on Pulse Height and Noise}
+	\scriptsize
+	\centering
+				
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			Gas Study with Module 8
+			
+			\includegraphics[width=0.9\textwidth]{m8_coincidenceEfficiencyVSmpvClusterQ_gasScan.pdf}
+		\column{.5\textwidth}
+			\centering
+			Noise Study with Module 7
+						
+			\includegraphics[width=0.9\textwidth]{m7_5mmEffiVSnormedClusterQperAPV.pdf}
+	\end{columns}
+					
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering						
+			\begin{itemize}
+				\scriptsize
+				\item
+					all gas-mixtures show a similar behavior
+				\item
+					for 90\%-efficiency $\Rightarrow$
+				
+					MPV of pulse-height has to exceed about 40 times the noise-level
+				\item
+					vice versa:
+					
+					noise should be kept below a 2\%-level of pulse-height to reach 90\%-efficiency
+			\end{itemize}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{m7_5mmEffiVSnormedSigmaPerAPV.pdf}
+	\end{columns}
+		
+}
+
+\subsection{Strip Shape} 
+
+\frame{\frametitle{Tracking in the Cosmic Ray Facility}
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=1.0\textwidth]{CRFprinciple5-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{CRF_small.JPG}
+	\end{columns}
+	
+	\vspace{7mm}
+	\centering
+	\begin{tabular}{ccccc}
+		residual & = & {\color{blue}measured} & - & {\color{red}reference}
+		\\
+		 & & & & 
+		\\
+		 & = & centroid $\times$ pitch & - & track$_{\mathrm{MDTs}}$ @ MM
+	\end{tabular}
+}
+
+\frame{\frametitle{\normalsize Reconstruction of Readout Board Alignment (Module 1, eta-in)}
+
+	\begin{columns}
+		\column{.6\textwidth}
+			\centering
+			\begin{columns}
+				\column{.5\textwidth}
+					\centering
+					\includegraphics[width=0.7\textwidth]{m1_ei_residaul_nearZero.pdf}
+				\column{.5\textwidth}
+					\centering
+					\hspace{-20mm} $\Rightarrow$ mean residual
+			\end{columns}
+			\vspace{2mm}
+			\includegraphics[width=0.8\textwidth]{m3_eo_deltaYperPart_2019-09.png}
+		\column{.4\textwidth}
+%			\centering
+			\includegraphics[width=0.9\textwidth]{m3_eo_resMeanVSscinX_allBoards.png}
+			\footnotesize
+			
+			\vspace{2mm}
+			undesired strip shape
+			
+			$\Rightarrow$ calibration needed
+			\vspace{2mm}
+			
+			\includegraphics[width=0.9\textwidth]{ROboardsBendStrips-crop.png}
+			\vspace{2mm}
+			
+			humidity causes 
+			
+			deviation from design:	
+			
+			$\Rightarrow$ known issue
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Alignment Reconstruction Comparison (eta-panel 9)}
+%	\scriptsize
+	\centering
+				
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			Rasfork measurement
+		\column{.5\textwidth}
+			\centering
+			mean hit-position-difference between eta-layers
+	\end{columns}
+					
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{RS2E00009_GluingSide2_plot.pdf}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m9_etaDifZcor.pdf}
+	\end{columns}
+		
+	$\Rightarrow$ rotation between layers reconstructable in both measurements
+}
+
+\section{Track Reconstruction with Micromegas}
+
+\frame{\frametitle{\normalsize Position Reconstruction using Charge and Drift-Time Measurements (M1)}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			residual normal tracks
+			
+			\includegraphics[width=0.8\textwidth]{m1_ei_residaul_nearZero.pdf}
+		\column{.5\textwidth}
+			\centering
+			angle reconstruction
+			
+			\includegraphics[width=0.65\textwidth]{m1_ei_uTPCangleVSangle_20180601_uptime_sameRange.pdf}
+	\end{columns}
+	
+	\vspace{1mm}
+		
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			simulation
+			
+			\includegraphics[width=0.7\textwidth]{inhomogeneousIonization_bE_cNm_timeNcentroidShift.pdf}
+		\column{.5\textwidth}
+			\centering
+			resolution VS angle
+			
+			\includegraphics[width=0.8\textwidth]{m1_ei_allResolutionsVSangle_20180601.pdf}
+	\end{columns}
+	
+}
+
+\subsection{Stereo Reconstruction}
+
+%\frame{\centering \Huge Stereo Reconstruction}
+
+\frame{\frametitle{Position Reconstruction using two Layers of Inclined Strips}
+			
+	\begin{columns}
+		\column{.5\textwidth}
+			\includegraphics[width=0.9\textwidth]{stereoBoards_angleNshift_centerNcoord-crop.pdf}
+			\vspace{2mm}
+			
+			\textcolor{blue}{precision} 
+			
+			\hspace{1mm} = stereos mean / $\cos \alpha$ 
+			\vspace{1.5mm}
+						
+			\textcolor{red}{non-precision}
+			
+			\hspace{1mm} = stereos difference / 2 $/ \sin \alpha$
+			\vspace{1.5mm}
+						
+			$\Rightarrow$ \textcolor{Brown}{alignment} 
+			
+			\hspace{4.5mm} non-precision coordinate
+			
+			\vspace{5mm}
+			$\Rightarrow$ non-precision residual spoiled 
+			
+			\hspace{4.5mm} by coarse scintillator resolution
+		\column{.5\textwidth}
+			\centering	
+			\includegraphics[width=0.65\textwidth]{m1_stereo_posDifVSscinX_wCenter.pdf}
+			
+			\vspace{2mm}
+			\includegraphics[width=0.95\textwidth]{m1_stereoResiduals_nonNprecision_BF.pdf}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{\large Stereo-Reconstruction Dependencies on Track-Inclination}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.6\textwidth]{m1_stereo_resXvsPhi_woAddTerm_rebin.pdf}
+		\column{.5\textwidth}
+			\centering
+			\vspace{-0.3mm}
+			\includegraphics[width=0.6\textwidth]{m1_stereo_resXvsTheta_woAddTerm_rebin.pdf}
+	\end{columns}
+	
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.65\textwidth]{stereoBoards_angleNshift_centerNcoord-crop.pdf}
+			\vspace{2mm}
+			
+			\includegraphics[width=0.43\textwidth]{Kugelkoord-def.pdf}
+		\column{.5\textwidth}
+			\small
+			\textcolor{blue}{precision}  = mean / $\cos \alpha$ 
+			\vspace{2mm}
+					
+			\textcolor{red}{non-precision} = difference / 2 $/ \sin \alpha$
+			\vspace{2mm}
+			
+			track-inclination-correction :
+			
+			$-\dfrac{1}{2 \tan\!\alpha} \cdot \bigtriangleup\!z \cdot \tan\!\Theta \cdot \sin\!\Phi$
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Timing Resolution }
+	\footnotesize
+	\centering
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			M11, eta-in
+			
+			$U_{\mathrm{amp}} =$ \SI{570}{V} , $U_{\mathrm{drift}} =$ \SI{300}{V}
+			
+			\includegraphics[width=0.6\textwidth]{m11_ei_meanFirstTimeMap.pdf}
+		\column{.5\textwidth}
+			\centering
+			M1, eta-in
+			
+			$U_{\mathrm{amp}} =$ \SI{570}{V} , $U_{\mathrm{drift}} =$ \SI{300}{V}
+			
+			\includegraphics[width=0.8\textwidth]{m1_ei_stripTime_firstNlast_20180601_turntime_wDifferences.pdf}
+	\end{columns}
+	
+	\vspace{1mm}
+	
+	module 3 , board 7
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			single layer first-strip time-width (eta-in)
+			
+			\includegraphics[width=0.78\textwidth]{m3_ei_b7_driftScan_firstTimeWidths.pdf}
+		\column{.5\textwidth}
+			\centering
+			eta-layers first-strips time-difference
+			
+			\includegraphics[width=0.78\textwidth]{m3_etas_b7_driftScan_firstTimeDifferenceWidths.pdf}
+	\end{columns}
+	
+	$\Rightarrow$ resistivity effects not yet considered
+	
+}
+
+\frame{\frametitle{Summary}
+	\small
+	\begin{itemize}
+		\item
+			about 13 SM2-Micromegas investigated in the Cosmic Ray Facility
+		\item
+			efficiency influenced by
+			
+			\begin{itemize}
+				\small
+				\item
+					noise behavior of preliminary APV25-electronics 
+					
+					local setup : 30 - 40 ADC channel
+				\item
+					pulse-height coupled to amplification-gap-height
+					
+					MPV : -10\%/\si{\micro\m}
+			\end{itemize}
+			
+			$\Rightarrow$ MPV of pulse-height has to exceed 
+			
+			\hspace{4mm} 40 times noise-level to reach 
+			
+			\hspace{4mm} 90\%-efficiency
+		\item
+			reference-tracking enables
+						
+			\begin{itemize}
+				\small
+				\item
+					alignment-reconstruction
+					
+					$\Rightarrow$ calibration of deviations
+				\item
+					resolution estimation
+					
+					$\Rightarrow$ centroid similar results as testbeam
+				\item
+					position-reconstruction using inclined strip-layers works as intended
+			\end{itemize}
+	\end{itemize}
+}
+
+\appendix
+
+\frame{\centering \Huge Backup}
+
+\frame{\frametitle{\large Reconstruction of Pitch Deviations and Readout Board Alignment}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			without correction
+			
+			\includegraphics[width=0.8\textwidth]{eta_in_resMeanVSmdtY_woAdapterBoard_wCorPitch_wCenter.png}
+		\column{.5\textwidth}
+			\centering
+			pitch deviation considered
+			
+			\vspace{-0.3mm}
+			\includegraphics[width=0.8\textwidth]{eta_in_resMeanVSmdtY_wNewPitchCor_shifts.pdf}
+	\end{columns}
+	
+	\vspace{4mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[angle=-90,width=0.55\textwidth]{ROboardsAligned1_wRingsNlines-crop.pdf}
+			\vspace{3mm}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{boardPitchDeviation_wLinesNdesNarrows-crop.pdf}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{\large Gain Dependencies}
+
+	\begin{align*}
+		G &= \exp\left( \alpha \cdot d \right)
+		\\[10pt]
+		&= \exp\left[ \;\; \dfrac{A p d}{T} \; \cdot \; \exp\!\left(\; -\dfrac{B p d}{T U} \; \right) \;\; \right].
+		\label{gainParametrization}
+	\end{align*}
+	
+	Taylor-series-expansion up to first order:
+	
+	\begin{align*}
+		G(d) &= 
+				\exp\left( a \cdot d_0 \cdot e^{- b \cdot d_0} \right) 
+				\nonumber
+				\\
+				&\qquad + a \cdot ( 1 - b \cdot d_0 ) \cdot \exp\left( - b \cdot d_0 + a \cdot d_0 \cdot e^{- b \cdot d_0} \right) \cdot ( d - d_0 )
+				\nonumber
+				\\
+				&\qquad + \mathcal{O}\left( ( d - d_0 )^2\right) \;\; ,
+	\end{align*}
+	
+	where 
+	
+	\begin{align*}
+		a = \dfrac{A \cdot p}{T} \;\;\; \text{and} \;\;\; b = \dfrac{B \cdot p}{T \cdot U} \;\; .
+	\end{align*}
+	
+}
+
+\end{document}

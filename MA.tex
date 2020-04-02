@@ -1,0 +1,1572 @@
+\documentclass[
+a4paper,                                %Papierformat
+twoside,                                %Oneside oder twoside, je nach dem, wie man die Arbeit ausdrucken möchte.
+BCOR1.4cm,                      %Bindungskorrektur
+%ngerman,                                %Sprache: Deutsch nach "neuer" Rechtschreibung
+10pt,                           %Schriftgröße
+headings=normal,                %Größe der Überschriften: Standard ist big, auch möglich sind normal und small
+headsepline,                    %Trennlinie zwischen Kopfzeile und Text
+clearplainpage, %Leere Seiten ohne Kopf- und Fußzeilen, bei twoside wird immer auf einer rechten Seite wieder mit Text begonnen
+final,                                  % Ausgabe der Grafiken: draft für Kästen statt Bildern, final für normale Ausgabe
+div=14,
+parskip=full,
+%bibtotoc
+openright,
+bibliography=toc
+]{scrreprt}
+
+\usepackage{scrpage2}
+\pagestyle{scrheadings}
+\automark[chapter]{chapter}
+\renewcommand*{\chapterpagestyle}{scrheadings}
+
+%\usepackage[nottoc,numbib]{tocbibind}
+%\pagestyle{headings}
+         
+%\documentclass[10pt,a4paper]{article}
+\usepackage[a4paper,head=60mm,headsep=10mm,height=232mm,bottom=40mm,left=3.4cm,right=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{subfigure} 
+%\usepackage{subfig} 
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+%\usepackage[german]{babel}
+\usepackage[english]{babel}
+\usepackage{caption}
+\usepackage{rotating}
+\usepackage{multirow,bigdelim,dcolumn,booktabs}
+\usepackage{siunitx}
+%\usepackage{cite}
+%\usepackage[square]{natbib}
+
+\usepackage{caption}
+%\usepackage{subcaption}
+
+\usepackage{float}
+\usepackage[usenames,dvipsnames]{xcolor}
+
+\usepackage{url}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+
+\graphicspath{
+	{LatexBilder/}
+	{LatexBilder/pics/}
+	{LatexBilder/sketches/}
+	{LatexBilder/Temp/}
+	{LatexBilder/Temp/TempCalibration/}
+	{LatexBilder/Temp/TempTest_20151030_1800/}
+	{LatexBilder/Temp/TempTest_20151109_1550/}
+	{LatexBilder/Temp/TempTest_20151113_1740/}
+	{LatexBilder/Temp/bbrm_correction/}
+	{LatexBilder/Temp/repeatedMeasurements/}
+	{LatexBilder/ANSYS/deform_mesh/}
+	{LatexBilder/ANSYS/L1/}
+	{LatexBilder/ANSYS/MicroMeGas/}
+	{LatexBilder/ANSYS/SM2_6int/}
+	{LatexBilder/ANSYS/stiff/}
+	{LatexBilder/posMeas/}
+	{LatexBilder/CRF_L1/}
+}
+
+\bibliographystyle{apalike}
+
+\begin{document}
+
+\pagenumbering{Roman}
+
+\thispagestyle{empty}
+\begin{center}
+    \vspace*{0.5cm}
+    \sffamily\bfseries\huge Methods and Techniques for Construction of large area Micromegas\\   
+    \vspace*{0.5cm}
+    \sffamily\bfseries\huge Methoden und Techniken zur Konstruktion gro{\ss}fl\"achiger Micromegas\\     
+\end{center}
+\vspace*{3mm}
+\begin{center}
+        \includegraphics[width=9cm]{siegel1.png}%
+\end{center}
+\vspace*{8mm}
+
+\begin{center}
+	\large Masterarbeit an der Fakult\"at f\"ur Physik\\
+	\large der\\
+	\large Ludwig-Maximilians-Universit\"at M\"unchen\\
+	\vspace*{8mm}
+	vorgelegt von \\
+	\vspace*{1mm}
+	{\Large Maximilian Herrmann}\\
+	geboren in Aschaffenburg\\
+	\vspace*{8mm}
+	M\"unchen, den 15.09.2016
+\end{center}
+\thispagestyle{empty}
+
+\newpage
+
+\thispagestyle{empty}
+\cleardoublepage
+
+%\vspace*{\stretch{2}}
+\begin{flushleft}
+   	\large Gutachter:  Prof. Dr. Otmar Biebel \\[1mm]
+\end{flushleft}
+
+\thispagestyle{empty}
+%\cleardoublepage
+
+\chapter*{Abstract}
+
+During the long shutdowns 2 and 3 of the Large Hadron Collider (LHC) the instantaneous luminosity will be successively increased to 10 $\times 10^{34}$ cm$^{-2}$ s$^{-1}$, ten times the nominal design luminosity. For the ATLAS experiment (A Toroidal LHC ApparatuS) this require a accordingly higher hit rate capability of the inner end cap region (Small Wheels) up to 15 kHz/cm$^{2}$, in order cope with the enlarged background rate. To face the new requirements at constant precision of momentum resolution a combined structure of small strip Thin Gap Chambers (sTGC) and Resistive Strip Micromegas is planned to replace the current detector systems in this region. The construction and the assembly of one of the four types of the Micromegas modules of this New Small Wheels (NSW), the so called SM2 modules, is developed at the LMU. The modules will consist of five planar sandwich panels forming the cathodes and anodes of four Micromegas detectors assembled as quadruplet. To ensure best momentum resolution and homogeneous detector behavior these electrodes have to be planar and flat on a level of \SI{80}{\micro\m}. A procedure is developed, which allows to built flat sandwich structures on precision granite table using precise references. A coordinate measuring machine (CMM) in combination with a laser distance sensor allows to verify these popularities down to \SI{15}{\micro\m}. 
+
+In this thesis several aspects for the quality control during the construction of the panels for the SM2 quadruplets are investigated. The influence of temperature on the planarity measurement system is studied. Therefore the thermal expansion of the setup in the order \SI{8}{\micro\m}K is compared to a model and it is shown that the effect on the planarity measurement is negligible. The alignment of the readout structure on the panels has been investigated using a microscope mounted to the CMM. It is shown that the alignment procedure works in principle, potential improvements are indicated. Furthermore finite element structural simulations have been performed to simulate and understand the deformations of tools and detector parts built for the SM2 modules. The results are in agreement with measurements of the specific structure. Therefore correction schemes could be developed.
+%For the calibration of the SM2 modules the Cosmic Ray Test Facility (CRF) in Garching/Munich will be used. In order to study the capabilities of the CRF and large area Resistive Strip Micromegas a \SI{1}{\square\m} sized detector, called L1 chamber, is analyzed within the test facility. Due to multiple scattering the resolution of both is above \SI{300}{\micro\m}. 
+To investigate the signal emergence in a similar Micromegas detector, the readout structure of a floating strip Micromegas was simulated. The results help to explain the measured polarities of signals in a two dimensional readout anode.
+
+The result of this thesis shows, that the production site at Munich is well prepared for the assembly of the SM2 Micromegas detectors for the ATLAS NSW upgrade.
+
+\thispagestyle{empty}
+\cleardoublepage
+
+\chapter*{Zusammenfassung}
+
+W\"ahrend der zweiten und dritten langen Shutdown des Large Hadron Collider in Genf (LHC / CERN), 2019, wird die instantane Luminosit\"at auf etwa 10 $\times 10^{34}$ cm$^{-2}$ s$^{-1}$ erh\"oht werde, dem zehnfachen der nominellen Luminosit\"at. Um mit dem entsprechend erh\"ohten Untergrund zurechtzukommen, wird die Endkappenregion des des ATLAS (A Toroidal LHC ApparatuS) Myonspektrometers, die Small Wheels, mit Detektoren einer erh\"ohten Trefferratenvertr\"aglichkeit von bis zu 15 kHz/cm$^{2}$ umger\"ustet werden. Eine Kombination von small strip Thin Gap Chambers (sTGC) und resistiven Streifen Micromegas, genannt New Small Wheel (NSW), wird die alte Small Wheels ersetzen, um mit gewohnt pr\"aziser Impulsaufl\"osung den neuen Vorraussetzungen zu begegnen. 
+
+Die Konstruktion und der Zusammenbaus von SM2 Micromegas Modulen f\"ur das NSW wurden in Garching bei M\"unchen entwickelt. Die Micromegas Detektoren werden aus planeren Strukturen, Sandwichpaneelen mit Honeycombkern, zusammengesetzt, die auf einem Pr\"azisionstisch unter Zuhilfenahme von Pr\"azisionsreferenzen geklebt werden. Diese Paneele bilden die Kathode und ide Anode der Detektoren und m\"ussen m\"oglichst flach und genau gearbeitet sein, um sp\"ater optimale Impulsaufl\"osung und homogene Detektoreigenschaften zu gew\"ahrleisten. Durch die Kombination eines Pr\"azisionstisches aus Granit, einer Koordinatenmessmaschine (CMM) und eines Laserabstandsensors ist die Gruppe an der LMU in der Lage flache Sandwichstrukturen mit einer Planarit\"at besser \SI{80}{\micro\m} zu bauen und mit einer Genauigkeit von \SI{15}{\micro\m} zu vermessen.
+
+In dieser Arbeit werden Aspekte zur Qualit\"atssicherung w\"ahrend des Baus der Paneele f\"ur die Quadruplets des SM2 Moduels untersucht. Zur Absch\"atzung des Einflusses der Temperatur auf das Messsystem der Planarit\"atsbestimmung wurden gemessene thermische Expansionen mit einem Model verglichen, welches mit einem Wert von \SI{8}{\micro\m}K die Messungen reproduziert. Es wird gezeigt, dass dieser Effekt f\"ur die Planarit\"atsmessungen vernachl\"assigbar ist. Die Ausrichtung der Auslesestrukturen auf den Paneelen wurde mit einer Kombination aus CMM und Mikroskop untersucht. Es wird gezeigt, dass das Ausrichtungsverfahren prinzipiell funktioniert, Verbesserungenm\"oglichkeiten werden beschrieben. Weiterhin wurden Finite-Element-Struktursimulationen durchgef\"uhrt, um Deformationen von Werkzeugen und Detektorteilen zu vertstehen. Die Ergebnisse sind im Einklang mit Messsungen der jeweiligen Strukturen. Damit sind die Verformungen verstanden, eine Vorraussetzung f\"ur das Anwenden von Korrekturen. Um die Signalentstehung in einem \"ahnlichem Micromegas Detektor zu verstehen, wurde die Auslesestruktur eines zweidimensionalen Floating Strip Micromegas simuliert. Die Ergebnisse tragen dazu bei, die Polarit\"at von Signalen auf den unterschiedlichen Striefenebenen ansatzweise zu verstehen.
+
+Schlussenlich zeigen die Resultate dieser Arbeit, dass die Produktionsstelle in M\"unchen gut aufgestellt ist f\"ur den Bau der SM2 Micromegas Detektoren f\"ur den ATLAS NSW Upgrade.
+
+\thispagestyle{empty}
+\cleardoublepage
+
+\thispagestyle{empty}
+
+\newpage
+
+\tableofcontents
+
+\cleardoublepage
+
+\pagenumbering{arabic}
+
+\chapter{The LHC and the ATLAS Experiment}
+
+With \SI{27}{\km} perimeter the Large Hadron Collider (LHC) is (2016) the largest circular proton-proton-collider built. It is located around \SI{100}{\m} below the ground near Geneva at CERN (Conseil Européen pour la Recherche Nucléaire). At a rate of 1/(\SI{25}{\ns}) proton bunches of around 10$^{11}$ particles collide at four collision points around the ring, where dedicated experiments are placed, seen in figure \ref{lhc}. 
+One of these is the ATLAS experiment (A Toroidal LHC ApparatuS). It is a multipurpose detector with an onion like layout, which was designed for a broad physics program. This includes not only the discovery of the Higgs boson over a wide mass range, but also searches for heavy particles, which would indicate physics beyond the standard model, such as super-symmetry. The structure of detector systems can be seen in figure \ref{atlas}. By fields of solenoidal and toroidal magnets the track of charged particles is bend, due to the Lorentz force. With the reconstruction of their track the momentum of charged particles can be determined. For the reconstruction several detector systems are used, which are arranged in cylindrical shells around the beam at the interaction point with end-caps for the 4$\pi$ enclosure. As the outermost layer the muon spectrometer provides a momentum resolution $<$ 10\%  up to $E_{\mu} \sim$ \SI{1}{\TeV} using a large volume magnetic field. The tracks are reconstructed with tracking chambers consisting of CSC (cathode strip chambers) and MDT detectors (monitored drift tubes). For triggering TGC (thin-gap) and RPC (resistive-plate) chambers are used. \cite{NSW_TDR}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{lhcatlasuntergrund.png}
+	\caption{A sketch of the LHC accelerator ring beneath Geneva with the four large experiments ALICE, ATLAS, CMS und LHCb at the four collision points. \cite{atlasCol}}
+	\label{lhc}
+\end{figure}
+
+\begin{figure}[H]
+	%\centering
+	\includegraphics[width=0.9\textwidth]{atlasdetektorkomponenten.png}
+	\caption{A cut-away view of the ATLAS experiment, with the detector components indicated. \\ Around the interaction point in the center pixel detectors, transition radiation trackers and semiconductor trackers are placed for precise track reconstruction in a solenoid magnetic field. The calorimeters are layers of scintillators and absorbers around the tracker. The absorbing material is liquid argon for the electromagnetic and steel for the hadronic calorimeters. The muon system consists of CSC (cathode strip chambers) and MDT (monitored drift tubes) for track reconstruction in a toroidal magnetic field. For triggering TGC (thin-gap) and RPC (resistive-plate) chambers are used. \cite{atlasCol}}
+	\label{atlas}
+\end{figure}
+
+In 2019 the LHC will be upgraded during the second long shutdown, which will increase the instantaneous luminosity to values above 2 $\times 10^{34}$ cm$^{-2}$ s$^{-1}$. This is a factor two or three over the design luminosity and will allow to collect approximately 100 fb$^{-1}/$year for the ATLAS experiment. The approximate time-line for the LHC runs and upgrades is sketched in figure \ref{lhcTime}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{LHCtimeline.pdf}
+	\caption{Proposed time line for the runs and upgrades of the LHC.}
+	\label{lhcTime}
+\end{figure}
+
+\section{The New Small Wheel Upgrade}\label{NSWupgrade}
+
+An increasing of luminosity leads to more interactions at the collision point in the center of the ATLAS detector. Not only hard scattering with interesting physics will occur more often, also soft scattering will increase the amount of background. This will influence mostly the detector components near the interaction point at the beam tube, due to the high moment of the particles along the beam axis. For the inner end cap region of the muon spectrometer, the so called Small Wheels, (position indicated in figure \ref{atlasYZ}) the hit rate is expected to reach \SI{15}{\kHz/\cm\squared}. \cite{NSW_TDR}
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[One fourth of the Z-Y view for the ATLAS detector. The Small Wheel Region is surrounded in dark blue, with Monitored Drift Tube chambers (MDT, light blue) and Cathode Strip Chambers (CSC). \cite{NSW_TDR}]{\label{atlasYZ} \includegraphics[width=0.45\linewidth]{atlas_zy_1fourth.png}}
+	\qquad
+	\subfigure[Schematic sketch of the New Smal Wheel. Indicated are in light blue the large and in dark blue the small sectors. \cite{laMMPR}]{\label{NSWwheel} \includegraphics[width=0.45\linewidth]{newSmallWheel.png}}
+	\caption{Indicated at the ATLAS detector (a) is where the old and the New Small Wheels (b) will be placed.}
+	\label{atlasNSW}
+\end{figure}
+
+The present Small Wheels consists of CSC (cathode strip chambers) and MDT chambers (monitored drift tubes). The MDT will have considerable hit inefficiencies at tube rates of \SI{300}{\kHz} (value at the design luminosity of $10^{34}$ cm$^{-2}$ s$^{-1}$ for the LHC). This inefficiency will increase with the luminosity, wherefore this detector system has to be exchanged. During the second long shutdown the so called New Small Wheels (NSW) will replace the current detector systems to incorporate this. They will consist of sTGC (small Thin Gap Chambers) for the trigger system and online track reconstruction, whereas the main purpose of resistive strip Micromegas (explained in chapter \ref{MMprinciple}) will be the offline track reconstruction. Both detector types are flat structures, which can be assembled with different shapes. To cover the whole area of the Small Wheel with both detector systems, they will be assembled in wedges parallel to each other, shown in figure \ref{NSWwheel}. Two types of these wedges, called large and small sectors, are used in consecutive positions. \cite{NSW_TDR}
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[Each sector is divided in two modules with trapazoidal shape. The Micromegas in the M1 modules will consist of five printed curcuit boards (PCBs), while for the M2 modules three PCBs have to be aligned. The sizes are given in mm. Also shown are the nations of the collaborations, which will be build the modules. \cite{laMMPR}]{\label{modulescollab} \includegraphics[width=0.45\linewidth, height=160pt]{modulescollaborations.png}}
+	\qquad
+	\subfigure[Sketches of the large and the small sectors for the NSW. In dark blue and red-orange the sTGC are indicated, while the Micromegas quadruplets are colored in green and orange.]{\label{moduleslayers} \includegraphics[width=0.45\linewidth]{sectors.png}}
+	\caption{The Micromegas for the two sectors of the NSW will divided into two modules (a). For each module two Micromegas quadruplets get sandwiched by two sTGC (b).}
+	\label{modulesnatlay}
+\end{figure}
+
+Each sector will consist of two modules with trapezoidal shape. They will be built of sTGC modules at the faces and two Micromegas quadruplets in between. Due to the manufacturing process of the readout structures for the Micromegas, made from printed circuit boards (PCB) (sizes shown in figure \ref{modulescollab}), the readout structures for the Micromegas have to be split up into \SI{450}{\mm} broad sheets. The precision direction of the Micromegas goes in radial direction of the ATLAS detector, therefore the boards will be oriented perpendicular to that. To distribute the effort for this project, the construction of each type of module is done by a different collaboration as indicated in figure \ref{modulescollab}. In this thesis some aspects are discussed of the work needed for the construction of the Micromegas quadruplets for the SM2 module (indicated in figure \ref{modulescollab} by ``GER''), which is done in Freiburg, Mainz, Munich and W\"urzburg.
+
+\chapter{The Micromegas Detector}\label{MMprinciple}
+
+MICRO-MEsh-GAseous Structure (Micromegas) detectors have been developed to overcome problems of multiwire proportional chamber, with spatial resolution at high particle fluxes. This is done by replacing wires with strips printed on isolating materials and separating the regions of initial ionization and charge amplification. By this the time is reduced when the field of slowly drifting ions prevents the detection of following incident particles. The separation is achieved via the eponymous micro-mesh. \cite{micromegas} Micromegas are planar gaseous detectors with high spacial resolution. Improvements have been made to make the detector more discharge resistant and thus increasing the rate capability further. In the upgrade of the inner end cap of the muon spectrometer resistive strip micromegas among other technologies will be used.
+
+In the following some aspects of the underlaying physics needed to understand the Micromegas working principle are explained. After that the general composition, as well as the construction of the Micromegas will be described, which will be built for the SM2 module of the NSW. 
+
+\section{Energy Loss of Charged Particles in Matter}\label{energyLoss}
+
+To detect moving charged particles the main effect used is their loss of energy, while traversing matter. 
+%Therein it can come to collisions with atoms, molecules or electrons of the material. 
+Primarily charged particles interact electromagnetically with a material. Effects like ionization of atoms or molecules, emitting of Cerenkov light or transition radiation due to inhomogeneities of the material can occur. 
+%In difference to Cerenkov light, which occurs only if the velocity of the interacting particle is larger than the phase velocity of light in that material, and transition radiation, ionization occurs more often. 
+The cross section for such events is rather small, therefore the probability for one collision is negligible. But as the density of atoms or molecules in mater is large (for noble gases $\sim$\SI{2.69e19}{atoms/\cm\cubed}), the effect has to be averaged over the traversed length of the material. As Micromegas are gaseous detectors ionization plays the most important role. The mean energy loss $-\mathrm{d}E$ per length $\mathrm{d}x$ crossed, can be described for ionization by the Bethe-Bloch formula \cite{bethe}:  
+
+\begin{align}
+	-\left\langle\dfrac{\mathrm{d}E}{\mathrm{d}x}\right\rangle &= 
+		4\pi r_{e}^{2} m_{e} c^{2} N_{0}
+		\cdot \dfrac{Z z^{2}}{A \beta^{2}}
+		\cdot\left[\ln\left(\dfrac{2m_{e}c^{2}\beta^{2}}{I\cdot\left(1-\beta^{2}\right)}\right)-\beta^{2}\right]
+\end{align}
+
+Constants are the classical electron radius $r_{e}$, the electron mass $m_{e}$, the speed of light $c$ and Avogadro's number $N_{0}$. Depending on the traversed material is the atomic number $Z$, the mass number $A$ and the effective ionization potential $I$, while $z\cdot e$  is the charge and $\beta=\tfrac{v}{c}$ the velocity of the moving particle. The so called stopping power $\mathrm{d}E \cdot \mathrm{d}x^{-1}$ is not depending on the mass of the incident particle, but only on its velocity (by $\beta$). A measurement for the stopping power of a muon in copper can be seen figure \ref{stopPow}.
+%Ionization lead to free electron-ion-pairs.
+ \cite{kleinknecht}
+ 
+\begin{figure}[H]
+	\centering
+ 	\includegraphics[width=0.8\textwidth]{betheBlochAllFromGroom.png}
+ 	\caption{Stopping power for a moun in copper as function of its momentum p.	\cite{groomStop}}
+ 	\label{stopPow}
+\end{figure}
+
+\section{Gas Amplification}\label{gasAmp}
+
+The direct measurement of the arising signal from the energy loss would be impossible, due to only small amount of charges generated in the initial ionization. To make this achievable the electrons have to be accelerated by high electric fields (of the order of \SI{100}{\kV/\cm}) in the gas, before they reach the readout structure. This lead to an amplification of the signal, by ionization of secondary electrons from collisions with other atoms. If the electrons gather enough energy between two collisions to ionize further atoms, they cause an avalanche of electron-ion-pairs. Therefore the free path length $\lambda$ plays an important role. It can be calculated by the atom or molecule density $N$ and the cross section for ionization $\sigma_{i}$ : 
+%
+\begin{align}
+	\lambda &= 1/(N \sigma_{i}) = 1/\alpha
+\end{align}
+%
+Here $\alpha$ is the first Townsend coefficient. It describes the number of electron-ion-pairs created by an electron traversing a certain length of material. Therefore the quantity of electrons $n(x)$ changes after a drift distance $x$ can be calculated with : 
+%
+\begin{align}
+	\mathrm{d} n(x) &= n(x) \alpha \; \mathrm{d} x
+\end{align}
+%
+Therefore an exponential increase of the number of electrons is expected, if $\alpha$ is independent of $x$. This leads to an avalanche like multiplication of electrons in a Micromegas detector towards the anode, where the signal then can be measured. The amplification $G=\exp(\alpha x)$ is called gas gain and reaches values for typical Micromegas of the order of $10^{3}$ to $10^{4}$. The region of gas pressure $p$ and electric field $E$, where $G$ is constant, is defined as the proportional counting region, because there the measured voltage pulse is proportional to the initial ionization. Additional to the electrons by ionization, UV-photons are created by excitation of atoms. They could also lead to additional avalanches, which increase the number of gathered electrons above the region for proportional counting. Therefore quenching gases can be used to reduce the range of these photons and by that keep the amplification in the proportional regime. \cite{kleinknecht}
+
+\section{Working Principle of a Micromegas Detectors}
+
+The general setup of a Micromegas detector is sketched in figure \ref{mmprinciple}. It consists of three parallel electrode planes, which enclose a gas volume. The middle plane is a gas-permeable micro-mesh, which separates the region between cathode and anode into unequal sized volumes. Resistive strips printed on an isolating material, like FR4, serves as anode, at a positive voltage of about \SI{550}{V}. A copper plane at negative voltages around \SI{-300}{V} builds the cathode. The micro-mesh is grounded and held by the so called pillars at a distance of about \SI{128}{\micro\m} above the anode strips. The larger region near the cathode serves as ``active'' volume. Incurred electrons drift in an electric field of $E\approx$\SI{1}{kV/cm} towards the micro-mesh, while the heavier ions drift towards the cathode. By tuning the voltages of cathode, mesh and anode, the electron transmission towards the amplification region, between mesh and anode, can be increased. The electrons get further accelerated by the high electric field (in the order of \SI{100}{kV/cm}) between the mesh and the anode and leads to an avalanche of electrons, as explained in chapter \ref{gasAmp}.\cite{micromegas}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{rsMM_PL.png}
+	\caption{Schematic cut through of a resistive strip Micromegas detector. In the drift region, between the cathode (purple) and the mesh, traversing charged particles (green track, indicated as muon) ionize gas atoms. The electrons (red) drift towards the anode (blue, resistive strips on 550 V) through the mesh, while ions drift with a smaller velocity towards the cathode. Electrons get accelerated by the high electric field in the amplification region below the mesh. This cases avalanches, which can be measured as signals on the anode strips. \cite{philippLthesis}}
+	\label{mmprinciple}
+\end{figure}
+
+The electrons will be collected on the resistive strips and the signal is capacitively coupled to the readout strips below them. If the number of free electrons exceeds the Raether limit ($\sim 10^7$) a conducting plasma channel between mesh and anode leads to a discharge \cite{raether1964electron}. Discharges between the mesh and the anode structure prevent for some time the further detection of traversing charged particles by equalizing the potentials on the mesh and the anode. When this happens no amplification can occur. To make the detector insensitive to discharges resistive strips are used for the readout anode. Only a small part of one or several strips gets affected by a local discharge due to the high resistivity. This assures a fast breakdown of the discharge streamer and a fast recharge process of the anode. \cite{laMMPR} The gas used for Micromegas is in general a mixture of a noble gas (neon or argon), for ionization, with a fraction of a quenching gas like CO$_{2}$, CH$_{4}$ or CF$_{4}$ to prevent UV-photons to generate additional charges above the proportional level. \cite{kleinknecht} For the reconstruction of the track from an traversing charged particle the geometrical information of the strip width and the distance between the center of neighboring strips, the so called pitch, is important. In the case of the Micromegas for the NSW the width of a readout copper strip is around \SI{300}{\micro\m} and the pitch is \SI{450}{\micro\m}. To have everywhere in the detector the same amplification and equal times for drifting electrons and guaranty best spatial resolution, it is important to have very parallel and therefore flat electrode planes. The micro-mesh is flat due to the tension needed to stretch it to the required plane. To assure also for the cathode and the anode planes an equivalent flatness the structures which hold them at position have to be very planar.
+
+\section{Construction of the SM2 Quadruplets}\label{constructionSM2} 
+
+As described in chapter \ref{NSWupgrade}, the Micromegas for the modules of the NSW will be built in quadruplets, which consist of four successive Micromegas. Five planar structures, called panels, will built the electrodes of neighboring Micromegas in the quadruplet. Three types of panels are needed for this structure as can be seen in figure \ref{quadrupletspanels}. Two panels are called readout panels, which hold the anodes and therefore the readout structure of the Micromegas. For the cathodes of the outer Micromegas, two panels will be used, called single drift panel. At last a panel in the center for the two cathodes of the inner Micromegas is needed. This is called double drift panel. The sequence will be single drift, readout, double drift, readout and single drift panel. The alternation of cathode and anode planes is made to avoid additional fields outside of the active volumes. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{moduleMMlayers.png}
+	\caption{Schematic cut of a quadruplet. Five honeycomb cored panels will be stacked to build four drift and amplification regions of four alternating oriented Micromegas. In blue the aluminium honeycomb cores are indicated, which are enclosed by the PCB made of FR4 (drawn in red). In gray the bars at the borders of the PCBs are shown. The mesh is drawn green slightly above the readout anodes. The panels will be hold at distance by interconnections sketched in the middle. At the borders, they are screwed together. Dedicated frames hold the mesh will be stretched and glued. O-rings will provide the required gas tightness. Additional channels provide the cooling of the electronics for the readout panels.}
+	\label{quadrupletspanels}
+\end{figure}
+
+Each panel for the Micromegas of the SM2 module consists of two layers of PCBs glued on a central layer of aluminium honeycomb. The honeycomb provides the required stiffness, while also being light. Aluminium bars at the borders and along the connection of the PCBs give additional stability. To achieve the necessary planarity for the electrodes a construction procedure was developed. Two main aspects have to be achieved during gluing. One point is the required planarity and the other is the alignment of the PCBs, to assure the correct position of the strips on different PCBs in respect to each other. For the planarity requirement a precision granite table, as well as an so called stiffback is used, both planar structures with the possibility to apply vacuum suction at one side. The alignment will be achieved by an alignment frame (seen in figure \ref{alignment}), made from aluminium, with precision holes at specific positions, which fit exactly to the positions of precision markers on the PCBs.
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[An oval washer glued on a PCB, with a small pin stuck in it.]{\label{Ovalwasher}
+	\begin{tikzpicture}
+		\node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.45\linewidth]{washerWithPin.jpeg}};
+		\node[right,blue] at (0.0,0.3) {\large oval washer};
+		\draw[arrows=->,blue,ultra thick](1.2,0.6)--(2.6,1.2);
+	\end{tikzpicture}
+	}
+	\qquad
+	\subfigure[A V shaped washer glued on a PCB and touching a precision cylinder on the granite table.]{\label{Vwasher} 
+	\begin{tikzpicture}
+		\node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.45\linewidth]{VwasherAtCyl.jpeg}};
+		\node[right,blue] at (2.7,3.0) {\large V-washer};
+		\node[right,blue] at (0.0,2.5) {\large precision};
+		\node[right,blue] at (0.03,2.0) {\large cylinder};
+		\draw[arrows=->,blue,ultra thick](1.7,2.1)--(3.0,1.8);
+	\end{tikzpicture}
+	}
+	\\
+	\subfigure[The alignmentframe on three PCBs and aligned to the precision cylinders on the granite table.]{\label{alignment} 
+	\begin{tikzpicture}
+		\node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.75\linewidth]{alignmentFrame.jpeg}};
+		\node[right,blue] at (5.0,4.0) {\large alignment};
+		\node[right,blue] at (5.3,3.6) {\large frame};
+		\draw[arrows=->,blue,ultra thick](5.2,3.6)--(4.2,3.1);
+		\draw[arrows=->,blue,ultra thick](5.0,4.0)--(3.9,4.8);
+		\draw[arrows=->,blue,ultra thick](7.0,4.0)--(8.0,4.5);
+		\draw[arrows=->,blue,ultra thick](6.7,3.6)--(7.7,2.9);
+		\node[right,blue] at (13.0,2.6) {\large pins in};
+		\node[right,blue] at (13.0,2.1) {\large holes};
+		\draw[arrows=->,blue,ultra thick](13.0,2.3)--(10.4,3.5);
+		\draw[arrows=->,blue,ultra thick](13.0,2.3)--(9.0,2.9);
+		\draw[arrows=->,blue,ultra thick](13.0,2.3)--(6.9,2.0);
+		\node[right,blue] at (0.0,1.0) {\large attached to};
+		\node[right,blue] at (0.0,0.6) {\large precision};
+		\node[right,blue] at (0.0,0.2) {\large cylinder};
+		\draw[arrows=->,blue,ultra thick](1.0,1.3)--(1.6,4.3);
+		\draw[arrows=->,blue,ultra thick](1.0,1.3)--(4.6,1.7);
+	\end{tikzpicture}
+	}
+	\caption{With the alignment frame the three PCBs for one side of a readout panel can be aligned to each other with respect to the washers, which are glued on top of precision markers. The frame gets aligned to the cylinders on the table by V- and L-washers, while the pins in the holes of the frame align the PCBs via the washer (round and oval) glued on the PCBs.}
+	\label{alignWasher}
+\end{figure}
+
+Before assembly the PCBs get prepared with a round and an oval washer (seen in figure \ref{Ovalwasher}) each placed exactly at the position of precision markers, which are printed at the small borders of the readout side on the boards. The washer have the same inner diameter as the holes in the alignment frame. For the first gluing step the table, the PCBs and the aluminum bars are cleaned with isopropyl alcohol and dust is removed by anti-static rollers. After the three PCBs for one side are placed with the readout structure facing the surface on the granite table, they are aligned by the frame. This is achieved with pins stuck into the holes of the frame and force the panel with the washer to the wanted position. The frame itself is aligned on the granite table by so called L- (Line) and V- (v-shaped) washers against two precision cylinders (seen in figure \ref{Vwasher}), which are fixed at the table. These washers are mounted on the frame and match the distance between the cylinders. Both assure the position in precision direction (perpendicular to the strips), whereas the V-washer also holds the position in the orthogonal direction along the strips. 
+%During the frame stands on four distance screws, it can be moved and by that aligned. 
+When the PCBs are aligned, they are fixed on the table by cellotape. Kapton tape is used to connect the PCBs at their common borders. After that vacuum suction is applied and the frame is removed. Additional L- and V-washer are glued on the boards, touching the precision cylinders the same way as the alignment frame. This is done to be able to align this first half panel on the table, when it is sucked to the stiffback during the second gluing step. Then the glue is distributed homogeneously over the PCBs. The aluminium bars are placed on to them, aligned by precision aluminium distance pieces mounted on the table. Between the bars the aluminium honeycomb is placed. A vacuum bag is put over the setup to press the bars and the honeycomb into the glue.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{glueing.png}
+	\caption{Schematic cut through of the two step gluing process for the construction of the panels for the SM2 module. The PCBs get sucked to the granite table by vacuum, after they are aligned to each other on the table. Then the aluminium honeycomb and bars get glued on them. After curing, the first half of the panel is transfered on the stiffback and sucked to it. Also the PCBs for the other side get sucked to the granite table. Then the first half of the panel gets lifted on the glue coated PCBs to the granite table. In order to ensure the right thickness, the stiffback is held at correct height above the table by precision distance pieces (black spheres).}
+	\label{twostepglueing}
+\end{figure}
+
+After curing, the vacuum bag is removed from the first half of the panel. Then the first half of the panel is placed with the PCB side on the cleaned precision surface of the stiffback and sucked to it. The table gets cleaned as well, before the same alignment procedure as for the first side is applied to the PCBs for the second side. Again glue is distributed uniformly over the PCBs. In contrast to the first side, the stiffback is used to place the first panel half with the aluminium bars and the honeycomb on the glue on the second side. Before the bars and the honeycomb touches the glue, the stiffback gets aligned by the L- and V-washer of the first side to the precision cylinders on the table, while it is lifted by four screws some mm above the surface. When it is aligned, the stiffback gets lowered to eight precision distance pieces, which are placed at the corners and the sides of it. They assure the correct size of the gluing gap for the second PCB side.
+
+Additional cooling bars for the electronics have to be placed during gluing of the readout panels next to the bars at the tapered borders. On the drift panel a frame for the micro-mesh will be glued after they are cured. When all panels are built they get assembled vertically by aligning them to the precision cylinders laying on the granite table and screwing them together at their assembly holes drilled through the aluminium bars by a CNC drilling machine. The right size of the gap between the panels is achieved by aluminium frames with a thickness of \SI{5.17}{mm}, which are screwed on the drift panels. Additional frames of \SI{5.06}{mm} hold the stretched micro-mesh. For the two New Small Wheels with their eight small sectors 32 SM2 quadruplets have to be built. Therefore 64 readout and 96 drift panels have to be glued.
+
+\chapter{Quality Control of the SM2 Panels with a Coordinate Measuring Machine}
+
+As a key component for building large areas with flat surfaces precision tables made of granite are used, which are available with a planarity of \SI{5}{\micro\m}. With holes in the granite surface connected to a vacuum system the flatness of the table can be transfered to a workpiece by suction. So called coordinate measuring machines (CMM) are able to determine sizes and lengths in the range of \SI{10}{\micro\m}. This is done via computerized numerical controlled (CNC) linear bearing units, which build an orthogonal three dimensional system. As final point laser distance sensors are capable to determine the gap between them and a measuring surface on scale of several hundred \SI{}{\nm}. By combining these three precision systems the group at the LMU in Garching/Munich is able to build flat sandwich structures with a planarity of \SI{30}{\micro\m} and measure them. The measurement system can be seen in figure \ref{granitetibale}. The linear bearing units as well as the pillar for the bridge are made of aluminium and are mounted to the granite table by several screws. Attached to the measurement arm the laser distance sensor can be moved with the units controlled by PC. 
+
+%\section{Experimental Setup -- Granite Table and Coordinate Measurement Machine}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{granittableleftresized.JPG}
+	%\includegraphics[width=14cm]{granittableleft.JPG}
+	\caption{The Planarity measurement setup. A granite table with precision surface (variation around \SI{5}{\micro\m}). Attached to it is a coordinate measurement machine (CMM) with three linear bearing units for displacement and a laser sensor mounted on the measurement unit. On the table an aluminium frame is attached for the alignment of the drift PCBs. They are placed in this picture on the table.}
+	\label{granitetibale}
+\end{figure}
+
+The granite table will be used for the construction of the panels for the SM2 quadruplet and the CMM for the control of their flatness. In order to cope with the requirements for the module the system has to be understood and its capabilities have to be checked. Therefore the parts for the measurements are introduced first and then the whole system is investigated under the influence of temperature variation on the measured distances.
+
+\section{Scheme for Distance Measurements using a Laser Triangulation System} % of the Light Path from a Laser
+
+There are several methods for distance measurements using lasers. In this thesis a laser sensor is used, which calculates the deviation of the measured distance to a reference distance by the position of the reflected light on a CCD chip. The general triangulation scheme can be seen in figure \ref{laserTriang}. The reference distance is the distance from the laser sensor to the solid line marked with ``reference surface''. The perpendicular red line represents the ``incident laser light''. 
+%This scheme correspond to the use with diffuse reflection, while it is also possible to let the laser shine in tilted to the surface. In both cases the calculation works the same, the only difference is the intensity which arrives at the CCD. 
+The light, reflected by the angle $\epsilon$, traverse the known distance $d$ to the lens, where it is focused on the CCD chip in a distance $a$. If the measured surface is shifted to the reference surface by $h$, the incident light gets reflected under an modified angle $\epsilon'$. This gives rise to an angle $\beta$ between the initial and the new reflected light of the measured surface, as well as an displacement $x$ of the spot on the CCD. Now the calculation only needs to connect this displacement $x$ with the distance difference $h$ of the reference and the measured surface.
+\begin{figure}[H]
+	\centering
+	\fcolorbox{black}{white}{\includegraphics[width=0.5\textwidth]{triangulation_scheme_MH-crop.pdf}}
+	\caption{Triangulation scheme for distance measurement with a laser sensor.}
+	\label{laserTriang}
+\end{figure}
+
+The relation between the angles $\epsilon$, $\epsilon'$ and $\beta$ can be calculated by the sum of angles of the triangle with sides $d$, $h$ and the long red dashed line.
+\begin{align}
+	180^{\circ} &= \epsilon' + \left( 180^{\circ} - \epsilon \right) + \beta 
+	\nonumber
+	\\
+	\rightarrow \;\;\; \epsilon' &= \epsilon - \beta
+	\label{epsilonprime}
+\end{align}
+The displacement $x$ of the spot on the CCD is connected to the angle $\beta$ by : 
+\begin{align}
+	\tan \beta &= \dfrac{x}{a} 
+	\label{tanbeta}
+\end{align} 
+Using the law of sines the distance difference $h$ is given by :
+\begin{align}
+	\dfrac{\sin \beta}{h} &= \dfrac{\sin \epsilon'}{d} 
+	\nonumber
+	\\
+	\rightarrow \;\;\; h &= d \cdot \dfrac{\sin \beta}{\sin \epsilon'}
+	\label{disdiffirst}
+\end{align}
+
+With (\ref{epsilonprime}) and the addition theorem, $\sin \epsilon'$ can be calculated as :
+\begin{align}
+	\sin \epsilon' &= \sin\left( \epsilon - \beta \right) = \sin(\epsilon) \cos(\beta) - \cos(\epsilon) \sin(\beta)
+	\label{sineps}
+\end{align}
+%\vspace{1mm}
+Plugging (\ref{tanbeta}) and (\ref{sineps}) in (\ref{disdiffirst}), the connection of $h$ and $x$ is given by : 
+\begin{align}
+	h &= d \cdot \dfrac{\sin \beta}{\sin(\epsilon) \cos(\beta) - \cos(\epsilon) \sin(\beta)}
+	\nonumber
+	\\
+	 &= \dfrac{d}{\sin(\epsilon) / \tan(\beta) - \cos(\epsilon)}
+	\nonumber
+	\\
+	 &= \dfrac{d}{\frac{a}{x} \sin(\epsilon) - \cos(\epsilon)}
+	\label{onlydenom}
+ 	\\
+	 &= x \cdot \frac{d}{a} \cdot \dfrac{1}{\sin(\epsilon) - \frac{x}{a} \cos(\epsilon)}
+	\label{almostlinear}
+\end{align}
+
+With the known constants $d$, $a$ and $\epsilon$ the shift in distance $h$ can be directly calculated with equation (\ref{onlydenom}) from the deviation $x$ of the spot on the CCD.
+(\ref{almostlinear}) shows that $h$ and $x$ depends almost linearly on each other except of small corrections (if $x \ll a$) due to the denominator. Although this scheme should work, it is common to use look up tables, which were programmed for the sensors individually by the manufacturer after reference measurements were done. The output of the sensor is an integer in the range of 0 to $2 \cdot\!10^{6}$. These correspond to \SI{0}{\mm} and \SI{2}{\mm}. Therefore the unit of the signal is nm. The sensor has to be placed in a distance of about \SI{2.5}{\cm} from the measured surface, in order to focus the laser light on the CCD chip. 
+
+Another point which has to be thought of is the refractive index of the measured surface. By using different materials it is reasonable to see varying penetration depths or even total reflection, which would lead to an unexpected measurement result. The laser is mounted on the measurement arm, so that the incident light shine tilted on the granite surface. The calculation scheme works the same, only the settings of the laser have to be changed (to use a different look up table).
+
+\section{Planarity Measurements using a Coordinate Measuring Machine}\label{planmeasCMM}
+
+The planarity of the granite table or something on top of it is measured by moving the laser sensor attached to the  measurement arm over the table via the CNC machine at a certain height over the surface and saving the distance of the laser sensor and position of the CMM for each measurement point in a ASCII file. Afterwards this file is analyzed by a C++ program, which fills the difference to a reference measurement of the granite surface in a two dimensional histogram. The measurement can be adjusted to the measured area on the granite table and the granularity in which the surface is scanned. For comparison of different measurements and the unambiguous localization, the coordinate system of the CMM is introduced as seen in figure \ref{coordsys}. It is right handed with the center in the back left corner of the precision table
+%, at the maximal height of the measurement arm
+. 
+%The positive Z direction goes up, while X is perpendicular to the linear bearing units, positive from the left to the right one. The Y direction has to go along the units, positive from front to back of the table.
+
+\begin{figure}[H]
+	\begin{tikzpicture}
+		\node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.9\textwidth]{granittableleftresized.JPG}};
+		\begin{scope}[x={(image.south east)},y={(image.north west)}]
+			\draw[arrows=->,cyan,ultra thick](0.4,0.16)--(0.8,0.408);
+			\node[below,cyan] at (0.68,0.31) {\huge X};
+			\draw[arrows=->,cyan,ultra thick](0.35,0.12)--(0.12,0.5);
+			\node[right,cyan] at (0.22,0.36) {\huge Y};
+			\draw[arrows=->,cyan,ultra thick](0.1,0.5)--(0.08,0.8);
+			\node[right,cyan] at (0.1,0.65) {\huge Z};
+			\node[above,cyan] at (0.1,0.8) {\huge center};
+			\node[right,red] at (0.8,0.6) {\huge right};
+			\node[left,red] at (0.4,0.65) {\huge back};
+			\node[right,red] at (0.8,0.2) {\huge front};
+			\node[left,red] at (0.15,0.15) {\huge left};
+		\end{scope}
+	\end{tikzpicture}
+	\caption{Planarity Measurement Setup. A granite precision table with CMM. Indicated is the orientation of the coordinate system (in cyan) and the definition of sides (in red).}
+	\label{coordsys}
+\end{figure}
+
+As the signal from the laser sensor is not read out continuously, but at certain points, the whole plain is approximated by small, rectangular areas. To each of them the distance measured for one point is assigned. With that the actual area is approximated. Another important point for the analysis is the reference measurement, as this influences the relative distances of all points to each other and therefore the planarity. To make such a reference the table has to be scanned with a high granularity, in order to be able to compare with many measurements of different sizes. Two points have to be kept in mind. On the one hand the sag of the bridge at which the measurement arm is mounted and on the other hand the crystalline structure of the granite. The bending leads to a virtual deformation of the reference surface, because the measured distance varies with position. This will be seen in chapter \ref{complanscan}. The crystalline structure gives rise to peaks in the measurement as the laser penetrates the surface in different depths. These peaks should occur isolated, because it is unlikely to hit such positions successively. Hence it is possible to correct for them. Generally it is not necessary as they are local and the important part is the overall planarity, which should not be effected by a small number of points.
+
+\chapter{Temperature Dependence of Planarity Measurements}
+
+Aluminium has a linear thermal expansion coefficient of \SI{23.1}{\micro\m/\K\m}. Hence it is considerable if the planarity measurement setup, consisting of the granite table and the CMM, is stable against variation of temperature. During an \SI{1}{\hour} measurement it is possible to reach temperature changes of \SI{1}{\K} and therefore an effect in the result of the measurement due to the expansion or shrinking of the aluminium should be seen. To study this effect an approximate calculation will be compared to reference measurements. A method for the correction of planarity measurements by temperature is tested and investigated when it works best.
+
+\section{Calculated Thermal Expansion for the Planarity Measurement Setup}\label{calcThermExp}
+
+In figure \ref{graniteTableSketch} a sketch of the measurement setup and the most important dimensions can be seen. To derive the change of the measured distance $h_{\mathrm{m}}$ due to temperature, some assumptions are made for its connection to the other dimensions. The setup is fixed at the granite table, hence the change of the mainstay can be neglected. The linear bearing units at the sides are considered to be fixed to the granite table such that their thermal expansion behavior goes along with the change of the lower half of the granite. Therefore on the one hand the thickness of the granite table $h_{\mathrm{g}}$ contributes only half to the overall change. On the other hand the length of the aluminium leg $h_{\mathrm{al}}$ contributes from the surface of the table to the upper side of the CNC machine bridge. The same assumption is made for the connection of the laser head to the bridge. With this in mind, the length $h_{\mathrm{lh}}$ contributes from the lower side of the bridge to its end. 
+
+\begin{figure}[H]
+	\centering
+	\subfigure[frontview]{\includegraphics[width=0.45\textwidth]{granittable_CNC2-crop.pdf}}
+	\qquad
+	\subfigure[sideview]{\includegraphics[width=0.34\textwidth]{granittable_CNC_sideview3-crop.pdf}}
+	\caption{Scheme of the granite table with CMM and relevant measures. It is assumed that the change of the measured distance $h_{\mathrm{m}}$, depends mainly on the change of the distances $h_{\mathrm{lh}}$, $h_{\mathrm{al}}$ and $h_{\mathrm{g}}$.}
+	\label{graniteTableSketch}
+\end{figure}
+
+In general a linear correlation between the change in size $\bigtriangleup\!h$ of a solid and the temperature difference $\bigtriangleup\!T$ is assumed. Also it will linearly depend on the initial length $h$ of the system. The correlation factor $\alpha$ is called linear thermal expansion coefficient and is material dependent.
+
+\begin{align}
+	\bigtriangleup\!h = \alpha \cdot h \cdot \bigtriangleup\!T
+	\label{gentempchange}
+\end{align}
+
+To use formula (\ref{gentempchange}) for our case, it has to be taken into account how the changes of lengths $h_{\mathrm{lh}}$, $h_{\mathrm{al}}$ and $h_{\mathrm{g}}$ contribute to the change of $h_{\mathrm{m}}$. As the size of the aluminium legs shrinks or increases the bridge will be lowered or lifted. Therefore the alteration of $h_{\mathrm{al}}$ could be assumed to contribute with the same sign to the variation of $h_{\mathrm{m}}$. In contrary if the length of the measurement arm, where the laser head is mounted, increases the measured distance should shrink, due to the assumption that the arm is fixed at the bridge and hence expands downwards. Vice versa for the other case, so the change of $h_{\mathrm{lh}}$ is assumed to concur negatively to the variation of $h_{\mathrm{m}}$. From the assumption that the linear bearing units are fixed to the half height of the granite table it can be concluded that the lower part of the table lifts up the entire system, including the upper part of the granite and therefore is negligible. But as the upper part of the granite is supposed to change independently of the attached units, $h_{\mathrm{m}}$ shrinks if it increases and the other way around. Taking all these together, the measured distance behaves as
+
+\begin{align}
+	\bigtriangleup\!h_{\mathrm{m}} &= {\color{green}+} \bigtriangleup\!h_{\mathrm{al}} {\color{red}-} \bigtriangleup\!h_{\mathrm{lh}} {\color{red}- \tfrac{1}{2}} \bigtriangleup\!h_{\mathrm{g}}. 
+	\label{dischange}
+\end{align}
+
+In order to get the distance change per temperature equations (\ref{gentempchange}) and (\ref{dischange}) have to be combined, leading to : 
+
+\begin{align}
+	\Rightarrow \; \bigtriangleup h_{\mathrm{m}} /\bigtriangleup\!T &= \left( h_{\mathrm{al}} {\color{red}-} h_{\mathrm{lh}} \right)  \alpha_{\mathrm{alu}} {\color{red}- \tfrac{1}{2}} h_{\mathrm{g}} \alpha_{\mathrm{granite}}.
+\end{align}
+
+With values for the linear thermal expansion coefficient of : 
+
+\begin{table}[H]
+\centering	 
+\begin{tabular}{lcr}
+	$\alpha_{\mathrm{aluminium}}$ & = & \SI{23.1}{\micro\m/\K\m}
+	\\
+	$\alpha_{\mathrm{granite}}$ & = & 3 - \SI{7}{\micro\m/\K\m} $\simeq$ \SI{5}{\micro\m/\K\m}
+\end{tabular}
+\end{table}
+
+and lengths of :
+
+\begin{table}[H]
+\centering	 
+\begin{tabular}{lcr}
+	$h_{\mathrm{al}}$ & = & 68$\pm$\SI{1}{\cm}
+	\\
+	$h_{\mathrm{lh}}$ & = & 27$\pm$\SI{1}{\cm}
+	\\
+	$h_{\mathrm{g}}$ & = & 30$\pm$\SI{1}{\cm}
+\end{tabular}
+\end{table}
+
+the distance change per temperature can be calculated as : 
+
+\begin{align*}
+	\bigtriangleup h_{\mathrm{m}} /\!\bigtriangleup\!T &= 8\;\mathrm{\mu m / K}
+\end{align*}
+
+almost independent of the value for granite.
+
+For the estimation of the error for this calculation the crucial point is not the error for the measured values, but the consideration about the accuracy of the model. To make an upper bound the top part of the linear bearing units can be included to the length of the aluminium leg, to take its variation into account as it changes independently from the table. Therefore a term of ${\color{green}+ \tfrac{1}{2}} h_{g} \alpha_{\mathrm{aluminium}} = +$\SI{3.5}{\micro\m/\K} has to be added to the derived distance change per temperature. For an lower bound the fixation of the laser head arm to the bridge is assumed to be mainly on the upper side, so the half length, not only the part below the bridge, contributes to the change of the laser head length. This produces a term of ${\color{red}- \tfrac{1}{2}}h_{\mathrm{bridge}} \alpha_{\mathrm{aluminium}} = - 11 \mathrm{cm} \cdot 23.1 \mathrm{\mu m/Km} = - 2.5 \mathrm{\mu m/K}$. 
+%Additionally the change of the whole granite table depth could be considered, which leads to a term of ${\color{red}- \tfrac{1}{2}} h_{\mathrm{g}} \alpha_{\mathrm{granite}} = -$\SI{1.1}{\micro\m/\K}. 
+
+Summarizing the calculated distance change per temperature with errors for the model is :
+
+\begin{align*}
+	\bigtriangleup h_{\mathrm{m}} /\!\bigtriangleup\!T &= 8_{-3}^{+4}\;\mathrm{\mu m / K}.
+\end{align*}
+
+It has to be mentioned, that if the value is in the correct order of magnitude the effect on the planarity measurements should be such small that it could be neglected. This is due to the high error during the measurements, because of the movement of the linear bearing units, as will be seen later on by comparing different reference measurements. Another point to keep in mind is that the whole setup is not as stiff as it is assumed. For example the connection of the linear bearing units to the granite is achieved by several screws along the axis. Also the measurement arm with the laser head is naturally mounted movable to the bridge of the CNN machine. Therefore even larger deviations would be expected as the value from the model, as well as effects of hysteresis, due to deformations which do not reverse linearly with temperature change. 
+
+\section{Scheme for Distance Correction by Temperature}
+
+The correlation between measured distance and temperature has to be studied for the planarity measurement setup and compared to the linear model introduced above. If the model and measurement are in agreement, the fitted values for the correlation can be used with the measured temperature $ T_{\mathrm{measured}} $ and a reference temperature $ T_{\mathrm{ref}} $, to correct the distance $ h_{\mathrm{measured}} $ by : 
+
+\begin{align}
+	h_{\mathrm{corrected}} &= h_{\mathrm{measured}} - \left( T_{\mathrm{measured}} - T_{\mathrm{ref}} \right) \cdot \bigtriangleup h_{\mathrm{m}} /\!\bigtriangleup\!T.
+	\label{tempcorformula}
+\end{align}
+
+This scheme will be applied to the distances of all points from a planarity scan as well as to the distances for the reference measurement with their respective temperatures. For the reference temperature the mean temperature of the current measurement can be used.
+
+\section{Estimation for the Change of Bending due to Temperature Variation}\label{estbend}
+
+Until now only the length change parallel to the measurement direction is taken into account. In the following a rough approximation for a change in bending of the CNC machine bridge due to temperature variation is done. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{bendingCNNbridge-crop.pdf}
+	\caption{Exaggerated sketch for the bending of an aluminium beam (in black) and the possible effect of increased temperature (in red).}
+	\label{bridgeBending}
+\end{figure}
+
+The bending of the bridge due to gravity is of the order of \SI{500}{\micro\m}, as will be seen later at the planarity scans of the granite table surface (sketched in figure \ref{bridgeBending}). From basic mechanics the correlation between the bending $b$ of a beam to the third power of its length $L$ is known \cite{ansysBook}:  
+
+\begin{align}
+	b &\propto L^{3}.
+\end{align}
+
+In order to see the effect of temperature on the bending, the length change $\bigtriangleup\!L$ has to be added to the initial length $L$. To compare these values, assumptions for the temperature variation have to be made. For a conservative approximation a high temperature change (for a climate controlled room) of about \SI{10}{\K} is made. Using formula (\ref{gentempchange}) and $\alpha_{aluminium}$ the ratio of the length change to the initial value is calculated as:
+
+\begin{align}
+	\dfrac{\bigtriangleup\!L}{L} &= \alpha_{aluminium} \bigtriangleup\!T = 23.1\;\mu \mathrm{m}/\mathrm{Km}\;\cdot\;10\;\mathrm{K} = 231\;\mu \mathrm{m}/\mathrm{m} \approx 3 \cdot 10^{-4}.
+\end{align}
+
+With this relation the change of bending could be approximated :
+
+\begin{align}
+	b \propto \left(L+\bigtriangleup\!L\right)^{3} &= L^{3} + 2\;L^{2} (\bigtriangleup\!L) + 2 L (\bigtriangleup\!L)^{2} + (\bigtriangleup\!L)^{3}
+	\\
+	 %&= L^{3} \cdot \big[ \underbrace{1}_{\rightarrow 500\;\mathrm{\mu m}} + \underbrace{2 \cdot 3 \cdot 10^{-4}}_{\rightarrow 0.3\;\mathrm{\mu m}} + \underbrace{2 \cdot \left(3 \cdot 10^{-4}\right)^{2}}_{\rightarrow \ll 1\;\mathrm{\mu m}} + \underbrace{\left(3 \cdot 10^{-4}\right)^{3}}_{\rightarrow \lll 1\;\mathrm{\mu m}}\;\;\;\big]
+	 %\label{bendapprox}
+	 &= L^{3} \cdot \Big[ \;\; 1 + 2 \cdot 3 \cdot 10^{-4} + 2 \cdot \left(3 \cdot 10^{-4}\right)^{2} + \left(3 \cdot 10^{-4}\right)^{3} \;\; \Big]
+	 \label{bendapprox}
+\end{align}
+
+The first term of equation (\ref{bendapprox}) correspond to the initial bending of the order \SI{500}{\micro\m}, while the second term is the linear correction due to temperature variation. The change is below \SI{1}{\micro\m}, because of the suppression of this term by the ratio $\bigtriangleup\!L / L$. The other terms are even more suppressed and therefore the change of bending due to temperature variation is at this approximation negligible. 
+
+\newpage
+
+\section{Calibration of Temperature Sensors}
+
+The temperature sensors were calibrated in order to be able to make statements about their relative measurements. For this purpose six Dallas18B20 sensors were placed together at one location and a measurement is performed with the readout program DigiTemp for 1-wire devices. \cite{digitemp} In order to investigate the air conditioning of the room, in which the precision table with the CMM is accommodated, the senors were placed at the granite table. From the data sheet of the temperature sensors a resolution of \SI{0.0625}{K} at an overall  accuracy of \SI{0.5}{K} is expected. \cite{ds18b20} The measurements were performed over four days, while the data were stored every \SI{10}{\s} in a common ASCII file. Afterwards this file was analyzed via a self written C++ program. The outcome was stored in histograms and plots ,which will be shown. For a first impression the progress of the six temperature signals as function of time is shown in (\ref{tempvstime6sens}). 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{templog_calib_001_tempNewAnalysed_tempvstime_Sens6.jpeg}
+	\caption{Temperature curves of six Dallas18B20 over four days. Due to the small time difference during the measurement the data points can not be resolved. The spaces in vertical direction are due to the resolution from the digitization in steps of \SI{0.0625}{K}.}
+	\label{tempvstime6sens}
+\end{figure}
+
+The temperature variation due to the day-night-cycle can be seen quite good, as maximal during the early afternoon. Also the vertical steps of \SI{0.0625}{K} from the digitization are for all sensors clearly visible at the same temperatures. In order to further investigate the predictive efficiency of the sensors the temperature value for each time step $t$ is compared. This is done for every sensor $j$ by taking the difference of its temperature value $T_{j,t}$ to the mean temperature $\overline{T}_{j,t}$ of the other 5 sensors.
+
+\begin{align}
+	\bigtriangleup\!T_{j,t} &= T_{j,t} - \overline{T}_{j,t} = T_{j,t} - \dfrac{1}{5}\sum_{i=0 ,\atop i\ne j}^{5} T_{i,t}
+\end{align}
+
+The differences are plotted in figure \ref{temphists}. From the distributions the mean values and variation (RMS) can be compared to check the compatibility of the sensors.
+
+\begin{figure}[H]
+	\begin{tabular}{cc}
+		\includegraphics[width=0.45\textwidth]{templog_calib_001_tempNewAnalysed_tempDiffToMean_Sens0_font.pdf}
+		&
+		\includegraphics[width=0.45\textwidth]{templog_calib_001_tempNewAnalysed_tempDiffToMean_Sens1_font.pdf}
+		\\
+		\includegraphics[width=0.45\textwidth]{templog_calib_001_tempNewAnalysed_tempDiffToMean_Sens2_font.pdf}
+		&
+		\includegraphics[width=0.45\textwidth]{templog_calib_001_tempNewAnalysed_tempDiffToMean_Sens3_font.pdf}
+		\\
+		\includegraphics[width=0.45\textwidth]{templog_calib_001_tempNewAnalysed_tempDiffToMean_Sens4_font.pdf}
+		&
+		\includegraphics[width=0.45\textwidth]{templog_calib_001_tempNewAnalysed_tempDiffToMean_Sens5_font.pdf}
+	\end{tabular}
+	\caption{Differences of the measured temperature to the mean temperature of the other sensors, for six Dallas18B20. Only one sensor has a higher offset (mean value) than the digitization of \SI{0.0625}{K}, which corresponds to a good comparability.}
+	\label{temphists}
+\end{figure}
+
+Except for one sensor the absolute mean values are smaller than \SI{0.05}{\K} and the RMS is below \SI{0.025}{\K}. The sensor exceeding these values has only slightly increased deviations to the other sensors. This could be explained by imperfect preparation of the sensors at their measurement positions. Therefore the compatibility of the sensors in the range of their digitization is sufficient for this study.
+
+\newpage
+
+\section{Measurement of the Thermal Expansion}
+
+To determine the variation of the measured distance due to temperature, the idea is to monitor the signal of the laser sensor simultaneously with several temperature sensors placed at the granite and at the aluminium legs of the CMM. By that the change of distance and temperature can be compared. The correlation can be fitted with a linear function. The slope of the function should correspond to the thermal expansion (see chapter \ref{calcThermExp}) for the setup. In figure \ref{sensorpositions} the positions of the installed temperature sensors at the measurement setup can be seen.
+
+\begin{figure}[H]
+	\begin{tikzpicture}
+		\node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.9\textwidth]{granittableleftresized.JPG}};
+		\begin{scope}[x={(image.south east)},y={(image.north west)}]
+			\draw[arrows=->,green,ultra thick](0.6,0)--(0.45,0.05);
+			\draw[arrows=->,green,ultra thick](1,0.3)--(0.92,0.39);
+			%\draw[arrows=->,cyan,ultra thick](0.8,0.73)--(0.62,0.69);
+			\draw[arrows=->,green,ultra thick](0.8,0.73)--(0.62,0.69);
+			%\node[right,cyan] at (0.8,0.73) {B};
+			\draw[arrows=->,green,ultra thick](0.3,0.71)--(0.13,0.68);
+			\draw[arrows=->,blue,ultra thick](0.4,0.72)--(0.58,0.75);
+			%\node[left,red] at (0.4,0.72) {A};
+			\draw[arrows=->,green,ultra thick](0.3,0.65)--(0.17,0.55);
+			\draw[arrows=->,green,ultra thick](0.4,0.65)--(0.52,0.64);
+		\end{scope}
+	\end{tikzpicture}
+	\caption{Planarity Measurement Setup. A granite precision table with CMM. Indicated are the positions of the temperature sensors. Four at the corners of the granite table, two at the aluminium legs. The last one is integrated in the laser sensor, which is mounted at the movable measurement arm. The argumentation made here will be done using the sensor at the position indicated by the blue arrow.}
+	\label{sensorpositions}
+\end{figure}
+
+Additional to the six Dallas18B20 sensors, the laser sensor has a built in temperature sensor with a resolution of \SI{0.25}{K}. Since the signal of this sensor is recorded by the planarity measurement programs as well, it will also be used in the following. The temperature of this sensor is generally higher than the values of the Dallas18B20, due to the heating of the laser. Most of the sensors show the same results. Therefore, to have a better overview, plots for only one up to two of the sensors are shown.
+
+The signals of the laser and the temperature sensor at the aluminium leg is shown over three days in figure \ref{disandtempvstime}. Both distance (in figure \ref*{disvstime}) and temperature (in figure \ref*{tempvstime}) show a variation in time due to day and night. Here already a first estimation of the thermal expansion can be made by calculating the distance variation $ \bigtriangleup\!h \approx 987\;\mathrm{\mu m} - 967\;\mathrm{\mu m} = 20\;\mathrm{\mu m} $ and divide it by the temperature variation $ \bigtriangleup\!T \approx 21.4 \mathrm{^\circ C} - 19.6 \mathrm{^\circ C} = 1.8\;\mathrm{K} $. Therefore $ \bigtriangleup\!h / \bigtriangleup\!T \approx 11\;\mathrm{\mu m / K}  $ is a first approximation of the thermal expansion for the planarity measurement setup, which is in the same order as the calculated one.
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[Measured distance as function of time]{\label{disvstime} \includegraphics[width=0.45\linewidth]{outerPCB_TempTest_20151030_1800_tempAtOnePoint_distancevstime_fonter.png}}
+	\qquad
+	\subfigure[Measured temperature as function of time]{\label{tempvstime} \includegraphics[width=0.45\linewidth]{outerPCB_TempTest_20151030_1800_tempAtOnePoint_tempvstime_Sens0_fonter.png}}
+	\caption{Measured signals of the laser sensor (a) and the temperature sensor at the right aluminium leg (b) as function of time. The single measurement points can not be resolved, because the time difference is much smaller than the scale of the graph. The change due to the three day-night-cycles in the temperature curve can be seen, as well as in the distance curve. The peaks in the distance curve are explained by automatic movement of the servo motors from the linear bearing units.}
+	\label{disandtempvstime}
+\end{figure}
+
+To compare them further the temperatures can be rescaled to be overlay with the distance curve. This is done by getting the maximal and minimal temperature ($ T_{\mathrm{max}} $,$ T_{\mathrm{min}} $), as well as the values for the distance ($ h_{\mathrm{max}} $,$ h_{\mathrm{min}} $). With $ m_{\mathrm{rescale}} = (h_{\mathrm{max}} - h_{\mathrm{min}})/(T_{\mathrm{max}} - T_{\mathrm{min}}) $ and $ b_{\mathrm{rescale}} = h_{\mathrm{max/min}} - T_{\mathrm{max/min}} \cdot m_{\mathrm{rescale}} $, the rescaled temperature can be calculated by $ T_{\mathrm{rescaled}} = T_{\mathrm{measured}} \cdot m_{\mathrm{rescale}} + b_{\mathrm{rescale}} $. The overlayed curves can be seen in figure \ref{tempoversens0meas1}. The direct correlation between distance and temperature, from which the thermal expansion is extracted by a linear fit is shown in figure \ref{tempdiscormeas1}.
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[Distance and rescaled temperature as function of time.]{\label{tempoversens0meas1} \includegraphics[width=0.45\linewidth, height=120pt]{outerPCB_TempTest_20151030_1800_tempAtOnePoint_distanceandtempvstime_sens0_fontsmall.jpeg}}
+	\qquad
+	\subfigure[Distance as function of temperature. The fitted paramter p1 of \SI{7.1}{\micro\m/\K} correspond to the thermal expansion.]{\label{tempdiscormeas1} \includegraphics[width=0.45\linewidth, height=120pt]{outerPCB_TempTest_20151030_1800_tempAtOnePoint_distancevstemp_sens0_hist_fit_fonter.pdf}}
+	\caption{Correlation between temperature signal of the sensor at the aluminium leg and distance measured with the laser. The time evolution (a) shows a good agreement, despite some fluctuations in the distance curve. In the correlation plot (b) an overall linear dependence can be seen with small hysteresis like effects.}
+	\label{tempdismeas1}
+\end{figure}
+
+The distance signal follows the curve of the temperature sensor (colored in red) in figure \ref{tempoversens0meas1}, despite some peaks around \SI{100}{ks}, \SI{180}{ks} and \SI{270}{ks}, as well as jumps at \SI{150}{ks} and \SI{240}{ks}. Due to the regularity of these outliers the reason for this can be questioned. The granite consists of small crystals, which are irregularly transparent and therefore let the laser penetrate the surface not always in the same way. But due to the periodic change in height because of the temperature variation of day and night, this irregular penetration occurs at equal times. Also the servo motors move in order to hold the setup at the same position and therefore give rise to the modulation of the distance signal. Two further measurements were made, because of these considerations, one with the servo motors shut off and another additional with white tape on the measured position, in order to overcome the crystalline structure of the granite. In figure \ref{tempdismeas2} the measurement result with switched off servo motors is shown.
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[Distance and rescaled temperature as function of time.]{\label{tempoversens0meas2} \includegraphics[width=0.45\linewidth, height=120pt]{outerPCB_TempTest_20151109_1550_tempAtOnePoint_heightandtempvstime_sens0_font.jpeg}}
+	\qquad
+	\subfigure[Distance as function of temperature. The fitted paramter p1 of \SI{7.8}{\micro\m/\K} correspond to the thermal expansion.]{\label{tempdiscormeas2} \includegraphics[width=0.45\linewidth, height=120pt]{outerPCB_TempTest_20151109_1550_tempAtOnePoint_heightandtempvstime_sens0_hist_fit_font.pdf}}
+	\caption{Correlation between temperature signal of the sensor at the aluminium leg and distance measured with the laser, when servo motors are turned off. The time evolution (a) shows a better agreement, than with the engines switched on. In the correlation plot (b) an anti-correlation below \SI{20.3}{\degreeCelsius} can be noticed, due to the peak at times between \SI{200}{ks} and \SI{250}{ks}.}
+	\label{tempdismeas2}
+\end{figure}
+
+By comparing figure \ref{tempoversens0meas1} with (\ref{tempoversens0meas2}) the \SI{3}{\micro\m} effect from the movement of the servo motors can be seen. The black curve (distance signal) is much smoother in the second case and the red curve (temperature signal) follows better. Due to a bump in the distance signal between \SI{200}{ks} and \SI{250}{ks} an unexpected anti-correlation can be seen in figure \ref{tempdiscormeas2} for temperatures below \SI{20.3}{\degreeCelsius}, because of this the fit is not in good agreement with the data. This peak can be explained by the irregular penetration of the granite surface by the laser light, due to the crystalline structure as explained in chapter \ref{planmeasCMM}.
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[Distance and rescaled temperature as function of time.]{\label{tempoversens0meas3} \includegraphics[width=0.45\linewidth, height=120pt]{outerPCB_TempTest_20151113_1740_tempAtOnePoint_heightandtempvstime_sens0_font.jpeg}}
+	\qquad
+	\subfigure[Distance as function of temperature. The fitted paramter p1 of \SI{8.8}{\micro\m/\K} correspond to the thermal expansion.]{\label{tempdiscormeas3} \includegraphics[width=0.45\linewidth, height=120pt]{outerPCB_TempTest_20151113_1740_tempAtOnePoint_heightvstemp_sens0_hist_fit_font.pdf}}
+	\caption{Correlation between temperature signal of the sensor at the aluminium leg and distance measured with the laser, with switched off servo motors and tape on the granite. The time evolution (a) shows a good agreement. In the correlation plot (right) a quite better linear dependence can be observed, as in the previous measurements.}
+	\label{tempdismeas3}
+\end{figure} 
+
+In figure \ref{tempdismeas3} the measurement with tape at the position of the laser reflection, in addition to the shut down servo motors, can be seen. The distance signal (black) in figure \ref*{tempoversens0meas3} has less peaks in comparison to figure \ref{tempoversens0meas2} and no anti-correlations in figure \ref{tempdiscormeas3} can be observed. To compare these three measurements quantitatively the variations from the fitted functions are shown in figure  \ref{disresall}.
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[first measurement]{\label{disres1} \includegraphics[width=0.30\linewidth]{outerPCB_TempTest_20151030_1800_tempAtOnePoint_distanceTempCorr_Sens0_fonter.pdf}}
+	\subfigure[servo motors switched off]{\label{disres2} \includegraphics[width=0.30\linewidth]{outerPCB_TempTest_20151109_1550_tempAtOnePoint_distancetempcorr_0_font.pdf}}
+	\subfigure[servo motors switched off and tape on granite]{\label{disres3} \includegraphics[width=0.30\linewidth]{outerPCB_TempTest_20151113_1740_tempAtOnePoint_distancetempcorr_0_font.pdf}}
+	\caption{Comparison of the deviations from the fits of distance as function of temperature for the three measurements (first without special preparation, second with shut down servo motors, third with shut down servo motors and laser refraction point prepared with white tape). The preparation leads to a narrower distributions and therefore a stronger linear correlation between temperature and distance.}
+	\label{disresall}
+\end{figure}
+
+The histograms are obtained by calculating the difference of the measured distance to the expected distance $ d_{expected} = p0 + p1 \cdot T_{measured} $ from the temperature measurement, using the parameters $ p0 $ and $ p1 $ from the fits of distance as function of temperature. As can be seen from figure \ref{disres1} to \ref{disres3} the distributions become narrower (the RMS becomes smaller) and more balanced around zero. 
+
+The actual values for the fitted slopes in table \ref{slopetable} can be compared with the value of the model  $\bigtriangleup\!h_{\mathrm{m}}/\bigtriangleup\!T$ in Chapter\ref{calcThermExp}.
+
+\begin{figure}[H]
+	\centering
+	\begin{tabular}{l|ccc} 
+		 & \multicolumn{3}{c}{ \textbf{slope from distance-temperature fit [$\boldsymbol{\mu}$m/K]} }
+		\\
+		\hline
+		 & first & engine off & engine off,
+		\\
+		\cline{1-1}
+		sensor at & measurement &  & tape on granite
+		\\
+		\hline
+		granite (upper left) & 11 & 11 & 11
+		\\
+		granite (upper right) & 9 & 10 & 10
+		\\
+		granite (lower left) & 10 & 11 & 10
+		\\
+		granite (lower right) & 9 & 7 & 8
+		\\
+		alu (left leg) & 4 & 7 & 7
+		\\
+		alu (right leg) & 7 & 8 & 9
+		\\
+		laser head (LH) & 6 & 6 & 6
+	\end{tabular}
+	\caption{Fitted slopes from the distance-temperature plots for all sensors used in the three measurements. The values are comparable to $8_{-3}^{+4}$ $\mu$m/K from the calculation. Despite some variations for each sensor the slopes stay in the same range during the three measurements.}
+	\label{slopetable}
+\end{figure}
+
+An overall agreement with the value of $8_{-3}^{+4}$ $\mu$m/K from the model can be seen. Despite the differences during the measurements the values for a specific sensor do not change much. The higher values for the sensors at the granite can be explained by the larger heat capacity of the heavy table. Due to the high mass the temperature variation $\bigtriangleup\!T$ is smaller and therefore, with the same distance variation $\bigtriangleup\!h_{\mathrm{m}}$, a larger thermal expansion is calculated. Although the fits in the third measurement show the best compatibility with the data, the fitted values for the first measurement are used for the correction of the planarity measurements. This is due to the two facts that neither the servo motors can be shut off nor the granite surface can be taped completely during the measurements and thus the first values corresponds better to the actual situation.
+
+\section{Comparison of Planarity Scans}\label{complanscan}
+
+In the following two planarity measurements of the granite table surface are compared and it is investigated how a temperature correction with equation (\ref{tempcorformula}) effects their compatibility. The measurements where performed with a time difference of about four months. Only the temperature sensor in the laser were used. For both runs the same area was chosen, but with a different resolution. This requires an algorithm in the analysis to find the nearest points of the two measurements, in order to compare them. The measurement time was above \SI{5}{\hour} for both, therefore an effect of temperature could be expected.
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[03.08.15]{\label{bbrm1} \includegraphics[width=0.45\linewidth]{bbrm1_onPlane_fonter.png}}
+	\qquad
+	\subfigure[01.12.15]{\label{bbrm2} \includegraphics[width=0.45\linewidth]{bbrm2_onPlane_fonter.png}}
+	\caption{Two measurements of the topology of the granite table surface. Plotted is the distance at the position of measurement. The relatively high distance variations of the order of \SI{500}{\micro\m} are due to the sagging of the CNC bridge, onto which the laser head is mounted. At a first glance only few, non significant differences between the measurements are visible.}
+	\label{bbrms}
+\end{figure}
+
+Similar deformations can be seen in figure \ref{bbrms} for the two measurements, despite some smaller differences. To understand the general variation from a \SI{5}{\micro\m} planar surface, as the flat granite table is expected to be, it has to be kept in mind, that the CNC bridge is bending. Therefore the laser sensor at the measurement arm is at different heights above the granite surface, depending on its position in X direction. Additionally the linear bearing units, on which the bridge is mounted, are screwed to the precision table. The modulation in Y direction is explained with the imperfection of this. In order to compare the measurements the idea is to take the difference of the measured distances at each point. The distribution of the distance differences at the nearest points of the two measurements can be seen in figure \ref{bbrmdisdif}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth, height=160pt]{heightDiff_fit_fonter.pdf}
+	\caption{Distance difference of two planarity measurements from the granite table. A simple Gaussian is fitted to the entries of the histogram. With that the asymmetry of the distribution can be seen.}
+	\label{bbrmdisdif}
+\end{figure}  
+
+The offset of the mean value of \SI{36}{\micro\m} is due to the fact that the height of the measurement arm, at which the laser sensor is mounted, was not the same for both measurements. As only planarity matters in this case, the mean value can be neglected. The sigma of the fitted Gaussian and the RMS are both in the order of \SI{7}{\micro\m} and are therefore comparable to the fluctuations of the distance around the temperature curve which have been seen during the first measurement of the thermal expansion (as seen in figure \ref{tempoversens0meas1}). Also the distribution shows a slight asymmetry. 
+
+Now the temperature correction can be applied to the distances. The corresponding temperature for each point and the measured thermal expansion with the temperature sensor in the laser from figure \ref{tempdiscormeas1} has to be used in formula (\ref{tempcorformula}). As reference temperature the mean of each measurement is chosen. The distribution of distance differences, after the correction, can be seen in figure \ref{bbrmdistempcordif}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth, height=160pt]{heightDiffTempCorr_fit_fonter.pdf}
+	\caption{Distance difference for the nearest points of two planarity measurements from the granite table after temperature correction. A simple Gaussian is fitted to the entries of the histogram. With that the better symmetry than in figure \ref{bbrmdisdif} can be seen.}
+	\label{bbrmdistempcordif}
+\end{figure}
+
+Not only the symmetry gets improved by the correction, as can be seen by the variation from the fitted Gaussian, but also the width of the distribution gets smaller. This is seen at the RMS decreasing from \SI{7.3}{\micro\m} to \SI{6.1}{\micro\m} and the fitted Sigma of \SI{6.9}{\micro\m} is lowered to \SI{5.5}{\micro\m}. Therefore the temperature correction improved the compatibility of the two measurements and is able to cancel the effect of temperature to the planarity. It has to be mentioned that the effect on the overall distribution of distances as in figure \ref{bbrms} is such small, that it can not be noticed and because of this the corresponding plots are not shown. 
+
+Both measurements took a rather long time (above \SI{5}{\hour}) and have therefore, due to the larger temperature variations compared to short measurements, a good capability for this method of temperature correction. Now the question can be asked if and how well short measurements (of about \SI{1.5}{\hour}), which is the typical duration for a planarity scan, can be corrected. Another point which could be thought of is the repeatability of this method for different temperature behaviors during a measurement. To investigate this, 50 successive measurements were performed, each about \SI{1.5}{\hour}, but with much coarser resolution (533 measurement points) as the previous two just shown ($\sim$50000 measurement points). A common planarity scan for this area has around 7000 measurement points and uses only the internal temperature sensor. As the readout for the temperature signals took a rather long time (around \SI{1}{\s} for one sensor), compared to the readout of the laser distance sensor, this coarse granularity was chosen.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{repmeas_bbrm_1030_heightOnPlane_0_font.pdf}
+	\caption{Generic topology plot of the 50 successive planarity scans from the granite table.}
+	\label{toporepmeas}
+\end{figure}
+
+A similar structure as in figure \ref{bbrms} can be seen in figure \ref{toporepmeas}, as an example of the 50 planarity scans, although the much coarser resolution. Comparing them all with the measurement from august (figure \ref{bbrm1}) provides a set of distance residuals. This set is fitted with Gaussians, to compare the width of the distributions (the sigma of the fit), with the corresponding distributions after temperature correction. All six introduced Dallas18B20 signals are used and with that each planarity scan gets corrected seven times (for each sensor, including the one in the laser). In order to see how the correction works, the fitted sigmas of the distributions after the correction are subtracted by the corresponding values before. If the temperature correction behaves as expected the differences should be negative, because the distribution should get narrower and therefore the fitted sigma should be smaller than without correction. The distribution of sigma differences from the correction with the temperature sensor at the left aluminium leg can be seen in figure \ref{sigmadiffbbrm}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{repMeas_sigmaDiff_font_color_better.pdf}
+	\caption{Differences of the fitted sigmas after temperature correction with the sensor at the right aluminium leg and before, for the distance residuals of the 50 planarity scans with the measurement form august. Green marked are the differences below zero, where the temperature correction works as expected and improves the compatibility of the planarity scans. Red marked are the differences above zero, where the temperature correction makes the distributions broader.}
+	\label{sigmadiffbbrm}
+\end{figure}
+
+In contrast to expected overall improvements, also sigma differences above zero, indicated by the red area, can be seen, which are due to temperature corrections where the distribution gets broader (and therefore the sigma gets larger). To study this unexpected effect further, the analysis program was modified to compare each of the 50 successive scans not with the measurement from august, but with each other of the 49 measurements, to get better statistics. The resultant distribution of sigma differences after correction with the temperature sensor at the right aluminium leg can be seen in figure \ref{sigmadiffrep}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{repMeas_repSigmaDiff_color.pdf}
+	\caption{Differences of the fitted sigmas before and after temperature correction. The temperature of the sensor at the right aluminium leg is used for correction. 
+	In green the differences below, in red the differences above zero are marked, corresponding to good and bad corrections.
+	%Green marked are the differences below zero, where the temperature correction works as expected and reduces the width of the distributions. Red marked are the differences above zero, where the temperature correction makes the distributions of the planarity scans broader.
+	}
+	\label{sigmadiffrep}
+\end{figure}
+
+With the new comparison method even more measurements become broader after temperature correction, as seen in the larger red fraction (around 45\%) of sigma differences above zero. Also larger negative values as in figure \ref{sigmadiffbbrm} (up to \SI{-2}{\micro\m}) are not reached (only up to \SI{-1}{\micro\m}), which means the temperature correction do not work as good as before. Both observations can be explained, by the fact that the measurement from august has a much higher temperature correction capability due to the longer measurement time and therefore a larger temperature variation. This influences the differences \ref{sigmadiffbbrm} to better (more negative) values, because the correction is also applied to the reference measurement. To investigate when the method works and when not, the idea is to select from the 1225 combinations of the 50 measurements only those with certain aspects. The selection criteria are illustrated by the mean temperatures of the measurements as function of repetition in figure \ref{repmeantemp}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{repmeas_bbrm_1030_tempmeanvsrep_Alu_fonter_screen_color.png}
+	\caption{Mean temperature of successive planarity scans as function of repetition. The temperature variation due to day night is clearly visible, although the averaging over \SI{1.5}{\hour}. The combinations of measurements from red and blue boxes have the highest difference of their mean temperature, whereas the planarity scans corresponding to measurements in the yellow boxes have larger temperature variation during a single measurement.}
+	\label{repmeantemp}
+\end{figure}
+
+The progress of the mean temperature of the 50 successive planarity scans follows the day night cycle. Combinations of measurements from a blue and a red box in figure \ref{repmeantemp} have a higher difference of the mean temperature, as other combinations, which could lead to more thermal effects. This is the idea for the first selection criteria. Only combinations of planarity scans with a difference of the mean temperatures larger than \SI{1.0}{K} are considered. The resultant distribution of sigma differences is shown in figure \ref{largemeantempdiff}.
+
+\begin{figure}[H]	
+	\centering
+	\includegraphics[width=0.6\linewidth]{repMeas_heightSigmaDiff_highTempDiff10_color.pdf}
+	\caption{Differences of the fitted sigmas before and after temperature correction. The temperature of the sensor at the right aluminium leg is used for correction. A cut for the difference of the mean temperature, to be above \SI{1.0}{K} is applied. 
+	In green the differences below, in red the differences above zero are marked, corresponding to good and bad corrections.
+	%Green marked are the differences below zero, where the temperature correction works as expected and reduces the width of the distributions. Red marked are the differences above zero, where the temperature correction makes the compatibility of the planarity scans worser.
+	}
+	\label{largemeantempdiff}
+\end{figure}
+
+The red fraction of the distribution (combinations with sigma differences above zero and therefore amiss temperature correction) gets larger to around 50\%. This unexpected observation could be explained by the progress of the temperature during the compared measurements. The combinations with high temperature difference are from the turning points of figure \ref{repmeantemp} (red and blue rectangles). During these times no high temperature variation is expected, because the temperature slope changes its sign. Therefore the correction only applies a shift of the measured distances, with some fluctuations. This fluctuations, which could not be resolved by the distance, leads to a broadening of the residual and by that to higher sigma values after temperature correction. 
+
+With this in mind, the second idea for a selection criteria is the temperature variation during the measurements. If the temperature changes frequently almost each point of the measurement is effected differently by the correction, which could lead to an improvement. In order to unselect measurements with almost no temperature variation, like the ones up to repetition 10 in figure \ref{repmeantemp}, a difference of the maximal and the minimal temperature of \SI{0.2}{K} is claimed. This rather small value is used, because of only small temperature changes during the planarity scans, due to the short measurement time of about \SI{1.5}{\hour}. Mainly the combinations with at least one of the measurements in the yellow boxes in figure \ref{repmeantemp}, should be selected by that.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{repMeas_heightSigmaDiff_highTempDelta02_color.pdf}
+	\caption{Differences of the fitted sigmas before and after temperature correction. The temperature of the sensor at the right aluminium leg is used for correction. A cut for the variation of the temperature to be larger than \SI{0.2}{K} during at least one of the measurements is applied. 
+	In green the differences below, in red the differences above zero are marked, corresponding to good and bad corrections.
+	%Green marked are the differences below zero, where the temperature correction works as expected and reduces the width of the distributions. Red marked are the differences above zero, where the temperature correction makes the compatibility of the planarity scans worser.
+	}
+	\label{largetempvar}
+\end{figure}
+
+As can be seen in figure \ref{largetempvar} the red fraction is smaller (around 37\%) than in the distributions before. This gives a hint that the temperature correction scheme works better for measurements with large temperature variation. To check if this conclusion holds also for larger cuts on the temperature variation, the fraction of sigma differences below zero (green marked distributions) is plotted as function of the cut on the temperature variation in figure \ref{ratiogoodcor}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{repMeas_ratioGoodCorr_vs_minTempDelta_font.pdf}
+	\caption{Fraction of the sigma differences below zero as function of minimal required temperature variation. The step like behavior is due to the digitization of \SI{0.0625}{\K} from the Dallas18B20 temperature sensors. The ratio increases with larger temperature variation, which correspond to a better correction at larger values.}
+	\label{ratiogoodcor}
+\end{figure}
+
+A step like behavior is observed. This is explained by the digitization of \SI{0.0625}{\K} from the Dallas18B20 temperature sensors. Nevertheless an increasing form 55\% up to 90\% of the fraction below zero with larger temperature variation can be seen. This confirms the assumption that with larger temperature variation during a measurement the correction scheme works better. The maximal cut was chosen at \SI{0.6}{\K}, because at higher values all combinations were discarded. Outliers from the steps could be due to failures in the digitization of the sensors. The 10\% worsened fraction at temperature variations above \SI{0.5}{\K}, are explainable by combinations with one measurement with a large variation, while the other measurement has only a small variation and the correction worsen therefore the compatibility.
+
+Taking the results together several conclusion can be made. First a thermal expansion of about \SI{8}{\micro\m/\K} is reasonable for the setup, as measurements confirm the value from the model. Second with this value a working temperature correction scheme can be applied to the planarity scans. Third this scheme works best for measurements during larger temperature shifts, above \SI{0.5}{\K}. Last to say is although this method works, it is not necessary for the kind of planarity scans used for the panels of the SM2 module, as the measurement time is around \SI{1.5}{\hour} and therefore no  large temperature variations are expected.
+
+\chapter{Position Measurements with the CMM using a Microscope}
+
+For the analysis of measurements with the quadruplets their calibration is an important necessity. The calibration gives information about pulse height distributions and efficiencies of the detector, as well as the alignment of the readout structure. With systems like the Cosmic Ray Facility in Garching the calibration can be done with the reconstructed tracks of muons by Monitored Drift Tubes (MDT) \cite{felixRthesis}. Huge effort is spent on the construction of the SM2 modules, therefore the alignment of the readout PCBs is checked already after gluing, before actual measurements with the finished detector can be made. This is done by combining the introduced CMM with a microscope. The setup for such measurements is presented, after that the results are compared with measurements of a other CMM system. Also a scheme for the correction of position measurements with the CMM in Garching/Munich is investigated.
+
+\section{Measurement Setup for Position Measurements}
+
+The same CMM used for the planarity measurements is used for the position measurements. Therefor a microscope is mounted at the measurement arm of the CMM, such that the lens is parallel to the surface of the granite table (see figure \ref{microAtCMM}). The video signal of the microscope is shown via the VLC media player on a nearby PC connected by with USB. To be able to move the measurement system exactly to the wanted position a crosshair, as shown in figure\ref{microCrosshair}, is overlayed on the video screen. The movement is done by the linear bearing units of the CNC machine, which are controlled by a second PC.  Also on this PC the current coordinates of the CMM are shown.
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[The microscope can be mounted at the measurement arm of the CMM.]{\label{microAtCMM} \includegraphics[width=0.45\linewidth]{microscopeAtCMM3.jpeg}} 
+	\qquad
+	\subfigure[Screenshot of the video signal from a microscope focussing a precision marker on a readout PCB with a crosshair.]{\label{microCrosshair} \includegraphics[width=0.4\linewidth]{microscope_screenshot_20160420_marker_board7_awayPC.jpeg}}
+	\caption{Combining the CMM with a microscope (a) the position of markers and structures on the granite table can be measured by aligning a crosshair with them on the screen (b). Keeping the height (Z position) of the measurement arm and the focus of the microscope constant, the distances between certain positions can be measured.}
+	\label{microCMMsetup}
+\end{figure}
+
+The parallelism of the lens to the surface is a crucial point. If the microscope is tilted to the normal of the granite surface, the measured position is biased. To test this a ring is placed in the focus of the microscope on the granite surface. The edges of the ring are fitted by circles. These fits are done separately for the lower and the upper part of the ring on the screen. If the deviation between the radii of the fitted circles is too large the microscope is considered to be tilted. The test shows that the lens of the microscope can be considered parallel to the surface at the point of measurement.
+
+There are some more critical aspects, which have to be kept in mind. First, the smallest step of the CNC machine, as well as the smallest measurement range of the CMM, is \SI{10}{\micro\m}. This means neither the crosshair can be positioned better than this nor positions and distances can be measured more exact. Second, changing the direction of movement for the CNC machine will cause by backlash inaccuracies. Changing the direction was tried to be made as rarely as possible, but could not be avoided completely. Third, the largest error source is the attachment of the microscope to the CMM measurement arm. The parallelism of the lens to the granite surface is effected not only by its initial position but also by vibrations during movement.
+
+\section{Comparison of two Position Measurements}
+
+To study the alignment of the readout PCBs on the panels of the SM2 modules certain distances between the precision markers are targeted, as shown in figure \ref{panelTarget}. The sketch should indicate the position of the precision markers on the three readout PCBs, as well as the precision cylinders on the table. Pictorial the L- and the V-washer are shown at their positions in front of the precision cylinders, but not at the right side for each panel. In the following the distances along the long side of the boards are referred as horizontal, while the distances perpendicular are named vertical. In horizontal direction the distances are set by the production of the PCBs, while in vertical direction the PCBs are aligned as described in chapter \ref{constructionSM2}. In order to control the precision of the manufacturer of the PCBs and the alignment scheme with the frame, the measured distances of the markers and the cylinders have to be compared to their target values.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{panel_target3.pdf}
+	\caption{Target values for the horizontal (along long side of the PCBs) and vertical (perpendicular to the long side of the PCBs) distances of the precision markers on the three readout boards of a panel and the precision cylinders on the table. Only the vertical distances can be adjusted before gluing, while the distances in horizontal direction are fixed by the manufacturer of the PCBs. In this and the following sketches the sides of the L- and the V-washer are the same, but not on the same sides as at the real panels.}
+	\label{panelTarget}
+\end{figure}
+
+To measure the position of the markers on the glued panels, the panels are laying on the granite table and are aligned to the precision pins with the V- and the L-washer. This is done to assure that the Y direction of the CMM is parallel to the vertical distances and the X direction is parallel to the horizontal distances. By that only the specific coordinates have to be subtracted to calculate the value for the distance. Of course this scheme can lead to errors due to the non perfect alignment of the precision pins to the coordinate system of the CMM and therefore a rotation has to be considered. In the analysis a new X coordinate is defined with the straight line through the position of the precision cylinders, which are measured additionally to each marker on the panels. Each point is rotated into the new coordinate system. The effect of this rotation is of the order $\pm$\SI{20}{\micro\m}, as compared to the values without the calculation. The differences of the measured distances to the design values can be seen in figure \ref{panelMeasMunich}. Here and in the following for each target value, four measured values are shown. These correspond to measurements for the two first built readout panels (upper and lower row), with their two sides (left column first side, right column second side during gluing of the panel). 
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[Differences of the measured distances between the precision markers to the design values in horizontal direction.]{\label{panelMeasMunichX} \includegraphics[width=0.45\linewidth]{panel_measXMunich2.pdf}}
+	\qquad
+	\subfigure[Differences of the measured distances between the precision markers to the design values in vertical direction.]{\label{panelMeasMunichY} \includegraphics[width=0.45\linewidth]{panel_measYMunich2.pdf}}
+	\caption{Deviations for the measured distances of the markers on the readout boards from the target values. The differences in horizontal direction are larger than in vertical direction, due to the precision of the manufacturer of the PCBs. Accidentally wrong alignment pins were used, therefore the first panel has also in vertical direction some large deviations (above $\pm$\SI{0.10}{\mm}), .}
+	\label{panelMeasMunich}
+\end{figure}
+
+Rather large deviations of about \SI{+0.17}{\mm}, up to \SI{+0.79}{\mm} are measured in the horizontal direction. The manufacturer was not able to provide the required accuracy at the present PCBs. Also some larger differences in vertical direction (above $\pm$\SI{0.10}{\mm}) are measured for the markers on the first readout panel. Here, by accident, alignment pins with too long phases did not provide proper alignment. This was avoided for the second panel and by that the alignment got improved. The large deviations for the distances between the marker on the largest board and the precision cylinder are presumably due to wrong alignment during the measurement with the microscope and are not as important as the distances between the PCBs.
+
+In order to make a crosscheck of the results for this measurement setup, a similar measurement was performed at the more precise CMM in Freiburg. This machine is used for precision measurements and has several systems for calibration. By comparing the results systematic errors during the first measurement could be revealed.  
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[Differences of the measured distances between the precision markers to the design values in horizontal direction, for the measurement in Freiburg.]{\label{} \includegraphics[width=0.45\linewidth]{panel_measXFreiburg2.pdf}}
+	\qquad
+	\subfigure[Differences of the measured distances between the precision markers to the design values in vertical direction, for the measurement in Freiburg.]{\label{} \includegraphics[width=0.45\linewidth]{panel_measYFreiburg2.pdf}}
+	\caption{Deviations for the measured distances of the markers on the readout boards from the target values, for the measurement in Freiburg. The differences in horizontal direction are larger than in vertical direction, due to the precision of the manufacturer of the PCBs. Accidentally wrong alignment pins were used, therefore the first panel has also in vertical direction some large deviations (above $\pm$\SI{0.10}{\mm}).}
+	\label{panelMeasFreiburg}
+\end{figure}
+
+Similar to the measurements in Garching/Munich, larger deviations for the distances in horizontal direction are measured in Freiburg. Also the first panel shows in this second measurement larger deviations to the design values, as the second one, like it is measured in Garching/Munich. Despite these accordances, overall differences between the two measurements can be observed. The deviations between the measurements are shown in figure \ref{diffFreiburgMunich}.
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[Differences of the measured distances in horizontal direction for the measurements in Munich and Freiburg.]{\label{diffFreiburgMunichX} \includegraphics[width=0.45\linewidth]{panel_differencesX2.pdf}}
+	\qquad
+	\subfigure[Differences of the measured distances in vertical direction for the measurements in Munich and Freiburg.]{\label{diffFreiburgMunichY} \includegraphics[width=0.45\linewidth]{panel_differencesY2.pdf}}
+	\caption{Deviations between the measured distances of the markers on the readout boards for the measurements in Munich and in Freiburg. As can be seen almost all values are negative, which correspond to systematic smaller measured distances in Garching/Munich, than in Freiburg.}
+	\label{diffFreiburgMunich}
+\end{figure}
+
+Except for the vertical distances between the markers on the largest board and the precision cylinders, the measured distances for the measurements in Munich are smaller than their corresponding values obtained in Freiburg, as only negative differences are obtained. Also the deviations between the two measurement systems are in the same range for distances at the same sides. This corresponds to the fact that the markers were at the same spots of the table during the measurements in Munich, which leads to equal errors for distances between same markers. The exception for the distances to the cylinders confirm the assumption of bad alignment during the measurements. This overall symptomatic, with the assumption of the more precise measuring system in Freiburg, leads to the conclusion, that the measurements in Munich are systematically biased.
+
+\section{Correction Scheme for Position Measurements}
+
+One reason for the systematically wrong measured positions could be the bending of the CNC bridge (seen inf figure \ref{granitetibale}), as effects from this are also seen during the planarity measurements. This has not to be considered for planarity scans, because there the precise position on the table does not matter, due to the averaging over small rectangles of the surface. For position measurements, the deformation of the CMM system plays a crucial role, therefore a correction scheme is investigated. 
+
+The considered dimensions and angles are sketched in figure \ref{xCorrSketch}. It is assumed, that the bridge bends as a normal beam. Also the measurement arm can be considered to follow this bending perpendicular, as it is mounted stiff to the bridge. This should lead to an error of the position measurement as the microscope, mounted on the arm, focuses a point on the granite table surface (along $d$), which is shifted by $x_{\mathrm{cor}}$ to the position, which is displayed by the CMM (given by the intersection of h with the surface). 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{posCorAll2.pdf}
+	\caption{Angles and dimensions involved due to the bending of the CNC bridge.}
+	\label{xCorrSketch}
+\end{figure}
+
+To correct this effect, the shift $x_{\mathrm{cor}}$, which is position dependent as the bending of the bridge changes along X (the coordinate going along the bridge), has to be calculated by the measured distances (of a planarity scan). This can be done by considering the trigonometrical connection between $x_{\mathrm{cor}}$ and $h$ 
+
+\begin{align}
+	x_{\mathrm{cor}}(x) &= \tan\left(\alpha\right) \cdot h(x) = \dfrac{\bigtriangleup\!h}{\bigtriangleup\!x} \cdot h(x)
+	\nonumber
+	\\
+	 &= h'(x) \cdot h(x)
+	 \label{xCorrCalc}
+\end{align}
+
+$d$ and not $h$ is measured during a planarity scan, hence $h$ has to be approximated by it.
+
+\begin{align}
+	d(x) &= \sqrt{\left[h(x)\right]^{2} + \left[x_{cor}(x)\right]^{2}}
+	\nonumber
+	\\
+	 &\stackrel{\mathrm{(\ref{xCorrCalc})}}= h(x) \cdot \sqrt{1 + \left[h'(x)\right]^{2}}
+\end{align}
+
+It can be assumed that $|h'(x)| \ll 1$, because the bridge bends only up to \SI{500}{\micro\m} over its length of more than \SI{2}{\m}. With this follows $ \sqrt{1 + \left[h'(x)\right]^{2}} \simeq 1$ and by that : 
+
+\begin{align}
+	\rightarrow d(x) &\simeq  h(x)
+	\label{disApproxHei}
+\end{align}
+
+The total height $h$ changes below the percent level along X, so it can be assumed constant. Taking this, (\ref{xCorrCalc}) and (\ref{disApproxHei}) together the shift $x_{\mathrm{cor}}$ can be calculated by : 
+
+\begin{align}
+x_{\mathrm{cor}}(x) &\simeq d'(x) \cdot h
+\end{align}
+
+To determine $d'(x)$ the planarity scan from august (see figure \ref{bbrm1}) gets fitted for each slice in Y direction with a hyperbolic cosine, as seen in figure \ref{ySliceFit}. With this function the fits  are in agreement with data, despite the fact that actual calculations for the bending of a beam leads to an polynomial of the order four (see \cite{ansysBook}). Also a small sinusoidal shift around the general slope of the distance fit can be observed. This can be explained by the movement of the vertical linear bearing unit, to hold the position. The fitted parameters can be used to calculate the slope at each point in X, for each slice in Y, by the derivative of the fitted function, as done in figure \ref{xCorrectionSlope}. 
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[Measured distance as function of the position in X, for one slice of the measurement along Y. A hyperbolic cosine is fitted to the measurement values, in correspondence to the bending of the bridge of the CMM.]{\label{ySliceFit} \includegraphics[width=0.45\linewidth]{distance_vs_x_fit.pdf}}
+	\qquad
+	\subfigure[Slope of the fitted functions along X at each measurement point. The variation due to the imperfections of the screwing leads to the variation along Y.]{\label{xCorrectionSlope} \includegraphics[width=0.45\linewidth]{bridgeBendingXSlope.png}}
+	\caption{For each slice in Y direction, the distances along X fitted by a hyperbolic cosine (a). The slopes of the fitted functions are calculated at each measurement point (b). With this a correction in $x_{cor}$ can be calculated.}
+	\label{xCorrScheme}
+\end{figure}
+
+As mentioned the markers were at almost the same spots for each measurement, therefore the correction is calculated for six points of the granite table, which are in the region of the markers during their measurement. In order to get the correction $x_{cor}$, the slope at each point has to be multiplied by the height of the CNC bridge above the granite surface, of about \SI{450}{\mm}. The calculated values can be seen in table \ref{xCorrTable}.
+
+\begin{figure}[H]
+	\centering
+	\begin{tabular}{ccccc|cc} 
+		\multicolumn{5}{c}{position (X/Y)[mm]} & slope from fit [$\mu$m/mm] & correction in X [mm] 
+		\\
+		\hline
+		( & 486 & / & $-181$ & ) & $-0.246$ & $-0.11$
+		\\
+		( & 1750 & / & $-181$ & ) & $+0.260$ & $+0.12$
+		\\
+		\hline
+		( & 405 & / & $-616$ & ) & $-0.147$ & $-0.07$
+		\\
+		( & 1830 & / & $-616$ & ) & $+0.420$ & $+0.19$
+		\\
+		\hline
+		( & 324 & / & $-1051$ & ) & $-0.164$ & $-0.07$
+		\\
+		( & 1911 & / & $-1051$ & ) & $+0.470$ & $+0.21$
+	\end{tabular}
+	\caption{For six points on the granite table the calculated slopes of the bending from CNC bridge and the corresponding corrections are shown.}
+	\label{xCorrTable}
+\end{figure}
+
+The indicated pairs in table \ref{xCorrTable} correspond to the positions for markers on the same boards. This corrections are applied to the distances measured in Munich (b) and compared to the values obtained in Freiburg (a), seen in figure \ref{panelXFreiburgMunichCor}.
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[Differences of the measured distances between the precision markers to the design values in horizontal direction, for the measurement in Freiburg.]{\label{} \includegraphics[width=0.45\linewidth]{panel_measXFreiburg2.pdf}}
+	\qquad
+	\subfigure[Differences of the measured distances between the precision markers to the design values in horizontal direction, for the measurement in Munich corrected by the model for the bending of the CNC bridge.]{\label{} \includegraphics[width=0.45\linewidth]{panel_measXMunich_cor.pdf}}
+	\caption{Comparison of the vertical distance measurements from Freiburg (a) and Munich (b), with the corrections for the measurements in Munich due to the bending of the CNC bridge.}
+	\label{panelXFreiburgMunichCor}
+\end{figure}
+
+For the upper two boards the distances are corrected to values larger than measured in Freiburg, the differences between the two ranging from $+$\SI{0.07}{\mm} up to $+$\SI{0.18}{\mm}. Whereas the corrected distances on the lowest board are smaller, with differences to the Freiburg measurement from \SI{-0.08}{\mm} to even \SI{0.00}{\mm}. Recalling figure \ref{diffFreiburgMunichX}, this correspond to the fact, that on the lowest board the largest deviations between the two measurements were observed and the distances on the upper boards therefore get corrected too much. With these results it can be said that the presented model does not describe the deviations between the two measurements as it can not explain the variation of the differences in X direction. Therefore the inaccuracies for the measurements in Munich are not understood and only the measurement in Freiburg is used to further analyse the distances of the markers on the panels. 
+
+%The calculated corrections to the measured distances are shown on the right side of figure \ref{difFreiburgMunichMeanXcor}, while left are shown the mean values and their standard deviations for the four measurements of the three distances. If the model would describe the differences ideally, the values left and right should be almost the same, with a different sign. Both, the absolute measured values and the values from the model, are increasing from the smallest to the largest board, though the differences between the measurement in Freiburg and in Munich start smaller and rise larger. The upper two values are not as large as the calculated one. This could be explained by the fact the measurement arm, while lifted from the bending of the bridge, deforms and the microscope gets in a position more vertical to the granite surface. But the absolute larger difference on the largest board, than the correction value, is unexpected and is therefore either a hint that the model does not work or that the measurement in Freiburg, despite the fact of better control systems, has also a larger systematic bias. 
+
+\section{Comparison of Frame and Panel Measurements}
+
+In Freiburg not only the positions of the markers were measured, but also the positions of the holes in the alignment frame, with which the boards were aligned before gluing (as described in chapter \ref{constructionSM2}). Therefore the distances of the holes in the alignment frame should be well comparable to the distances of the markers on the panels. The measurement of the frame is done by placing it bottom up on the measurement table and touch the inner surface by a tactile sensor mounted at the measurement arm of the CMM in Freiburg. Then the wall of the hole gets automatically measured with several points. By this the center of the hole can be reconstructed, as well as the slope, with which the hole is tilted to the XY surface of the CMM. 
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[Tactile measurement of the hole positions in the alignment frame, done by the precision CMM in Freiburg. Additional to the absolut distances between the marker in vertical direction, also the differences to the nominal values are noted below.]{\label{frameFreiburg} \includegraphics[width=0.45\linewidth]{frame_freiburg_tactile.pdf}}
+	\qquad
+	\subfigure[Differences of the measured distances of the marker positions on the second readout panel, measured with a mircoscope at the CMM in Freiburg.]{\label{panelYFreiburg} \includegraphics[width=0.45\linewidth]{panel2_measYFreiburg2.pdf}}
+	\caption{The differences to the target values are good comparable for the measurement of the frame (a) and the measurement of the second panel (second rows in (b)).}
+	\label{framePanelFreiburg}
+\end{figure}
+
+Due to the errors made during gluing of the first panel, only the distances of the second panel (figure \ref{panelYFreiburg}) gets compared with the values of the frame (figure \ref{frameFreiburg}). Except for one value at the lower left side, the distances from the second panel match the values of the frame in the range of $\pm$\SI{0.04}{\mm}. This one larger deviation can be explained by the large slope of about \SI{4}{\micro\m/\mm} measured for the inclination of the hole for the left side of the longest PCB. With an distance of about half a cm to the alignment frame during positioning, this can explain the larger variation. The differences of $\pm$\SI{0.04}{\mm} are probably due to measurement inaccuracies, as well as the lash of the pins in the holes and the washer during alignment. Therefore the differences to the target values of the distances on the panels can be explained by the non perfect alignment frame.
+
+\section{Comparison of Marker Positions on Back and Front Side of Readout Panels}
+
+For the calibration of the modules not only the distances between the readout boards on one side are relevant, but also the relative position of the boards on the other side of the panel. Therefore the positions of markers on opposing sides have to be compared. This can be done by calculating the coordinates of the markers in the coordinate system with the precision cylinder on the X axis and the cylinder at the V-washer in the center. Here the position of the V-washer has to be considered, as its position flips for the opposing side. The results are shown in figure \ref{sideComp}. 
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[Readout Panel 1 (Stereo Panel).]{\label{RO1sideComp} \includegraphics[width=0.45\linewidth]{panel_Feiburg_compareMarkerSides_RO1-crop.pdf}}
+	\qquad
+	\subfigure[Readout Panel 2 (Eta Panel).]{\label{RO2sideComp} \includegraphics[width=0.45\linewidth]{panel_Feiburg_compareMarkerSides_RO2-crop.pdf}}
+	\caption{Displacement of the precision marker on the second gluing side with respect to the marker on the first gluing side.}
+	\label{sideComp}
+\end{figure}
+
+Large shifts (more than \SI{0.6}{\mm}, up to \SI{1.3}{\mm}) in the horizontal direction are measured. They are due to problems concerning the imperfect distances of markers on the boards along this direction. The main precision requirement is in vertical direction, therefore this rather large deviations are not problematic, whereas in the orthogonal direction smaller, but more serious deviations are measured. Largest difference in vertical direction is at the first readout panel on the lower left side. This correspond to the errors made due to the wrong alignment pin. Also some larger shifts at other points are measured. To improve this a new alignment frame, with more precise holes, will be used during the series production of the panels for the quadruplets, as well as better produced PCBs. 
+
+\chapter{Deformations of Sandwich Structures simulated with the FEM Program ANSYS}
+
+Until now the mechanical properties of the systems for the quality control of the parts for the SM2 modules have been investigated by models and measurements. In the following also numerical simulations are used for comparison.
+Due to the design of the SM2 quadruplets many components or tools, used for construction, can be described as flat sandwich-structured-composites, like the panels or the stiffback. These are layered structures with thin, but stiff, outer plates and a honeycomb core. They are designed to be stiff and also light. The finite element software-package ANSYS provides a suitable simulation framework to investigate temperature or stress induced deformations. In the following first a short introduction is given to finite element modeling with ANSYS, which is followed by methods and results of simulations for different sandwich structures.
+
+\section{Introduction to Finite Element Simulations using ANSYS}
+
+The goal of the finite element method (FEM) is to approximate the solution of partial differential equations with boundary conditions in a continuous space. This is done by discretization of the considered space with small subsamples, the so called finite elements, on which the solution can be easily calculated. The solution for each finite element gets assembled into a global matrix, where the continuously differentiability to neighboring elements is considered and the boundary conditions can be applied. By diagonalizing this matrix the solution is achieved, with the superposition of the solutions for each finite element. The dependencies between the finite elements is calculated at specific, common points at their borders, the so called nodes. Each node has degrees of freedom, which are connected to the values of its neighbors, by the set of differential equations, which are considered. For most applications this set of equations describe physical aspects of a system, which is considered as the continuous space.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{MicroMeGas_com1_MESH.png}
+	\caption{A cuboid after the application of the meshing algorithm. The small triangular finite elements can be seen.}
+	\label{meshOfFiniteElements}
+\end{figure}
+
+The mathematical calculations are done by the program ANSYS in its solution phase. Before that the user has to setup the model in the so called preprocessing phase, where several steps have to be performed. First the type of analysis has to be chosen by selecting the right systems of finite elements. These systems differ on the one hand by the dimension, as many analysis can be done with simplifying assumptions to reduce the considered space, and on the other hand by the available degrees of freedom for the finite elements. The degrees of freedom for a structural analysis are displacement and rotation, while for a thermal analysis only the temperature is considered. Analog voltage is the only degree of freedom for an electrical simulation. Second a geometrical model has to be build, which represents the analyzed system. In this step, many simplifications can be made by considering the symmetry of the system and the properties of the available finite elements. The chosen systems of finite elements, as well as material models, are assigned in the third step to the geometrical model. Several finite element systems of the same class (with same degrees of freedom) can be used simultaneously to model different areas or volumes. After this an algorithm, the so called meshing, generates the finite elements in the geometrical model, with assigned systems of finite elements and material models (example seen in figure \ref{meshOfFiniteElements}). In this step the crucial part is how coarse the meshing is done, which means how large the finite elements are compared to the size of the whole system. A finer mesh, equivalent to smaller finite elements, leads to a better solution, but also increases the computing time, as more finite elements have to be considered. The last step before the solution phase is setting the boundary conditions. This includes two parts : forces and displacements. As FEM evolved from structural analysis, heat transfer, for thermal simulations, and charges, for electromagnetic calculations, are also included in the forces section. Equal to that fixed temperatures and voltages are considered as displacements for their specific finite element systems. These boundary conditions can either be assigned to the geometrical model, the lines, areas or volumes, or directly to the nodes of the finite elements. In the solution phase all boundary conditions are automatically transfered to the nodes, for which the calculations are done. After the program has solved the equations, in a last phase the solution can be used to show the displacements (voltages for electromagnetic, temperature for thermal analysis) for the nodes and elements or to make further calculations with the values obtained. During the last years systems of finite elements came up, which model different types of analysis simultaneously. These types of analysis are referred to as multiphysics simulation. \cite{ansysBook}
+
+As mentioned above sandwich-structured-composites can be described in ANSYS using SHELL element systems (example seen in figure \ref{finiteElement}). The elements will be generated during meshing only on an area, while the different layers are incorporated for each element automatically. This allows to simulate complex layered systems by modeling only their footprint and assigning different layers. A point which has to be kept in mind is that the core component for the panels and the stiffback is aluminium honeycomb. Sandwiches from this material fulfill both requirements of being stiff, while also lightweight. To use the SHELL element systems a material model is used for aluminium honeycomb, which approximates it as full solid, whereas actually a more complex structure is given. This was demonstrated by \cite{ponsotTalk}. The model is anisotropic, what describes stiffness perpendicular to the honeycomb plane, simultaneously with the compressibility in the area. Similar models have to be used for other materials with complex internal structure like FR4.
+
+\captionsetup[figure]{format=plain, labelsep=newline}
+\begin{figure}[H]
+	\begin{minipage}[b]{0.45\linewidth}
+		\centering
+		\fcolorbox{black}{white}{\includegraphics[width=0.85\textwidth]{ANSYS_FE_SHELL281.png}}
+	\end{minipage}
+	\hspace{0.5cm}
+	\begin{minipage}[b]{0.45\linewidth}
+		\caption{Example of the SHELL281 finite element from the ANSYS element reference.\cite{ansys} Indicated are the coordinate system of the element and the alphabetical named nodes, as well as the surfaces of the element. As option not only quadrilateral, but also triangular shaped elements are possible.}
+		\label{finiteElement}
+		%\vspace{14mm}
+	\end{minipage}
+\end{figure}
+\captionsetup[figure]{format=hang, labelsep=colon}
+
+%\section{The Finite Element Methode}
+
+%\section{Simulation Software ANSYS} %unnoetig
+
+\section{Inflation of a 1 m$^\mathbf{2}$ in size Resistive Strip Micromegas due to Overpressure}
+
+The so called L1 chamber is a \SI{1}{\square\m} in size Resistive Strip Micromegas, which was built at CERN to investigate the capability of detectors working with the resistive strip principle at large sizes. Also it was already a check for the possibility to use such devices at the New Small Wheel. As preparation for the tests of the quadruplets in the Cosmic Ray Facility the L1 chamber was given to the group in Munich, to investigate the capability of the facility for large area Micromegas detectors. It operates at a gas overpressure of around \SI{10}{mbar}. The analysis of the data shows a bump in the reconstructed central plane of the detector (see figure \ref{L1DefMeas}), which was not expected to be such large. Therefore a simulation of the chamber was initiated to see if this bump corresponds to a deformation of the envelope due to pressure or is a relict of the analysis. 
+
+During the tests in the Cosmic Ray Facility the chamber lay horizontally, with the cathode as the upper part and the anode structure below. Between them the micro-mesh separates the gas volume into the drift region above and the amplification region below. The position of the traversing muons is reconstructed in the central plane of the drift region between the cathode and the mesh (as seen in figure \ref{L1blowUpSketch}), if the mesh has everywhere the same distance to the anode structure. This is assumed, because the PCBs with the anode structure are glued on a \SI{2}{\mm} thick aluminium plate, which should make the lower part more stiff than the upper part and therefore hold the PCBs at distance to the mesh. Both parts consist out of \SI{10}{\mm} thick aluminium honeycomb glued on FR4 opposite to the PCBs for the cathode and the anode, with the mentioned aluminium plate.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{L1_blowUp.png}
+	\caption{Sketch of the assumed blow up of the L1 chamber due to \SI{10}{mbar} overpressure. The reconstructed central plane between the cathode and the mesh is indicated by red dots. Taken from \cite{philippLthesis}.}
+	\label{L1blowUpSketch}
+\end{figure}
+
+In the simulation of the deformation due to overpressure the anode and the cathode can be considered independently, because they are screwed together only at the borders. Furthermore only the upper part of the chamber is treated, because the lower part is  assumed to be stiff enough, due to the aluminium plate, that mainly the deformation of the upper part contributes. The two dimensional ANSYS SHELL281 element system is suitable to simulate the layered structure of the detector part. For the aluminium honeycomb and the FR4 of the PCBs the anisotropic models explained above are used. As boundary conditions the displacement and the rotation of the border nodes are set to zero. This is reasonable, because the cathode plate is fixed by the screws around the active area to the lower part, which leads to stiffening at the borders. In addition to the deformation due to the pressure of \SI{10}{mbar}, counter acting gravitation is also considered in this calculation. %These two forces are applied in the simulation. 
+
+\captionsetup[figure]{format=plain, labelsep=newline}
+\begin{figure}[H]
+	\begin{minipage}[b]{0.45\linewidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{L1_deformup_linesdisall_press1000_grav_bigfont.png}
+		\caption{Simulated deformation of the L1 chamber due to pressure. The boundary conditions are no movement or rotation of the border nodes and gravitational force into the image plane (z direction). A pressure of \SI{1}{mbar} is assigned to the whole area.}
+		\label{L1DefSim}
+	\end{minipage}
+	\hspace{0.5cm}
+	\begin{minipage}[b]{0.45\linewidth}
+		\centering
+		\includegraphics[width=\textwidth]{L1_deformation_znew_richtig.pdf}
+		\caption{Measured deformation of the L1 chamber. Shown is the reconstructed middle plane of the detector, by an analysis of the data from the Cosmic Ray Facility. The values have to be doubled in order to get the full deformation. Modified taken from \cite{philippLthesis}.}
+		\label{L1DefMeas}
+		%\vspace{4.3mm}
+	\end{minipage}
+\end{figure}
+\captionsetup[figure]{format=hang, labelsep=colon}
+
+In figure \ref{L1DefSim} the output of the simulation can be seen. Color encoded is the deformation, ranging from 0 to \SI{1.5}{\mm}. Therefore a maximal deformation in the central red part of about \SI{1.5}{mm} is simulated. To compare this with the measured central plane in figure \ref{L1DefMeas} a few things have to be kept in mind : The orientation of the plots is rotated by $90^{\circ}$. In the simulation the whole area of the detector is simulated, while in the measurement only the active area can be reconstructed. As sketched in figure \ref{L1blowUpSketch}, the central plane shows only the half deformation of the structure. The last point leads to a measured maximal deformation of $d_{\mathrm{max}} = 2 \cdot ( z_{\mathrm{max}} - z_{\mathrm{min}} ) = 2 \cdot ( 0.3\mathrm{mm} - (-0.4\mathrm{mm}) ) = 2\cdot0.7\mathrm{mm} = 1.4\mathrm{mm}$. Hence the values for the maximal deformation from the simulation and the reconstruction are in the same range, as well as the overall shape. A slightly larger simulated deformation can be explained by the fact that experimentally only the active area is reconstructed, but the whole detector is considered during simulation.
+
+\section{Gravitational Sag of the Stiffback}
+
+Huge effort was spent by the group in Munich for the construction of the so called stiffback. This tool was made to be manually manageable in order to transfer the first half of a panel onto the second, prepared with glue. The assembly of the stiffback followed the same procedure like the panels (explained in chapter \ref{constructionSM2}). The differences of the designs are a thicker honeycomb core (\SI{8}{\cm}) and aluminium plates (thickness \SI{1}{mm}) for the outer surfaces. This guarantees a higher stiffness, from which the name is derived. Additionally added are handlebars at the aluminium frame for carrying and holes on the precision side for vacuum suction. Like the panels the stiffback has a trapezoidal area. During the second gluing step of the panels the stiffback is placed on eight distance pieces, to assure the size for the gluing gap. Therefore the support is only at the sides and the corners. Due to gravitationally sag a deformation of the whole structure in the middle part could be expected. As this deformation is transfered directly during gluing to the panels, it is an important question for the construction how much the sagging will be. As can be seen in figure \ref{panelInitialDeform} the first gluing side of a test panel, which is attached during gluing of the second side to the stiffback, is slightly bulged in its center. To investigate whether this is due to the sagging of the stiffback, simulations are made.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{tp4_1ks_vac_20151006_1220_tp4_ref_granit_20151007_1150_topoRef_font.pdf}
+	\caption{Inital deformation of a testpanel due to imperfections during gluing. The maximal height difference is about \SI{130}{\micro\m}. Taken from \cite{ralphMthesis}.}
+	\label{panelInitialDeform}
+\end{figure}
+
+For the modeling of the stiffback not only the layered design has to be taken into account, but also the aluminium bars defining the borders of the area and connecting the handle bars to the structure. This is incorporated by assigning BEAM189 elements to the border lines of the generated trapezoid, which simulate a hollow rectangular profile as approximation for the aluminium bars with a more complex profile. The BEAM elements are one dimensional and incorporate the profile of beams into the model by the area moment of inertia (second moment of area), in this case the area of the cross section from the beam. The area of the stiffback model is meshed with SHELL281 elements and layers of \SI{1}{\mm} aluminium, \SI{8}{cm} aluminium honeycomb and again \SI{1}{\mm} aluminium.
+
+To choose the right boundary conditions, some considerations have to be made. First a straight forward simulation is done, with fixations, as expected by the problem, for eight nodes at the positions of the distance pieces (sides and corners), which were set to zero displacement and no rotation. Gravity is assigned.
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[Simulated deformation of the stiffback. Boundary conditions are fixation at the eight positions of the distance pieces, as well as gravitiy. A maximal deformation of about \SI{12}{\micro\m} can be seen.]{\label{stiffSimDef8pieces} \includegraphics[width=0.45\linewidth]{stiff4_8holdingsdisZ_centroiddisXYRZ_grav_bigfont.png}}
+	\qquad
+	\subfigure[Inital deformation of the stiffback due to imperfections during gluing. The maximal height difference is about \SI{100}{\micro\m}. Taken from \cite{ralphMthesis}.]{\label{stiff1KSdeform} \includegraphics[width=0.45\linewidth]{stiffback4_2KS_1KSnovac_stiffback4_2alusheet_41_topoRef1Pol1_font.pdf}}
+	\caption{The simulated deformation of the stiffback due to sagging (a) is a order of magnitude smaller than the observed initial deformations of the upper side of the stiffback (b).}
+	\label{nonComparableWithSim}
+\end{figure}
+
+As can be seen in figure \ref{nonComparableWithSim} the deformation of the stiffback due to sagging on eight distance pieces is simulated to be in the range of \SI{12}{\micro\m}, which is a way smaller than the initial deformations of the upper side of the stiffback of around \SI{100}{\micro\m} and the panels of around \SI{130}{\micro\m}. This leads to the assumption that the applied boundary conditions are too strict, because the stiffback should deform more than simulated.
+
+To understand the deformation of the panel, the boundary conditions for the simulation of the stiffback has to be modified to see its maximal possible deflection under its own weight. This can be done by a single fixation at the centroid of the trapezoidal area, in addition to gravity as only force. Comparable to this approach is the calculation for the bending of a beam supported at its ends, as a main simplification is done by inverting the case when the beam is fixed only at its center \cite{ansysBook}. In order to be able to compare the outcome from the simulation by a measurement, the stiffback was placed on nine distance pieces and a planarity scan was made. The additional, ninth piece was placed at the center with slightly larger height (of \SI{360}{\micro\m}) than the other to be able to measure the deformation, while the other eight distance pieces assured that the stiffback did not fall over.
+
+\captionsetup[figure]{format=plain, labelsep=newline}
+\begin{figure}[H]
+	\begin{minipage}[b]{0.45\linewidth}
+		\centering
+		\includegraphics[width=\textwidth]{stiff4_centroiddisall_grav_beamfullrect_bigfont.png}
+		\caption{Simulated deformation of the stiffback due to gravitational sagging. Only boundary condition is the fixation of all degrees of freedom at the centroid (central red dot). A maximal deformation of \SI{117}{\micro\m} is simulated.}
+		\label{stiffDefSim}
+		\vspace{4mm}
+	\end{minipage}
+	\hspace{0.5cm}
+	\begin{minipage}[b]{0.45\linewidth}
+		\centering
+		\includegraphics[width=\textwidth]{stiffback4_2KS_9distPieces_360mu_20151013_1338_bbrm_topology_fonter.pdf}
+		\caption{Measured deformation of the stiffback by the CMM. The stiffback was placed on one central distance piece, which is \SI{360}{\micro\m} higher than the eight pieces at the borders and the corners. A maximal deformation of \SI{160}{\micro\m} is measured. Taken from \cite{ralphMthesis}.}
+		\label{stiffDefMeas}
+	\end{minipage}
+\end{figure}
+\captionsetup[figure]{format=hang, labelsep=colon}
+
+Comparing figure \ref{stiffDefSim} and \ref{stiffDefMeas} almost similar shapes can be seen, despite the difference of maximal deformations simulated as \SI{117}{\micro\m}, while measured \SI{160}{\micro\m}. This discrepancy can be understood by two considerations : First the stiffback has an initial deformation even on its precision side, which leads to a higher value as simulated. Second while lying on the central piece the stiffback will fall over until the bottom area reaches at some point one or more of the other distance pieces. While one corner is moved downwards the other gets lifted up, what will lead to a higher measured maximal deformation. In the simulation this last point is overcome twice : by fixation at the centroid, because there it should be stabilized, and removing the rotational degree of freedom for it. 
+
+The shape from the deformation of the panel (seen in figure \ref{panelInitialDeform}) can be explained by the transfer of the deformation from the stiffback to it. The differences by inverting the colors of \ref{panelInitialDeform} and comparing it with figure \ref{stiffDefMeas}, are probably due to inhomogeneities during gluing. To compensate this deformation a correction scheme is developed as shown in \cite{ralphMthesis}.
+
+\section{SM2 Panel Deformation due to Mesh Tension}
+
+The micro-mesh, eponymous for the Micromegas, will be transfered to the panels by the group in W\"urzburg. It will be stretched and glued on a transfer frame and then glued on the final frame, while this is already attached to the panel. In order to define a good amplification region the mesh has to got a certain tension, of about \SI{10}{\N/\cm}. This means for each \SI{1}{cm} slice in one direction the tension leads to a force of \SI{10}{\N} in the opposite direction, along the slice. Orthogonal directions can be treated independently, hence this holds also for the other axis (see upper part of figure \ref{panelBendingSketch}). The question is how this tension will deform the panels. A first study on this issue was done by E. Pree \cite{elias}. It was shown that the lowering of the mesh tension due to the deformation of the panel is negligible. Furthermore to approximate the force of the tension by the mesh to the panel the idea is to transfer it as a torsional moment. This can be done, because the frame on which the mesh is glued acts as lever arm to the perpendicular force, as sketched in figure \ref{panelBendingSketch} (lower part). It has to be kept in mind that the tension is not expected to bend the panel as much as in the sketch, so the force and the lever arm stay almost orthogonal.  
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{panel_bending_2dir.pdf}
+	\caption{The tension of the mesh glued on the panel leads to a deformation. This can be described for \SI{1}{\cm} slices of the panel as a force of \SI{10}{\N}, which acts on a lever arm of about \SI{10}{\mm} from the mesh frame (thickness \SI{5}{\mm}) to the neutral axis of the panel (thickness \SI{10}{\mm} $\rightarrow$ halved). Due to the wire structure of the mesh orthogonal directions have to be considered independently.}
+	\label{panelBendingSketch}
+\end{figure}
+
+The torsional moment from the mesh tension $M_{\mathrm{mesh}}$ will be compensated by an opposed torsional moment $M_{\mathrm{panel}}$, from the stiffness of the panel. Therefore the panel gets deformed, until both torsional moments are in equilibrium. This deformation is opposed to the direction of the reacting force of the panel $F_{\mathrm{panel}}$, which leads to the compensating torsional moment, as indicated by the sketch in figure \ref{bendingMoments}. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{meshBendingMoments4-crop.pdf}
+	\caption{The torsional moment due to mesh tension gets compensated by a opposed torsional moment from the stiffness of the panel. Until equilibrium of the two torsional moments, the panel is deformed in the inverse direction of its reaction force. Sketched are the involved forces and their lever arms, as well as the positions, where they act.}
+	\label{bendingMoments}
+\end{figure}
+
+Problematic in this model, as indicated in the upper right part of figure \ref{panelBendingSketch} by the dashed lines, are the sides of the trapezoid along the tilted borders. Here two components of the tension act on the borders of the panel, both not orthogonal to the border lines. To overcome this in a first try the panel can be approximated by a rectangle as sketched in figure \ref{panelSimplifaction}. In addition this rectangle can be split up due to symmetry.  Therefore only one of the four parts needs to be simulated.\cite{elias}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{deform_mesh_simplemodel3-crop.pdf}
+	\caption{Approximation of the trapezoidal area of a panel by a rectangle. To simplify the model further the area can be divided due to symmetry by the dashed red lines, which correspond to symmetric boundary conditions for the simulation.}
+	\label{panelSimplifaction}
+\end{figure}
+
+The simulation of this simplified panel uses the forces on the horizontal and vertical division lines perpendicular to the area, transfered by the torsional moment. These forces are given by the equilibrium of the torsional moment from the mesh tension with the compensating torsional moment from the stiffness of the panel : 
+
+\begin{align}
+	\boldsymbol{M}_{\mathrm{mesh}} &= \boldsymbol{M}_{\mathrm{panel}}
+	\nonumber
+	\\
+	\boldsymbol{r}_{\mathrm{mesh}} \times \boldsymbol{F}_{\mathrm{mesh}} &= \boldsymbol{r}_{\mathrm{panel}} \times \boldsymbol{F}_{\mathrm{panel}} 
+	\nonumber
+	\\
+	\stackrel{\boldsymbol{r}\perp\boldsymbol{F}}\rightarrow \;\;\; F_{\mathrm{panel}} &= F_{\mathrm{mesh}} \cdot \dfrac{r_{\mathrm{mesh}}}{r_{\mathrm{panel}}}
+	\label{bendingForce}
+\end{align}
+
+In order to get the full force on the panel, this force has to be multiplied by the length of the side in cm, because only the force for one slice with width \SI{1}{\cm} is considered so far. Therefore the forces on the horizontal and the vertical line can be calculated as :
+
+\begin{align*}
+	F_{\mathrm{horizontal}} &= 10\mathrm{N/cm} \cdot \dfrac{10\mathrm{mm}}{675\mathrm{mm}} \cdot 72.1\mathrm{cm} \simeq 11\mathrm{N} 
+	\\
+	F_{\mathrm{vertical}} &= 10\mathrm{N/cm} \cdot \dfrac{10\mathrm{mm}}{721\mathrm{mm}} \cdot 67.5\mathrm{cm} \simeq 9.4\mathrm{N}
+\end{align*}
+
+With these values a first simulation is done, using the SHELL281 element system for the \SI{721}{\mm} $\times$ \SI{675}{\mm} sized area (layers : FR4 \SI{0.5}{mm}, aluminium honeycomb \SI{1}{cm} and FR4 \SI{0.5}{mm}), with symmetric boundary conditions and gravity acting opposite to the forces. Gravity is applied, because when the panel gets measured by the CMM, it will be positioned the mesh laying against the granite surface, while the bending goes upwards. As displacement boundary the rotational and translational degrees of freedom are fixed for the borders. The result is shown in figure \ref{deformMeshSim1}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{deform_mesh1_linesdisZ_cornernodedisXYRZ_forcelength100divnodes_grav_bigfont.png}
+	\caption{Simulation of the deformation of a panel due to mesh tension, for a simplified model with rectangular area and symmetric boundary conditions at the bottom and the right side. The forces are calculated by the torsional moment arising from the mesh tension, transfered via the lever arm of the panel to the corresponding sides. A maximal deformation of \SI{1.55}{\mm} is simulated.}
+	\label{deformMeshSim1}
+\end{figure}
+
+The largest deformation is simulated in the central part (red area) with a rather huge value for the maximal deformation of \SI{1.55}{\mm}. To test this model further, but with less approximations, a full panel with trapezoidal area is simulated. Using tables ANSYS provides the possibility to assign position dependent forces. They are needed due to the tapered shape of the panel. For horizontal slices near to the short side of the panel the length of the lever arm $r_{\mathrm{panel}}$ in formula (\ref{bendingForce}) will be smaller and therefore a higher force is calculated. Vice versa for slices near the long side. Therefore the position dependent lever arm for the horizontal slices generate a position dependent force on the central vertical line. Also for the horizontal line a position dependent force is needed, as the central part (all along the length of the short side) is at equal force, while the force at the sides increases. For the calculation the forces in the corners of the long side are ignored. Boundary conditions are again the rotational and translational fixation of the borders and gravitation.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{deform_mesh2_linesdisXYZ_tableforcelength_grav_bigfont.png}
+	\caption{Simulation of the deformation of a panel due to mesh tension. The forces are calculated by the torsional moment arising from the mesh tension, transfered via the lever arm of the panel to the corresponding sides. A maximal deformation of \SI{1.9}{\mm} is simulated.}
+	\label{deformMeshSim2}
+\end{figure}
+
+As can be seen in figure \ref{deformMeshSim2} a higher maximal deformation of \SI{1.9}{\mm} is simulated by the new model, which is understood by the asymmetric force distribution and the non perpendicular sides, compared to the old model. The last step to a full model of the panel is to include the internal aluminium bars situated parallel to the short and the long side in the panel at distances of \SI{45.7}{\cm}. This can be incorporated by BEAM189 elements, with a hollow rectangular profile, which have to be assigned to lines at the positions of the bars. Furthermore to use less approximations as before, not the resulting forces are assigned to the center of the panel, but the torsional moments are distributed directly to the sides of the panel. For one slice a torsional moment of $10\mathrm{N}\cdot10\mathrm{mm}=0.1\mathrm{Nm}$ can be calculated. Therefore a torsional moment of $0.1\mathrm{Nm/cm}\cdot119\mathrm{cm}=11.9\mathrm{Nm}$ for the short side and of $0.1\mathrm{Nm/cm}\cdot169\mathrm{cm}=16.9\mathrm{Nm}$ for the long side have to be assigned, due to the fact that the mesh tension is given per slice of \SI{1}{\cm}. For the side lines two torsional moments have to be applied : one in the vertical direction (Y) with a value of $0.1\mathrm{Nm/cm}\cdot135\mathrm{cm}=13.5\mathrm{Nm}$ and an orthogonal in the horizontal direction (X) with a value of $0.1\mathrm{Nm/cm}\cdot(169\mathrm{cm}-119\mathrm{cm})/2=2.5\mathrm{Nm}$. These are absolute values. For the right assignment the direction of the torsional moments in the chosen coordinate system have to be considered. This is sketched in figure \ref{bendingMomentsSigns}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{bendingMomentsSimulation-crop.pdf}
+	\caption{Sketch of the acting torsional moments and their signs in the chosen coordinate system. }
+	\label{bendingMomentsSigns}
+\end{figure}
+
+Additionally to the torsional moments, gravity, like in the simulations before, is considered. The boundary conditions are fixation of the outer borders of the panel in Z and no rotation of the centroid in the X-Y-plane, as well as no movement of the centroid in that area. 
+%The side lines are not fixed due to the expectation that they get lifted also.
+
+\captionsetup[figure]{format=plain, labelsep=newline}
+\begin{figure}[H]
+	\begin{minipage}[b]{0.45\linewidth}
+		\centering
+		\includegraphics[width=0.9\textwidth]{deform_mesh6_linsdisZ_centroiddisXYRZ_moment_grav_bigfont.png}
+		\vspace{3mm}
+		\caption{Simulated deformation of a panel due to mesh tension. The approximation for the influence of the mesh tension is a torsional moment, which is transfered to the borders of the panel. As boundary conditions gravity and the fixation of the borders are assigned. A maximal deformation of \SI{1.63}{\mm} is simulated.}
+		\label{panelMeshDefSim}
+	\end{minipage}
+	\hspace{0.5cm}
+	\begin{minipage}[b]{0.45\linewidth}
+		\centering
+		\includegraphics[width=\textwidth, height=140pt]{tp3withMesh_2k_20151123_1115_klebetest_panel3_2KS_2KSgeklebt_noVac20150901_1804_topology_font.pdf}
+		%\vspace{3mm}
+		\caption{Measured deformation of a panel due to mesh tension with the CMM. The panel is placed with the mesh facing the granite table, therefore the bending generates a bump. A maximal deformation of \SI{1.8}{\mm} is measured.}
+		\label{panelMeshDefMeas}
+		\vspace{8.5mm}
+	\end{minipage}
+\end{figure}
+\captionsetup[figure]{format=hang, labelsep=colon}
+
+The measurement in figure \ref{panelMeshDefMeas} shows a similar deformation as the final simulation in figure \ref{panelMeshDefSim}. Small deviations are observed along the left and right tapered border, which are fixed in the simulation. Also the value for the maximal deformation in the simulation of about \SI{1.63}{\mm} is in agreement with the measured value of \SI{1.8}{\mm}. The larger value could be explained by larger mesh tension than the design value of \SI{10}{\N/\cm} and not perfect gluing of the panel. 
+%
+All three approaches show results in the same range as the measured value. Therefore the model for the bending of the panel due to the mesh tension is in agreement with the measurement and can be used to describe the deformation of it. After assembly of the SM2 quadruplets interconnections will hold the panels together and by that makes the deformation due to mesh tension smaller.
+
+\chapter{Signal Simulation in two-dimensional Floating Strip Micromegas Detectors}
+
+%To learn more about the working principle of Micromegas and to investigate the capabilities of such detectors, in the following so called Floating Strip Micromegas will be discussed. Contrary to the resistive strip technology, the anode strips are made of copper, individually connected to HV via high-ohmic resistors. Signals are decoupled via pF capacitors, formed by copper readout strips separated by a thin insulating kapton layer. This setup enables a powerful protection against discharges in the detector. \cite{jonaBthesis}
+
+Not only resistive strip technology can be used as discharge protection for Micromegas detectors. Another possibility are the so called floating strips \cite{jonaBthesis}. After the discussion of the working principle of floating strip Micromegas, the simulation of capacitive coupling between strips and of signal generation will be described and their results will be presented.
+
+\section{Floating Strip Micromegas Working Principle}
+
+%Floating Strip Micromegas avoid dead time due to discharges between mesh and anode by grounding the mesh and applying a positive voltage, needed for the amplification, via high-ohmic resistors to additional copper strips, the so called floating strips, on the readout structure. This is sketched in figure \ref{fsmmprinciple}.
+
+The working principle of floating strip Micromegas is almost the same as for resistive strip Micromegas. It differs only in the discharge protection. Whereas the resistive strip Micromegas have printed a high-ohmic paste strip-like on top of the readout structure separated by a thin insulation layer (see chapter \ref{MMprinciple}), the floating strip Micromegas has a additional layer of copper strips. These copper strips are individually connected to the voltage supply via high-ohmic resistors.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{MicomPrinzipFSM.pdf}
+	\caption{Schematic cut through a Floating Strip Micromegas. In difference to common Micromegas the mesh is grounded and so called floating strips, building the anode, are set to high positive voltage in order to generate the amplification field. The signal can either be read out by discrete capacitors as sketched in the figure or by additional strips under the floating strips.\cite{jonaBthesis}}
+	\label{fsmmprinciple}
+\end{figure}
+
+There are two possibilities to read out the signal. Either with the readout electronics directly coupled to the floating strips via SMD capacitors (discrete) or with additional readout copper strips below the floating strips (integrated).\cite{jonaBthesis} In the following, the integrated setup will be discussed.
+
+\section{Modeling the two-dimensional Readout Structure with ANSYS}
+
+As an additional feature, the two dimensional hit position of a particle traversing the detector can be achieved by a third layer of copper strips (supplementary to the floating and the first readout strips). They have to be orientated orthogonal to the other strips, in order to get the information about the perpendicular direction. In reference \cite{felixKthesis} a detector was tested with a readout anode consisting of three layers of copper strips printed on a \SI{25}{\micro\m} thick kapton foils. The floating strips on top have a width of \SI{300}{\micro\m}. In the central layer the strips for the readout, parallel to the floating strips, in the following called X strips, are the smallest with a width of \SI{80}{\micro\m}. The strips perpendicular to the floating and X strips, the Y strips, have a width of \SI{400}{\micro\m}. All strips are \SI{35}{\micro\m} thick and separated by \SI{25}{\micro\m} of kapton. The pitch (distance between the center of neighboring strips in one layer) is for all three layers \SI{500}{\micro\m}. A picture (a), as well as an sketch (b), of the strip structure are shown in figure \ref{rofsmm}.
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[Picture of the PCB used for a Floating Strip Micromegas Detector with two dimensional readout. The floating strips are indicated in red. Through the kapton the Y strips are visible, indicated by yellow. Also two pillars can be seen, marked by light blue. The X stips can not be seen, because they are parallel below the floating strips.]{\label{fsmmROpicture} 
+		\begin{tikzpicture}
+			\node[anchor=south west,inner sep=0] (float) at (0,0) {\includegraphics[width=0.40\textwidth]{floatingstripnearer.jpeg}};
+			\begin{scope}[x={(float.south east)},y={(float.north west)}]
+				\node[right,cyan] at (0.095,0.1) {Pillars};
+				\draw[arrows=->,cyan,ultra thick](0.1,0.12)--(0.03,0.22);
+				\draw[arrows=->,cyan,ultra thick](0.28,0.12)--(0.35,0.22);
+				\node[red] at (0.42,0.95) {Floating Strips};
+				\draw[arrows=->,red,ultra thick](0.025,0.8)--(0.025,0.6);
+				\draw[arrows=->,red,ultra thick](0.09,0.8)--(0.09,0.6);
+				\draw[arrows=->,red,ultra thick](0.155,0.8)--(0.155,0.6);
+				\draw[arrows=->,red,ultra thick](0.22,0.8)--(0.22,0.6);
+				\draw[arrows=->,red,ultra thick](0.285,0.8)--(0.285,0.6);
+				\draw[arrows=->,red,ultra thick](0.35,0.8)--(0.35,0.6);
+				\draw[arrows=->,red,ultra thick](0.415,0.8)--(0.415,0.6);
+				\draw[arrows=->,red,ultra thick](0.48,0.8)--(0.48,0.6);
+				\draw[arrows=->,red,ultra thick](0.545,0.8)--(0.545,0.6);
+				\draw[arrows=->,red,ultra thick](0.61,0.8)--(0.61,0.6);
+				\node[left,yellow] at (1.0,0.26) {Y Strips};
+				\draw[arrows=->,yellow,ultra thick](0.78,0.015)--(0.68,0.015);
+				\draw[arrows=->,yellow,ultra thick](0.78,0.10)--(0.68,0.10);
+				\draw[arrows=->,yellow,ultra thick](0.78,0.185)--(0.68,0.185);
+				\draw[arrows=->,yellow,ultra thick](0.78,0.27)--(0.68,0.27);
+				\draw[arrows=->,yellow,ultra thick](0.78,0.355)--(0.68,0.355);
+				\draw[arrows=->,yellow,ultra thick](0.78,0.44)--(0.68,0.44);
+				\draw[arrows=->,yellow,ultra thick](0.78,0.525)--(0.68,0.525);
+				\draw[arrows=->,yellow,ultra thick](0.78,0.61)--(0.68,0.61);
+				\node[magenta] at (0.51,0.07) {Pitch};
+				\draw[arrows=<->,magenta,ultra thick](0.475,0.15)--(0.55,0.15);
+			\end{scope}
+		\end{tikzpicture}
+	}
+	\qquad
+	\subfigure[Three dimensional sketch of the strips on the PCB for a Floating Strip Micromegas Detector with two dimensional readout. The floating strips on top of the PCB (not indicated) are oriented orthogonal to the readout strips on the bottom of the PCB (Y strips). Between both layers the X strips are orientated parallel to the floating strips insulated by two thin Kapton layers.]{\label{fsmm3Dsketch} \includegraphics[width=0.45\linewidth]{floatingStripStructure1.pdf}}
+	\caption{Picture and a sketch of the strips on the PCB for a Floating Strip Micromegas Detector with two dimensional readout.}
+	\label{rofsmm}
+\end{figure}
+
+With this readout structure a Micromegas detector was built and investigated by \cite{felixKthesis} in a \SI{20}{\MeV} proton beam. Among others the analysis of the data from this test beam at the Tandem Accelerator in Garching/Munich shows that the signals on the X readout strips are polar, as only positive APV channel are measured, while the signals on Y readout strips are bipolar, first negative, then changing to positive values. This bipolar behavior on the Y strips was not expected. A typical signal on X and Y strips can be seen in figure \ref{fsmm_2DRO_sig}.
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[Signal on a X strip parallel to the floating strips. The signal is only positive (up to about 1800) and has a step rising (from 11$\times$\SI{25}{\ns}, until 12$\times$\SI{25}{\ns}), with a flat decrease (starting at 13$\times$\SI{25}{\ns}).]{\label{xSig} \includegraphics[width=0.45\linewidth]{xSignal_pic_fontest.pdf}}
+	\qquad
+	\subfigure[Bipolar signal on a Y strip orthogonal to the floating strips. The signal is first negative (at the saturation of about $-$280) from 11$\times$\SI{25}{\ns}, until 15$\times$\SI{25}{\ns}. At 16$\times$\SI{25}{\ns} it rises to about 500.]{\label{ySig} \includegraphics[width=0.45\linewidth]{ySignal_pic_fontest.pdf}}
+	\caption{Typical signals of the strips in a floating strip Micromegas with two dimensional readout. Both signals start at 11$\times$\SI{25}{\ns}. While for the charge on the strip parallel to the floating strip (a) a step rise is observed, the signal on the strip perpendicular to the floating strip ( (b), below the first readout strip) falls below the lower saturation at about $-$280. At 16$\times$\SI{25}{\ns} the second signal rises to about 500. \cite{felixKthesis}}
+	\label{fsmm_2DRO_sig}
+\end{figure}
+
+To investigate this a ANSYS simulation of the readout structure of the detector is done to understand the basic behavior of the signals. In order to set up a model of the two dimensional grid of strips, the idea is to only consider one unit cell. A unit cell in this case can be described as a cuboid with quadratic footprint with a side length of \SI{500}{\micro\m}. It includes the crossing of a Y strip with the orthogonal X and floating strip. Hereby the main aspect of the static coupling between the three strips can be investigated. Additional to the strip structure on the PCB (kapton foil) the gas volume above, up to the mesh (at a distance of \SI{150}{\micro\m}), is considered as well, to be able to simulate arriving charges. The model of a unit cell, generated in ANSYS, is shown in figure \ref{fsmmUnitCellANSYS}.
+
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.5\textwidth]{MicroMeGas_com91_volumesColor.png}};
+		\node[right,blue] at (0.0,0.3) {\large Y strip};
+		\draw[arrows=->,blue,ultra thick](0.8,0.6)--(1.9,1.2);
+		\node[right,blue] at (6.1,0.3) {\large X strip};
+		\draw[arrows=->,blue,ultra thick](7.0,0.6)--(5.4,1.7);
+		\node[right,blue] at (5.1,5.5) {\large floating strip};
+		\draw[arrows=->,blue,ultra thick](6.3,5.2)--(5.3,2.3);
+		\node[right,blue] at (7.6,3.6) {\large amplification region};
+		\draw[arrows=<->,blue,ultra thick](7.6,3.0)--(7.6,4.2);
+		\node[right,blue] at (-1.3,2.4) {\large kapton};
+		\draw[arrows=<->,blue,ultra thick](0.1,2.0)--(0.1,2.8);
+	\end{tikzpicture}
+	%\includegraphics[width=0.5\textwidth]{MicroMeGas_com91_volumesColor.png}
+	\caption{Model of a \SI{500}{\micro\m}$\times$\SI{500}{\micro\m} unit cell for the two dimensional readout structure of a Floating Strip Micromegas. In orange the volumes are indicated with a material model using copper. The volumes which are assigned to the kapton material model are drawn yellow. In green the volumes assigned to the gas material model are shown.}
+	\label{fsmmUnitCellANSYS}
+\end{figure}
+
+To understand their coupling with this model first the capacity between the strips is investigated. After that an approach to simulate the signal generation is discussed. The main goal is to understand the different polarity and pulse height of the signals on the readout strips (X and Y).
+
+\section{Treatment of the Capacitance between the Strips}
+
+%A first approach to understand the signal behavior is to calculate the capacitances between the strips. 
+The capacitances $C$ between the strips can be used to get an idea about the coupling between the strips. 
+%, as the signals are generated on the X- and Y-strips by influenced mirror charges of the electrons gathered on the floating strip. 
+To calculate them the strips can be approximated by common parallel-plate condensators.
+
+\begin{align}\label{plateCapa}
+	C &= \epsilon_{0} \epsilon_{r} \cdot \dfrac{A}{d}
+\end{align}
+
+with the vacuum permittivity $\epsilon_{0}\simeq$ \SI{8.854e-12}{\A\s/\V\m}, the relative permittivity of the material between the plates $\epsilon_{r}$, the overlapping area $A$ of the plates and the distance $d$ between the plates. In order to use formula \ref{plateCapa} for the strips in a unit cell, the overlapping areas of the three strip combinations have to be calculated. The three resulting capacitances are $C_{\mathrm{fX}}$ between floating strip and X strip, $C_{\mathrm{XY}}$  between X strip and Y strip and $C_{\mathrm{fY}}$ between floating strip and Y strip. In figure \ref{unitcellSketch} the approach for this is sketched.
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[Sketch of the topview for a unit cell of the structure for a Floating Strip Micromegas with two dimensional readout. The areas with no strips present are indicated in green. The strips are shown in orange and yellow. The X strip goes parallel, below the floating strip (yellow). Both are orientated vertically, along the Y axis, while the Y strip goes orthogonally along the X axis, below them. Also indicated are the overlapping areas of the strips, as well as the name conventions for the areas considered by the calculation for the capacitances.]{\label{unitcellSketch} \includegraphics[width=0.45\linewidth]{MicroMeGas_topview_areas_letters.pdf}}
+	\qquad
+	\subfigure[Sketch of a simplifed model for the capacitances between the strips. It is assumed, that the capacitances between the strips behave like capacitances for parallel-plate condensators, and therefore can be calculated by their overlaping parallel areas.]{\label{capacitiesBetweenStrips} \includegraphics[width=0.45\linewidth]{MicroMeGas_capacities6-crop.pdf}}
+	\caption{Sketches for the simplifying assumptions made for the model of the capacitances between the strips on the PCB for a Floating Strip Micromegas Detector with two dimensional readout.}
+	\label{capacitiesSketch}
+\end{figure}
+
+The overlapping area of the floating strip and the X strip is given by the whole area of the X strip, indicated in the figure by areas A, C1 and C2 (surrounded in red). For the X and the Y strip only area A has to be calculated (surrounded in blue). The crucial part is the capacity between the floating strip and the Y strip. Here not only their overlapping area (surrounded in magenta) has to be considered, but also the capacity between floating and X strip, as well as X and Y strip. Additionally the coupling via the areas B1 and B2 is over a larger distance. The actual relations and their simplifications are sketched in figure \ref{capacitiesBetweenStrips}. The capacitances $C_{\mathrm{fX}}$ and $C_{\mathrm{XY}}$ are in series connection to each other and parallel to them the coupling via the areas B1 and B2 has to be calculated. With the thickness of a copper strip $d_{\mathrm{s}}=$ \SI{35}{\micro\m}, the thickness of the kapton between the strip layers $d_{\mathrm{k}}=$ \SI{25}{\micro\m} and the relative permittivity of kapton $\epsilon_{\mathrm{k}}=4$ the three capacitances can be calculated : 
+
+\begin{align*}
+	C_{\mathrm{fX}} &= \epsilon_{0}\epsilon_{\mathrm{k}} \cdot \dfrac{A_{\mathrm{A}} + A_{\mathrm{C1}} + A_{\mathrm{C2}}}{d_{\mathrm{k}}} = 5.7 \cdot 10^{-14} \mathrm{F}
+	\\
+	C_{\mathrm{XY}} &= \epsilon_{0}\epsilon_{\mathrm{k}} \cdot \dfrac{A_{\mathrm{A}}}{d_{\mathrm{k}}} = 4.5 \cdot 10^{-14} \mathrm{F}
+	\\
+	C_{\mathrm{fY}} &= \epsilon_{0}\epsilon_{\mathrm{k}} \cdot \dfrac{A_{\mathrm{B1}} + A_{\mathrm{B2}}}{d_{\mathrm{k}} + d_{\mathrm{s}} + d_{\mathrm{k}}} + \left(\dfrac{1}{C_{\mathrm{fX}}} + \dfrac{1}{C_{\mathrm{XY}}}\right)^{-1} = 8.2 \cdot 10^{-14} \mathrm{F}
+\end{align*}
+
+All three calculated capacitances are in the range \SI{100}{\femto\F} and the value between the floating and the Y strip is the largest. In order to compare these values from a simple model with predictions from ANSYS simulations, the definition of capacity is used : 
+
+\begin{align}\label{capaDef}
+	C &= Q / U
+\end{align}
+
+For each of the three capacitances the volume in the geometrical model of one of the two considered strips has to be assigned the charge $+Q$, while the other is assigned a charge of $-Q$. By that the capacity can be calculated with the voltage difference $U$ simulated by ANSYS. For the simulation a value of \SI{1.8e6}{e} is chosen for $Q$.
+
+\begin{figure}[H]	
+	\centering
+	\subfigure[Positive charge on floating strip and negative charge on X strip. The voltage scale is ranging from \SI{-1.45303}{\V} (for the X strip) to \SI{0.870139}{\V} (for the floating strip).]{\label{UCfX} \includegraphics[width=0.29\linewidth]{MicroMeGas_com94_1cross1_1point8MillionChargeBotFloatTopX.png}}
+	\qquad
+	\subfigure[Positive charge on X strip and negative charge on Y strip. The voltage scale is ranging from \SI{-0.939217}{\V} (for the Y strip) to \SI{1.56325}{\V} (for the X strip).]{\label{UCXY} \includegraphics[width=0.29\linewidth]{MicroMeGas_com94_1cross1_1point8MillionChargeBotXTopY.png}}
+	\qquad
+	\subfigure[Positive charge on floating strip and negative charge on Y strip. The voltage scale is ranging from \SI{-1.51088}{\V} (for the X strip) to \SI{1.56009}{\V} (for the floating strip).]{\label{UCfY} \includegraphics[width=0.29\linewidth]{MicroMeGas_com94_1cross1_1point8MillionChargeBotFloatTopY.png}}
+	\caption{ANSYS simulations for the three capacitances. For each combination of the three strips a simulation is made with one of the two considered strips assigned a charge of \SI{+1.8e6}{e}, while a charge of \SI{-1.8e6}{e} is assigned the other strip.}
+	\label{unitcellCapaloads}
+\end{figure}
+
+The charges are simulated directly on the specific strips, therefore the maximal and minimal simulated voltages correspond to the voltages on the considered strips. They can be read off from the scales in figure \ref{unitcellCapaloads} and by that the voltage difference $U=U_{\mathrm{max}}-U_{\mathrm{min}}$ can be calculated. The results are compared in table \ref{capacities}. 
+
+\begin{figure}[H]
+	\centering
+	\begin{tabular}{c||ccc|c} 
+		$Q = 1.8 \times 10^{6}$e & $U_{\mathrm{min}}$/V & $U_{\mathrm{max}}$/V & $C_{\mathrm{ANSYS}} / 10^{-14}$F & $C_{\mathrm{model}} / 10^{-14}$F
+		\\
+		\hline
+		\hline
+		fX & -1.45303 & +0.870139 & 12.4 & 5.7 
+		\\
+		XY & -0.939217 & 1.56325 & 11.5 & 4.5
+		\\
+		fY & -1.51088 & 1.56009 & 9.4 & 8.2 
+	\end{tabular}
+	\captionof{table}{With the minimal and maximal voltages simulated by ANSYS, after assigning charges of $Q = \pm1.8 \times 10^{6}$e to the different strip combinations, the capacitances between the strips can be calculated by formula \ref{capaDef}. The values from ANSYS can be compared to the capacitances calculated by the parallel-plate condensator model.} 
+	\label{capacities}
+\end{figure}
+
+Contrary to the calculations with the simplified model, the capacity between floating and Y strip is simulated by ANSYS to be the smallest of the three combinations. Also all simulated capacitances are larger than calculated by the model. The smaller capacitances of the simplified model can be explained by the approximation of parallel plate capacitor. The field is overestimated, due to the not considered border volumes as sketched in figure \ref{fsmmFieldlines}. This effect is smaller for the capacity between the floating and the Y strip, because the areas B1 and B2 are considered. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{fsmm_fieldlines2-crop.pdf}
+	\caption{By the idealization of parallel plate capacitors (left) border volumes (surrounded red dashed, right) are ignored in order to simplify the calculation. For the capacitances between the strips on the readout anode these border volumes contribute, so that the simplification does not hold.}
+	\label{fsmmFieldlines}
+\end{figure}
+
+The simulated capacitances give a first hint for the observed signal behavior. The capacity between the floating and the X strip is larger than between floating and the Y strip, hence the signal on the X strip can be expected to be larger than on the Y strip. Additionally the capacity between floating and Y strip is smaller than between X and Y strip, which could lead to an opposite signed signal on the Y strip, assuming it couples more to the charges on the X, than on the floating strip. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\textwidth]{moreUnitCells-crop.pdf}
+	\caption{Stepwise, symmetrically increasing of the number of unit cells. Sketched for the first two iterations from 1$\times$1 to 3$\times$3 and from 3$\times$3 to 5$\times$5. In red the added, while in black the previous unit cells are indicated.}
+	\label{moreUnitCells}
+\end{figure}
+
+To investigate the unexpected ratios of the capacitances between the strips, the geometrical model can be expanded to several unit cells. This is done in successive steps by adding symmetrically a new row in the opposite direction for both sides of each direction (X and Y), as sketched in figure \ref{moreUnitCells}, in order to neglect effects due to asymmetry. Therefore the side length of the model increases for each step by two times the side length of a single unit cell (the pitch length). For each step the capacitances of the three strip combinations are calculated for the central strips of the three layers. This procedure had to be stopped at 13$\times$13 unit cells (the sixth step, after the single unit cell), because the used ANSYS version is not able to incorporate a larger model.
+
+\begin{figure}[H]	
+	\centering
+	\includegraphics[width=0.6\textwidth]{cap_square_all_fonter.pdf}
+	\caption{The capacitances between the strips as function of lattice size increases linearly.}
+	\label{capa}
+\end{figure}
+
+As can be seen in figure \ref{capa}, the capacitances of the three strip combinations increase linearly with the size of the simulated model. This is expected for the capacity between the floating and X strip, as the overlapping area increases with the model size, but not for the other two combinations. The capacity between the floating and the Y strip is expected to saturate by the simplified model, as only the term of $C_{\mathrm{fX}}$ increases in the formula for the capacity between floating and Y strips with the size of the considered structure. Also the capacity between the X and Y strip is assumed to stay almost constant. The increasing of all three capacitances with the size of the model can be understood by the coupling between the strips through larger volumes, as the model size increases. Also the fact can be seen that the capacity between the X and the Y strip stays larger for increasing lattice size than the capacity between the floating and the Y strip. With this model the actual capacitances can not be calculated, because the size can not be further increased. Therefore only approximations can be made for the couplings between the strips. But up to the limits of the simulation the signal behavior can be understood, by the larger capacity between the X and the Y strip than between the floating and the Y strip.
+
+\section{Simulation of Signal Generation}
+
+To investigate the signal behavior with a different approach the generation of the signal after completed avalanche process in the amplification region is studied. Due to their higher mobility the electrons reach the anode (in this case the floating strips), before the ions have moved the entire way to the mesh. This fast movement of the electrons to the floating strips can not be seen in the signal in figure \ref{fsmm_2DRO_sig} as it is finished in several ns. Only the slower movement of the ions towards the mesh, while the electrons have already reached the anode can be seen. Therefore the idea is to simulate  a cloud of positive charges, for the ions, in the gas volume between the floating strips and the mesh, additional to negative charges on the central floating strip, due to the arrived electrons. In difference to the actual situation of moving electrons and ions, as well as strips coupled to electronic systems, this is approximated with static negative and positive charges placed at specific locations in the geometry. With an expanded model of seven times seven unit cells, this approximation can be investigated with good accuracy of the simulation. During the movement of the electrons and ions the strips and the mesh are connected on a fixed potential, which lead to boundary conditions at the borders of the strips. The mesh is grounded, therefore \SI{0}{\V} is applied to the top area of the model. Also the readout strips can be considered to be set to \SI{0}{\V}. Only the floating strips are on a voltage of \SI{+500}{\V}, for the amplification field. To check this approach the system was first simulated without the charges, only with voltages. The result can be seen in figure \ref{fsmm_onlyVoltages}.
+
+\begin{figure}[H]
+	\centering
+	\subfigure[Isometric view.]{\label{fsmm7x7volt} \includegraphics[width=0.45\textwidth]{fsmm_7x7_onlyVoltages.png}}
+	\qquad
+	\subfigure[Focus on the side perpendicular to the floating and X strips.]{\label{fsmm7x7voltside}  \includegraphics[width=0.45\textwidth]{fsmm_7x7_onlyVoltages_sideFocus.png}}
+	\caption{Simulation of seven times seven unit cells of the readout structure for a Floating Strip Micromegas with a two dimensional readout anode. The voltage boundaries are the initial voltages of the readout strips and the mesh at \SI{0}{\V} (blue volumes) and the floating strips at \SI{+500}{\V} (red volumes). The picture stays the same, if positive charges for the ions in the amplification region and negative charges for the electrons on the central floating strip are taken into account.}
+	\label{fsmm_onlyVoltages}
+\end{figure}
+
+Above the floating strips up to the mesh the field is nearly homogeneous. Below the floating strip the field gets deformed by the structure of the readout strips. This can be compared to the case with charges. Therefor in the middle part of the central floating strip a charge of \SI{-3.6e6}{e} is distributed equally at the top side of the strip. Also a charge of \SI{+3.6e6}{e} is distributed homogeneously in a cuboid volume above the strip in the center of the seven times seven unit cells. These charges correspond to the expected amount of charges due to gas amplification (explained in chapter \ref{gasAmp}), their distributions are chosen to see the effect on the central X and Y strip, which should be most effected. Unexpectedly, the simulation shows the same result as without the charges (seen in figure \ref{fsmm_onlyVoltages}). This could be explained by the small amount of charge compared to the high voltage boundaries. In order to see only the effect of the considered charges, the voltage boundary conditions are neglected, so that only the charges in the gas volume and on the central floating strip contribute to the simulated voltage distribution. 
+
+\begin{figure}[H]
+	\centering
+	\subfigure[Isometric view.]{\label{signalfsmmSimIso} \includegraphics[width=0.55\textwidth]{fsmm_7x7_3dot6chargeFloat100AwayGas_topview.png}}
+	\\
+	\subfigure[Central X strips focused.]{\label{signalfsmmSimXfoc} \includegraphics[width=0.45\linewidth]{fsmm_7x7_3dot6chargeFloat100AwayGas_XstripFocused.png}}
+	\qquad
+	\subfigure[Y strips below the other strip layers.]{\label{signalfsmmSimYfoc} \includegraphics[width=0.45\linewidth]{fsmm_7x7_3dot6chargeFloat100AwayGas_Ystripfocussed.png}}
+	\caption{Simulation of seven times seven unit cells of the readout structure for a floating strip Micromegas with a two dimensional readout. No voltage boundary conditions are set, only charges are distributed. Negative at the top of the central floating strip and positive in the amplification gas volume of the central unit cell. The scale is ranged from \SI{-0.14}{V} to \SI{0.06}{V}, in order to see the effect on the central X strip (in (b)) and Y strip (in (c)). Therefore the gray areas are at a too high or a too low voltage to be marked with color.}
+	\label{signalfsmmSim}
+\end{figure}
+
+As shown in figure \ref{signalfsmmSimYfoc} the central charge in the gas volume leads to a positive voltage of the Y readout strip (in red) in the range of $+38$ to \SI{+60}{\mV}, while the central X strip (seen in figure \ref{signalfsmmSimXfoc}) is at a negative voltage (in blue) in the range of $-140$ to \SI{-118}{\mV}. The grey volumes are out of scale. A better scaling reveals for the X strip a value of \SI{-118}{\mV} and for the Y strip \SI{51.8}{\mV}. This simulation shows both aimed targets. The inverse polarity of the signals on the X and Y strips is seen in the different sign of their voltages in the simulation, as well as an absolute larger voltage on the X strip, than on the Y strip. Additionally the simulation shows that the neighboring strips in the X layer see a different polarity (red in figure \ref{signalfsmmSimXfoc}). In the simulation this comes from coupling between the strips, but this is not observed by the signals of the detector. The strong limitation to this simulation is the approximation of a dynamic process, the moving charges of electrons and ions in the amplification region, with a static model of charges assigned to volumes in a limited geometric model. Also the neglected voltage boundaries are a missing fact of the actual situation. Despite this, the observed signal can be understood partly by this simulation. 
+
+\chapter{Summary}
+
+A production scheme was presented for the Micromegas quadruplets of the SM2 modules for the New Small Wheel Upgrade for the ATLAS experiment at the LHC. Flat panels with readout structures will be assembled, after they got glued, to form the electrodes of the Micromegas, together with stretched micro-meshes. Several aspects for the quality control of these panels for the quadruplets were discussed. 
+
+One aspect for the quality control of the panels is the planarity. The system used for the planarity measurement is a CMM mounted on a precision granite table with an attached laser distance sensor. It was studied under the influence of temperature variations. The measured thermal expansion of the setup is in agreement with the value of $8_{-3}^{+4}$ $\mu$m/K from the presented model. It was also shown that with the measured expansion planarity scans can be corrected, but due to the size of the effect this is not needed. 
+%
+Furthermore the alignment of the readout structure for the Micromegas was investigated with a microscope mounted on a CMM. The comparison with a second measurement at a more accurate CMM revealed some systematic errors in the measurement, as well as during the alignment before gluing, which could not be fully described by a simple model. Therefore the alignment frame, a tool for the positioning of the readout structures, will be replaced by a more precise one, as well as the PCBs must be built more accurately by the manufacturer.
+
+Several simulations were made to investigate detectors and parts built for them with the finite element software-package ANSYS. 
+
+A \SI{1}{\square\m} sized Resistive Strip Micromegas Detector, called L1 chamber, showed a deformation of its central plane in the analysis with the Cosmic Ray Test Facility in Garching/Munich. Its deformation of about \SI{1.4}{\mm} can be explained by gas overpressure with the help of a simulation. The simulated value of \SI{1.5}{\mm} is in agreement with the measurement. 
+
+The so called striffback, a tool used during the gluing process of the panels, has shown a gravitational sag. This undesired behavior was studied with a simulation and compared to a surface measurement with the CMM. The simulated deformation of \SI{117}{\micro\m} is a way smaller than the measured value of \SI{160}{\micro\m}, which could be explained by the initial deformation of the stiffback. 
+
+Due to the tension of the micro-mesh mounted on the drift panels, they will be deformed. A model was shown, which describes the transfer of the force due to the tension of the mesh on the panel as torsional moment. The panels were simulated with forces and torsional moments calculated by this model, to investigate their deformation. The simulation is with a value of \SI{1.6}{\mm} in agreement with the measured deformation of \SI{1.8}{\mm}, as well as the general shape of the deformation. Therefore the model describes the deformation sufficiently. During the assembly of the quadruplets the panels will be hold together by several interconnections, which will reduce this large deformation. 
+
+The signal generation in a two-dimensional Floating Strip Micromegas was investigated as a comparable type of detector used for the NSW upgrade. The readout structure was geometrically simplified by a unit cell of the two dimensional system. With this the coupling between floating and readout strips got studied under two aspects. The capacitances were compared between a simple model, which assumes the strip structure as parallel-plate capacitors, and simulations made with ANSYS. The simulations were improved by increasing the number of considered unit cells. The results showed, that the largest capacity is between the floating and the readout strips parallel to it. Whereas the capacity between the readout strips orthogonal to the floating strip is larger to the parallel readout strips than to the floating strips. The other investigated aspect considers the charge distribution directly after the electron avalanche reached the readout structure. This dynamic process was simulated in simplified manner with static positive charges, simulating the ions, in the gas volume. The simulation revealed opposite signed polarities on the central readout strips of the two layers. 
+
+To summarize, the construction site in Munich is well prepared for the production of the Micromegas for the SM2 quadruplets.
+
+
+%\bibliographystyle{myplainnat}
+\bibliography{MA_references}{}
+%\bibliographystyle{apalike_url}
+
+\chapter*{Acknowledgments}
+
+F\"ur die Unterst\"utzung die ich w\"ahrend des vergangenen Jahres erhalten habe, m\"ochte ich einigen Personen danken :
+
+\begin{itemize}
+ \item 
+ 	Prof. Dr. Otmar Biebel f\"ur die Chance diese Arbeit in der experimentellen Teilchenphysik zu schreiben und die Unterst\"utzung w\"ahrendessen.
+ \item 
+ 	Dr. Ralf Hertenberger f\"ur die Diskussionen, Anregungen und Kommentaren, die zu den Ergebnissen gef\"uhrt haben.
+ \item
+ 	Prof. Dr. Dorothee f\"ur das gute Arbeitsklima an ihrem Lehrstuhl.
+ \item
+ 	Der Hardware Gruppe die nicht nur w\"ahrend der Arbeitszeiten viel Hilfsbereitschaft gezeigt hat, sondern auch in der Freizeit viele gemeinsame Unternehmungen gemacht hat. Darunter: Ralph M\"uller bei der Einarbeitung mit der CMM, Philipp L\"osel und Bernhard Flierl bei vielen Programmieraspekten, Jona Bortfeldt und Felix Klitzner beim Verst\"andnis der Floating Strip Micromegas, Dr. Andr\'{e} Zibell und Dr. Chrysostomos Valderanis bei vielen technischen Fragen.
+ \item
+ 	Meiner Familie, ohne die ich nicht so weit gekommen w\"are.
+\end{itemize}
+
+\thispagestyle{empty}
+%\cleardoublepage
+
+\chapter*{Erkl\"arung:}
+
+Hiermit erkl\"are ich, die vorliegende Arbeit selbst\"andig verfasst zu haben und keine anderen als die in der Arbeit angegebenen Quellen und Hilfsmittel benutzt habe.
+
+\vspace{25mm}
+
+M\"unchen, den 15.09.2016
+
+\thispagestyle{empty}
+
+\end{document}

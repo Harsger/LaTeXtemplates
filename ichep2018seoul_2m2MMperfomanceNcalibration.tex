@@ -1,0 +1,943 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{spruce}
+\definecolor{green(pigment)}{rgb}{0.0, 0.65, 0.31}
+\setbeamercolor*{item}{fg=green(pigment)}
+\definecolor{Green}{rgb}{0.00, 1.00, 0.00}
+\definecolor{Red}{rgb}{1.00, 0.00, 0.00}
+\definecolor{Blue}{rgb}{0.00, 0.00, 1.00}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{textcomp}
+\usepackage{multirow,bigdelim,dcolumn,booktabs}
+%\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+\usepackage{siunitx}
+\usepackage{appendixnumberbeamer}
+\usepackage{hyperref}
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\beamertemplatenavigationsymbolsempty
+%\usepackage[absolute,overlay]{textpos}
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+
+\graphicspath{
+	{pictures/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/plots/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/sketches/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/pictures/}
+}
+
+\begin{document}
+\title[\SI{2}{\square\m} \& 4-layered Micromegas for ATLAS]{Performance and Calibration of \SI{2}{\square\m}-size 4-layered Micromegas Detectors for the ATLAS Upgrade}
+\author[M. Herrmann]{ Maximilian Herrmann, \\ on behalf of the ATLAS muon collaboration}
+\institute[LMU Munich]{Ludwig-Maximilians-Universit\"at M\"unchen - Lehrstuhl Schaile}
+\date[05.07.2018]{05.07.2018, Seoul} 
+
+\frame{
+	\centering
+	\vspace{2mm}
+	{\Large International Conference on High Energy Physics 2018}
+
+	\titlepage
+	\vspace{-6mm}
+	
+	\includegraphics[width=0.35\textwidth]{LMUlogo.jpg}
+	\hspace{2.5cm}
+	\includegraphics[width=0.4\textwidth]{ATLAS-Logo.png}
+}
+
+\section{Motivation}
+
+\subsection{New Small Wheels for the ATLAS Experiment}
+
+\frame{\frametitle{LHC Upgrade Status}
+	\centering
+	\includegraphics[width=0.8\textwidth]{HL_LHC_PlanUpdateJuly2015_wLumi.pdf}
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+			\includegraphics<1>[width=0.95\textwidth]{ATLASnewer.jpg}
+			\includegraphics<2>[width=0.95\textwidth]{ATLAS_wSW.png}
+		\column{.45\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{MDTefficiencyPerHitRate_NSW-TDR_edited.png}
+	\end{columns}
+}
+
+\frame{\frametitle{Upgrade of the Muon Small Wheels}
+%	\begin{textblock*}{5cm}(5.3cm,7.8cm)
+%	3/5 PCBs
+%	
+%	per active 
+%	
+%	layer
+%	\end{textblock*}
+
+
+	replacement of the current end caps of the muon spectrometer by small-strip Thin Gap Chambers (sTGC) and Micromegas quadruplets
+	
+	\vspace{3mm}
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+			\textbf{New Small Wheel Sectors}
+			\vspace{7mm}
+			
+			\includegraphics[width=1\textwidth]{sectorsDimensions.png}
+		\column{.45\textwidth}
+			\centering
+			\textbf{Micromegas quadruplets}
+			
+			\includegraphics<1>[width=1\textwidth]{sectorsNsides.png}
+			\includegraphics<2>[width=1\textwidth]{sectorsNsides_SM2marked.png}
+	\end{columns}
+}
+
+\subsection{Micromegas Quadruplets}
+
+\frame{\frametitle{\normalsize Micromegas Quadruplets for track reconstruction in the NSW}
+	\textbf{MICROMEGAS - MICROMEesh GAseous Structure}
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+			\includegraphics[width=1.05\textwidth]{RSMM_principle7-crop.pdf}
+		\column{.45\textwidth}
+			\small
+			\hspace{5mm}
+			$
+				{\bf \bf \mathrm{centroid}} 
+				 = 
+				\dfrac{
+					\sum\limits_{\scriptscriptstyle\mathrm{strips}} \mathrm{strip} \cdot q_{\scriptscriptstyle\mathrm{strip}}
+				}
+				{\sum\limits_{\scriptscriptstyle\mathrm{strips}} q_{\scriptscriptstyle\mathrm{strip}} }
+			$
+			
+			\vspace{3mm}
+			\hspace{4mm}
+			$\Rightarrow$ position = $\mathrm{centroid} \; \times$ pitch
+			
+			\vspace{3mm}
+			\hspace{4mm}
+			$t_{\mathrm{drift}} = f(\mathrm{strip})$
+			
+			\vspace{1mm}
+			\hspace{4mm}
+			$\Rightarrow$ incident angle reconstruction
+	\end{columns}
+	\vspace{3mm}
+	
+	\textbf{Micromegas Quadruplet}
+	\begin{columns}
+		\column{.6\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{sandwichassembly.png}
+		\column{.4\textwidth}
+			\footnotesize	
+			4 active layers of Micromegas
+			
+			\vspace{5mm}
+			
+			$\Rightarrow$ 2 $\times$ back-to-back
+	\end{columns}
+}
+
+\frame{\frametitle{Design of Readout Anodes}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{quadrupletStripOrientation3-crop.pdf}
+		\column{.5\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					{\color{red}eta planes} for precision reconstruction in pseudorapidity direction perpendicular to anode strips
+				\item	
+					{\color{blue}stereo planes} for additional coarse position information along the anode strips
+			\end{itemize}
+	\end{columns}
+	\vspace{5mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			SM2 anode
+			
+			\vspace{2mm}
+			\includegraphics[width=\textwidth]{ROboardMechanicalAlignment2-crop.pdf}
+		\column{.5\textwidth}
+			\footnotesize
+			technical limitations
+			
+			micropattern readout anode: width $\le$ \SI{50}{cm}
+			\begin{itemize}
+				\item[$\Rightarrow$] 
+					
+					3(/5) printed circuit boards (PCB) 
+					
+					per active layer
+				\item[$\Rightarrow$] 	
+					reconstruction and calibration of alignment errors (during production) required
+			\end{itemize}
+	\end{columns}
+}
+
+%\frame{\frametitle{Cosmic Ray Facility LMU Munich}
+%		
+%	\begin{columns}
+%		\column{.50\textwidth}
+%			\centering
+%			\includegraphics[width=0.9\textwidth]{CRFprinciple3-crop.pdf}
+%		\column{.50\textwidth}
+%			\centering
+%			\includegraphics[width=0.9\textwidth]{CRF_small.JPG}
+%	\end{columns}
+%	
+%	\footnotesize
+%			
+%	\begin{itemize}
+%		\item
+%			2D track reconstruction with two Monitored Drift Tube (MDT) chambers
+%		\item
+%			trigger via scintillator hodoscope with $\approx$ \SI{10}{cm} resolution in orthogonal direction
+%		\item
+%			MDT chambers : \SI{2.2}{\m} $\times$ \SI{4}{\m} 
+%			
+%			$\Rightarrow$ active area : \SI{9}{\m\squared}, angular acceptance : $\pm30^{\circ}$
+%		\item
+%			readout of the full module with six FEC cards @ full \SI{100}{Hz} \textmu -rate
+%			
+%			(tested up to \SI{500}{Hz} with random trigger)
+%	\end{itemize}
+%}
+
+
+\frame{
+	\begin{center} 
+		\Huge SM2 Prototype - M0
+	\end{center}
+	\vspace{10mm}
+	
+	\normalsize
+	Measurement Campaign
+	
+	\begin{itemize}
+		\item
+			Cosmic Ray Facility in Munich
+		\item
+			testbeam at H8 beamline at the SPS
+	\end{itemize}
+}
+
+\frame{\frametitle{Cosmic Ray Facility LMU Munich}
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{CRFprinciple4-crop.pdf}
+			
+			\tiny
+			\color{red} track prediction accuracy given by multiple scattering
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{CRF_wMicromegas.pdf}
+	\end{columns}
+	
+	\vspace{0mm}
+	\centering
+	\footnotesize
+	\begin{tabular}{ll}
+	track reconstruction & 2 $\times$ Monitored Drift Tube chambers (MDTs)
+%	\\
+%	 & single tube resolution $\sim$ \SI{100}{\micro\m}
+% 	\\
+%	 & six layers $\sim$ \SI{41}{\micro\m}
+	\\
+	trigger & scintillator hodoscope
+	\\
+	active area & \SI{2.2}{m} $\times$ \SI{4}{m}
+	\\
+	angular acceptance & $\pm$ \SI{30}{\degree}
+	\\
+	readout & 12288 channels
+	\\
+	 & $\to$ 96 APVs (frontend electronics)
+	\\
+	 & $\to$ 6 FECs (scalable readout system)
+	\\
+	readout rate & 130 Hz (full muon rate)
+	\\
+	measurement period & 17.10. - 06.12. 2017
+	\end{tabular}
+}
+
+\frame{\frametitle{M0 : Full Area Pulse Height}
+	\begin{columns}
+		\column{.45\textwidth}
+			\centering
+			eta in: cluster charge
+			
+			\includegraphics[width=0.8\textwidth]{SM2-M0_CRFafterH8_eta-in_MPVclusterQ_wTrigLim.png}
+			
+			\vspace{-1mm}
+			amplification scan
+			
+			\includegraphics[width=0.9\textwidth]{SM2-M0_CRF_MPVclusterQvsAmplificationVoltage_errorWidth_halfLines_fatBalls.png}
+		\column{.65\textwidth}
+			\footnotesize
+			\vspace{-5mm}
+			\begin{itemize}
+				\item
+					$U_{\mathrm{amp}} = $ \SI{600}{V}
+					
+					$U_{\mathrm{drift}} = $ \SI{-300}{V}
+										
+					Ar:CO$_{2}$ 93:7 vol\%
+				\item
+					for each bin (\SI{54.4}{mm}$\times$\SI{100}{mm}):
+					
+					cluster charge distribution fitted with Landau
+					
+					$\Rightarrow$ Most Probable Value (MPV)
+				\item
+					differences between 
+					
+					readout boards clearly visible
+					
+					$\Rightarrow$ higher amplification for central board
+					
+					$\Rightarrow$ homogeneity spoiled by 
+					
+					\hspace{3.5mm} prototype PCB quality
+				\item
+					smaller features due to trigger acceptance
+					
+					\vspace{5mm}
+				\item		
+					exponential rise as function of the amplification voltage (Townsend)
+				\item
+					differences between readout layers 
+					
+					due to variation in prototype PCB quality
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{M0 : Full Area Efficiency}
+	\begin{columns}
+		\column{.45\textwidth}
+			\centering
+			eta in: \SI{5}{mm} efficiency
+			
+			\includegraphics[width=0.8\textwidth]{SM2-M0_CRFafterH8_eta-in_5mmEfficiency600V.pdf}
+			
+			\vspace{-1mm}
+			efficiency turn on curve
+			
+			\includegraphics[width=0.9\textwidth]{SM2-M0_CRFafterH8_5mmEfficiency_allCluster_halfLines_fatBalls.png}
+		\column{.65\textwidth}
+			\footnotesize
+			\vspace{-5mm}
+			\begin{itemize}
+				\item
+					$U_{\mathrm{amp}} = $ \SI{600}{V}
+					
+					$U_{\mathrm{drift}} = $ \SI{-300}{V}
+					
+					Ar:CO$_{2}$ 93:7 vol\%
+				\item
+					\SI{5}{mm} efficiency:
+					
+					number of cluster found within $\pm$ \SI{5}{mm} to reference track
+					
+					divided by
+					
+					number all tracks going through partition
+					
+					$\Rightarrow$ calculated for each bin separately
+				\item
+					higher amplification of central board 
+					
+					leads to higher efficiency
+				\item
+					efficiency at boarders spoiled due to 
+					
+					tapered edges (rectangular partitions)
+					
+					\vspace{2mm}
+				\item
+					efficiency turn on curve reaches more than 90\% 
+					
+					at \SI{590}{V} for all layer
+				\item
+					differences between layer due to problematic prototype PCB material
+			\end{itemize}
+	\end{columns}
+}
+
+\subsection{Calibration Using Reference Tracks over Whole Area}
+
+\frame{\frametitle{Alignment using Reference Tracks}
+	\centering 
+	\textbf{Concept:}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.90\textwidth]{positionshift2-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.90\textwidth]{verticalshift-crop.pdf}
+	\end{columns}
+	\vspace{2mm}
+	\textbf{Implementation:}
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+			\footnotesize before alignment
+			
+			\includegraphics[width=0.75\textwidth]{resVSslope_blue.pdf}
+		\column{.45\textwidth}
+			\small
+			\textbf{residual} = pos\textsubscript{measured} - pos\textsubscript{reference}
+%					\textbf{residual} = $\mathrm{pos}_{\mathrm{measured}} - \mathrm{pos}_{\mathrm{reference}}$
+
+			\vspace{3mm}
+			$\Rightarrow$ residual vs. slope {\scriptsize(reference track)}
+	 
+	 		\vspace{3mm}
+			$\Rightarrow$ {\color{red}linear fit}
+			
+	 		\vspace{3mm}
+			shift\textsubscript{horizontal} = intercept\textsubscript{fit}
+%					$\mathrm{shift}_{\mathrm{horizontal}} = \mathrm{intercept}_{\mathrm{fit}}$
+
+			\vspace{3mm}
+			shift\textsubscript{vertical} = slope\textsubscript{fit}	
+%					$\mathrm{shift}_{\mathrm{vertical}} \;\;\; = \mathrm{slope}_{\mathrm{fit}}$
+	\end{columns}
+}
+
+\frame{\frametitle{Reconstruction of the Gravitational Sag of M0}
+
+	\begin{columns}
+		\column{.7\textwidth}
+			\centering
+			\textbf{eta in plane}
+			
+			\includegraphics[width=0.72\textwidth]{SM2-M0_CRFafterH8_eta-in_deltaZ.pdf}
+		\column{.1\textwidth}
+			\centering
+			\textbf{stereo in}
+			\vspace{10mm}
+			
+			\textbf{stereo out}
+			\vspace{10mm}	
+					
+			\textbf{eta out}
+		\column{.2\textwidth}
+			\centering
+			
+			\includegraphics[width=0.85\textwidth]{SM2-M0_CRFafterH8_stereo-in_deltaZ.pdf}
+			
+			\includegraphics[width=0.85\textwidth]{SM2-M0_CRFafterH8_stereo-out_deltaZ.pdf}
+			
+			\includegraphics[width=0.85\textwidth]{SM2-M0_CRFafterH8_eta-out_deltaZ.pdf}
+	\end{columns}
+
+	\vspace{1mm}	
+	$\Rightarrow$ all layers show gravitational sag 
+	
+	$\Rightarrow$ irrelevant for ATLAS, as detectors will be used vertically in NSW
+}
+
+\frame{\frametitle{M0 : Board Alignment  and Reconstructed Pitch Deviation}
+	\vspace{-3mm}
+	\begin{center}
+		\Large
+		position = centroid $\times$ pitch
+	\end{center}
+	\vspace{-5mm}
+	\begin{columns}
+		\column{.50\textwidth}
+			\small
+			\begin{center}
+				{\color{red}pitch deviation}
+				
+				\includegraphics[width=\textwidth]{eta_in_resMeanVSmdtY_woAdapterBoard_wCorPitch.png}
+				\vspace{1.5mm}
+				
+				\centering\includegraphics[width=0.45\textwidth]{ROboardsAligned-crop.pdf}
+			\end{center}
+		\column{.50\textwidth}
+			\small
+			\vspace{-2.7mm}
+			\begin{center}
+				corrected pitch
+				
+				\includegraphics[width=\textwidth]{eta_in_resMeanVSmdtY_wNewPitchCor_boards.pdf}
+			\end{center}
+			\vspace{1.5mm}
+				
+			\hspace{4mm}		
+			construction equipment optimized 
+
+			\hspace{4mm}			
+			$\Rightarrow$ avoid shifts
+			\vspace{2mm}
+			
+			\hspace{4mm}
+			humidity control of readout boards 
+
+			\hspace{4mm}			
+			$\Rightarrow$ avoid pitch deviation
+	\end{columns}
+}
+
+\subsection{Setup for Tracking}
+
+%\frame{\frametitle{H8 Testbeam Setup for Tracking}
+%	\begin{columns}
+%		\column{.50\textwidth}
+%			\centering
+%			\includegraphics[width=0.9\textwidth]{setup-crop.pdf}
+%		\column{.50\textwidth}
+%			\centering
+%			\includegraphics[width=0.9\textwidth]{SM2-M0_H8aug17_setup.png}
+%	\end{columns}
+%	
+%	\footnotesize
+%	
+%	\begin{itemize}
+%		\item
+%			module fully equipped with 96 APVs
+%		\item 
+%			1024 strips for each layer were read out by two FEC cards
+%		\item
+%			two further FEC cards for 28 APVs of tracking telescope:
+%			
+%			3 twodimensional GEMs and 2 twodimensional TMMs
+%			
+%			$\Rightarrow$ 4 FECs read out @ \SI{220}{Hz} %(during spills)
+%		\item
+%			TDC for acquisition of time jitter between APC clock and trigger
+%	\end{itemize}
+%}
+
+\frame{\frametitle{H8 Testbeam for SM2 M0 in August 2017}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{H8_SM2-M0_setup-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{SM2-M0_H8aug17_wDescription.png}
+	\end{columns}
+		
+	\vspace{1mm}
+	\centering
+	\footnotesize{\tiny 
+	\begin{tabular}{lll}
+		tracking telescope & 3 $\times$ 2D GEM &
+		\\
+		 & 2 $\times$ 2D TMM &
+		\\
+		track accuracy & \SI{65}{\micro\m} & (extrapolated at module) 
+		\\
+		channels & 4 $\times$ 1024 & module
+		\\
+		 & 2976 & telescope
+		\\
+		readout & 32 APVs $\to$ 2 FECs  & module 
+		\\
+		 & 24 APVs $\to$ 2 FECs & telescope
+		\\
+		trigger rate & $\sim$ \SI{1}{kHz} (muons) & for \SI{9}{cm} $\times$ \SI{9}{cm}
+		\\
+		readout rate & 220 Hz & (limited by bandwidth)
+	\end{tabular}}
+}
+
+\subsection{Behavior of Pulse Height and Efficiency}
+
+\frame{\frametitle{M0 : Behavior of Pulse Height and Efficiency}
+	\begin{itemize}
+		\item
+			pulse height:
+			
+			exponential rise as function of the amplification voltage (Townsend)
+		\item
+			differences between layers due to variation in prototype PCB quality
+		\item
+			efficiency plateau starting at \SI{590}{V}
+		\item
+			lower efficiency due to unconnected strips in measurement region
+			
+			(e.g. eta out plane)
+	\end{itemize}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{H8_M0_clusterQvsAmpVolt_bigDots.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{SM2-M0_H8aug17_efficiencyVSampVoltage_unconStrips.png}
+	\end{columns}
+}
+
+\frame{\frametitle{M0 : Results for Charge Weighted Position Reconstruction}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{SM2-M0_H8aug17_residualDistribution_res.pdf}
+			
+			\includegraphics[width=\textwidth]{H8_M0_eoNei_resoltionVSampVolt.pdf}
+		\column{.50\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					residual distribution (difference of measured position and track prediction) fitted with double Gaussian
+					
+					\vspace{3mm}
+					
+					$\Rightarrow$ weighted sigma:
+					
+					\scriptsize
+					$\sigma_{\mathrm{w}}\,= \dfrac{I_{\mathrm{narrow}} \cdot \sigma_{\mathrm{narrow}} + I_{\mathrm{broad}} \cdot \sigma_{\mathrm{broad}}}{I_{\mathrm{narrow}} + I_{\mathrm{broad}}}$
+					
+					\vspace{2mm}
+					
+					\footnotesize
+					$\Rightarrow$ consider track uncertainty:
+					
+					$\sigma_{\mathrm{res}} = \sqrt{\sigma_{\mathrm{w}}^2 - \sigma_{\mathrm{Track}}^2}$
+					
+					\vspace{5mm}
+				\item
+					resolution for perpendicular incident for both eta layers similar
+					
+					$\Rightarrow$ \SI{80}{\micro\m}
+				\item
+					resolution independent of amplification and drift voltage
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{M0 : Drift Time Measurement for Track Reconstruction}
+	\begin{columns}
+		\column{.50\textwidth}
+			
+			\centering
+			\includegraphics[width=0.9\textwidth]{timevsstrip_wDrift.pdf}
+			
+			\includegraphics<1>[width=0.7\textwidth]{SM2-M0_H8_resolutionVSangle_onlyEta.png}
+			\includegraphics<2>[width=0.7\textwidth]{SM2-M0_H8_resolutionVSangle_wStereo.png}
+			\includegraphics<3>[width=0.7\textwidth]{SM2-M0_H8_resolutionVSangle_timingCor.png}
+		\column{.50\textwidth}
+			\footnotesize
+			\vspace{-2mm}
+			\begin{itemize}
+				\item
+					drift time measurement enables reconstruction of inclined tracks: 
+					
+					time-projection-chamber like 
+				\item
+					inhomogeneous ionization leads to a timing dependence of the residual
+			\end{itemize}
+			\vspace{4mm}
+			\begin{itemize}
+				\item
+					degrading resolution for inclined incident using charge weighted reconstruction only
+					
+					$\Rightarrow$ similar behavior as 
+					
+					\hspace{3.5mm} small size chambers 
+				\item
+					charge weighted timing correction improves resolution considerably
+					
+					$\Rightarrow$ almost constant for angles $\le$ \SI{30}{\degree}
+				\item
+					resolution limited by signal to noise ratio of APV readout
+			\end{itemize}
+			\vspace{7mm}
+	\end{columns}
+}
+
+\frame{\frametitle{Summary}
+	\footnotesize
+	\begin{itemize}
+		\item
+			upgrade of the ATLAS muon spectrometer inner end cap
+			\begin{itemize}
+				\footnotesize
+				\item
+					sTGC and Micromegas quadruplets (16 active layers in total)
+				\item
+					threepart (/fivepart) readout structure 
+					
+					$\Rightarrow$ reconstruction and calibration is required after construction
+			\end{itemize}
+		\item
+			Investigation of the SM2 Prototype (M0) at the Cosmic Ray Facility in Munich
+			\begin{itemize}
+				\footnotesize
+				\item
+					full active area responsive, despite problematic prototype PCB quality
+				\item
+					calibration of the full active area of SM2 demonstrated
+			\end{itemize}
+		\item
+			Measurement at H8 Beamline of the SPS with the SM2 M0
+			\begin{itemize}
+				\footnotesize
+				\item
+					reasonable pulse height and efficiency behavior
+				\item
+					charge weighted position reconstruction for perpendicular tracks 
+					
+					$\Rightarrow$ \SI{80}{\micro\m} resolution
+					
+					$\Rightarrow$ same for both eta layers
+					
+					$\Rightarrow$ independent of drift and amplification voltage
+				\item
+					drift time measurement for tracks with $\le$ \SI{30}{\degree} inclination
+					
+					$\Rightarrow$ similar resolution
+					
+					$\Rightarrow$ limitation by signal to noise ratio of APV electronics 
+					
+					\hspace{3.5mm} (final electronics currently under test with first series SM2 module at H8) 
+			\end{itemize}
+	\end{itemize}
+}
+
+\appendix
+
+\frame{\centering \Huge Backup}
+
+\frame{\frametitle{Time Evolution of the Signal on a Single Strip}
+	beginning of the signal : fit by an inverse Fermi function
+	\vspace{5mm}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{pulseheight_withExtrapolationLine_wPoint3.pdf}
+		\column{.50\textwidth}
+			{\small
+			\centering
+			\hspace{3mm} $ \mathrm{f}_{\mathrm{Fermi}} = \dfrac{p_{0}}{1 + \exp[(p_{1} - x)/p_{2}]} + p_{3}$
+			
+			
+			%\hspace{3mm} $ \dfrac{p_{0}}{1 + e^{(p_{1} - x)/p_{2}}} + p_{3}$
+			\begin{itemize}
+				\item
+					$p_{0}$ : maximal pulse height 
+					
+					\hspace{8mm} $\Rightarrow$ charge of signal
+				\item
+					$p_{1}$ : time of 50\% 
+					
+					\hspace{5.5mm} maximal pulse height
+				\item
+					$p_{2}$ : $\propto$ rise time
+				\item
+					$p_{3}$ : pedestal
+			\end{itemize}
+			}
+	\end{columns}
+	\vspace{5mm}
+	\centering
+	$\Rightarrow$ {\color{green}3 values} of $\mathrm{f}_{\mathrm{Fermi}}$ at 10\% , 50\% and 90\% define 
+	
+	{\color{teal}start time} of signal by {\color{blue}extrapolation}
+}
+
+\frame{\frametitle{Position and Track Reconstruction}
+	\begin{columns}
+			\column{.50\textwidth}
+				\centering
+				\includegraphics[width=1.1\textwidth]{eventdisplay.png}
+				
+				drift time measurement
+				
+				\includegraphics[width=0.9\textwidth]{timevsstrip2.pdf}
+			\column{.50\textwidth}
+				\small
+				\begin{itemize}
+					\item
+						centroid method
+						
+						$\Rightarrow$ charge average over strips
+						
+						\vspace{3mm}$
+							 {\bf \color{violet}x_{\bf \mathrm{centroid}}} 
+								 = 
+							\dfrac{
+								\sum\limits_{\scriptscriptstyle\mathrm{strips}} x_{\scriptscriptstyle\mathrm{strip}} \cdot q_{\scriptscriptstyle\mathrm{strip}}
+							}
+							{\sum\limits_{\scriptscriptstyle\mathrm{strips}} q_{\scriptscriptstyle\mathrm{strip}} }
+						$\vspace{4mm}
+					\item
+						TPC-like method
+						
+						angle reconstruction by drift time measurement
+						
+						${\color{blue}\alpha} = \arctan\left(\dfrac{\mathrm{pitch}}{{\color{red}\mathrm{slope}_{\mathrm{fit}}} \cdot v_{\mathrm{drift}}}\right)$
+				\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{\normalsize Position Reconstruction Using Charge Weighted Clustertime}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{inhomogeneousIonization.png}
+			
+			\vspace{-1mm}
+			\includegraphics[width=0.75\textwidth]{H8_M0_resVScluTime.png}
+		\column{.50\textwidth}
+			\scriptsize
+			\begin{itemize}
+				\item
+					charge weighted timing:
+					
+					$t_{\mathrm{q}} = \dfrac{\sum t_{\mathrm{strip}} q_{\mathrm{strip}}}{\sum q_{\mathrm{strip}}}$
+					
+					$\Rightarrow$ vertical position in drift gap
+				\item
+					for inclined incident:
+					
+					centroid residual 
+					
+					VS charge weighted timing 
+					
+					$\Rightarrow$ linear dependence 
+				\item
+					slope given by 
+					
+					drift time and incident angle
+										
+					$\Rightarrow$ drift time is given by gas mixture, 
+					
+					\hspace{3mm} cathode voltage and drift gap
+										
+					$\Rightarrow$ for NSW Micromegas incident angle is 
+					
+					\hspace{3mm} almost fixed 
+					
+					\hspace{3mm} (direction to interaction point)
+				\item
+					new position is given by:
+					
+					$ x = x_{\mathrm{cen}} + \bigtriangleup t \cdot v_{\mathrm{drift}} \cdot \tan \theta$
+					
+					with:
+					
+					\begin{tabular}{ll}
+					$x_{\mathrm{cen}}$ & centroid position
+					\\
+					$\bigtriangleup t$ & $t_q - t_{\mathrm{mean}}$
+					\\
+					$v_{\mathrm{drift}}$ & drift velocity
+					\\
+					$\theta$ & incident angle
+					\end{tabular}
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{SM2-M0 at H8 Testbeam August 2017 Measurement Overview}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{SM2-M0_pointsAtH8_stereofront-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{SM2-M0_pointsAtH8_etafront-crop.pdf}
+	\end{columns}
+	\vspace{3mm}
+	\begin{itemize}
+		\item
+		for second configuration the order of layers was inverted
+		\item
+		at Points 12 and 13 module was tilted for inclined measurements
+		\item
+		several amplification scans made at different Points
+	\end{itemize}
+}
+
+\frame{\frametitle{Jitter Correction for \SI{40}{MHz} Readout of APVs}
+	\begin{columns}
+		\column{.50\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{SM2-M0_H8aug17_triggerNreadout-crop.pdf}
+		\column{.50\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{jitter_25ns.pdf}
+	\end{columns}
+	\vspace{3mm}
+	\begin{itemize}
+		\item
+			expected time jitter of signal due to \SI{40}{MHz} sampling of APVs
+		\item
+			record time difference of trigger signal and FEC cards (connected to APVs) via TDC
+		\item
+			merge at DAQ PC
+			
+			$\Rightarrow$ offline offsetcorrection and zerosuppression
+	\end{itemize}
+}
+
+%\frame{\frametitle{Position Resolution as Function of the Incident Angle}
+%	\vspace{-1mm}
+%	
+%	\begin{columns}
+%		\column{.50\textwidth}
+%			\centering
+%			\footnotesize
+%			\textbf{eta out}
+%			\includegraphics[width=0.9\textwidth]{m1_eo_resolutionVSangle_wCluTimeCor.pdf}
+%			
+%			\vspace{-0.5mm}
+%			\textbf{eta in}
+%			\includegraphics[width=0.9\textwidth]{m1_ei_resolutionVSangle_wCluTimeCor.pdf}
+%		\column{.50\textwidth}
+%			\footnotesize
+%			\begin{itemize}
+%				\item
+%					first series SM2 Module in Cosmic Ray Facility
+%				\item
+%					residual distribution for each angle separately
+%				\item
+%					fit with double Gaussian
+%					
+%					analysis sigma narrow Gaussian only
+%					
+%					(reject multiple scattering)
+%				\item
+%					consider track uncertainty of reference chambers: 
+%				
+%					$\sigma_{\mathrm{micromegas}} = \sqrt{\sigma_{\mathrm{res}}^2 - \sigma_{\mathrm{track}}^2}$
+%				\item
+%					resolution is for perpendicular incident close to expectation
+%				\item
+%					charge weighted clustertime correction improves residual distribution considerably
+%			\end{itemize}
+%	\end{columns}
+%}
+
+\end{document}

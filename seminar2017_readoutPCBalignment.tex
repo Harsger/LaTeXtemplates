@@ -1,0 +1,1095 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{spruce}
+\definecolor{green(pigment)}{rgb}{0.0, 0.65, 0.31}
+\setbeamercolor*{item}{fg=green(pigment)}
+\definecolor{Green}{rgb}{0.00, 1.00, 0.00}
+\definecolor{Red}{rgb}{1.00, 0.00, 0.00}
+\definecolor{Blue}{rgb}{0.00, 0.00, 1.00}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{textcomp}
+\usepackage{multirow,bigdelim,dcolumn,booktabs}
+%\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+\usepackage{siunitx}
+\usepackage{appendixnumberbeamer}
+\usepackage{hyperref}
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\beamertemplatenavigationsymbolsempty
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+
+\graphicspath{
+	{pictures/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/plots/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/sketches/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/pictures/}
+}
+
+\begin{document}
+\title[Readout PCB Alignment]{Investigation of Readout PCB Alignment \\ for SM2 Modules}  
+\author[M. Herrmann]{ Maximilian Herrmann}
+\institute[LMU Munich]{Ludwig-Maximilians-Universit\"at M\"unchen - Lehrstuhl Schaile}
+\date[20.12.2017]{Abteilungsseminar 20.12.2017} 
+
+\frame{\titlepage} 
+
+\frame{\frametitle{Outline}
+	\tableofcontents
+} 
+
+\section{Motivation}
+
+\subsection{New Small Wheels for the ATLAS Experiment}
+
+\frame{\frametitle{\large LHC upgrade and Efficiency for the ATLAS Muon Spectrometer}
+	\centering
+	\includegraphics[width=0.8\textwidth]{HL_LHC_PlanUpdateJuly2015}
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{ATLASnewer.jpg}
+		\column{.45\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{MDTefficiencyPerHitRate_NSW-TDR_edited.png}
+	\end{columns}
+}
+
+\frame{\frametitle{Upgrade of the Inner Barrel End Caps}
+
+	replacement of the current detector systems by small-strip Thin Gap Chamber (sTGC) and Micromegas quadruplets
+	
+	\vspace{3mm}
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+			\textbf{New Small Wheel Sectors}
+			\vspace{7mm}
+			
+			\includegraphics[width=1\textwidth]{sectorsDimensions.png}
+		\column{.45\textwidth}
+			\centering
+			\textbf{Micromegas quadruplets}
+			
+			\includegraphics[width=1\textwidth]{sectorsNsides.png}
+	\end{columns}
+}
+
+\subsection{Micromegas Quadruplets}
+
+\frame{\frametitle{\normalsize Micromegas Quadruplets for track reconstruction in the NSW}
+	\textbf{MICROMEGAS - MICROMEesh GAseous Structure}
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=1.1\textwidth]{RSMM_principle7-crop.pdf}
+		\column{.5\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					drift region for electron and ion transport
+				\item	
+					high field in amplification region to create electron avalanches
+				\item
+					position reconstruction using charge weighted mean of hit strips
+				\item
+					reconstruction of incident angle using drift time measurements
+			\end{itemize}
+	\end{columns}
+	\vspace{3mm}
+	
+	\textbf{Micromegas Quadruplet}
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{sandwichassembly.png}
+		\column{.45\textwidth}
+			\footnotesize	
+			alternating orientation of drift and amplification region
+			
+			$\Rightarrow$ construction of dedicated 
+			
+			readout and drift panels
+	\end{columns}
+}
+
+\frame{\frametitle{Construction of Readout Panels}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{quadrupletStripOrientation-crop.pdf}
+		\column{.5\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					eta planes for precision reconstruction in transversal direction
+				\item	
+					stereo planes for additional coarse information about orthogonal direction
+			\end{itemize}
+	\end{columns}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{alignmentFrameOnBoards-crop.pdf}
+		\column{.5\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					two step gluing process for one panel
+				\item	
+					limitations by industry
+				
+					$\Rightarrow$ segmented readout anode: 
+					
+					3 Printed Circuit Boards (PCB) per plane
+				\item
+					alignment using a frame and cylinders
+								
+					attached via V-shaped and line spacers 
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{PCB Alignment before Gluing}
+	\centering
+	\begin{tikzpicture}
+		\node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.7\linewidth]{alignmentFrame.jpeg}};
+		\node[right,red] at (3.4,2.8) {\large alignment};
+		\node[right,red] at (3.7,2.4) {\large frame};
+		\draw[arrows=->,red,ultra thick](3.4,2.6)--(2.9,2.3);
+		\draw[arrows=->,red,ultra thick](3.4,2.8)--(2.8,3.3);
+		\draw[arrows=->,red,ultra thick](5.0,3.0)--(5.7,3.1);
+		\draw[arrows=->,red,ultra thick](5.0,2.6)--(5.5,2.2);
+		\node[right,red] at (7.0,0.8) {\large pins in};
+		\node[right,red] at (7.0,0.4) {\large holes};
+		\draw[arrows=->,red,ultra thick](7.5,1.3)--(7.45,2.5);
+		\draw[arrows=->,red,ultra thick](7.5,1.3)--(6.4,2.0);
+		\draw[arrows=->,red,ultra thick](7.5,1.3)--(5.0,1.5);
+		\node[right,red] at (0.0,1.0) {\large attached to};
+		\node[right,red] at (0.0,0.6) {\large precision};
+		\node[right,red] at (0.0,0.2) {\large cylinder};
+		\draw[arrows=->,red,ultra thick](1.0,1.3)--(1.15,3.1);
+		\draw[arrows=->,red,ultra thick](2.0,0.5)--(3.6,1.15);
+	\end{tikzpicture}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			washer with pin
+			
+			\includegraphics[width=0.7\textwidth]{washerWithPin.jpeg}
+		\column{.50\textwidth}
+			\centering
+			V-shaped spacer at pin
+			
+			\includegraphics[width=0.7\textwidth]{VwasherAtCyl2.png}
+	\end{columns}
+}
+
+\frame{\frametitle{Measurement Overview}
+	naming convention
+					
+	\vspace{3mm}
+	\centering
+	\includegraphics[width=0.9\textwidth]{panelStripOrientation-crop.pdf}
+	
+	\vspace{3mm}
+	\begin{itemize}
+		\item
+			Freiburg CMM: Module 0 panels
+		\item	
+			Munich CMM: calibration and first series panels
+		\item
+			Saclay CMM: first series panels
+		\item
+			H8 beamtime: Module 0 quadruplet
+		\item
+			CRF: Module 0 quadruplet
+	\end{itemize}
+}
+
+\section{Optical Surveying of the Board Alignment}
+
+\subsection{Investigation with Coordinate Measurement Machines}
+
+\frame{\frametitle{Alignment Measurements \\ with a Camera attached to a CMM}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\begin{tikzpicture}
+				\node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.9\textwidth]{granittableleftresized.JPG}};
+				\begin{scope}[x={(image.south east)},y={(image.north west)}]
+					\draw[arrows=->,red,ultra thick](0.4,0.16)--(0.8,0.408);
+					\node[below,red] at (0.68,0.31) {X};
+					\draw[arrows=->,red,ultra thick](0.35,0.12)--(0.12,0.5);
+					\node[right,red] at (0.22,0.36) {Y};
+					\draw[arrows=->,red,ultra thick](0.1,0.5)--(0.08,0.8);
+					\node[right,red] at (0.1,0.65) {Z};
+					\node[above,red] at (0.1,0.8) {center};
+					\node[above,red] at (0.8,0.7) {camera};
+				\end{scope}
+			\end{tikzpicture}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{microscope_screenshot_20160420_marker_board7_awayPC.jpeg}
+	\end{columns}
+	
+	\begin{itemize}
+		\item
+			usage of 
+			%Computerized Numerical Controlled 
+			three axes machines 
+			%(CNC) 
+			as Coordinate Measurement Machine (CMM)
+		\item
+			axes for movement of measurement head
+			
+			$\Rightarrow$ calibration of movement inaccuracies
+		\item	
+			image evaluation for reconstruction of exact position
+	\end{itemize}
+}
+
+\frame{\frametitle{Alignment Measurement of Module 0 in Freiburg}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			deviations to nominal values [mm]
+			
+			\includegraphics[width=0.9\textwidth]{Module0_Ydeviation_FreiburgOptical.pdf}
+		\column{.5\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					goal: $\le$ \SI{0.030}{mm}
+				\item
+					large deviations to nominal values
+					
+					$\Rightarrow$ exchanged old alignment frame
+				\item	
+					shifts and rotations w.r.t. central board can be reconstructed
+			\end{itemize}
+	\end{columns}
+	
+	\begin{columns}
+		\column{.70\textwidth}
+			\tiny
+			\begin{tabular}{ccc|ccc}
+			panel & side & board & rotation & corner shift & center shift
+			\\
+			 &  &  & [\SI{10}{\micro\m/\m}] & [mm] & [mm]
+			\\
+			\hline
+			stereo & 1 & small & 4 & 0.07 & 0.10
+			\\
+			 &  & large & 6 & -0.17 & -0.13
+			\\
+ 			\hline
+ 			stereo & 2 & small & -16 & 0.10 & 0.20
+ 			\\
+			 &  & large & 7 & -0.02 & 0.04
+ 			\\
+ 			\hline
+ 			eta & 1 & small & 2 & 0.07 & 0.08
+ 			\\
+		 	 &  & large & 3 & -0.03 & -0.01
+ 			\\
+ 			\hline
+ 			eta & 2 & small & 2 & 0.05 & 0.07
+ 			\\
+			 &  & large & 6 & -0.01 & 0.04
+			\end{tabular}
+		\column{.30\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{shiftDefinitions-crop.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{Alignment w.r.t. opposite side of the panel}
+	\centering
+	deviations to other side of the panel [mm]
+	\vspace{3mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			stereo
+			\vspace{2mm}
+			
+			\includegraphics[width=0.7\textwidth]{Module0_deviationGluingSides_stereo.pdf}
+		\column{.5\textwidth}
+			\centering
+			eta
+			\vspace{2mm}
+			
+			\includegraphics[width=0.7\textwidth]{Module0_deviationGluingSides_eta.pdf}
+	\end{columns}
+	\vspace{3mm}
+	
+	\scriptsize
+	\begin{tabular}{cc|cc}
+		panel & board & rotation [\SI{10}{\micro\m/\m}] & center shift [mm]
+		\\
+		\hline
+		stereo & small & -11 & -0.06
+		\\
+	 	 & middle & 1 & 0.04
+		\\
+	 	 & large & -12 & 0.21
+		\\
+		\hline
+		eta & small & 11 & -0.04
+		\\
+		 & middle & 6 & -0.06
+		\\
+		 & large & -4 & -0.01
+	\end{tabular}
+			
+}
+
+\subsection{Calibration of a Coordinate Measurement Machine}
+
+\frame{\frametitle{Mapping with a Laser-Interferometer}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{laserinterferometerAtCMM_withLegs-crop.pdf}
+		\column{.5\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					laserinterferometer specification: 
+					
+					error below \SI{1}{\micro\m/\m}
+				\item
+					\SI{20}{mm} periodicity along X and Y
+					
+					due to rotating spindle
+				\item
+					\SI{100}{mm} periodicity along X additionally,
+					
+					screwing of the rotating spindel
+			\end{itemize}
+	\end{columns}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{cmmlaser_Xdeviation_zoomed.pdf}
+		\column{.5\textwidth}
+			\centering
+			Fourier Analysis
+			
+			\includegraphics[width=0.9\textwidth]{CMMfequencyAlongX.png}
+	\end{columns}
+}
+
+\frame{\frametitle{CMM Calibration}
+	\begin{columns}
+		\column{.45\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{measuredNreconstructedVdeviation.pdf}
+		\column{.55\textwidth}
+			\scriptsize
+			\begin{itemize}
+				\item	
+					interpolation of leg movement 
+					
+					$\Rightarrow$ reconstruction of movement of the measurement arm along Y axis between the legs
+				\item
+					at small scales reconstruction looks correct
+				\item
+					reconstruction fails at large scale
+					
+					\begin{itemize}
+						\scriptsize
+						\item
+							depending on X position
+						\item
+							can be explained by bending of the measurement arm
+					\end{itemize}
+					
+					$\Rightarrow$ more measurements required
+			\end{itemize}
+	\end{columns}
+	
+	\begin{columns}
+		\column{.33\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{CMMdiffRecoMeas_severalX.png}
+		\column{.33\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{CMMdiffRecoMeas_hightVSx.png}
+		\column{.33\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{diffRecoMeasNangle.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{Workaround instead of a full Calibration}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{CMMworkaroundTry1-crop.pdf}
+		\column{.5\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					once:
+				
+					measure distances of specific locations to pins on granite table with the laserinterferometer
+				\item	
+					for each alignment measurement:
+					\begin{itemize}
+						\footnotesize
+						\item
+							take a picture of the marker at the locations
+						\item
+							evaluate pictures to reconstruct center of the marker
+						\item
+							add evaluated position to distance of the laserinterferometer at that location
+					\end{itemize}
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{Comparison of Measurements of the new Alignment}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			Freiburg
+			
+			\includegraphics[width=0.7\textwidth]{newAlignment_Freiburg-crop.pdf}
+		\column{.5\textwidth}
+			\centering
+			Munich
+			
+			\includegraphics[width=0.7\textwidth]{newAlignment_Munich-crop.pdf}
+	\end{columns}
+	\vspace{3mm}
+	
+	measurement from Freiburg shows more reasonable results
+	
+	$\Rightarrow$ method do not work as expected
+	
+	error sources:
+	\begin{itemize}
+		\item
+			parallax error due to bending of measurement arm not considered
+		\item
+			combination of CMM and picture coordinates
+		\item
+			X and Y axis are \textbf{not} exactly perpendicular 
+	\end{itemize}
+}
+
+\frame{\frametitle{A more sophisticated Approach}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{CMMworkaroundTry2-crop.pdf}
+		\column{.5\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					same procedure as for the other method
+				\item	
+					different measurement scheme for the laserinterferometer
+					\begin{itemize}
+						\footnotesize
+						\item
+							measure distances between the pins and one marker
+						\item
+							calculate the distance ({\color{blue}blue}) to the baseline between the pins
+						\item
+							repeat this for each marker
+					\end{itemize}
+			\end{itemize}
+	\end{columns}
+	\vspace{5mm}
+	
+	\begin{align*}
+		h_{a} = \sqrt{2 \left(a^2 b^2 + b^2 c^2 +c^2 a^2 \right) - \left( a^4 + b^4 + c^4 \right)} / (2a)
+	\end{align*}
+	
+	\footnotesize
+	measurements not yet done (granite table with CMM needed for series production)
+	
+}
+
+\frame{\frametitle{Alignment Measurements w.r.t. the Alignment Frame}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			alignment frame hole
+			
+			\includegraphics[width=0.75\textwidth]{alignmentFrameHole.pdf}
+		\column{.5\textwidth}
+			\centering
+			precision marker
+			
+			\includegraphics[width=0.75\textwidth]{markerFitted.pdf}
+	\end{columns}
+	\vspace{2mm}
+	
+	\footnotesize
+	compare position of hole in alignment frame with marker on panel via a circular fit
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{aliNfirstPanels_pixelpositionGood_wPixelSize.pdf}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{aliNfirstPanels_pixelpositionBad_wError.pdf}
+	\end{columns}
+	\centering
+	
+	$\Rightarrow$ reconstruction of alignment error feasible
+}
+
+\frame{\frametitle{Measurements done in Saclay}
+	\begin{itemize}
+		\item
+			CMM scans for planarity
+		\item
+			CMM scans with camera for alignment in single plane
+		\item 
+			Raskfork for alignment w.r.t. other side of panel
+	\end{itemize}
+	\vspace{3mm}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			CMM prepared for measurement with the laserinterferometer
+			\vspace{1mm}
+			
+			\includegraphics[width=\textwidth]{sacleyNov2017_gantryWithLaserinterferometer.JPG}
+		\column{.50\textwidth}
+			\centering
+			Raskfork attached to a readout panel
+			\vspace{2.5mm}
+			
+			\includegraphics[width=\textwidth]{sacleyNov2017_raskfork.JPG}
+	\end{columns}
+}
+
+\frame{\frametitle{Saclay Results for the first Series Panels}
+		alignment in a single plane $\Rightarrow$ w.r.t. middle board [$\mu$m]
+		\vspace{3mm}
+		
+		\scriptsize
+		\begin{tabular}{cc|cccc}
+			panel & side &  large left & large right & small left & small right
+			\\
+			\hline
+			stereo1 & 1 & -11 & -16 & -27 & -38
+			\\
+		 	 & 2 & 4 & -15 & -1 & -14
+			\\
+			\hline
+			stereo2 & 1 & -13 & {\color{red}-73} & -18 & -7
+			\\
+			 & 2 & -8 & -24 & -19 & -32
+			\\
+			\hline
+			eta2 & 1 & -4 & -39 & {\color{red}-54} & -20
+			\\
+			 & 2 & 32 & 19 & -10 & {\color{red}-60}
+			\\
+			\hline
+			frame & Freiburg & 35 & 39 & 28 & 24
+		\end{tabular}
+		\vspace{3mm}
+		
+		\normalsize
+		alignment w.r.t. the other side of the panel [$\mu$m]
+		\vspace{3mm}
+		
+		\scriptsize
+		\begin{tabular}{c|cccccc}
+			panel & large left & large right & middle left & middle right & small left & small right
+			\\
+			\hline
+			stereo1 & {\color{blue}-266} & -5 & {\color{blue}-238} & -27 & {\color{blue}-187} & -24
+			\\
+			stereo2 & 34 & -33 & {\color{red}95} & -36 & {\color{red}81} & {\color{red}44}
+			\\
+			eta2 & -28 & -11 & -38 & 15 & {\color{red}56} & 4
+		\end{tabular}
+}
+
+\section{Reconstruction of the Board Alignment}
+
+\subsection{Beamtime in August 2017 at the H8 Beamline}
+
+\frame{\frametitle{H8 Testbeam Setup for Tracking}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{setup-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{SM2-M0_H8aug17_setup.png}
+	\end{columns}
+	
+	\footnotesize
+	
+	\begin{itemize}
+		\item
+			module fully equipped with 96 APVs
+		\item 
+			1024 strips for each layer were read out by two FEC cards
+		\item
+			two further FEC cards for 28 APVs of tracking telescope:
+			
+			3 twodimensional GEMs and 2 twodimensional TMMs
+			
+			$\Rightarrow$ 4 FECs read out @ \SI{220}{Hz} %(during spills)
+		\item
+			acquisition of time jitter via TDC (VME)
+	\end{itemize}
+}
+
+\frame{\frametitle{Measurement Program for Module 0}
+	view from telescope against beam direction
+	\vspace{3mm}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{SM2-M0_pointsAtH8_stereofront-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{SM2-M0_pointsAtH8_etafront-crop.pdf}
+	\end{columns}
+	\vspace{3mm}
+	
+	\begin{itemize}
+		\item
+			scan of a large part of the active area to investigate the efficiency  
+			
+			$\Rightarrow$ dead or noisy areas (for example between the PCBs)
+		\item
+			determination of resolution as function of amplification and drift voltage, as well as incidence angle
+		\item
+			\textbf{reconstruction of PCB alignment}
+	\end{itemize}
+}
+
+\frame{\frametitle{Results for Pulse Height and Spatial Resolution}
+	\begin{itemize}
+		\item
+			pulse height behaves as expected
+		\item
+			for both eta layers the same resolution is achieved
+			
+			$\Rightarrow$ below \SI{90}{\micro\m}
+		\item
+			resolution independent of amplification voltage
+		\item
+			resolution independent of drift voltage
+		\item
+			angular dependence very similar to 10$\times$10 cm$^2$ chambers
+	\end{itemize}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{SM2-M0_H8aug17_ampScan_nice.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{SM2-M0_H8aug17_resolutionVSampVolt-crop.pdf}
+	\end{columns}
+	
+	$\Rightarrow$ module showed a good performance despite bad PCB quality
+}
+
+\frame{\frametitle{Reconstruction of the PCB Rotation}
+	residual between the layers as function of position along the strips
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{H8_run193_residualEtaLayers.pdf}
+			
+			\scriptsize
+			rotation [\SI{10}{\micro\m/\m}]
+			
+			\begin{tabular}{cc|cc}
+				panel & board & CMM & H8 
+				\\
+				\hline
+				stereo & small & -11 & 
+				\\
+			 	 & middle & 1 & 13
+				\\
+			 	 & large & -12 & -14
+				\\
+				\hline
+				eta & small & 11 & 10 
+				\\
+				 & middle & 6 & -4
+				\\
+				 & large & -4 & 6
+			\end{tabular}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{sm2_m0_h8_board7_etaDifVSalongStrips.png}
+			\vspace{3mm}
+			\scriptsize
+			
+			problems:
+			
+			\begin{itemize}
+				\item
+					only small areas investigated
+				\item
+					no exact measurement of the position along the strips
+				\item
+					noisy and dead areas on board 6
+				\item
+					systematic error due to inclination w.r.t. beam
+			\end{itemize}
+	\end{columns}
+}
+
+\subsection{Investigation in the Cosmic Ray Facility}
+
+\frame{\frametitle{Cosmic Ray Test Facility}
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=1.0\textwidth]{CRFprinciple-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{CRF_small.JPG}
+	\end{columns}
+	
+	\footnotesize
+			
+	\begin{itemize}
+		\item
+			2D track reconstruction with two Monitored Drift Tube (MDT) chambers
+		\item
+			trigger via scintillator hodoscope with $\approx$ \SI{10}{cm} resolution in orthogonal direction
+		\item
+			MDT chambers : \SI{2.2}{\m} $\times$ \SI{4}{\m} 
+			
+			$\Rightarrow$ active area : \SI{9}{\m\squared}, angular acceptance : $\pm30^{\circ}$
+		\item
+			readout of the full module with six FEC cards @ full \SI{100}{Hz} \textmu -rate
+			
+			(tested up to \SI{500}{Hz} with random trigger)
+	\end{itemize}
+}
+
+\frame{\frametitle{Alignment using Reference Tracks}
+	\centering \textbf{Idea:}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.90\textwidth]{positionshift2-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.90\textwidth]{verticalshift-crop.pdf}
+	\end{columns}
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+			
+			%{\rotatebox{90}{\textbf{\tiny \hspace{3mm} residual = measured - reference position}}}
+			\includegraphics[width=0.93\textwidth]{resVSslope_blue.pdf}
+		\column{.45\textwidth}
+			\small
+			\textbf{Implementation:}
+			\begin{itemize}
+				\item
+					%residual = measured - reference position
+					\textbf{residual} = $\mathrm{pos}_{\mathrm{measured}} - \mathrm{pos}_{\mathrm{reference}}$
+				\item
+					residual vs. slope 
+					
+					 of reference track 
+					 
+					$\Rightarrow$ {\color{red}linear fit}
+				\item	
+					$\mathrm{shift}_{\mathrm{horizontal}} = \mathrm{intercept}_{\mathrm{fit}}$
+				\item						
+					$\mathrm{shift}_{\mathrm{vertical}} \;\;\; = \mathrm{slope}_{\mathrm{fit}}$
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{Reconstructed Deviations per Partition}
+	\small
+
+	$\Rightarrow$ subdivide the active area into smaller partitions
+	
+	$\Rightarrow$ reconstruct separate for each partition the vertical and the horizontal shift
+	
+	\vspace{3mm}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			vertical shift
+			
+			\includegraphics[width=0.90\textwidth]{sm2_m0_CRF_eta-out_deltaZperPartition.pdf}
+			
+			\scriptsize
+			$\Rightarrow$ gravitational sag deforms all layers the same way
+		\column{.50\textwidth}
+			\centering
+			horizontal shift
+			
+			\includegraphics[width=0.90\textwidth]{sm2_m0_CRF_eta-out_deltaYperPartition.pdf}
+			\scriptsize
+			
+			$\Rightarrow$ shifts between PCBs have to be investigated
+			
+			$\Rightarrow$ rotations on this scale are hardly recognizable
+	\end{columns}
+}
+
+\frame{\frametitle{Reconstructed Pitch Error and Board Alignment per Plane}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			{\color{blue}pitch error} and {\color{red}misaligned electronic adapter board}
+			
+			\includegraphics[width=0.90\textwidth]{sm2_m0_CRF_eta-in_color.pdf}
+			
+			\vspace{3mm}
+			
+			pitch error [10$^{-4}$]
+			\scriptsize
+			\begin{tabular}{cc|ccc}
+			panel & side & small & middle & large
+			\\
+			\hline
+			stereo & out & 0.8 & -2.4 & 2.7
+			\\
+			stereo & in &  & 1.4 & 
+			\\
+			\hline
+			eta & in & 1.0 & 2.9 & 3.6
+			\\
+			eta & out & 2.3 & 4.4 & 4.7
+			\end{tabular}
+		\column{.50\textwidth}
+			\centering
+			corrected pitch and shifted adapter board
+			
+			\includegraphics[width=0.90\textwidth]{sm2_m0_CRF_eta-in_shiftNpitchCor.pdf}
+			
+			\vspace{3mm}
+						
+			center shift [mm]
+			\scriptsize
+			\begin{tabular}{cc|cc}
+			panel & side & small & large
+			\\
+			\hline
+			stereo & out & 0.09 & -0.06
+			\\
+			stereo & in & -0.18 & 0.25
+			\\
+			\hline
+			eta & in & -0.07 & 0.13
+			\\
+			eta & out & 0.00 & 0.24
+			\end{tabular}
+	\end{columns}
+}
+
+\frame{\frametitle{Rotations and Shifts per PCB}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			stereo in middle
+			
+			\includegraphics[width=\textwidth]{resVSscinX.pdf}
+		\column{.50\textwidth}
+			\begin{itemize}
+				\item
+					reconstruction of the rotation: 
+						
+					residual as function along the strips
+					
+					$\Rightarrow$ separately for each PCB
+					
+					$\Rightarrow$ calculate relative to middle PCB
+				\item
+					reconstruction of the shift:
+					
+					residual distribution of each PCB separately
+					
+					$\Rightarrow$ calculate relative to middle board
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{Comparison of CMM and CRF measurements}
+	alignment in single plane relative to middle board
+	\vspace{2mm}
+	\scriptsize
+	\begin{tabular}{ccc|cc|cc}
+		 &  &  & \multicolumn{2}{c}{CMM Freiburg} &  \multicolumn{2}{c}{CRF}
+		\\
+		panel & side & board & rotation & center & rotation & center
+		\\
+		 &  &  &  [\SI{10}{\micro\m/\m}] & [mm] &  [\SI{10}{\micro\m/\m}] & [mm]
+		\\
+		\hline
+		stereo & out & small & 4 & 0.07 & -2 & 0.10
+		\\
+		 &  & large & 6 & -0.17 & 20 & -0.04
+		\\
+		\hline
+		stereo & in & small & -16 & 0.10 & -11 & -0.17
+		\\
+		 &  & large & 7 & -0.02 & -8 & 0.26
+		\\
+		\hline
+		eta & in & small & 2 & 0.07 & 7 & -0.08
+		\\
+		 &  & large & 3 & -0.03 & 4 & 0.23
+		\\
+		\hline
+		eta & out & small & 2 & 0.05 & 8 & 0.01
+		\\
+		 &  & large & 6 & -0.01 & -5 & 0.27
+	\end{tabular}
+	\vspace{2mm}
+	
+	
+		
+	\scriptsize
+	\begin{tabular}{cc|cc|cc}
+		&  & \multicolumn{2}{c}{CMM Freiburg} &  \multicolumn{2}{c}{CRF}
+		\\
+		panel & board & rotation & center & rotation & center
+		\\
+		 &  &  [\SI{10}{\micro\m/\m}] & [mm] &  [\SI{10}{\micro\m/\m}] & [mm]
+		\\
+		\hline
+		stereo & small & -11 & -0.06 & 73 &
+		\\
+		& middle & 1 & 0.04 & 81 & 
+		\\
+		& large & -12 & 0.21 & 53 & 
+		\\
+		\hline
+		eta & small & 11 & -0.04 & 11 & -0.07
+		\\
+		& middle & 6 & -0.06 & 10 & 0.01
+		\\
+		& large & -4 & -0.01 & 1 & 0.06
+	\end{tabular}
+}
+
+\frame{\frametitle{Conclusion of CMM and CRF measurements}
+	
+	$\Rightarrow$ no obvious correlation visible
+	\vspace{2mm}
+	\scriptsize
+	
+	error sources:
+	\begin{itemize}
+		\item
+			method: 
+			\begin{itemize}
+				\scriptsize
+				\item	
+					comparison with middle board may be problematic
+				\item						
+					errors during measurement in Freiburg can be reconstructed hardly
+			\end{itemize}
+		\item
+			bad PCB quality: noisy and dead areas distort residual distributions
+		\item
+			imperfect alignment during fabrication of PC in industry
+		\item
+			deformation of the glued panel during transport (Munich - Freiburg and vice versa), due to temperature, humidity or mechanical stress
+	\end{itemize}
+	\vspace{5mm}
+	
+	\normalsize
+	
+	\centering
+	
+	$\Rightarrow$ work in progress
+
+}
+
+\frame{\frametitle{Summary}
+	\footnotesize
+	\begin{itemize}
+		\item
+			replacement of the ATLAS inner end cap with new detector systems
+			
+			$\Rightarrow$ sTGC and Micromegas quadruplets
+		\item 
+			Micromegas quadruplets for SM2 Modules will be built by the German collaboration
+			
+			$\Rightarrow$ huge part of work is and will be done in Munich
+		\item
+			segmented readout structure due to limitations by industry
+			
+			$\Rightarrow$ surveying and calibration is needed during and after construction
+		\item
+			CMM in combination with cameras could be used for surveying
+			
+			\begin{itemize}
+				\footnotesize
+				\item
+					calibration of the local CMM is sophisticated and needs more measurements
+				\item
+					effects of surveying with the camera have to be understood better
+			\end{itemize}
+			
+			$\Rightarrow$ measurements with calibrated CMMs show good results for first panels
+		\item
+			measurement of readout PCB alignment with the CRF should be feasible
+						
+			\begin{itemize}
+				\footnotesize
+				\item
+					distortions of the reconstruction with the residuals due to imperfect board quality should decline with series PCB
+				\item
+					much better alignment than for the L1 chamber already reconstructed
+				\item
+					for comparison with optical measurements better analysis methods have to be considered
+			\end{itemize}
+	\end{itemize}
+}
+
+\frame{\centering \Huge Merry Christmas \\ and a \\ Happy New Year}
+
+\appendix
+
+\frame{\centering \Huge Backup}
+
+\frame{\frametitle{Nominal Distances between the Precision Marker}
+	\centering
+	\includegraphics[width=0.9\textwidth]{nominalDistances.pdf}
+}
+
+\end{document}

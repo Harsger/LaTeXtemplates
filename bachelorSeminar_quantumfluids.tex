@@ -1,0 +1,261 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\begin{document}
+\title{Quantum Fluids}  
+\author{ Maximilian Herrmann}
+\date{16.01.2014} 
+
+\frame{\titlepage} 
+
+\frame{\frametitle{Inhaltsverzeichnis}\tableofcontents} 
+
+
+\section{ $ {}^4 $He und $ {}^3 $He bei tiefen Temperaturen} 
+
+\frame{\frametitle{Phasendiagramme} 
+\begin{figure}
+    \subfigure[ $ {}^4 $He ]{\includegraphics[width=0.49\textwidth]{he4-diagramm-po.png}}
+    \subfigure[ $ {}^3 $He ]{\includegraphics[width=0.49\textwidth]{he3-diagramm-po.png}}
+\end{figure}  
+}
+
+\frame{\frametitle{Resultierende Fragen }
+
+\begin{enumerate}
+
+\item 
+Warum gibt es festes Helium nur bei sehr hohen Dr\"ucken?
+\item 
+Wieso haben $ {}^4 $He und $ {}^3 $He so unterschiedliche Phasen\"uberg\"ange?
+\item 
+Wie l\"asst sich der Verlauf der Phasengrenze von $ {}^3 $He erkl\"aren?
+
+\end{enumerate}
+
+}
+
+\frame{\frametitle{Fehlender Tripelpunkt} 
+Bindung von Helium nur durch Van-der-Waals-Kr\"afte.
+\par\medskip 
+Aber: Nullpunktsbewegung durch Unsch\"arferelation
+\par\medskip 
+Vgl. harmonischer Oszillator (Q.M.):
+\par\medskip
+\begin{equation*}
+E_{n}\;=\;\hbar \omega \left(n+\frac{1}{2}\right)
+\end{equation*}
+\par\medskip
+mit $ \;\omega\;=\;\sqrt{\frac{D}{m}}\; $ folgt:
+\par\medskip
+\begin{equation*}
+E_{0}\;\propto\;\frac{1}{\sqrt{m}}
+\end{equation*}
+
+}
+
+\section{ $ {}^4 $He als Superfluid}
+
+\frame{\frametitle{Superfluide} 
+
+Superfluide besitzen bemerkenswerten Eigenschaften:
+
+\begin{enumerate}
+
+\item 
+sehr geringe Viskosit\"at (keine innere Reibung)
+\item 
+keine Entropie
+\item 
+extrem hohe W\"armeleitf\"ahigkeit
+
+\end{enumerate}
+
+Diese erkl\"art man dar\"uber, dass ein makroskopischer Anteil der Atome, welche Bosonen sind, sich im gleichen quantenmechanischem Zustand befinden. Dadurch k\"onnen sie durch die gleiche Wellenfunktion beschrieben werden.
+
+\begin{align*}
+mit\;\;\;
+\Omega\;\approx\;1
+\;\;\;und\;\;\;
+S\;&=\;k_{B} \ln(\Omega)
+\\
+folgt\;\;\;
+S\;&\approx\;0
+\end{align*}
+
+}
+
+\frame{\frametitle{Zwei Fl\"ussigkeiten Modell} 
+
+\begin{columns}
+
+\column{.45\textwidth}
+\pgfimage[width=\textwidth]{he4-superfluid-gu.png}
+
+\column{.55\textwidth}
+Im Temperaturbereich von 1 K bis zum Lambda Punkt (dieser bezeichnet den \"Ubergang  von fl\"ussig zu superfluid) besitzt  $ {}^4 $He sowohl normale als auch superfluide Eigenschaften. Dies beschreibt man, als besteht es aus zwei untrennbaren Fl\"ussigkeiten, einer normalen und einer superfluiden. Der superfluide Anteil wandelt sich durch W\"arme in normalen um, wobei die Gegenstr\"omung der beiden Anteile reibungsfrei verl\"auft.
+
+\end{columns}
+
+}
+
+\subsection{Font\"anen Effekt}
+
+\frame{\frametitle{Versuchsaufbau}
+
+\begin{columns}
+
+\column{.55\textwidth}
+\pgfimage[width=\textwidth]{he4-superleak-gu.png}
+
+\column{.45\textwidth}
+Zwei Reservoirs verbunden durch extrem d\"unne Kapillare. Heizdraht erw\"armt eine Seite $ \Rightarrow $ superfluider Anteil wird von beiden Seiten \glqq angezogen\grqq , normaler Anteil kommt aber nicht durch pr\"aparierte Kapillare.
+
+\end{columns}
+\par\medskip
+Thermomechanischer Effekt: Der Druck baut sich solange auf bis er den Temperaturunterschied kompensiert.
+
+}
+
+\subsection{Film Flow}
+
+\frame{\frametitle{Versuchsaufbau} 
+
+\begin{columns}
+
+\column{.65\textwidth}
+\pgfimage[width=\textwidth]{he4-filmflow1-po.png}
+
+\column{.35\textwidth}
+Durch Adsorption bildet sich auf Beh\"alter Oberfl\"achen ein relativ dicker Film $ {}^4 $He. Beim in Kontakt bringen mehrerer dieser Beh\"alter gleichen sich deren Flüssigkeitshöhen selbst \"uber Trennw\"ande hinweg aus. 
+
+\end{columns}
+
+}
+
+\section{ $ {}^3 $He als Spin $ \frac{1}{2} $ Teilchen }
+
+\subsection{Clapeyron-Gleichung}
+
+\frame{\frametitle{Negative Steigung der Phasengrenze} 
+
+Aus der Clapeyron-Gleichung folgt:
+\begin{align*}
+\dfrac{dP_{m}}{dT}\;=\;\dfrac{\left(S_{liq}-S_{sol}\right)_{m}}{\left(V_{liq}-V_{sol}\right)_{m}}
+\end{align*}
+
+mit $ V_{sol}\;<\;V_{liq} $ und 
+$ \dfrac{dP_{m}}{dT}\;<\;0 $ folgt:
+
+\begin{align*}
+S_{liq}\;<\;S_{sol}
+\end{align*}
+
+}
+
+\frame{\frametitle{Entropie}
+ 
+Der Hauptteil der Entropie, bei Temperaturen unter dem Phasen\"ubergangsminimum kommt durch die Spin Aufteilung. Diese ist gegeben durch:
+\begin{align*}
+S\;=\;N k_{B} \ln (2)
+\end{align*}
+In der Fl\"ussigkeit sind die Atome als ununterscheidbar zu betrachten und gehorchen der Fermi Statistik. D.h. es gibt zwei Teilchen mit entgegengesetztem Spin f\"ur jeden Translation- Energiezustand. Dies f\"uhrt zu einer geringeren Entropie.
+
+Im Festk\"orper hingegen werden die Atome aufgrund ihrer Gitterpositionen getrennt betrachtet was zum kompletten Spinanteil der Entropie f\"uhrt.
+
+}
+
+\subsection{Pomerantschuk K\"uhlen}
+
+\frame{\frametitle{Aufbau und Methode} 
+
+\begin{columns}
+
+\column{.45\textwidth}
+\pgfimage[width=\textwidth]{he3-pomeranchuckcooling-po.png}
+
+\column{.55\textwidth}
+\"Ubergang von fl\"ussiger zur festen Phase:
+
+$ \bigtriangleup\!Q
+\;=\;
+T\left(S_{sol}-S_{liq}\right)\;>\;0 $
+
+d.h. es muss dem System W\"arme hinzugef\"ugt werden.
+
+$ \Rightarrow $ K\"uhlung der Umgebung
+
+
+\end{columns}
+
+}
+
+\section{ $ {}^4 $He-$ {}^3 $He-Mischungsk\"uhlung}
+
+\frame{\frametitle{Methode} 
+
+\begin{columns}
+
+\column{.55\textwidth}
+\pgfimage[width=\textwidth]{dilution1-gu.png}
+
+\column{.45\textwidth}
+Einzige bekannte isotopische Aufspaltung unter 0,8K. Obere Phase  $ {}^3 $He reicher, untere $ {}^4 $He. 
+
+Bei weiterem Abk\"uhlen besteht die obere Phase nur noch aus $ {}^3 $He. Die untere Phase l\"auft gegen eine Verteilung von 6/94 von $ {}^3 $He zu $ {}^4 $He. 
+
+\end{columns}
+
+
+}
+
+\frame{\frametitle{Aufbau und Methode} 
+
+\begin{columns}
+
+\column{.35\textwidth}
+\pgfimage[width=\textwidth]{dilution2-gu.png}
+
+\column{.65\textwidth}
+Die untere Phase (L\"osung von $ {}^3 $He in $ {}^4 $He) besitzt eine geringere Entropie als die obere, aufgrund der Superfluidit\"at von $ {}^4 $He. Demnach ergibt sich wieder nach 
+$ \bigtriangleup\!Q
+\;=\;
+T\bigtriangleup\!S\;>\;0 $
+eine K\"uhlung der Umgebung.
+
+\end{columns}
+
+}
+
+\frame{\frametitle{Quellen} 
+ 
+ \begin{itemize}
+ 
+ \item 
+ Frank Pobell - Matter and Methods at Low Temperatures
+ \item 
+ Tony Guénault - Basic Superfluids
+ \item
+ http://de.wikipedia.org/wiki/Helium
+ \item
+ http://de.wikipedia.org/wiki/Superfluidit
+ 
+ \end{itemize}
+ 
+}
+
+\frame{\frametitle{Schluss} 
+\begin{align*}
+Vielen\;Dank\;f\text{\"u}r\;eure\;Aufmerksamkeit!
+\end{align*}
+}
+
+\end{document}
+

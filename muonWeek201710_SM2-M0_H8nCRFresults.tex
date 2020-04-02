@@ -1,0 +1,734 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{spruce}
+\definecolor{green(pigment)}{rgb}{0.0, 0.65, 0.31}
+\setbeamercolor*{item}{fg=green(pigment)}
+\definecolor{Green}{rgb}{0.00, 1.00, 0.00}
+\definecolor{Red}{rgb}{1.00, 0.00, 0.00}
+\definecolor{Blue}{rgb}{0.00, 0.00, 1.00}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{textcomp}
+\usepackage{multirow,bigdelim,dcolumn,booktabs}
+%\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+\usepackage{siunitx}
+\usepackage{appendixnumberbeamer}
+\usepackage{hyperref}
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\beamertemplatenavigationsymbolsempty
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+
+\graphicspath{
+	{pictures/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/plots/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/sketches/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/pictures/}
+}
+
+\begin{document}
+%\title[SM2 Module 0 @ H8 2017]{MM results from the H8C beam test with SM2, including micro-TPC mode and First Doublet results}
+\title[NSW - SM2 Module 0 @ H8 2017]{Investigation of the SM2 Module 0 at H8C Testbeam and in the Cosmic Ray Test Facility}  
+\author[M. Herrmann]{ Maximilian Herrmann}
+\institute[LMU Munich]{Ludwig-Maximilians-Universit\"at M\"unchen - Lehrstuhl Schaile}
+\date[10.11.2017]{Muon \& NSW Week \\ 10.11.2017, NSW Performance \& Testbeam} 
+
+\frame{\titlepage} 
+
+%\frame{\frametitle{Outline}\tableofcontents}
+
+\section{H8 Testbeam Setup}
+
+\frame{\frametitle{H8 Testbeam Setup for Tracking}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{setup-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{SM2-M0_H8aug17_setup.png}
+	\end{columns}
+	
+	\footnotesize
+	
+	\begin{itemize}
+		\item
+			module fully equipped with 96 APVs
+		\item 
+			1024 strips for each layer were read out by two FEC cards
+		\item
+			two further FEC cards for 28 APVs of tracking telescope:
+			
+			3 twodimensional GEMs and 2 twodimensional TMMs
+			
+			$\Rightarrow$ 4 FECs read out @ \SI{220}{Hz} %(during spills)
+		\item
+			acquisition of \SI{25}{ns} time jitter via TDC (VME)
+	\end{itemize}
+}
+
+\subsection{Centroid Spatial Resolution}
+
+\frame{\frametitle{ Centroid Spatial Resolution for Perpendicular Incident}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			%\textbf{tracking}
+			
+			\includegraphics[width=0.9\textwidth]{H8tracking-crop.pdf}
+			
+			\textbf{centroid distribution}
+			
+			\includegraphics[width=0.9\textwidth]{SM2-M0_H8aug17_residualDistribution-woTrack.pdf}
+		\column{.50\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					5 reference detectors: $\sigma_{\mathrm{track}} = $ \SI{70}{\micro\m} 
+					
+					track uncertainty @ SM2
+				\item
+					residual distribution fitted by double Gaussian
+						\begin{itemize}
+							\footnotesize
+							\item
+								each Gaussian corrected by the track uncertainty 
+							\item
+								sigmas weighted by integral of the respective Gaussian ($I_{i}$)
+						\end{itemize}
+						
+%					$\sigma_{\mathrm{centroid}} = 
+%					\dfrac{
+%						I_{narrow} \cdot \sqrt{ \sigma_{\mathrm{narrow}} - \sigma_{\mathrm{track}}}
+%						+
+%						I_{broad} \cdot \sqrt{ \sigma_{\mathrm{broad}} - \sigma_{\mathrm{track}}}
+%					}
+%					{I_{narrow} + I_{broad}}$
+											
+					$\sigma_{\mathrm{centroid}} =$ 
+					\vspace{3mm}
+					
+					$\dfrac{
+						I_{1} \cdot \sqrt{ \sigma_{\mathrm{1}}^2 - \sigma_{\mathrm{track}}^2}
+						+
+						I_{2} \cdot \sqrt{ \sigma_{\mathrm{2}}^2 - \sigma_{\mathrm{track}}^2}
+					}
+					{I_{1} + I_{2}}$
+				\item
+					resolution : \textbf{86$\pm$\SI{5}{\mu\m}}
+					
+					for eta out @  
+					
+					$U_\mathrm{amplification} = $ \SI{580}{V}
+					
+					$U_\mathrm{drift} = $ \SI{-300}{V}
+			\end{itemize}
+	\end{columns}	
+	\vspace{3mm}
+	\centering
+	
+	\textbf{conclusion : tracking works }
+}
+
+\frame{\frametitle{Investigation of Centroid Resolution}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			
+			\includegraphics[width=0.8\textwidth]{SM2-M0_H8aug17_resolutionVSampVolt-crop.pdf}
+			
+			\includegraphics[width=0.8\textwidth]{SM2-M0_H8aug17_resolutionVSdriftVolt_threeAngles-crop.pdf}
+		\column{.50\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					for both eta layers the same resolution is achieved
+					
+					$\Rightarrow$ below \SI{90}{\micro\m}
+				\item
+					resolution independent of amplification voltage
+				\item
+					resolution independent of drift voltage
+				\item
+					angular dependence very similar to {\color{orange}K.Ntekas} (10$\times$10 cm$^2$ chambers)
+			\end{itemize}
+			\centering
+			
+			\includegraphics[width=0.9\textwidth]{SM2-M0_H8_resolutionVSangle_wKostas.pdf}
+	\end{columns}
+	\centering
+	
+	\textbf{conclusion : centroid resolution is excellent and behaves as expected }	
+}
+
+\frame{\frametitle{Cluster Reconstruction}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\textbf{number of clusters}
+			
+			\includegraphics[width=0.8\textwidth]{SM2-M0_H8run109angle20_numberOfClu_logscale.pdf}
+			
+			\textbf{number of strips \\ in leading cluster}
+			
+			\includegraphics[width=0.8 \textwidth]{SM2-M0_H8_numberOfStripsPerAngle.pdf}
+		\column{.50\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					only the cluster with the highest charge is considered (leading cluster, 90\% single cluster events)
+					
+					clusters created by noise are avoided
+				\item
+					number of strips in leading cluster increases with angle as expected
+				\item
+					readout PCB differences of Module 0 boards influence heavily the amplification, but not the resolution
+			\end{itemize}
+			
+			\normalsize
+			\centering
+						
+			\textbf{charge of leading cluster}
+			
+			\includegraphics[width=0.8 \textwidth]{SM2-M0_H8run109angle20_cluQ.pdf}
+	\end{columns}
+}
+
+\section{Results}
+
+\subsection{Pulse Height}
+
+\frame{\frametitle{Pulse Height}
+	\centering
+	\includegraphics[width=0.75\textwidth]{SM2-M0_H8aug17_ampScan_asexpected.pdf}
+	
+	\begin{itemize}
+		\item
+			gas amplification depended on layer 
+		\item
+			gas amplification for stereo layers lower
+	\end{itemize}
+}
+
+\section{\textmu TPC Analysis}
+
+\frame{\frametitle{APV Readout and Signal Reconstruction for \textmu TPC Analysis}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\textbf{APV principle}
+			
+			\includegraphics[width=0.9\textwidth]{APV_principle.png}
+			
+			\textbf{signal fit}
+			
+			\includegraphics[width=\textwidth]{pulseheight_withExtrapolationLine_wPoint3.pdf}
+		\column{.50\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					single strip APV readout
+				\item
+					APV is sampling charge in \SI{25}{ns} steps
+				\item
+					charge on strip corresponds to maximum value of APV signal
+				\item
+					ionization time in drift region corresponds to start time of signal
+					
+					$\Rightarrow$ fit with inverse Fermi function:
+					
+					$q(t) = \dfrac{p_{0}}{1+\exp[(t-p_{1})/p_{2}]} + p_{3}$
+					
+					\begin{itemize}
+						\item
+							$p_{0}$ : maximum charge
+						\item
+							$p_{1}$ : turn time ($\mathrel{\hat=}$ 50\%)
+						\item
+							$p_{2}$ : rise time
+						\item
+							$p_{3}$ : offset ($\approx$ 0)   
+					\end{itemize}
+				\item
+					\SI{25}{ns} time jitter due to \SI{40}{MHz} sampling recorded via TDC
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{Single Channel Signal Properties @ \SI{20}{\degree} , \SI{300}{V} $U_{\mathrm{drift}}$}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\textbf{rise time}
+			
+			\includegraphics[width=0.8\textwidth]{SM2-M0_H8run109angle20_risetimes.pdf}
+			
+			\textbf{turn time}
+			
+			\includegraphics[width=0.8\textwidth]{SM2-M0_H8run109angle20_turntimes.pdf}
+		\column{.50\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					noise signals: 
+					
+					rise times smaller than \SI{2.5}{ns}
+				\item
+					very similar signal shapes for all layers 
+				\item
+					adjust amplification voltage to avoid saturation of readout channels
+				\item
+					cluster reconstruction:
+					
+					combine neighboring strips with at max 2 missing strips 
+			\end{itemize}
+						
+			\normalsize
+			\centering
+			
+			\textbf{maximum charge}
+			
+			\includegraphics[width=0.8\textwidth]{SM2-M0_H8run109angle20_stripQ.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{\textmu TPC Analysis}
+	\begin{columns}
+		\column{.55\textwidth}
+			%\centering
+			\footnotesize
+			\includegraphics[width=0.9\textwidth]{timevsstrip_descripted.pdf}
+			
+			\vspace{1.5mm}
+			\normalsize
+			
+			linear fit: 
+			
+			signal time = $m_{\mathrm{fit}} \cdot$ strip number + $t_{\mathrm{fit}}$
+		\column{.45\textwidth}
+		\footnotesize
+			\begin{itemize}
+				\item
+					angle reconstruction: 
+											
+					\vspace{2mm}
+					
+					$m_{\mathrm{fit}}$ : slope \textmu TPC fit
+						
+					\vspace{2mm}
+					
+					$\theta = \arctan\left( \tfrac{\mathrm{pitch}}{m_{\mathrm{fit}} \cdot v_{\mathrm{drift}}} \right)$
+				\item
+					position reconstruction:
+										
+					$t_{\mathrm{fit}}$ : intercept \textmu TPC fit
+					
+					$t_{\mathrm{mid}} = z_{\mathrm{half}} / v_{\mathrm{drift}} + t_{\mathrm{start}}$
+%					$
+%					\mathrm{pos}_{\mu\mathrm{TPC}}
+%					=
+%					\dfrac{t_{0} - t_{\mu \mathrm{TPC}}}{m_{\mu \mathrm{TPC}}}
+%					$
+					\begin{align*}
+						&\mathrm{pos} = 
+						\\
+						&=
+						\dfrac{z_{\mathrm{half}} - v_{\mathrm{drift}} \cdot \left( t_{\mathrm{fit}} - t_{\mathrm{start}}\right)}
+						{v_{\mathrm{drift}} \cdot m_{\mathrm{fit}} / \mathrm{pitch}}
+						\\
+						&=
+						\dfrac{t_{\mathrm{mid}} - t_{\mathrm{fit}}}{m_{\mathrm{fit}}} \cdot \mathrm{pitch}
+					\end{align*}
+			\end{itemize}
+	\end{columns}
+	
+	\vspace{3mm}
+	
+	\begin{itemize}
+		\item
+			determination of $t_{\mathrm{mid}}$ with new method
+		\item
+			time jitter correction (\SI{40}{MHz} clock of APV/FEC) works \checkmark
+		\item
+			correction of capacitive coupling between strips $\approx$ 30\% \checkmark
+			
+			(LT Spice simulation)
+	\end{itemize}
+}
+
+\frame{\frametitle{Preliminary \textmu TPC Results at \SI{20}{\degree}}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\textbf{angle reconstruction}
+			
+			\includegraphics[width=0.85\textwidth]{SM2-M0_H8run109angle20_angle_wNwoCCC.pdf}
+						
+			\textbf{residual distribution}
+			
+			\includegraphics[width=0.85\textwidth]{SM2-M0_H8run109-angle20_uTPCresidual_correction.pdf}
+		\column{.50\textwidth}
+			\small
+			\begin{itemize}
+				\item
+					run parameter:
+					\begin{itemize}	
+						\item
+							\SI{590}{V} amplification voltage
+						\item
+							\SI{300}{V} drift voltage
+						\item
+							muons
+						\item
+							\SI{20}{\degree} incident angle
+					\end{itemize}
+				\item
+					corrections improve angular and residual distributions by decreasing the width
+					
+					optimum \@ 30\% capacitive coupling
+				\item
+					reconstructed angular distribution peaks at \SI{20}{\degree} when corrections applied
+				\item
+					very similar results using turn time of Fermi fit, as start time
+			\end{itemize}
+	\end{columns}	
+}
+
+\frame{\frametitle{Time Jitter Correction and Signal Time}
+	
+	\begin{columns}
+		\column{.34\textwidth}
+			\centering
+			\textbf{jitter recording}
+						
+			\includegraphics[width=0.8\textwidth]{FECjitterRecording.pdf}
+		\column{.33\textwidth}
+			\centering
+			\textbf{measured jitter}
+									
+			\includegraphics[width=\textwidth]{jitter_25ns.pdf}
+		\column{.33\textwidth}
+			\centering
+			\textbf{signal fit}
+			
+			\includegraphics[width=\textwidth]{pulseheight_withExtrapolationLine_wPoint3.pdf}
+	\end{columns}
+		
+	\begin{columns}
+		\column{.34\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					time jitter due to APV sampling in \SI{25}{ns} steps
+				\item
+					recorded via TDC
+				\item
+					slope of 
+					
+					\textmu TPC residual 
+					
+					VS time jitter 
+					
+					distribution 
+					
+					drift time dependent
+					
+			\end{itemize}
+		\column{.33\textwidth}
+			\centering
+			
+			\includegraphics[width=1.0\textwidth]{SM2-M0_H8run109-angle20_uTPCresVSjitter_otherColor.pdf}
+		\column{.33\textwidth}
+			\centering
+			
+			\includegraphics[width=1.0\textwidth]{timing_vergleich.pdf}
+	\end{columns}
+	\vspace{3mm}
+	
+	\footnotesize
+	\hspace{45mm} extrapolated time = turn time - $\log (81) / 1.6\;\cdot$ rise time
+}
+
+\section{Cosmic Ray Facility}
+
+\frame{\frametitle{Cosmic Ray Test Facility for Module Calibration}
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=1.0\textwidth]{CRFprinciple-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{CRF_small.JPG}
+	\end{columns}
+	
+	\footnotesize
+			
+	\begin{itemize}
+		\item
+			2D track reconstruction with two Monitored Drift Tube (MDT) chambers
+		\item
+			trigger via scintillator hodoscope with $\approx$ \SI{10}{cm} resolution in orthogonal direction
+		\item
+			MDT chambers : \SI{2.2}{\m} $\times$ \SI{4}{\m} 
+			
+			$\Rightarrow$ active area : \SI{9}{\m\squared}, angular acceptance : $\pm30^{\circ}$
+		\item
+			readout of the full module with six FEC cards @ full \SI{100}{Hz} \textmu -rate
+			
+			(tested up to \SI{500}{Hz} with random trigger)
+	\end{itemize}
+}
+
+\frame{\frametitle{Average Pulse Height Distribution}
+	\begin{columns}
+		\column{.33\textwidth}
+			\small
+			\begin{itemize}
+				\item
+					MDT chambers 
+					
+					$\Rightarrow$ \textbf{\color{red}Y} precision coordinate 
+				\item	
+					scintillators
+					
+					$\Rightarrow$ \textbf{\color{red}X} coordinate
+					
+					coarse segmentation 
+				\item
+					HV: \SI{600}{V}, one sector at \SI{560}{V} (stereo out)
+				\item	
+					homogeneous pulse height (some inefficient spots)
+				\item
+					inefficient regions under investigation
+			\end{itemize}
+		\column{.33\textwidth}
+			\centering
+			\textbf{eta out}
+						
+			\includegraphics[width=0.9\textwidth]{SM2-M0_CRF_eta-out_meanCluQ.pdf}
+						
+			\textbf{eta in}
+			
+			\includegraphics[width=0.9\textwidth]{SM2-M0_CRF_eta-in_meanCluQ.pdf}
+		\column{.33\textwidth}
+			\centering
+			\textbf{stereo in}
+			
+			\includegraphics[width=0.9\textwidth]{SM2-M0_CRF_stereo-in_meanCluQ.pdf}
+			
+			\textbf{stereo out}
+						
+			\includegraphics[width=0.9\textwidth]{SM2-M0_CRF_stereo-out_meanCluQ.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{Readout PCB Alignment}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\textbf{eta in}
+			
+			\includegraphics[width=0.8\textwidth]{SM2-M0_CRF_eta-in_resMeanVSmdtY_zebraMisaligned.pdf}
+			
+			\textbf{stereo out}
+			
+			\includegraphics[width=0.8\textwidth]{SM2-M0_CRF_stereo-out_resMeanVSmdtY_APVadapterMisaligned.pdf}
+		\column{.50\textwidth}
+			\begin{itemize}
+				\item
+					mean of residual to reconstructed track intersection by MDT as function of precision coordinate of the MDT 
+				\item
+					reconstruction of:
+						
+					$\Rightarrow$ misalignment of APV adapter boards
+						
+					$\Rightarrow$ shift of readout PCB with respect ot each other
+					
+					$\Rightarrow$ pitch error $\mathcal{O}$(\SI{100}{nm})
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{First Data of SM2 Module 1}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			
+			\textbf{cluster charge}
+			
+			\includegraphics[width=0.9\textwidth]{M1Charge_Neu.pdf}
+			
+			\textbf{cluster position}
+			
+			\includegraphics[width=0.9\textwidth]{M1Pos_Neuer.pdf}
+		\column{.50\textwidth}
+			\centering
+			\textbf{setup}
+			\vspace{3mm}
+			
+			\includegraphics[width=0.8\textwidth]{cosmics308_setup.JPG}
+			
+			\footnotesize
+			\begin{itemize}
+				\item
+					series eta panel 1 doublet
+				\item
+					board 7 of one side read out
+				\item
+					drift voltage : \SI{-300}{V}
+					
+					amplification voltage : \SI{600}{V}
+				\item
+					coincidence of scintillator trigger from above and below
+			\end{itemize}
+		
+	\end{columns}	
+}
+
+\frame{\frametitle{Conclusions}
+	\begin{itemize}
+		\item
+			centroid analysis shows:
+			\begin{itemize}
+				\item
+					resolution for perpendicular tracks is below \SI{90}{\micro\m} $\Rightarrow$ tracking works \checkmark
+				\item
+					resolution behaves as expected $\Rightarrow$ Module works \checkmark
+			\end{itemize}
+		\item
+			\textmu TPC analysis:
+			\begin{itemize}
+				\item
+					signal properties as expected \checkmark
+				\item
+					cluster properties as expected \checkmark
+				\item
+					corrections (jitter, capacitive coupling) work \checkmark
+				\item
+					incident angle is reconstructed correctly \checkmark
+				\item
+					resolution will be further investigated
+			\end{itemize}
+		\item
+			 investigation in the cosmic ray test facility:
+ 			\begin{itemize}
+				\item
+					homogeneous pulse height distribution for the full SM2 Module 0 measured \checkmark
+				\item
+					board alignment will be further investigated
+			\end{itemize}
+	\end{itemize}
+}
+
+\appendix
+
+\frame{\centering \Huge Backup}
+
+\frame{\frametitle{Measurement Program}
+	view from telescope against beam direction
+	\vspace{3mm}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{SM2-M0_pointsAtH8_stereofront-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{SM2-M0_pointsAtH8_etafront-crop.pdf}
+	\end{columns}
+	\vspace{3mm}
+	
+	\begin{itemize}
+		\item
+			scan of a large part of the active area to investigate the efficiency  
+			
+			$\Rightarrow$ dead or noisy areas (for example between the PCBs)
+		\item
+			resolution as function of amplification and drift voltage, as well as incidence angle
+		\item
+			PCB alignment
+	\end{itemize}
+}
+
+\frame{\frametitle{Readout with Jitter Correction Possibility}
+			\centering
+			
+			\includegraphics[width=\textwidth]{SM2-M0_H8aug17_triggerNreadout-crop.pdf}
+}
+
+\frame{\frametitle{Correction due to Capacitive Coupling \\ of Neighboring Strips}
+
+	charge spread due to capacitive coupling between resistive/readout strips
+	
+	\vspace{3mm}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\textbf{concept} \hspace{8mm}
+			
+			\includegraphics[width=0.9\textwidth]{capacitiveCoupling_withResStrips_smallQ.png}
+		\column{.50\textwidth}
+			\centering
+			\textbf{simulation} \hspace{9mm}
+			\vspace{3mm}
+			
+			\includegraphics[width=0.9\textwidth]{capacitveCoupling_circuit_simulation.png}
+	\end{columns}
+	
+	\vspace{1mm}
+	
+	\textbf{implementation}
+	
+	\footnotesize
+		
+	\textbf{loop} strips in cluster
+	
+	\hspace{3mm} \textbf{loop} timebins from signalstart to maximum
+	
+	\hspace{3mm} \hspace{3mm} \textbf{loop} neighbors from 1 to 3
+	
+	\hspace{3mm} \hspace{3mm} \hspace{3mm} neighbor charge \hspace{5mm} - 0.29$^n$ central strip charge
+	
+	\hspace{3mm} \hspace{3mm} \hspace{3mm} central strip charge + 0.29$^n$ central strip charge
+	
+}
+
+\frame{\frametitle{Readout PCB Alignment}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\textbf{eta out}
+						
+			\includegraphics[width=0.8\textwidth]{SM2-M0_CRF_eta-out_resMeanVSmdtY_wShift.pdf}
+						
+			\textbf{eta in}
+			
+			\includegraphics[width=0.8\textwidth]{SM2-M0_CRF_eta-in_resMeanVSmdtY_wShift.pdf}
+		\column{.5\textwidth}
+			\centering
+			\textbf{stereo in}
+			
+			\includegraphics[width=0.8\textwidth]{SM2-M0_CRF_stereo-in_resMeanVSmdtY_wShift.pdf}
+			
+			\textbf{stereo out}
+						
+			\includegraphics[width=0.8\textwidth]{SM2-M0_CRF_stereo-out_resMeanVSmdtY_wShift.pdf}
+	\end{columns}
+}
+
+\end{document}

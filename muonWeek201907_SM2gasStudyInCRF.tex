@@ -1,0 +1,1047 @@
+\documentclass[usenamees,dvipsnames]{beamer}
+\usetheme{Madrid}
+\usecolortheme{spruce}
+\definecolor{green(pigment)}{rgb}{0.0, 0.65, 0.31}
+\setbeamercolor*{item}{fg=green(pigment)}
+\definecolor{Green}{rgb}{0.00, 1.00, 0.00}
+\definecolor{Red}{rgb}{1.00, 0.00, 0.00}
+\definecolor{Blue}{rgb}{0.00, 0.00, 1.00}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{textcomp}
+\usepackage{multirow,bigdelim,dcolumn,booktabs}
+%\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+\usepackage{siunitx}
+\usepackage{appendixnumberbeamer}
+\usepackage{hyperref}
+\usepackage{mdframed}
+\usepackage{xcolor}
+\usepackage[absolute,overlay]{textpos}
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\beamertemplatenavigationsymbolsempty
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+
+\graphicspath{
+	{pictures/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/plots/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/sketches/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/pictures/}
+}
+
+\begin{document}
+\title[SM2 Gas Studies]{SM2 Micromegas Gas Studies \\ in the LMU Cosmic Ray Facility}  
+\author[M. Herrmann]{ Maximilian Herrmann}
+\institute[LMU Munich]{Ludwig-Maximilians-Universit\"at M\"unchen - Lehrstuhl Schaile}
+\date[02.07.19]{Muon Week 02.07.2019} 
+
+\frame{
+	\titlepage
+	\vspace{5mm}
+	
+	\hspace{-1.1cm}
+	\includegraphics[width=0.5\textwidth]{LMUlogo.jpg}
+	\hspace{3cm}
+	\includegraphics[width=0.3\textwidth]{BMBFlogo.png}
+	\vspace{1mm}
+} 
+
+\frame{\frametitle{Outline}
+	\tableofcontents
+} 
+
+\section{SM2 M8 in the Cosmic Ray Facility}
+
+\frame{\frametitle{Cosmic Ray Facility}
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{CRFprinciple3-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{CRF_small.JPG}
+	\end{columns}
+	
+	\vspace{2mm}
+	\footnotesize
+	\begin{tabular}{ll}
+		trigger & scintillator hodoscope
+		\\
+		track reconstruction & 2 $\times$ Monitored Drift Tube chambers (MDTs)
+		\\
+		active area & \SI{2.2}{m} $\times$ \SI{4}{m}
+		\\
+		angular acceptance & $\pm$ \SI{30}{\degree}
+		\\
+		energy cut & iron absorber (\SI{32}{cm})
+		\\
+		readout (full SM2) & 12288 channels
+		\\
+		 & $\to$ 96 APVs (frontend electronics)
+		\\
+		 & $\to$ 6 FECs (scalable readout system)
+		\\
+		readout rate & 100 Hz (online zerosuppression)
+		\\
+		 & $\to$ 70 Hz for 1.5 Modules
+	\end{tabular}
+}
+
+\frame{\frametitle{Measurement Overview - M8 \& eta3 doublet}
+	\scriptsize
+	\centering
+	\setlength{\tabcolsep}{3pt}
+				
+	\begin{tabular}{cccccccccccccc}
+		\hline
+		\hline
+		\multicolumn{4}{c}{Ar:CO$_{2}$ {\color{black}93:7} vol\%} & \hspace{6mm} & \multicolumn{4}{c}{Ar:CO$_{2}$ {\color{red}85:15} vol\%} & \hspace{6mm} & \multicolumn{4}{c}{Ar:CO$_{2}$ {\color{blue}80:20} vol\%}
+		\\
+		date & trig. & $U_{\mathrm{amp}}$ & $U_{\mathrm{drift}}$ & &
+		date & trig. & $U_{\mathrm{amp}}$ & $U_{\mathrm{drift}}$ & &
+		date & trig. & $U_{\mathrm{amp}}$ & $U_{\mathrm{drift}}$
+		\\
+		 & $10^{6}$ & [V] & [V] & &
+		 & $10^{6}$ & [V] & [V] & &
+		 & $10^{6}$ & [V] & [V]
+		\\
+		\hline
+		28.05. & 4.8 & 570 & 300 & &
+		16.05. & 4.9 & 620 & 300 & &
+		23.05. & 3.2 & 640 & 475 
+		\\
+		29.05. & 3.8 & 560 & 300 & &
+		17.05. & 3.9 & 625 & 300 & &
+		24.05. & 2.8 & 645 & 475 
+		\\
+		30.05. & 2.2 & 570 & 300 & &
+		17.05. & 3.9 & 630 & 300 & &
+		24.05. & 4.0 & 650 & 475 
+		\\
+		30.05. & 2.4 & 550 & 300 & &
+		18.05. & 4.7 & 635 & 300 & &
+		25.05. & 1.9 & 655 & 475 
+		\\
+		30.05. & 2.9 & 540 & 300 & &
+		19.05. & 5.3 & 615 & 300 & &
+		25.05. & 3.7 & 660 & 475 
+		\\
+		31.05. & 2.8 & 530 & 300 & &
+		20.05. & 1.8 & 610 & 300 & &
+		26.05. & 1.9 & 665 & 475 
+		\\
+		31.05. & n.a. & 520 & 300 & &
+		20.05. & 5.4 & 580 & 300 & &
+		26.05. & 2.4 & 600 & 475 
+		\\
+		 &  &  &  & &
+		21.05. & 3.4 & 620 & 380 & &
+		27.05. & 2.7 & 610 & 475 
+		\\
+		 &  &  &  & &
+		22.05. & 2.5 & 635 & 380 & &
+		 &  &  &  
+		\\
+		 &  &  &  & &
+		22.05. & 2.8 & 635 & 450 & &
+		 &  &  &  
+		\\
+		\hline
+		\hline
+	\end{tabular}
+	
+	\setlength{\tabcolsep}{6pt}
+}
+
+\section{Gain}
+
+\frame{\frametitle{Cluster Charge Evaluation - M8 eta out (=L1) board 8}
+	\footnotesize
+
+	\only<2>{
+		\begin{textblock*}{5cm}(8.7cm,4.47cm) 
+			\begin{tikzpicture}
+				\draw[green,-, line width=0.4mm] (0,1) -- (2.7,1);
+			\end{tikzpicture}
+		\end{textblock*}
+		\begin{textblock*}{5cm}(8.7cm,3.24cm) 
+			\begin{tikzpicture}
+				\draw[green,-, line width=0.4mm] (0,1) -- (2.9,1);
+			\end{tikzpicture}
+		\end{textblock*}
+		\begin{textblock*}{5cm}(8.7cm,3.24cm) 
+			\begin{tikzpicture}
+				\draw[orange,-, line width=0.4mm] (0,0) -- (0,2.3);
+			\end{tikzpicture}
+		\end{textblock*}
+		\begin{textblock*}{5cm}(10.45cm,3.24cm) 
+			\begin{tikzpicture}
+				\draw[orange,-, line width=0.4mm] (0,0) -- (0,2.3);
+			\end{tikzpicture}
+		\end{textblock*}
+		\begin{textblock*}{5cm}(10.28cm,4.47cm) 
+			\begin{tikzpicture}
+				\draw[orange,-, line width=0.4mm] (0,0) -- (0,1.1);
+			\end{tikzpicture}
+		\end{textblock*}
+		\begin{textblock*}{5cm}(11.60cm,3.24cm) 
+			\begin{tikzpicture}
+				\draw[orange,-, line width=0.4mm] (0,0) -- (0,2.3);
+			\end{tikzpicture}
+		\end{textblock*}
+		\begin{textblock*}{5cm}(11.4cm,4.47cm) 
+			\begin{tikzpicture}
+				\draw[orange,-, line width=0.4mm] (0,0) -- (0,1.1);
+			\end{tikzpicture}
+		\end{textblock*}
+	}
+		
+	\begin{columns}
+		\column{.45\textwidth}
+			\centering
+			Ar:CO$_{2}$ 93:7 vol\% 
+			
+			$U_{\mathrm{amp}}$ = \SI{570}{V} , $U_{\mathrm{drift}}$ = \SI{300}{V}
+			
+			\includegraphics[width=0.85\textwidth]{m8_eo_b8_A570V_C300V_20190528_1223_clusterQ_perStrip.png}
+		\column{.55\textwidth}
+			\centering
+			\textbf{93:7} , \hspace{8mm} {\color{red}\textbf{85:15}} , \hspace{3mm} {\color{blue}\textbf{80:20}}
+			
+			\includegraphics[width=\textwidth]{m8_eo_b8_gasNampScan_clusterQposition.pdf}
+	\end{columns}
+	
+	\vspace{4mm}
+	
+	$\Rightarrow$ for higher fractions of CO$_{2}$, larger gains ($\sim$ efficiency) can be reached
+		
+	\vspace{2mm}
+	
+	dependence on board quality (e.g. pillar height)?
+	
+	$\Rightarrow$ compare \only<1>{voltages} \only<2>{{\color{orange} voltages}} 
+	at \only<1>{same pulse height} \only<2>{{\color{green} same pulse height}}
+			
+	\vspace{1mm}
+	
+	\centering
+	
+	\begin{tabular}{cccc}
+		\hline
+		\hline
+		[V] & 93:7 & {\color{red}85:15} & {\color{blue}80:20}
+		\\
+		\hline
+		mean & 570 & 615 & 645
+		\\
+		MPV & 570 & 610 & 640
+		\\
+		\hline
+		\hline
+	\end{tabular}
+	
+}
+
+\frame{\frametitle{Cluster Charge Dependence on Pillar Height}
+
+	pillar heights measured at CERN (mean and std. dev.)
+	
+	$\Rightarrow$ correlate at equal efficiency ($\approx$ 90\%) 
+	
+	\hspace{4.5mm} mean pulse height and pillar height
+		
+	\vspace{3mm}
+		
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ \textbf{93:7} vol\% 
+			
+			$U_{\mathrm{amp}}$ = \SI{570}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{300}{V}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ {\color{red}\textbf{85:15}} vol\% 
+			
+			$U_{\mathrm{amp}}$ = \SI{615}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{300}{V}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ {\color{blue}\textbf{80:20}} vol\% 
+			
+			$U_{\mathrm{amp}}$ = \SI{645}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{475}{V}
+	\end{columns}
+	
+	\vspace{3mm}
+			
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_9307_A570V_C300V_meanClusterQvsPillarHeight.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_8515_A615V_C300V_meanClusterQvsPillarHeight.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_8020_A645V_C475V_meanClusterQvsPillarHeight.pdf}
+	\end{columns}
+			
+	\vspace{3mm}
+	
+	$\Rightarrow$ mean pulse height change per increased pillar size
+				
+	\vspace{3mm}
+				
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			-(6.0$\pm$0.6)\SI{}{\%/\micro m}
+		\column{.32\textwidth}
+			\centering
+			-(5.7$\pm$0.6)\SI{}{\%/\micro m}
+		\column{.32\textwidth}
+			\centering
+			-(6.7$\pm$0.8)\SI{}{\%/\micro m}
+	\end{columns}
+	
+}
+
+\section{Efficiency}
+
+\frame{\frametitle{Efficiency Dependence on Cluster Charge (eta out = L1)}
+		
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ \textbf{93:7} vol\% 
+			
+			$U_{\mathrm{drift}}$ = \SI{300}{V}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ {\color{red}\textbf{85:15}} vol\% 
+			
+			$U_{\mathrm{drift}}$ = \SI{300}{V}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ {\color{blue}\textbf{80:20}} vol\% 
+			
+			$U_{\mathrm{drift}}$ = \SI{475}{V}
+	\end{columns}
+	
+	\vspace{3mm}
+			
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{m8_9307_C300V_L1_turnOnCurve.png}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{m8_eo_8515_C300V_turnOnCurve_startZero.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{m8_eo_8020_C475V_turnOnCurve_startZero.pdf}
+	\end{columns}
+				
+	\vspace{5mm}
+				
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{m8_9307_C300V_L1_ampScan.png}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{m8_8515_C300V_L1_ampScan.png}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{m8_8020_C475V_L1_ampScan.png}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Efficiency Dependence on Cluster Charge (eta out = L1)}
+	\scriptsize
+	\centering
+	\only<1,2>{
+		amplification scan (HV sector L6)
+			
+		\begin{columns}
+			\column{.5\textwidth}
+				\centering
+				MPV cluster charge
+				
+				\includegraphics[width=0.9\textwidth]{m8_L1L7_ampScanMPV_gasScan.pdf}
+			\column{.5\textwidth}
+				\centering
+				coincidence efficiency
+							
+				\includegraphics[width=0.9\textwidth]{m8_L1L7_coincidenceTurnOnCurve_gasScan.pdf}
+		\end{columns}
+	}
+	\only<3>{
+		\centering
+		\includegraphics[width=0.52\textwidth]{m8_coincidenceEfficiencyVSmpvClusterQ_gasScan}
+	}
+	
+	\vspace{2mm}
+			
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ \textbf{93:7} vol\% 
+			
+			$U_{\mathrm{amp}}$ = \SI{570}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{300}{V}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ {\color{red}\textbf{85:15}} vol\% 
+			
+			$U_{\mathrm{amp}}$ = \SI{610}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{300}{V}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ {\color{blue}\textbf{80:20}} vol\% 
+			
+			$U_{\mathrm{amp}}$ = \SI{640}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{475}{V}
+	\end{columns}
+					
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics<1>[width=\textwidth]{m8_eo_9307_A570V_C300V_gainMap.pdf}
+			\includegraphics<2->[width=\textwidth]{m8_eo_9307_A570V_C300V_5mmEfficiencyMap.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics<1>[width=\textwidth]{m8_eo_8515_A610V_C300V_gainMap.pdf}
+			\includegraphics<2->[width=\textwidth]{m8_eo_8515_A610V_C300V_5mmEfficiencyMap.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics<1>[width=\textwidth]{m8_eo_8020_A640V_C475V_gainMap.pdf}
+			\includegraphics<2->[width=\textwidth]{m8_eo_8020_A640V_C475V_5mmEfficiencyMap.pdf}
+	\end{columns}
+	
+}
+
+\section{Resolution}
+
+\frame{\frametitle{Residual Width}
+	\scriptsize
+		
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ \textbf{93:7} vol\% 
+			
+			$U_{\mathrm{amp}}$ = \SI{570}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{300}{V}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ {\color{red}\textbf{85:15}} vol\% 
+						
+			$U_{\mathrm{amp}}$ = \SI{620}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{380}{V}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ {\color{blue}\textbf{80:20}} vol\% 
+						
+			$U_{\mathrm{amp}}$ = \SI{640}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{475}{V}
+	\end{columns}
+	
+	\vspace{1mm}
+				
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eo_9307_A570V_C300V_residual_centroidNuTPC_fits.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eo_8515_A620V_C380V_residual_centroidNuTPC_fits.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eo_8020_A640V_C475V_residual_centroidNuTPC_fits.pdf}
+	\end{columns}
+	
+	\vspace{2mm}
+			
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eb_residualWidthsVSslope_9307_A570V_C300V.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eb_residualWidthsVSslope_8515_A620V_C380V.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eb_residualWidthsVSslope_8020_A640V_C475V.pdf}
+	\end{columns}
+	
+	\vspace{3mm}
+	
+	\footnotesize
+	
+	multiple scattering broadens residual distributions for Micromegas, as for MDTs
+	
+	\vspace{2mm}
+		
+	$\Rightarrow$ consider only width of narrow Gaussian ($\sim$ resolution)
+	
+}
+
+\frame{\frametitle{Residual Dependence on Gas and Amplification Voltage}
+	\scriptsize
+	\centering
+		
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ \textbf{93:7} vol\% 
+			
+			$U_{\mathrm{amp}}$ = \SI{570}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{300}{V}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ {\color{red}\textbf{85:15}} vol\% 
+						
+			$U_{\mathrm{amp}}$ = \SI{620}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{380}{V}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ {\color{blue}\textbf{80:20}} vol\% 
+						
+			$U_{\mathrm{amp}}$ = \SI{640}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{475}{V}
+	\end{columns}
+	
+	\vspace{1mm}
+			
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eb_resolutionVSslope_9307_A570V_C300V_brown.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eb_resolutionVSslope_8515_A620V_C380V_brown.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eb_resolutionVSslope_8020_A640V_C475V_brown.pdf}
+	\end{columns}
+		
+	\vspace{3mm}
+		
+	amplification scan
+		
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			residual narrow width
+			
+%			\includegraphics[width=\textwidth]{m8_eo_residualCentroidNuTPCWidthsVSampVolt_gasScan.pdf}
+			\includegraphics[width=0.9\textwidth]{m8_eo_residualCentroidNuTPCnCTCnarrowWidthsVSampVolt_gasScan_CCC30up.pdf}
+		\column{.5\textwidth}
+			\centering
+			ratio of broad to narrow Gaussian
+						
+%			\includegraphics[width=0.95\textwidth]{m8_eo_residualCentroidNuTPCgausRatiosVSampVolt_gasScan.pdf}
+			\includegraphics[width=0.9\textwidth]{m8_eo_residualCentroidNuTPCnCTCgausRatiosVSampVolt_gasScan_CCC30up.pdf}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Summary}
+	\footnotesize
+	\begin{itemize}
+		\item
+			higher fractions of CO$_{2}$ $\Rightarrow$ larger safety margin
+			
+			\vspace{3mm}
+		\item
+			all mixtures show almost the same 
+			
+			pulse height reduction for increasing pillar height $\approx$ \SI{6}{\%/\micro m} 
+			
+			$\Rightarrow$ favors larger fraction of CO$_{2}$ to profit by higher reachable gain
+						
+			\vspace{3mm}
+		\item
+			efficiency directly coupled to cluster charge ($=$gain)
+			
+			$\Rightarrow$ larger efficiency-plateaus for 85:15 and 80:20 than 93:7
+						
+			\vspace{3mm}
+		\item
+			resolution estimation despite limitation due to multiple scattering of cosmics
+			
+			$\Rightarrow$ similar behavior for all three gas-mixtures:
+			
+			\hspace{5mm} $\sim$ \SI{100}{\micro m} perpendicular incident
+						
+			\hspace{5mm} $\sim$ \SI{300}{\micro m} at $\sim$\SI{15}{\degree} $\Rightarrow$ \textmu TPC 
+			
+			\hspace{5mm} $\sim$ \SI{400}{\micro m} at $\sim$\SI{25}{\degree} $\Rightarrow$ cluster-time-corrected
+			
+			$\Rightarrow$ residual width ($\propto$ resolution) improves with higher gain
+	\end{itemize}
+}
+
+\appendix
+
+\frame{\centering \Huge Backup}
+
+\frame{\frametitle{Pillar Heights}
+	\footnotesize
+	\centering
+				
+	\begin{tabular}{lccc}
+		\hline
+		\hline
+		layer & board & mean [\textmu m] & std. dev. [\textmu m]
+		\\
+		\hline
+		M8 eta out & 6 & 120.3 & 1.9
+		\\
+		(=L1) & 7 & 120.1 & 1.9
+		\\
+		 & 8 & 120.3 & 2.3
+		\\
+		\hline
+		M8 eta in & 6 & 120.6 & 3.1
+		\\
+		(=L2) & 7 & 121.1 & 1.6
+		\\
+		 & 8 & 120.6 & 2.6
+		\\
+		\hline
+		M8 stereo in & 6 & 121.6 & 3.0
+		\\
+		(=L3) & 7 & 122.2 & 1.6
+		\\
+		 & 8 & 123.0 & 2.5
+		\\
+		\hline
+		M8 stereo out & 6 & 121.5 & 2.5
+		\\
+		(=L4) & 7 & 122.2 & 2.2
+		\\
+		 & 8 & 122.3 & 3.8
+		\\
+		\hline
+		eta3 top & 6 & 113.9 & 1.5
+		\\
+		(=gs1) & 7 & 117.7 & 3.3
+		\\
+		 & 8 & 116.2 & 2.3
+		\\
+		\hline
+		eta3 bot & 6 & 114.7 & 2.1
+		\\
+		(=gs2) & 7 & 116.8 & 4.0
+		\\
+		 & 8 & 115.7 & 2.6
+		\\
+		\hline
+		\hline
+	\end{tabular}
+	
+}
+
+\frame{\frametitle{Cluster Charge Dependence on Pillar Height}
+
+	pillar heights measured at CERN (mean and std. dev.)
+	
+	$\Rightarrow$ correlate at equal efficiency ($\approx$ 90\%) 
+	
+	\hspace{4.5mm} MPV pulse height and pillar height
+		
+	\vspace{3mm}
+		
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ 93:7 vol\% 
+			
+			$U_{\mathrm{amp}}$ = \SI{570}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{300}{V}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ 85:15 vol\% 
+			
+			$U_{\mathrm{amp}}$ = \SI{615}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{300}{V}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ 80:20 vol\% 
+			
+			$U_{\mathrm{amp}}$ = \SI{645}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{475}{V}
+	\end{columns}
+	
+	\vspace{3mm}
+					
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_9307_A570V_C300V_MPVclusterQvsPillarHeight.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_8515_A615V_C300V_MPVclusterQvsPillarHeight.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_8020_A645V_C475V_MPVclusterQvsPillarHeight.pdf}
+	\end{columns}
+			
+	\vspace{3mm}
+	
+	$\Rightarrow$ MPV pulse height change per increased pillar size
+				
+	\vspace{3mm}
+				
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			-(9.8$\pm$1.0)\SI{}{\%/\micro m}
+		\column{.32\textwidth}
+			\centering
+			-(10.4$\pm$1.1)\SI{}{\%/\micro m}
+		\column{.32\textwidth}
+			\centering
+			-(10.7$\pm$1.1)\SI{}{\%/\micro m}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Residual Dependence on Gas and Amplification Voltage}
+	\scriptsize
+	\centering
+		
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ 93:7 vol\% 
+			
+			$U_{\mathrm{amp}}$ = \SI{570}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{300}{V}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ 85:15 vol\% 
+						
+			$U_{\mathrm{amp}}$ = \SI{620}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{380}{V}
+		\column{.32\textwidth}
+			\centering
+			Ar:CO$_{2}$ 80:20 vol\% 
+						
+			$U_{\mathrm{amp}}$ = \SI{640}{V}
+			
+			$U_{\mathrm{drift}}$ = \SI{475}{V}
+	\end{columns}
+	
+	\vspace{1mm}
+			
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eo_9307_A570V_C300V_residual_centroidNuTPC_logy.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eo_8515_A620V_C380V_residual_centroidNuTPC_logy.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eo_8020_A640V_C475V_residual_centroidNuTPC_logy.pdf}
+	\end{columns}
+		
+	\vspace{3mm}
+					
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eb_residualGausRatiosVSslope_9307_A570V_C300V.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eb_residualGausRatiosVSslope_8515_A620V_C380V.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eb_residualGausRatiosVSslope_8020_A640V_C475V.pdf}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Influence of Multiple Scattering}
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			M3 (only)
+		\column{.50\textwidth}
+			\centering
+			M6 with eta3 doublet
+	\end{columns}
+			
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{m3_eo_residualWidthsVSslope_201809end_wMDT.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{m6_eo_residualWidthsVSslope_201901full_wMDT.pdf}
+	\end{columns}
+			
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{m3_eo_residualGausRatiosVSslope_201809end_wMDT.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{m6_eo_residualGausRatiosVSslope_201901full_wMDT.pdf}
+	\end{columns}
+			
+}
+
+\frame{\frametitle{Cluster Properties (M8 eta out board 8)}
+
+	\begin{columns}
+		\column{\textwidth}
+			\centering
+			\textbf{93:7}  \hspace{8mm} {\color{red}\textbf{85:15}}  \hspace{8mm} {\color{blue}\textbf{80:20}}
+	\end{columns}
+		
+	\vspace{2mm}
+			
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			multiplicity
+		\column{.50\textwidth}
+			\centering
+			cluster charge
+	\end{columns}
+	
+	\vspace{2mm}
+			
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eo_b8_nStripsVSampVoltage_woCCC_gasScan.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_eo_b8_gasNampScan_clusterQproperties.pdf}
+	\end{columns}
+			
+	\vspace{5mm}
+	\footnotesize
+			
+	$\Rightarrow$ multiplicity and charge not at limit at \SI{570}{V} for Ar:CO$_{2}$ 93:7, 
+	
+	\hspace{4.5mm} but sparking prevent further voltage increase
+	
+}
+
+\frame{\frametitle{Residual Properties}
+	\centering
+			
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			broad Gaussian width
+			
+			\includegraphics[width=0.9\textwidth]{m8_eo_residualCentroidNuTPCnCTCbroadWidthsVSampVolt_gasScan_CCC30up.pdf}
+		\column{.50\textwidth}
+			\begin{itemize}
+				\footnotesize
+				\item
+					broad Gaussian same magnitude as for MDTs
+					
+					$\Rightarrow$ due to multiple scattering
+				\item
+					\textmu TPC resolution improves for signal evaluation at maximum
+				\item
+					correction for capacitive coupling (CCC) required
+			\end{itemize}
+	\end{columns}
+	\vspace{1mm}
+		
+	\textmu TPC	
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			residual width
+			
+			\includegraphics[width=0.8\textwidth]{m8_eo_uTPCnarrowGausWidthVSampVolt_wNwoCCC_gasScan.pdf}
+		\column{.50\textwidth}
+			\centering
+			ratio broad to narrow Gaussian
+			
+			\includegraphics[width=0.8\textwidth]{m8_eo_uTPCgausRatiosVSampVolt_wNwoCCC_gasScan.pdf}
+	\end{columns}
+			
+}
+
+\frame{\frametitle{APV25 Frontend Electronics}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			APV25
+			
+			\includegraphics[width=0.8\textwidth]{APV25.png}
+		\column{.5\textwidth}
+			\centering			
+			\begin{itemize}
+				\small
+				\item
+					128 input channel
+					\vspace{2mm}
+				\item
+					charge-sensitive preamplifier
+					\vspace{2mm}
+				\item
+					analog pipeline memory
+					\vspace{2mm}
+				\item
+					\SI{40}{MHz} clock 
+					
+					$\Rightarrow$ \SI{25}{ns} sampling
+			\end{itemize}
+	\end{columns}
+	
+	\vspace{4mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			eventdisplay
+			
+			\includegraphics[width=0.85\textwidth]{eventdisplay.png}
+			\vspace{3mm}
+		\column{.5\textwidth}
+			\centering
+			single strip signal
+			
+			\includegraphics[width=0.8\textwidth]{pulseheight_differentSignaltimes.pdf}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Signal Fit for APV Readout}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\textbf{APV principle}
+			
+			\includegraphics[width=0.9\textwidth]{APV_principle.png}
+			
+			\textbf{signal fit}
+			
+			\includegraphics[width=\textwidth]{pulseheight_withExtrapolationLine_wPoint3.pdf}
+		\column{.50\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					single strip APV readout
+				\item
+					APV is sampling charge in \SI{25}{ns} steps
+				\item
+					charge on strip corresponds to maximum value of APV signal
+				\item
+					fit signal with inverse Fermi function:
+					
+					$q(t) = \dfrac{p_{0}}{1+\exp[(t-p_{1})/p_{2}]} + p_{3}$
+					
+					\begin{itemize}
+						\item
+							$p_{0}$ : maximum charge
+						\item
+							$p_{1}$ : turn time ($\mathrel{\hat=}$ 50\%)
+						\item
+							$p_{2}$ : rise time
+						\item
+							$p_{3}$ : offset ($\approx$ 0)   
+					\end{itemize}
+				\item
+					\SI{25}{ns} time jitter due to \SI{40}{MHz} sampling recorded via TDC
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{Recapitulation \textmu TPC Formulas}
+	\centering
+	\includegraphics[width=0.7\textwidth]{timeVSstrip_meshNcathodeNstrips_fitNtimeNangle.pdf}
+			
+	\begin{itemize}
+		\item
+			angle reconstruction: 
+			{\boldmath$\textcolor{Plum}{\theta}$}$\; = \arctan \left( \tfrac{\mathrm{pitch}}{\textcolor{red}{\mathrm{slope}} \;\cdot\; v_{\mathrm{drift}}} \right)$
+			
+			\vspace{3mm}
+		\item
+			position reconstruction:
+			$
+			\mathrm{pos}_{\mu\mathrm{TPC}}
+			=
+			\dfrac{\textcolor{Cyan}{t_{\mathrm{mid}}} - \textcolor{red}{\mathrm{intercept}}}{\textcolor{red}{\mathrm{slope}}}
+			\cdot \textcolor{brown}{\mathrm{pitch}}
+			$
+	\end{itemize}
+	
+}
+
+\frame{\frametitle{Concept for Charge Weighted Timing Reconstruction}
+
+	\centering
+	\includegraphics<1,2>[width=0.5\textwidth]{inhomogeneousIonization_bE_cNm_timeNcentroidShift_deltaXnTnAngle.pdf}
+	
+	\only<1>{
+		\vspace{4mm}
+		\begin{tabular}{ccccc}
+			$\bigtriangleup x$ & = & $\bigtriangleup z$ & $\cdot$ & $\tan \theta$
+			\\
+			 & & & &
+			\\
+			 & = & $( t_{\mathrm{c}} - t_{\mathrm{mid}} ) \cdot v_{\mathrm{drift}}$ &  $\cdot$ & $\mathrm{slope}_{\mathrm{ref}}$
+		\end{tabular}
+	}
+	\only<2>{
+		\vspace{4mm}
+		\begin{tabular}{ccccc}
+			$\mathrm{centroid}$ & = & $\sum\limits_{\scriptscriptstyle\mathrm{strips}} \mathrm{strip} \cdot q_{\scriptscriptstyle\mathrm{strip}}$ & $/$ & $\sum\limits_{\scriptscriptstyle\mathrm{strips}} q_{\scriptscriptstyle\mathrm{strip}}$
+			\\
+			 & & & &
+			\\
+			$t_{\mathrm{c}}$ & = & $\sum\limits_{\scriptscriptstyle\mathrm{strips}} t_{\scriptscriptstyle\mathrm{strip}} \cdot q_{\scriptscriptstyle\mathrm{strip}}$ &  $/$ & $\sum\limits_{\scriptscriptstyle\mathrm{strips}} q_{\scriptscriptstyle\mathrm{strip}}$
+		\end{tabular}
+	}
+			
+}
+
+\end{document}

@@ -1,0 +1,437 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{spruce}
+\definecolor{green(pigment)}{rgb}{0.0, 0.65, 0.31}
+\setbeamercolor*{item}{fg=green(pigment)}
+\definecolor{Green}{rgb}{0.00, 1.00, 0.00}
+\definecolor{Red}{rgb}{1.00, 0.00, 0.00}
+\definecolor{Blue}{rgb}{0.00, 0.00, 1.00}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{textcomp}
+\usepackage{multirow,bigdelim,dcolumn,booktabs}
+%\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+\usepackage{siunitx}
+\usepackage{appendixnumberbeamer}
+\usepackage{hyperref}
+\usepackage{mdframed}
+\usepackage{xcolor}
+\usepackage[absolute,overlay]{textpos}
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\beamertemplatenavigationsymbolsempty
+
+\usepackage{tikz}
+%\usetikzlibrary{decorations.text}
+%\usetikzlibrary{trees}
+%\usetikzlibrary{decorations.pathmorphing}
+%\usetikzlibrary{decorations.markings}
+%\usetikzlibrary{patterns}
+
+\graphicspath{
+	{pictures/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/plots/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/sketches/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/pictures/}
+}
+\begin{document}
+\title[\SI{2}{\square\m}-sized Micromegas Quadruplets]{Characterisation of 2 m$^2$ sized 4 layered Micromegas Modules with Cosmic Muons}  
+\author[M. Herrmann]{Maximilian Herrmann}
+\institute[LMU Munich]{Ludwig-Maximilians-Universit\"at M\"unchen - Lehrstuhl Schaile}
+\date[25.03.19]{25.03.2019, Aachen} 
+
+\frame{\titlepage
+	\centering
+	Fr\"uhjahrstagung der Deutschen Physikalischen Gesellschaft
+	
+	\hspace{-1.1cm}
+	\includegraphics[width=0.5\textwidth]{LMUlogo.jpg}
+	\hspace{2cm}
+	\includegraphics[width=0.3\textwidth]{BMBFlogo.png}
+	\vspace{1mm}
+} 
+
+%\frame{\frametitle{Outline}\tableofcontents}
+
+\section{Multilayered Squaremeter Sized Micromegas Modules}
+
+\subsection{Micromegas Quadruplets for Track Reconstruction}
+
+\frame{\frametitle{Micromegas Principle}
+	
+	\begin{columns}
+		\column{.6\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{RSMM_principle8-crop.pdf}
+		\column{.4\textwidth}
+			\small
+			position reconstruction:
+			\vspace{3mm}
+			
+			$
+				{\bf \bf \mathrm{centroid}} 
+			 = 
+				\dfrac{
+					\sum\limits_{\scriptscriptstyle\mathrm{strips}} \mathrm{strip} \cdot q_{\scriptscriptstyle\mathrm{strip}}
+				}
+				{\sum\limits_{\scriptscriptstyle\mathrm{strips}} q_{\scriptscriptstyle\mathrm{strip}} }
+			$
+			\vspace{5mm}
+			
+			angle reconstruction:
+			\vspace{5mm}
+			
+			\footnotesize
+			$
+					{\bf \bf \mathrm{angle}}
+				=
+					\arctan
+						\left(
+							\dfrac{\mathrm{pitch} \cdot \bigtriangleup \mathrm{strips}}
+							{v_\mathrm{drift} \cdot \bigtriangleup t_\mathrm{drift}}
+						\right)
+			$
+			\vspace{6mm}
+	\end{columns}
+}
+
+\frame{\frametitle{Detector Design (\SI{2}{\m\squared})}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			4 active layers per module
+			\vspace{1mm}
+			
+			\includegraphics[width=\textwidth]{sandwichassembly.png}
+			\vspace{5mm}
+					
+			\includegraphics[width=\textwidth]{quadrupletStripOrientation3-crop.pdf}
+		\column{.5\textwidth}
+			\centering
+			3 PCBs per active layer
+			\vspace{5.5mm}
+			
+			\includegraphics[width=\textwidth]{ROboardsAligned2-crop.pdf}
+			\vspace{3mm}
+	\end{columns}
+	\vspace{4mm}
+	
+	$\Rightarrow$ investigation of homogeneity: pulse height and efficiency
+
+	$\Rightarrow$ reconstruction of alignment: shape of readout structure
+}
+
+\section{Investigation with Cosmic Muons}
+
+\subsection{Cosmic Ray Facility in Garching}
+
+\section{Cosmic Ray Facility}
+
+\frame{\frametitle{Cosmic Ray Facility}
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics<1>[width=0.9\textwidth]{CRFprinciple3-crop.pdf}
+			
+			\includegraphics<2>[width=0.9\textwidth]{CRFprinciple5-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{CRF_small.JPG}
+	\end{columns}
+	
+	\vspace{4mm}
+	\footnotesize
+	\begin{tabular}{ll}
+		trigger & scintillator hodoscope
+		\\
+		 & non-precision coordinate, resolution $\sim$ \SI{10}{cm}
+		\\
+		track reconstruction & 2 $\times$ Monitored Drift Tube chambers (MDTs)
+		\\
+		 & precision coordinate, resolution $\sim$ \SI{0.2}{mm} (multiple scattering)
+		\\
+		active area & \SI{2.2}{m} $\times$ \SI{4}{m}
+		\\
+		angular acceptance & $\pm$ \SI{30}{\degree}
+		\\
+		energy cut & iron absorber (\SI{34}{cm}) $\to E_{\mu} > $ \SI{600}{MeV} 
+		\\
+		readout (full module) & 12288 channels $\to$ APVs (frontend electronics)
+		\\
+		readout rate & 100 Hz (online zerosuppression)
+	\end{tabular}
+}
+
+\frame{\frametitle{\large Pulse Height and Efficiency (Ar:CO$_2$ 93:7 vol\%, $U_{\mathrm{amp}} =$ \SI{570}{V})}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			pulse height
+			\vspace{1mm}
+			
+			\includegraphics[width=0.65\textwidth]{m3_eo_clusterQmpv_20180911.pdf}
+			\vspace{0.5mm}
+		\column{.5\textwidth}
+			\centering
+			efficiency
+			\vspace{1mm}
+			
+			\includegraphics[width=0.65\textwidth]{m3_eo_coinEffi_20180911.pdf}
+	\end{columns}
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.7\textwidth}
+			\centering
+			pulse height VS pillar height
+			\vspace{1mm}
+			
+			\includegraphics[width=0.65\textwidth]{meanClusterQvsPillarHeight_etaNstereo.png}
+			\vspace{1mm}
+		\column{.3\textwidth}
+			pillar height variation
+			
+			\vspace{2mm}
+			$\Rightarrow$ pulse height
+			
+			\vspace{2mm}
+			$\Rightarrow$ efficiency
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Reconstruction of Board Alignment}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			mean residual per partition
+		\column{.5\textwidth}
+			\centering
+			\small
+			mean residual VS position along strips
+	\end{columns}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m3_eo_deltaYperPart_2019-09.pdf}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m3_eo_resMeanVSscinX_allBoards.pdf}
+	\end{columns}
+			
+	\centering	
+	$\Rightarrow$ bend strip shape
+				
+	\includegraphics[width=0.6\textwidth]{ROboardsBendStrips-crop.pdf}
+}
+
+\frame{\frametitle{\large Resolution of Charge Weighted Reconstruction}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{m1_ei_resVSangle.pdf}
+			
+			\only<1>{
+				centroid resolution
+						
+				\includegraphics[width=0.75\textwidth]{m1_resolutionVSangle_eoNei.pdf}
+			}
+			\includegraphics<2>[width=0.7\textwidth]{inhomogeneousIonization_bE_cNm_centroidShift.pdf}
+		\column{.5\textwidth}
+			\hspace{3mm} residual, angle $\in$ [ \SI{0}{\degree} , \SI{2}{\degree} ]
+			\vspace{1mm}
+			
+			\begin{centering}
+				\includegraphics[width=0.85\textwidth]{m1_ei_residaul_nearZero.pdf}
+			\end{centering}
+			\footnotesize
+		
+			$\sigma$ of narrow Gaussian $\Rightarrow$
+			
+			\vspace{2mm}
+			
+			resolution $ = \sqrt{\sigma_{\mathrm{MM}}^{2} - \left(\tfrac{1}{\sqrt{2}}\cdot\sigma_{\mathrm{MDT}}\right)^{2}}$
+			
+			\vspace{4mm}
+						
+			inhomogeneous ionization 
+			
+			\vspace{0.5mm}
+			$\Rightarrow$ declining resolution 
+			
+			\hspace{4.5mm} for larger angles
+			
+			\vspace{3mm}
+			
+			$\Rightarrow$ use drift time information
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Drifttime Measurements for Track Reconstruction}
+	\small
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{timeVSstrip_meshNcathodeNstrips_fitNtime.pdf}
+		\column{.50\textwidth}
+			\centering
+			angle reconstruction
+			
+			\includegraphics[width=0.65\textwidth]{m1_ei_uTPCangleVSangle_20180601_turntime.pdf}
+	\end{columns}
+	\vspace{1.5mm}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics<1>[width=0.7\textwidth]{inhomogeneousIonization_bE_cNm_timeNcentroidShift_deltaXnTnAngle.pdf}
+			\only<2>{
+				fix track slope
+				
+			}
+			\includegraphics<2>[width=0.6\textwidth]{m3_ei_C150V_resVSclutime_slope-dot46.pdf}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{m1_ei_allResolutionsVSangle_20180601.pdf}
+	\end{columns}
+}
+
+\subsection{Stereo Reconstruction}
+
+\frame{\frametitle{Position Reconstruction with Stereo Readout}
+	\begin{columns}
+		\column{.65\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{stereoBoards_angleNshift_centerNcoord-crop.pdf}
+		\column{.35\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{m1_stereo_posDifVSscinX_wCenter.pdf}
+	\end{columns}
+	
+	\vspace{3mm}
+	improve position information along strips (non-precision coordinate)
+	\vspace{2mm}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{m1_si_resVSposAlongStripsByStereos_slopeX1e-2.pdf}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m1_si_resdiual_wNwoNewXtrack.pdf}
+	\end{columns}
+}
+
+\section{Summary}
+
+\frame{\frametitle{Summary}
+	\footnotesize
+	\begin{itemize}
+		\item
+			investigation of four-layered and segmented Micromegas Modules
+			
+			at the Munich Cosmic Ray Facility
+			\vspace{3mm}
+		\item
+			correlation of pillar height and pulse height (accordingly efficiency)
+			\vspace{3mm}
+		\item
+			alignment and strip shape reconstructed at a precision of $\sim$ \SI{20}{\micro\m}
+			\vspace{3mm}
+		\item
+			resolution for perpendicular tracks $\sim$ \SI{90}{\micro\m}
+			\vspace{3mm}
+		\item
+			improvement of position resolution for inclined tracks via drift time measurement
+			\vspace{3mm}
+		\item
+			combination of the two layers with inclined strips 
+			
+			$\Rightarrow$ reconstruction of position perpendicular to precision direction
+			\vspace{3mm}
+	\end{itemize}
+}
+
+\appendix
+
+\frame[noframenumbering]{
+	\Huge
+	\centering
+	Backup
+}
+
+\frame{\frametitle{CRF systematics}
+
+	systematics due to different placement in CRF
+			
+	$\Rightarrow$ investigate effect of CRF tracks
+	\vspace{5mm}
+	
+	\centering
+	\includegraphics[width=0.7\textwidth]{CRF_MDTdiffVSscinX_perBoard_2019-09.pdf}
+}
+
+\frame[noframenumbering]{\frametitle{\large LHC upgrade and Efficiency for the ATLAS Muon Spectrometer}
+	\centering
+	\includegraphics[width=0.8\textwidth]{HL_LHC_PlanUpdateJuly2015}
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{ATLASnewer.jpg}
+		\column{.45\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{MDTefficiencyPerHitRate_NSW-TDR_edited.png}
+	\end{columns}
+}
+
+\frame[noframenumbering]{\frametitle{Upgrade of the Inner Barrel End Caps}
+
+	replacement of the current detector systems by small-strip Thin Gap Chamber (sTGC) and Micromegas quadruplets
+	
+	\vspace{3mm}
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+			\textbf{New Small Wheel Sectors}
+			\vspace{7mm}
+			
+			\includegraphics[width=1\textwidth]{sectorsDimensions.png}
+		\column{.45\textwidth}
+			\centering
+			\textbf{Micromegas quadruplets}
+			
+			\includegraphics[width=1\textwidth]{sectorsNsides.png}
+	\end{columns}
+}
+
+\frame[noframenumbering]{\frametitle{Influence of Muon Multiple Scattering}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\textbf{MDTs}
+			
+			\includegraphics[width=0.9\textwidth]{MDTresidualVSangle_slopeDifCuts.pdf}
+			
+			\includegraphics[width=0.9\textwidth]{MDTresidual_slopeDifCuts.pdf}
+		\column{.5\textwidth}
+			\centering
+			\textbf{micromegas quadruplet (1 layer)}
+			
+			\includegraphics[width=0.9\textwidth]{SM2-M0_CRFafterH8_eta-out_residualVSangle_slopeDifCuts.pdf}
+			
+			\includegraphics[width=0.9\textwidth]{SM2-M0_CRFafterH8_eta-out_residual_cutsMDTslopeDif.pdf}
+	\end{columns}
+}
+
+\end{document}

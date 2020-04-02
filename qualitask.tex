@@ -1,0 +1,490 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{spruce}
+\definecolor{green(pigment)}{rgb}{0.0, 0.65, 0.31}
+\setbeamercolor*{item}{fg=green(pigment)}
+\definecolor{Green}{rgb}{0.00, 1.00, 0.00}
+\definecolor{Red}{rgb}{1.00, 0.00, 0.00}
+\definecolor{Blue}{rgb}{0.00, 0.00, 1.00}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{multirow,bigdelim,dcolumn,booktabs}
+%\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+\usepackage{siunitx}
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\beamertemplatenavigationsymbolsempty
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+
+\graphicspath{
+	{/home/m/Maximilian.Herrmann/Bilder/forLatex/plots/}
+	{/home/m/Maximilian.Herrmann/Bilder/forLatex/sketches/}
+	{/home/m/Maximilian.Herrmann/Bilder/forLatex/pictures/}
+}
+
+\begin{document}
+\title[CNC Calibration]{Calibration of CNC Machines for Readout Panel Drilling and Inspection}  
+\author[M. Herrmann]{Maximilian Herrmann}
+\institute[LMU Munich]{Ludwig-Maximilians-Universit\"at M\"unchen - Lehrstuhl Schaile}
+\date{05.07.2017, Munich} 
+
+\frame{\titlepage} 
+
+\frame{\frametitle{Outline}\tableofcontents}
+
+\section{Motivation: Tasks for the Munich Production Site}
+
+\frame{\frametitle{Tasks for the Munich Production Site}
+	Excerpt:
+
+	\begin{itemize}
+		\item
+			SM2 Readout Panel Gluing 
+			
+			$\Rightarrow$ Granite Table (with Coordinate Measurement Machine = CMM)
+		\item 
+			Drilling of the Holes in the Drift and Readout Panels for SM2
+			
+			$\Rightarrow$ Computerized Numerical Controlled Drilling Machine ( = CNC)
+	\end{itemize}
+	
+	Questions for Quality Assurance:
+	
+	\begin{itemize}
+		\item
+			Alignment Accuracy of Readout Boards during Gluing
+		\item 
+			Accuracy of Drilling Positions
+	\end{itemize}
+	
+	Solutions for Quality Assurance:
+		
+	\begin{itemize}
+		\item
+			Measure Positions of Markers on Boards and Holes in Panels
+		\item 
+			Calibrate the CNC
+	\end{itemize}
+}
+
+\frame{\frametitle{CNC Machines for Drilling and Quality Control}
+	\begin{figure}
+		\begin{tikzpicture}
+			\node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=0.5\linewidth]{graniteWcmm.JPG}};
+			\node[anchor=south west,inner sep=0] (image) at (6.3,0) {\includegraphics[width=0.5\linewidth]{drillingCNC.JPG}};
+			
+			\node[right,black] at (0.5,5.0) {\large Granite Table with CMM};
+			\node[right,black] at (7.0,5.0) {\large CNC Drilling Machine};
+			
+			\node[right,red] at (3.9,3.5) {\large x};
+			\draw[arrows=->,red,ultra thick](3.8,3.2)--(4.6,3.35);
+			\node[right,red] at (2.2,1.0) {\large y};
+			\draw[arrows=->,red,ultra thick](3.0,0.1)--(1.35,1.3);
+			\node[right,red] at (5.0,2.6) {\large y};
+			\draw[arrows=->,red,ultra thick](5.7,2.2)--(4.4,2.5);
+			
+			\node[right,red] at (10.6,2.9) {\large x};
+			\draw[arrows=->,red,ultra thick](10.1,2.68)--(11.6,2.63);
+			\node[right,red] at (7.7,1.8) {\large y};
+			\draw[arrows=->,red,ultra thick](7.75,1.38)--(8.7,2.0);
+			\node[right,red] at (10.7,1.5) {\large y};
+			\draw[arrows=->,red,ultra thick](11.4,0.9)--(11.35,1.8);
+		\end{tikzpicture}
+	\end{figure}
+}
+
+\section{Scheme for Measurement of Board Alignment}
+
+\frame{\frametitle{Scheme for Measurement of Board Alignment}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{ROpanelATpins_wLegend-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\begin{itemize}
+				\item
+					Pins on Table for Alignment of Panels
+				\item 
+					Precision Marker on each side of each Board on a Panel
+				\item
+					Measure Distances of Markers and Pins
+					
+					$\Rightarrow$ Investigation of Temperature and Humidity Effects 
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{Realization of Measurement of Board Alignment}
+	\begin{columns}
+		\column{.03\textwidth}
+		\column{.30\textwidth}
+			\centering
+			\includegraphics[angle=270, width=0.95\textwidth]{telecentricCameraAtArm2.JPG}
+		\column{.67\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{microscope_screenshot_20160420_marker_board7_awayPC.jpeg}
+	\end{columns}
+	
+	\begin{itemize}
+		\item
+			Positioning of the CMM Measurement Arm above the Marker/Pin
+		\item
+			Taking a Picture of the Marker/Pin with a Telecentric Camera
+		\item
+			Analyzing the Position on the Picture and Adding these Coordinates to the Measurement Position
+	\end{itemize}
+
+	\centering
+	$\Rightarrow$ Comparison of the measured Positions for each Marker/Pin
+}
+
+\frame{\frametitle{Approach}
+	
+	\begin{itemize}
+		\item
+			Automatized Identification of the Marker in the Picture and
+			
+			Calculation of the Coordinates in the CMM System
+			
+			$\Rightarrow$ OpenCV Program for Identification and Fitting of the Marker Shape
+		\item
+			Ensure Accuracy of the absolute CMM Position
+			\begin{itemize}
+				\item
+					Repetitive Accuracy
+				\item
+					Reversing Play
+			\end{itemize}
+			
+			$\Rightarrow$ Calibration of the CMM with a Laserinterferometer
+		\item
+			CMM and CNC are of the same Type and from the same Manufacturer
+			
+			$\Rightarrow$ Same Procedure for Calibration of CNC is used
+	\end{itemize}
+	
+}
+
+\section{Identification of the Markers and Calculation of their Positions Using OpenCV}
+
+\frame{\frametitle{Marker Identification Using OpenCV}
+
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			
+			Picture of the Marker with the Telecentric Optic
+			
+			\includegraphics[width=0.6\textwidth]{marker_wAxes.png}
+			
+			Pixels over Threshold
+			
+			\includegraphics[width=0.7\textwidth]{markerThresholdPixel.png}
+		\column{.50\textwidth}
+			\centering
+			
+			Brightness Distribution
+			
+			\includegraphics[width=0.8\textwidth]{brightnessDistribution.png}
+			
+			\begin{itemize}
+				\item
+					Fit Peak in Brightness Distribution
+				\item
+					Set Threshold to 
+					
+					Mean plus 2 $\times$ Sigma
+				\item
+					Weight Pixel over Threshold with 1, all other with 0
+			\end{itemize}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Estimation of the Marker Position by the Projection}
+
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			
+			Projection to the X axis
+			
+			\includegraphics[width=0.9\textwidth]{markerProjectionXaxis.png}
+		\column{.50\textwidth}
+			\centering
+			
+			Projection to the Y axis
+			
+			\includegraphics[width=0.9\textwidth]{markerProjectionYaxis.png}
+	\end{columns}
+	
+	\vspace{5mm}
+	\centering
+	$\Rightarrow$ Problematic Identification of Marker due to surrounding Structures 
+	
+	(in this case neighboring test Marker)
+}
+
+\frame{\frametitle{Estimation of the Marker Position Using Template Matching}
+			
+	\begin{itemize}
+		\item
+			Make a Template of the Marker cropped to cover all necessary Parts
+		\item
+			Iterate over the Picture to be analyzed and calculate the Metric for each Pixel $(x,y)$:
+			
+			\small
+			
+			\begin{align*}
+			R(x,y) = 
+				\dfrac{
+					\sum\limits_{x^{\prime} , y^{\prime}}
+						T(x^{\prime} , y^{\prime} ) \cdot 
+						I(x+x^{\prime} , y+y^{\prime} )
+				}
+				{	
+					\sqrt{
+						\sum\limits_{x^{\prime} , y^{\prime} }
+							T^{2}(x^{\prime} , y^{\prime} ) 
+						\sum\limits_{x^{\prime} , y^{\prime} }
+							I^{2}(x+x^{\prime} , y+y^{\prime} )
+					}
+				}	
+			\end{align*}
+			
+			with $(x^{\prime} , y^{\prime})$ the Pixels in the Template, $T$ brightness of the Template and $I$ brightness of the Picture.
+			
+			$\Rightarrow$ Maximum Value is given at the best Matching Position
+		\item
+			After Position is estimated the Circles of the Markers can be fitted to calculate the exact Position of the Marker
+	\end{itemize}
+	
+}
+
+\frame{\frametitle{Test of the Template Matching Method}
+
+	\small
+
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			
+			Template for Position Estimation
+			
+			\includegraphics[width=0.4\textwidth]{template.pdf}
+		\column{.50\textwidth}
+			\centering
+			
+			Separate Fits for each Circle
+			
+			\includegraphics[width=0.5\textwidth]{markerRingGraphs.png}
+	\end{columns}
+	
+	\vspace{3mm}
+	
+	For Test of the Algorithm: Take Pictures at the same Position for different Heights above the Marker (in \SI{100}{\micro\m} Steps)
+	
+	\centering
+	
+	$\Rightarrow$ Average Chi$^2/$NDF of the three Fits VS Height above Marker:
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			
+			Aperture 4{.}5
+			
+			\includegraphics[width=0.7\textwidth]{markerFit_averageChiSquareOverNDF_aperture4dot5.png}
+		\column{.50\textwidth}
+			\centering
+			
+			Aperture 22
+			
+			\includegraphics[width=0.7\textwidth]{markerFit_averageChiSquareOverNDF_aperture22.png}
+	\end{columns}
+	
+}
+
+\section{Calibration of the CMM and CNC Using a Laserinterferometer}
+
+\frame{\frametitle{The CMM and the CNC in the SM2 Assembly Hall}
+	\centering
+	\includegraphics[width=1.0\textwidth]{cmmNcnc_atlasHall-crop.pdf}
+}
+
+\frame{\frametitle{Calibration with a Laserinterferometer}
+	\begin{columns}
+		\column{.60\textwidth}
+			\centering
+			Working Principle of a Laserinterferometer
+			
+			\includegraphics[width=1.0\textwidth]{laserinterferometerPrinciple.png}
+			
+			\vspace{2mm}
+			
+			Measurement Setup At the CMM 
+			
+			for Calibration
+						
+			\vspace{2mm}
+			
+			\includegraphics[width=0.65\textwidth]{laserinterferometerAtCMM-crop.pdf}
+		\column{.40\textwidth}
+			Laserinterferometer measures Distance Variations by Counting of Interference Maxima.
+			
+			\vspace{8mm}
+			
+			Difference of set Distance at CMM to measured Distance of Laserinterferometer allows Calibration of CMM Positions.
+	\end{columns}
+}
+
+\frame{\frametitle{Calibration of the CMM - X Axis}
+
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\SI{2}{mm} Steps over whole Range
+			
+			\includegraphics[width=0.8\textwidth]{cmmlaser_Xdeviation_shortNlong.pdf}
+		\column{.50\textwidth}
+			\centering
+			Zoomed for Periodic Structure
+			
+			\includegraphics[width=0.8\textwidth]{cmmlaser_Xdeviation_shortNlong_zoomed.pdf}
+	\end{columns}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			Backward VS Forward
+			
+			\includegraphics[width=0.7\textwidth]{cmmlaser_Xdeviation_backVSforward.png}
+		\column{.50\textwidth}
+			\begin{itemize}
+				\item
+					no Y dependence of 
+				\item
+					Twofold Periodic Structure
+					
+					$\Rightarrow$ \SI{20}{mm} and \SI{100}{mm} Periods
+				\item
+					Backlash below \SI{5}{\micro\m}
+					
+					$\Rightarrow$ Negligible
+			\end{itemize}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Calibration of the CMM - Y Axis}
+
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\SI{2}{mm} Steps over whole Range
+			
+			\includegraphics[width=0.8\textwidth]{cmmlaser_Ydeviation_leftNright.pdf}
+		\column{.50\textwidth}
+			\centering
+			Zoomed for Periodic Structure
+			
+			\includegraphics[width=0.8\textwidth]{cmmlaser_Ydeviation_leftNright_zoomed.pdf}
+	\end{columns}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			Backward VS Forward
+			
+			\includegraphics[width=0.7\textwidth]{cmmlaser_Ydeviation_backVSforward.png}
+		\column{.50\textwidth}
+			\begin{itemize}
+				\item
+					X position dependent Deviation
+					
+					$\Rightarrow$ no simple Calibration possible
+				\item
+					only \SI{20}{mm} Periodicity
+				\item
+					Backlash about \SI{40}{\micro\m}
+					
+					$\Rightarrow$ has to be considered
+			\end{itemize}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Calibration of the CNC - Y Axis}
+
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			Long Side of Trapezoid
+			
+			\includegraphics[width=0.8\textwidth]{cncLaser_Y_Xat-16_linearFit.pdf}
+		\column{.50\textwidth}
+			\centering
+			Short Side of Trapezoid
+			
+			\includegraphics[width=0.8\textwidth]{cncLaser_Y_Xat1352_linearFit.pdf}
+	\end{columns}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\SI{2}{mm} Steps
+			
+			\includegraphics[width=0.8\textwidth]{cncLaser_Y_Xat-16_2mmSteps.pdf}
+		\column{.50\textwidth}
+			\begin{itemize}
+				\item
+					Linear Correction of the Global Slope Sufficient
+				\item
+					Substructure at 2 mm Steps below accuracy 
+					
+					$\Rightarrow$ Negligible
+			\end{itemize}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Calibration of the CNC - X Axis}
+
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			Perpendicular to Parallel Sides of Trapezoid
+			
+			\includegraphics[width=0.8\textwidth]{cncLaser_X_Yat772dot5_twoStepSizes.pdf}
+			
+			\SI{2}{mm} Steps
+			
+			\includegraphics[width=0.8\textwidth]{cncLaser_X_Yat772dot5_2mmSteps.pdf}
+		\column{.50\textwidth}
+			\begin{itemize}
+				\item
+					Differences between Measurements of different Step Sizes indicate Substructure
+				\item
+					Substructure at 2 mm Steps visible 
+					
+					$\Rightarrow$ \SI{10}{mm} Periodicity
+				\item
+					to avoid Calibration of the whole Axis, only calibrate the Drilling Positions
+			\end{itemize}
+	\end{columns}
+	
+}
+
+\end{document}

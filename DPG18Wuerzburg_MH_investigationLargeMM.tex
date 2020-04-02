@@ -1,0 +1,586 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{spruce}
+\definecolor{green(pigment)}{rgb}{0.0, 0.65, 0.31}
+\setbeamercolor*{item}{fg=green(pigment)}
+\definecolor{Green}{rgb}{0.00, 1.00, 0.00}
+\definecolor{Red}{rgb}{1.00, 0.00, 0.00}
+\definecolor{Blue}{rgb}{0.00, 0.00, 1.00}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{multirow,bigdelim,dcolumn,booktabs}
+%\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+\usepackage{siunitx}
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\beamertemplatenavigationsymbolsempty
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+
+\graphicspath{
+	{pictures/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/plots/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/sketches/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/pictures/}
+}
+\begin{document}
+\title[\SI{2}{\square\m}-sized Micromegas Quadruplets]{Investigation of Square Meter Sized Micromegas Quadruplets with Cosmic Muons}  
+\author[M. Herrmann]{Maximilian Herrmann}
+\institute[LMU Munich]{Ludwig-Maximilians-Universit\"at M\"unchen - Lehrstuhl Schaile}
+\date{21.03.2018, W\"urzburg} 
+
+\frame{\titlepage
+	\centering
+	Fr\"uhjahrstagung der Deutschen Physikalischen Gesellschaft
+	
+	\includegraphics[width=0.5\textwidth]{LMUlogo.jpg}
+	\hspace{2cm}
+	\includegraphics[width=0.3\textwidth]{BMBFlogo.png}
+} 
+
+%\frame{\frametitle{Outline}\tableofcontents}
+
+\section{Motivation}
+
+\subsection{Micromegas Quadruplets for Track Reconstruction}
+
+\frame{\frametitle{Micromegas Quadruplets for Track Reconstruction}
+	\textbf{MICROMEGAS - MICROMEesh GAseous Structure}
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=1.1\textwidth]{RSMM_principle7-crop.pdf}
+		\column{.5\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					drift region for electron and ion transport
+				\item	
+					high field in amplification region to create electron avalanches
+				\item
+					position reconstruction using charge weighted mean of hit strips
+				\item
+					reconstruction of incident angle using drift time measurements
+			\end{itemize}
+	\end{columns}
+	\vspace{3mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\textbf{Micromegas Quadruplet}
+			
+			\centering
+			\includegraphics[width=\textwidth]{sandwichassembly.png}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{quadrupletStripOrientation2-crop.pdf}
+	\end{columns}
+}
+
+\subsection{Determination of Construction Inaccuracies}
+
+\frame{\frametitle{Design of \SI{2}{\square\m}-sized Anode Panels}
+	\hspace{12mm}
+	\includegraphics[width=\textwidth]{ROboardMechanicalAlignment-crop.pdf}
+	
+	\vspace{2mm}
+%	\footnotesize
+	segmented readout anode (3 PCBs for technical reasons)
+	\begin{itemize}
+		\item[$\Rightarrow$]
+			sophisticated construction, requirements:
+			\begin{itemize}
+%				\footnotesize
+				\item
+					shifts $<$ \SI{50}{\micro\m}
+				\item
+					rotation $<$ $10^{-4}$ rad
+			\end{itemize}
+		\item[$\Rightarrow$]				
+			analysis: reconstruction and calibration of inaccuracies
+	\end{itemize}
+}
+
+\section{Investigation with Cosmic Muons}
+
+\subsection{Cosmic Ray Facility in Garching}
+
+\frame{\frametitle{Cosmic Ray Facility in Garching}
+	\centering
+	
+	\includegraphics[width=0.82\textwidth]{CRF_small.JPG}
+	
+	\vspace{1mm}
+	MDT chambers : \SI{2.2}{\m} $\times$ \SI{4}{\m} $\Rightarrow$ active area : \SI{8}{\m\squared}
+	
+	angular acceptance : $\pm30^{\circ}$
+}
+
+\frame{\frametitle{Cosmic Ray Facility}
+	\centering
+	%scheme of test facility in Garching near Munich
+	%\vspace{1mm}
+	
+	\includegraphics[width=\textwidth]{CRF_sketch4-crop.pdf}
+	
+	\begin{itemize}
+		\item
+			precision prediction along y axis 
+			
+			by Monitored Drift Tube chambers (MDT)
+			
+			$\Rightarrow$ Micromegas aligned for position reconstruction
+			
+			\vspace{3mm}
+		\item
+			\SI{10}{\cm} wide scintillator hodoscope
+			
+			$\Rightarrow$ coarse segmentation along x axis 
+	\end{itemize}
+}
+
+\frame{\frametitle{Detector Alignment}
+	\centering \textbf{Idea:}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.90\textwidth]{positionshift2-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.90\textwidth]{verticalshift-crop.pdf}
+	\end{columns}
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+			
+			%{\rotatebox{90}{\textbf{\tiny \hspace{3mm} residual = measured - reference position}}}
+			\includegraphics[width=0.93\textwidth]{resVSslope_blue.pdf}
+		\column{.45\textwidth}
+			\small
+			\textbf{Implementation:}
+			\begin{itemize}
+				\item
+					%residual = measured - reference position
+					\textbf{residual} = $\mathrm{pos}_{\mathrm{measured}} - \mathrm{pos}_{\mathrm{reference}}$
+				\item
+					residual vs. slope 
+					
+					 of reference track 
+					 
+					$\Rightarrow$ {\color{red}linear fit}
+				\item	
+					$\mathrm{shift}_{\mathrm{horizontal}} = \mathrm{intercept}_{\mathrm{fit}}$
+				\item						
+					$\mathrm{shift}_{\mathrm{vertical}} \;\;\; = \mathrm{slope}_{\mathrm{fit}}$
+			\end{itemize}
+	\end{columns}
+}
+
+\subsection{Reconstruction of Geometrical Properties}
+
+\frame{\frametitle{Reconstruction of the Gravitational Sag}
+	\small
+	partitioning of the active area into smaller subdivisions 
+	
+	$\Rightarrow$ detailed reconstruction of local properties for each layer separate
+
+	\vspace{1mm}
+	\begin{columns}
+		\column{.7\textwidth}
+			\centering
+			\textbf{eta in}
+			
+			\includegraphics[width=0.72\textwidth]{SM2-M0_CRFafterH8_eta-in_deltaZ.pdf}
+		\column{.1\textwidth}
+			\centering
+			\textbf{stereo in}
+			\vspace{10mm}
+			
+			\textbf{stereo out}
+			\vspace{10mm}	
+					
+			\textbf{eta out}
+		\column{.2\textwidth}
+			\centering
+			
+			\includegraphics[width=0.85\textwidth]{SM2-M0_CRFafterH8_stereo-in_deltaZ.pdf}
+			
+			\includegraphics[width=0.85\textwidth]{SM2-M0_CRFafterH8_stereo-out_deltaZ.pdf}
+			
+			\includegraphics[width=0.85\textwidth]{SM2-M0_CRFafterH8_eta-out_deltaZ.pdf}
+	\end{columns}
+
+	\vspace{1mm}	
+	$\Rightarrow$ all layer show gravitational sag due to insufficient support structure 
+	
+	actually detector should be used vertical
+}
+
+\frame{\frametitle{Reconstruction of Strip Alignment}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			{\color{red}mismatch by one strip} 
+			
+			and {\color{blue}pitch error}
+			
+			\includegraphics[width=0.90\textwidth]{SM2-M0_CRFafterH8_eta-in_resMeanVSmdtY_pitchErrorNshift.pdf}
+		\column{.50\textwidth}
+			\centering
+			corrected mismatch 
+			
+			and corrected pitch error
+			
+			\includegraphics[width=0.90\textwidth]{SM2-M0_CRFafterH8_eta-in_resMeanVSmdtY.pdf}
+	\end{columns}
+	
+	mean of residual distribution as function of the position enables reconstruction of 
+	\begin{itemize}
+		\item
+			pitch errors: feasible up to an accuracy of $10^{-4}$ 
+			
+			pitch = \SI{0.425}{\micro\m} $\Rightarrow$ resolution = \SI{40}{n\m}
+		\item
+			board alignment on \SI{}{\micro\m} level
+	\end{itemize}
+}
+
+\subsection{Variation of the Amplification Voltage}
+
+\subsection{Homogeneity of Pulse Hight and Efficiency}
+
+\frame{\frametitle{Investigation of the Pulse Height}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\textbf{eta in MPV cluster charge}
+			
+			\includegraphics[width=0.8\textwidth]{SM2-M0_CRFafterH8_eta-in_MPVclusterQ.pdf}
+			
+			\includegraphics[width=0.8\textwidth]{SM2-M0_CRF_MPVclusterQvsAmplificationVoltage_errorWidth_halfLines.pdf}
+		\column{.50\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					for each partition:
+					
+					landau fit of cluster charge distribution
+				\item
+					Most Probable Values (MPV) of landau fit shows differences between readout boards
+				\item
+					high amplification in whole detector
+				\item
+					inhomogeneities due to master-slave readout (horizontal slices)
+					
+					\vspace{5mm}
+				\item
+					variation of amplification voltage shows exponential rise of cluster charge as expected
+				\item	
+					differences between layer have to be investigated further
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{Investigation of the Efficiency}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\textbf{eta in hit efficiency}
+			\includegraphics[width=0.8\textwidth]{SM2-M0_CRFafterH8_eta-in_hitEfficiency_1123.pdf}
+			
+			\vspace{4mm}
+			\includegraphics[width=0.8\textwidth]{SM2-M0_CRFafterH8_5mmEfficiency_allCluster_halfLines.pdf}
+		\column{.50\textwidth}
+			\centering
+			\textbf{ \footnotesize hit within \SI{5}{mm} to reference track}
+			
+			\vspace{1mm}
+			\includegraphics[width=0.8\textwidth]{SM2-M0_CRFafterH8_5mmEfficiency_allCluster_1123.pdf}
+			
+			\vspace{2mm}
+			\footnotesize
+			\begin{itemize}
+				\item
+					large areas with homogeneous efficiency
+				\item
+					94\% \SI{5}{mm}-efficiency 
+					
+					for all layers at \SI{600}{V}
+				\item
+					minor differences between layer
+			\end{itemize}
+			\vspace{6mm}
+	\end{columns}
+}
+
+\subsection{Position Resolution and Track Reconstruction}
+
+\frame{\frametitle{Raw Position Reconstruction}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\footnotesize
+			\textbf{centroid residual width}
+			\includegraphics[width=0.85\textwidth]{SM2-M0_CRFafterH8_eta-out_residualVSangle_woStereoX.pdf}
+			
+			\textbf{X position by scintillators}
+			\includegraphics[width=0.85\textwidth]{SM2-M0_CRFafterH8_eta-out_resMeanVSstereoX_best.pdf}
+		\column{.50\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					for each angle separate residual distribution
+					
+					$\Rightarrow$ fit with double Gaussian
+					
+					$\Rightarrow$ sigma of narrow Gaussian 
+				\item
+					bad mechanical alignment of the module before measurement
+					
+					(angle between micromegas strips and MDT wires 0.0126 rad)
+					
+					$\Rightarrow$ spatial resolution limited by coarse segmentation in non-precision direction 
+				\item
+					stereo reconstruction enables a better resolution in non-precision direction
+					
+					$\Rightarrow$ diminish dependence of residual mean
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{Spatial Resolution}
+	\vspace{-1mm}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\footnotesize
+			\textbf{reference track resolution}
+			\includegraphics[width=0.9\textwidth]{MDTresidualVSangle.pdf}
+			
+			\vspace{-0.5mm}
+			\textbf{centroid resolution eta out}
+			\includegraphics[width=0.9\textwidth]{SM2-M0_CRFafterH8_eta-out_resolutionVSangle.pdf}
+		\column{.50\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					$\sigma_{\mathrm{micromegas}} = \sqrt{\sigma_{\mathrm{res}}^2 - \sigma_{\mathrm{track}}^2}$
+				\item
+					consider spatial resolution of MDTs
+					
+					$\Rightarrow$ subtract width of residual 
+					
+					\hspace{3.5mm} distribution quadratically
+				\item
+					resolution reaches for perpendicular incident about \SI{110}{\micro\m} (eta in),
+					
+					close to expectation
+			\end{itemize}
+			
+			\vspace{6mm}
+			\centering
+			\textbf{centroid resolution eta in}
+			\includegraphics[width=0.9\textwidth]{SM2-M0_CRFafterH8_eta-in_resolutionVSangle.pdf}
+	\end{columns}
+}
+
+\section{Summary}
+
+\frame{\frametitle{Summary}
+	\footnotesize
+	\begin{itemize}
+		\item
+			\SI{2}{\square\m}-sized micromegas quadruplets for tracking of minimal ionizing particles ($\mu$)
+		\item
+			segmented readout structure due to technical limitations
+			
+			$\Rightarrow$ alignment and calibration is needed after construction
+		\item
+			Cosmic Ray Facility in Garching
+			
+			$\Rightarrow$ investigation of a \SI{2}{\square\m}-sized micromegas quadruplet prototype
+			\begin{itemize}
+				\footnotesize
+				\item
+					reconstruction of a gravitational sag of about \SI{1.5}{mm}
+				\item
+					rotations between readout boards better than 0.0001 rad,
+					
+					shifts between readout boards under investigation
+				\item
+					deviation to nominal pitch on a sub permille level
+				\item
+					large area homogeneous pulse hight and efficiency, 
+					
+					despite differences between readout boards
+				\item
+					\SI{5}{mm}-efficiency of 94 \% at \SI{600}{V}
+					
+					$\Rightarrow$ working point for prototype module
+				\item
+					\SI{110}{\micro\m} for perpendicular incident
+					
+					close to expected value
+			\end{itemize}
+		\item
+			TODO: timing analysis for inclined incident
+	\end{itemize}
+}
+
+\appendix
+
+\frame[noframenumbering]{
+	\Huge
+	\centering
+	Backup
+}
+
+\frame[noframenumbering]{\frametitle{\large LHC upgrade and Efficiency for the ATLAS Muon Spectrometer}
+	\centering
+	\includegraphics[width=0.8\textwidth]{HL_LHC_PlanUpdateJuly2015}
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{ATLASnewer.jpg}
+		\column{.45\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{MDTefficiencyPerHitRate_NSW-TDR_edited.png}
+	\end{columns}
+}
+
+\frame[noframenumbering]{\frametitle{Upgrade of the Inner Barrel End Caps}
+
+	replacement of the current detector systems by small-strip Thin Gap Chamber (sTGC) and Micromegas quadruplets
+	
+	\vspace{3mm}
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+			\textbf{New Small Wheel Sectors}
+			\vspace{7mm}
+			
+			\includegraphics[width=1\textwidth]{sectorsDimensions.png}
+		\column{.45\textwidth}
+			\centering
+			\textbf{Micromegas quadruplets}
+			
+			\includegraphics[width=1\textwidth]{sectorsNsides.png}
+	\end{columns}
+}
+
+\frame[noframenumbering]{\frametitle{Hit Distribution}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\textbf{eta out}
+			
+			\includegraphics[width=0.65\textwidth]{SM2-M0_CRFafterH8_eta-out_hits.pdf}
+			
+			\vspace{-2mm}
+			\textbf{eta in}
+			
+			\includegraphics[width=0.65\textwidth]{SM2-M0_CRFafterH8_eta-in_hits.pdf}
+		\column{.5\textwidth}
+			\centering
+			\textbf{stereo out}
+			
+			\includegraphics[width=0.65\textwidth]{SM2-M0_CRFafterH8_stereo-out_hits.pdf}
+			
+			\vspace{-2mm}
+			\textbf{stereo in}
+						
+			\includegraphics[width=0.65\textwidth]{SM2-M0_CRFafterH8_stereo-in_hits.pdf}
+	\end{columns}
+}
+
+\frame[noframenumbering]{\frametitle{Pulse Hight}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\textbf{eta out}
+			
+			\includegraphics[width=0.65\textwidth]{SM2-M0_CRFafterH8_eta-out_meanCluQ.pdf}
+			
+			\vspace{-2mm}
+			\textbf{eta in}
+			
+			\includegraphics[width=0.65\textwidth]{SM2-M0_CRFafterH8_eta-in_meanCluQ.pdf}
+		\column{.5\textwidth}
+			\centering
+			\textbf{stereo out}
+			
+			\includegraphics[width=0.65\textwidth]{SM2-M0_CRFafterH8_stereo-out_meanCluQ.pdf}
+			
+			\vspace{-2mm}
+			\textbf{stereo in}
+						
+			\includegraphics[width=0.65\textwidth]{SM2-M0_CRFafterH8_stereo-in_meanCluQ.pdf}
+	\end{columns}
+}
+
+\frame[noframenumbering]{\frametitle{Noise and Pulse Hight}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\textbf{2 strips required}
+			
+			\includegraphics[width=0.85\textwidth]{SM2-M0_CRFafterH8_eta-out_board7_clusterQ_min2strips.pdf}
+			
+			\textbf{nearest cluster is leading}
+			
+			\includegraphics[width=0.6\textwidth]{SM2-M0_CRFafterH8_eta-out_ratioNearLeading.pdf}
+		\column{.5\textwidth}
+			\centering
+			\textbf{3 strips required}
+			
+			\includegraphics[width=0.85\textwidth]{SM2-M0_CRFafterH8_eta-out_board7_clusterQ_min3strips.pdf}
+			
+			\textbf{nearest cluster has one strip}
+						
+			\includegraphics[width=0.6\textwidth]{SM2-M0_CRFafterH8_eta-out_oneStripCluster.pdf}
+	\end{columns}
+}
+
+\frame[noframenumbering]{\frametitle{Multiple Scattering Rejection}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\textbf{MDTs}
+			
+			\includegraphics[width=0.9\textwidth]{MDTresidualVSangle_slopeDifCuts.pdf}
+			
+			\includegraphics[width=0.9\textwidth]{MDTresidual_slopeDifCuts.pdf}
+		\column{.5\textwidth}
+			\centering
+			\textbf{micromegas quadruplet (1 layer)}
+			
+			\includegraphics[width=0.9\textwidth]{SM2-M0_CRFafterH8_eta-out_residualVSangle_slopeDifCuts.pdf}
+			
+			\includegraphics[width=0.9\textwidth]{SM2-M0_CRFafterH8_eta-out_residual_cutsMDTslopeDif.pdf}
+	\end{columns}
+}
+
+\frame[noframenumbering]{\frametitle{Stereo Reconstruction}
+	\centering
+	
+	\includegraphics[width=0.7\textwidth]{SM2-M0_CRFafterH8_eta-out_resVSstereoX.pdf}
+}
+
+\end{document}

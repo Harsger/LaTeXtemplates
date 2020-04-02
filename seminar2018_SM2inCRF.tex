@@ -1,0 +1,755 @@
+\documentclass[usenamees,dvipsnames]{beamer}
+\usetheme{Madrid}
+\usecolortheme{spruce}
+\definecolor{green(pigment)}{rgb}{0.0, 0.65, 0.31}
+\setbeamercolor*{item}{fg=green(pigment)}
+\definecolor{Green}{rgb}{0.00, 1.00, 0.00}
+\definecolor{Red}{rgb}{1.00, 0.00, 0.00}
+\definecolor{Blue}{rgb}{0.00, 0.00, 1.00}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{textcomp}
+\usepackage{multirow,bigdelim,dcolumn,booktabs}
+%\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+\usepackage{siunitx}
+\usepackage{appendixnumberbeamer}
+\usepackage{hyperref}
+\usepackage{mdframed}
+\usepackage{xcolor}
+\usepackage[absolute,overlay]{textpos}
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\beamertemplatenavigationsymbolsempty
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+
+\graphicspath{
+	{pictures/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/plots/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/sketches/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/pictures/}
+}
+
+\begin{document}
+\title[SM2 in CRF]{Micromegas Modules in the Cosmic Ray Facility}  
+\author[M. Herrmann]{ Maximilian Herrmann}
+\institute[LMU Munich]{Ludwig-Maximilians-Universit\"at M\"unchen - Lehrstuhl Schaile}
+\date[21.11.2018]{Abteilungsseminar 21.11.2018} 
+
+\frame{\titlepage} 
+
+\frame{\frametitle{Outline}
+	\tableofcontents
+} 
+
+\section{Micromegas Quadruplets for ATLAS}
+
+\frame{\frametitle{Micromegas Quadruplets for ATLAS}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics<1>[width=\textwidth]{ATLASnewer.jpg}
+			\includegraphics<2-4>[width=\textwidth]{ATLAS_wSW.png}
+		\column{.5\textwidth}
+			\pause \includegraphics<3>[width=\textwidth]{sectorsNsides.png}
+			\includegraphics<4>[width=\textwidth]{sectorsNsides_SM2marked.png}
+	\end{columns}
+}
+
+\frame{\frametitle{Micromegas Concept and Realization}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{RSMM_principle8-crop.pdf}
+		\column{.5\textwidth}
+%			\small
+			position reconstruction:
+			\vspace{3mm}
+			
+			$
+				{\bf \bf \mathrm{centroid}} 
+			 = 
+				\dfrac{
+					\sum\limits_{\scriptscriptstyle\mathrm{strips}} \mathrm{strip} \cdot q_{\scriptscriptstyle\mathrm{strip}}
+				}
+				{\sum\limits_{\scriptscriptstyle\mathrm{strips}} q_{\scriptscriptstyle\mathrm{strip}} }
+			$
+			\vspace{5mm}
+			
+			drift time measurement
+			
+			$\Rightarrow$ incident angle reconstruction
+			\vspace{6mm}
+			
+			\centering
+			four active layers per module
+			\vspace{1mm}
+			
+			\includegraphics[width=\textwidth]{sandwichassembly.png}
+	\end{columns}
+}
+
+\frame{\frametitle{Design of Readout Anodes}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{quadrupletStripOrientation3-crop.pdf}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{smallWheelTrackRejection.png}
+	\end{columns}
+	
+	\vspace{3mm}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{ROboardMechanicalAlignment2-crop.pdf}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[angle=-90,width=0.65\textwidth]{dryCleaningwithRui.png}
+	\end{columns}
+}
+
+\section{Cosmic Ray Facility}
+
+\frame{\frametitle{Cosmic Ray Facility}
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=1.0\textwidth]{CRFprinciple3-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{CRF_small.JPG}
+	\end{columns}
+	
+	\vspace{2mm}
+	\centering
+	\footnotesize
+	\begin{tabular}{ll}
+		track reconstruction & 2 $\times$ Monitored Drift Tube chambers (MDTs)
+		\\
+		trigger & scintillator hodoscope
+		\\
+		active area & \SI{2.2}{m} $\times$ \SI{4}{m}
+		\\
+		angular acceptance & $\pm$ \SI{30}{\degree}
+		\\
+		readout & 12288 channels
+		\\
+		 & $\to$ 96 APVs (frontend electronics)
+		\\
+		 & $\to$ 6 FECs (scalable readout system)
+		\\
+		readout rate & 130 Hz (full muon rate)
+	\end{tabular}
+}
+
+\section{Homogeneity}
+
+\subsection{Pulse Height}
+
+\frame{\frametitle{\normalsize M3 Pulse Height Map at $U_{\mathrm{amp}}=$ 560 V, Ar:CO$_2$ 93:7, 1800 ppm H$_2$O}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			eta out \only<2>{GS2}
+			
+			\includegraphics<1>[width=0.6\textwidth]{m3_eo_clusterQmpv_20180911.pdf}
+			\includegraphics<2>[width=0.6\textwidth]{m3_eo_clusterQmpv_20180911_pillar.pdf}
+			
+			stereo in \only<2>{GS2}
+			
+			\includegraphics<1>[width=0.6\textwidth]{m3_si_clusterQmpv_20180911.pdf}
+			\includegraphics<2>[width=0.6\textwidth]{m3_si_clusterQmpv_20180911_pillar.pdf}
+		\column{.5\textwidth}
+			\centering
+			
+			eta in \only<2>{GS1}
+			
+			\includegraphics<1>[width=0.6\textwidth]{m3_ei_clusterQmpv_20180911.pdf}
+			\includegraphics<2>[width=0.6\textwidth]{m3_ei_clusterQmpv_20180911_pillar.pdf}
+			
+			stereo out \only<2>{GS1}
+			
+			\includegraphics<1>[width=0.6\textwidth]{m3_so_clusterQmpv_20180911.pdf}
+			\includegraphics<2>[width=0.6\textwidth]{m3_so_clusterQmpv_20180911_pillar.pdf}
+	\end{columns}
+	
+}
+
+\subsection{Strip Shape} 
+
+\frame{\frametitle{Cosmic Ray Facility}
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=1.0\textwidth]{CRFprinciple5-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{CRF_small.JPG}
+	\end{columns}
+	
+	\vspace{7mm}
+	\centering
+	\begin{tabular}{ccccc}
+		residual & = & {\color{blue}measured} & - & {\color{red}reference}
+		\\
+		 & & & & 
+		\\
+		 & = & centroid $\times$ pitch & - & track$_{\mathrm{MDTs}}$( height$_{\mathrm{MM}}$ )
+	\end{tabular}
+}
+
+\frame{\frametitle{\large Reconstruction of Readout Board Alignment (Layer to Layer)}
+	\begin{textblock*}{10cm}(6.5cm,1.0cm)
+		\includegraphics<2>[width=0.6\textwidth]{m3_board8_etas_resMeanVSscinX_distance.pdf}
+	\end{textblock*}
+	\begin{textblock*}{3cm}(2.2cm,4.3cm)
+		\uncover<2>{\begin{mdframed}[backgroundcolor=white]\textbf{0.03 $\;\;\;$ 0.01}\end{mdframed}}
+	\end{textblock*}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.5\textwidth]{sacleyNov2017_raskfork.JPG}
+			
+			\includegraphics[width=0.95\textwidth]{RS2E00003_GluingSide1_plot.pdf}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics<1>[width=0.6\textwidth]{m3_board8_etas_resMeanVSscinX.pdf}
+			\includegraphics<2>[width=0.6\textwidth]{m3_resMeanVSscinX_empty.png}
+			
+			\includegraphics[width=0.6\textwidth]{m3_board7_etas_resMeanVSscinX.pdf}
+			
+			\includegraphics[width=0.6\textwidth]{m3_board6_etas_resMeanVSscinX.pdf}
+	\end{columns}
+}
+
+\section{Track Reconstruction with Micromegas}
+
+\frame{\centering \Huge Track Reconstruction with Micromegas}
+
+\subsection{Charge Weighted Position}
+
+\frame{\frametitle{\large Residual of Charge Weighted Reconstruction}
+	\begin{textblock*}{3cm}(8.25cm,6.46cm)
+		\uncover<2>{\begin{mdframed}[backgroundcolor=white]\centering\Huge\boldmath$/\sqrt{2}$\end{mdframed}}
+	\end{textblock*}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			Micromegas residual
+			
+			\includegraphics[width=0.75\textwidth]{m1_ei_resVSangle.pdf}
+		\column{.5\textwidth}
+			\centering
+			MDTs difference
+			
+			\includegraphics[width=0.75\textwidth]{m1_MDTinterceptDifVSangle_at-ei.pdf}
+	\end{columns}
+	
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{m1_ei_residaul_nearZero.pdf}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{m1_MDTinterceptDif_nearZero_at-ei.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{\large Resolution of Charge Weighted Reconstruction}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			Micromegas resolution
+			
+			\includegraphics[width=0.75\textwidth]{m1_resolutionVSangle_eoNei.pdf}
+			
+			simulation
+			
+			\includegraphics<1>[width=0.75\textwidth]{inhomogeneousIonization_bE_cathodeNmesh.pdf}
+			\includegraphics<2>[width=0.75\textwidth]{inhomogeneousIonization_bE_cNm_centroidShift.pdf}
+		\column{.5\textwidth}
+		
+			$\sigma$ of narrow Gaussian $\Rightarrow$
+			
+			\vspace{2mm}
+			
+			resolution $ = \sqrt{\sigma_{\mathrm{MM}}^{2} - (\tfrac{1}{\sqrt{2}}\cdot\sigma_{\mathrm{MDT}})^{2}}$
+			
+			\vspace{4mm}
+			
+			inhomogeneous ionization 
+			
+			\vspace{0.5mm}
+			$\Rightarrow$ declining resolution 
+			
+			\hspace{4.5mm} for larger angles
+			
+			\vspace{3mm}
+			
+			solution: use drift time information
+			
+			$\Rightarrow$ 2 approaches
+			
+			\begin{itemize}
+				\item[(1)]
+					Time-Projection-Chamber-like reconstruction (\textmu TPC)
+				\item[(2)]
+					centroid correction by clustertime
+			\end{itemize}
+	\end{columns}
+	
+}
+
+\subsection{Drift Time Measurement}
+
+\frame{\frametitle{(1) Time-Projection-Chamber-like Reconstruction (\textmu TPC)}
+	\centering
+	\includegraphics<1>[width=0.7\textwidth]{timeVSstrip_meshNcathodeNstrips_fit.pdf}
+	\includegraphics<2>[width=0.7\textwidth]{timeVSstrip_meshNcathodeNstrips_fitNangle.pdf}
+	\includegraphics<3>[width=0.7\textwidth]{timeVSstrip_meshNcathodeNstrips_fitNtime.pdf}
+			
+	\begin{itemize}
+		\item
+			angle reconstruction: 
+			{\boldmath$\textcolor{Plum}{\theta}$}$\; = \arctan \left( \tfrac{\mathrm{pitch}}{\textcolor{red}{\mathrm{slope}} \;\cdot\; v_{\mathrm{drift}}} \right)$
+			
+			\vspace{3mm}
+		\item
+			position reconstruction:
+			$
+			\mathrm{pos}_{\mu\mathrm{TPC}}
+			=
+			\dfrac{\textcolor{Cyan}{t_{\mathrm{mid}}} - \textcolor{red}{\mathrm{intercept}}}{\textcolor{red}{\mathrm{slope}}}
+			\cdot \textcolor{brown}{\mathrm{pitch}}
+			$
+	\end{itemize}
+	
+}
+
+\frame{\frametitle{(1) \textmu TPC Angle Reconstruction}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			single strip signal
+			
+			\includegraphics[width=0.75\textwidth]{pulseheight_differentSignaltimes.pdf}
+		\column{.5\textwidth}
+			\centering
+			reference angle $\in $ [ \SI{20}{\degree} , \SI{22}{\degree} ]
+			
+			\includegraphics[width=0.75\textwidth]{m1_ei_uTPCangle_20-22degree_20180601_differentSignaltimes.pdf}
+	\end{columns}
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.33\textwidth}
+			\centering
+			inflection
+			
+			\includegraphics[width=0.9\textwidth]{m1_ei_uTPCangleVSangle_20180601_turntime.pdf}
+		\column{.34\textwidth}
+			\centering
+			baseline
+			
+			\includegraphics[width=0.9\textwidth]{m1_ei_uTPCangleVSangle_20180601.pdf}
+		\column{.33\textwidth}
+			\centering
+			maximum
+			
+			\includegraphics[width=0.9\textwidth]{m1_ei_uTPCangleVSangle_20180601_uptime.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{(1) \textmu TPC Angular Resolution}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			most probable value
+			
+			\includegraphics[width=0.9\textwidth]{m1_ei_20180601_uTPCangleMPVvsAngle_differentSignaltimes.pdf}
+		\column{.5\textwidth}
+			\centering
+			width
+			
+			\includegraphics[width=0.9\textwidth]{m1_ei_20180601_uTPCangleWidthVSangle_differentSignaltimes.pdf}
+	\end{columns}
+	
+	\vspace{5mm}
+	
+	biased, inaccurate reconstruction for small angles
+	
+	\vspace{4mm}
+	
+	inflection yields better angular estimation and resolution than extrapolation
+}
+
+\frame{\frametitle{(1) Determination of $t_{\mathrm{mid}}$ (signal time spectra)}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			earliest and latest signal
+			
+			\includegraphics<1>[width=0.85\textwidth]{m1_ei_stripTime_firstNlast_20180601_turntime_wDifferences.pdf}
+			\includegraphics<2>[width=0.85\textwidth]{m1_ei_stripTime_firstNlast_20180601_turntime_wDifferencesNmean.pdf}
+		\column{.5\textwidth}
+			\centering
+			strip time difference per event
+			
+			\includegraphics[width=0.65\textwidth]{m1_ei_timeDifVsangle_20180601_turntime.pdf}
+	\end{columns}
+	\small
+	\vspace{3mm}
+	
+	$\Rightarrow t_{\mathrm{mid}} \simeq $ \textbf{\textcolor{OliveGreen}{10}} timebins 
+	
+	\begin{itemize}
+		\item
+			expected time difference: 106 ns = 5 mm / \SI{47}{\micro\m/ns} ($\mathrel{\hat=}$ 4.2 timebins)
+		\item
+			not yet understood differences between timing distributions
+		\item
+			smaller differences per event
+	\end{itemize}
+}
+
+\frame{\frametitle{(1) Determination of $t_{\mathrm{mid}}$ (residual dependence)}
+	\centering
+	\textmu TPC residual VS $1 /\!$ slope ($\propto \tan(\theta)$)
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{m1_ei_uTPCresVSuTPCslope_0601_logz.pdf}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics<1>[width=0.8\textwidth]{m1_ei_uTPCresVSuTPCslope_0601_zoom.pdf}
+			\includegraphics<2>[width=0.8\textwidth]{m1_ei_uTPCresVSuTPCslope_0601_zoom_slope.pdf}
+	\end{columns}
+	\vspace{4mm}
+	
+	$\mathrm{residual} = \dfrac{t_{\mathrm{mid}} - \mathrm{intercept}}{\mathrm{slope}} \cdot \mathrm{pitch}\; - \mathrm{reference}$
+	
+	\only<2>{
+		\vspace{2mm}
+		$\Rightarrow t_{\mathrm{mid}} 
+		= \dfrac{\mathrm{residual}}{1 / \mathrm{slope}} \cdot \dfrac{1}{\mathrm{pitch}} 
+		= \textcolor{Rhodamine}{4} \cdot \dfrac{1}{\mathrm{0.425}} \simeq 9.4$ timebins
+	}
+}
+
+\frame{\frametitle{(1) \textmu TPC Position Resolution}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{m1_ei_uTPCresVSangle_20180601_turntime.pdf}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{m1_ei_bothResolutionsVSangle_20180601.pdf}
+	\end{columns}
+	\vspace{4mm}
+		
+	\textmu TPC resolution better than centroid for large angles
+	
+	\vspace{2mm}
+	but: no improvement of \textmu TPC resolution for increasing incident angle
+}
+
+\frame{\frametitle{(2) Charge Weighted Timing}
+
+	\centering
+	\includegraphics<1>[width=0.7\textwidth]{inhomogeneousIonization_bE_cNm_centroidShift.pdf}
+	\includegraphics<2>[width=0.7\textwidth]{inhomogeneousIonization_bE_cNm_timeNcentroidShift.pdf}
+	\includegraphics<3>[width=0.7\textwidth]{inhomogeneousIonization_bE_cNm_timeNcentroidShift_deltaXnTnAngle.pdf}
+	\includegraphics<4-5>[width=0.5\textwidth]{inhomogeneousIonization_bE_cNm_timeNcentroidShift_deltaXnTnAngle.pdf}
+	
+	\only<4>{
+		\vspace{4mm}
+		\begin{tabular}{ccccc}
+			$\bigtriangleup x$ & = & $\bigtriangleup z$ & $\cdot$ & $\tan \theta$
+			\\
+			 & & & &
+			\\
+			 & = & $( t_{\mathrm{c}} - t_{\mathrm{mid}} ) \cdot v_{\mathrm{drift}}$ &  $\cdot$ & $\mathrm{slope}_{\mathrm{ref}}$
+		\end{tabular}
+	}
+	\only<5>{
+		\vspace{4mm}
+		\begin{tabular}{ccccc}
+			$\mathrm{centroid}$ & = & $\sum\limits_{\scriptscriptstyle\mathrm{strips}} \mathrm{strip} \cdot q_{\scriptscriptstyle\mathrm{strip}}$ & $/$ & $\sum\limits_{\scriptscriptstyle\mathrm{strips}} q_{\scriptscriptstyle\mathrm{strip}}$
+			\\
+			 & & & &
+			\\
+			$t_{\mathrm{c}}$ & = & $\sum\limits_{\scriptscriptstyle\mathrm{strips}} t_{\scriptscriptstyle\mathrm{strip}} \cdot q_{\scriptscriptstyle\mathrm{strip}}$ &  $/$ & $\sum\limits_{\scriptscriptstyle\mathrm{strips}} q_{\scriptscriptstyle\mathrm{strip}}$
+		\end{tabular}
+	}
+			
+}
+
+\frame{\frametitle{(2) Residual Dependence on Charge Averaged Clustertime}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			$\mathrm{angle}_{\mathrm{ref}} = -26.4^{\circ}$
+						
+			$\mathrm{slope}_{\mathrm{ref}} = -0.46$
+			\vspace{2.5mm}
+			
+			\includegraphics[width=0.72\textwidth]{m3_ei_C150V_resVSclutime_slope-dot46.pdf}
+		\column{.5\textwidth}
+			\centering
+			fitted correlation VS $\mathrm{slope}_{\mathrm{ref}}$
+			\vspace{5mm}
+			
+			\includegraphics[width=\textwidth]{m3_ei_driftScan_slopeFitresVSclutime.pdf}
+	\end{columns}
+	\vspace{4mm}
+	
+	\centering
+	
+	$\bigtriangleup x = ( t_{\mathrm{c}} - t_{\mathrm{mid}} ) \cdot v_{\mathrm{drift}} \cdot \mathrm{slope}_{\mathrm{ref}}$
+	
+	\vspace{3mm}
+	
+	$\Rightarrow v_{\mathrm{drift}} = \dfrac{\bigtriangleup x}{( t_{\mathrm{c}} - t_{\mathrm{mid}} )}\;\; / \;\; \mathrm{slope}_{\mathrm{ref}}$
+}
+
+\frame{\frametitle{\large (2) Resolution with Charge Averaged Clustertime Correction}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{m1_ei_allResolutionsVSangle_20180601.pdf}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{m3_driftVelocitiesFromCTCnSimulation.pdf}
+	\end{columns}
+	
+	\vspace{4mm}
+	\small
+	
+	improvement of centroid resolution for large angles
+	
+	$\Rightarrow$ better resolution expected (see Bernhard's Thesis)
+	\vspace{4mm}
+	
+	reconstruction of drift velocities fails
+	
+	$\Rightarrow$ systematics can not yet be excluded
+}
+
+\subsection{Stereo Reconstruction}
+
+\frame{\centering \Huge Stereo Reconstruction}
+
+\frame{\frametitle{Position Reconstruction with Stereo Readout}
+	\centering
+	\includegraphics<1>[width=0.8\textwidth]{stereoBoards_angleNshift-crop.pdf}
+	\includegraphics<2>[width=0.8\textwidth]{stereoBoards_angleNshift_centerNcoord-crop.pdf}
+	\vspace{2mm}
+			
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics<1>[width=0.9\textwidth]{m1_stereo_posDifVSscinX.pdf}
+			\includegraphics<2>[width=0.9\textwidth]{m1_stereo_posDifVSscinX_wCenter.pdf}
+		\column{.5\textwidth}
+			\textcolor{blue}{precision} 
+			
+			\hspace{1mm} = stereos mean / $\tan \alpha$ 
+			\vspace{1.5mm}
+						
+			\textcolor{red}{non-precision}
+			
+			\hspace{1mm} = stereos difference / 2 $/ \tan \textcolor{Brown}{\alpha}$
+			\vspace{1.5mm}
+						
+			$\Rightarrow$ \textcolor{Brown}{alignment} 
+			
+			\hspace{4.5mm} non-precision coordinate
+	\end{columns}
+}
+
+\frame{\frametitle{Stereo Residual Dependence on Track Inclination}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			spherical coordinates
+			
+			\includegraphics[width=0.8\textwidth]{Kugelkoord-def.pdf}
+			
+			{\tiny (image: wikipedia)}
+			
+			\vspace{5mm}
+			\only<1>{$\Rightarrow$ correction for track inclination crucial for reconstruction}
+			\only<2,3>{
+				non-precision correction
+				\vspace{1.5mm}
+							
+				= $\dfrac{\bigtriangleup z \cdot \tan \theta \cdot \sin \phi}{2 \cdot \tan \alpha}$
+			}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics<1,2>[width=0.7\textwidth]{m1_stereo_resXvsTheta_woAddTerm_rebin.pdf}
+			\includegraphics<3>[width=0.7\textwidth]{m1_stereo_resXvsTheta_TanThetaSinPhi_rebin.pdf}
+						
+			\includegraphics<1,2>[width=0.7\textwidth]{m1_stereo_resXvsPhi_woAddTerm_rebin.pdf}
+			\includegraphics<3>[width=0.7\textwidth]{m1_stereo_resXvsPhi_TanThetaSinPhi_rebin.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{Stereo Residual Dependence on CRF Systematics}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering	
+			\includegraphics[width=0.8\textwidth]{m1_stereo_resXvsSlopeX_TanThetaSinPhi.pdf}
+			
+			$\Rightarrow$ wrong z position of scintillators? (32 mm)
+		\column{.5\textwidth}
+			\centering	
+			\includegraphics[width=0.8\textwidth]{m1_stereo_resXvsScinX_likeBF.pdf}
+			
+			$\Rightarrow$ wrong scale/pitch of scintillators? (0.22 percent)
+	\end{columns}
+	
+}
+
+\frame{\frametitle{\large Influence of Scintillator Resolution on Badly Aligned Module}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering	
+			\includegraphics[width=0.9\textwidth]{m1_si_resVSposAlongStripsByStereos_slopeX1e-2.pdf}
+			\vspace{3mm}
+			
+			$\Rightarrow$ scintillator segments visible
+		\column{.5\textwidth}
+			\centering	
+			\includegraphics[width=\textwidth]{m1_si_resdiual_wNwoNewXtrack.pdf}
+			\vspace{10mm}
+			
+			$\Rightarrow$ significant improvement
+	\end{columns}
+}
+
+\frame{\frametitle{Summary}
+	\small
+	\begin{itemize}
+		\item
+			Micromegas quadruplets for the ATLAS muon spectrometer inner end cap
+		\item
+			investigation in the Cosmic Ray Facility
+		\item
+			homogeneity
+			
+			\begin{itemize}
+				\small
+				\item
+					bend strip shape due to manufacturing process
+				\item
+					pulse height variation due to unequal sized distance pieces
+			\end{itemize}
+		\item
+			track reconstruction with Micromegas
+						
+			\begin{itemize}
+				\small
+				\item
+					resolution depending on incident angle
+				\item
+					drift time measurement 
+					
+					$\Rightarrow$ resolution improvement for inclined incident
+				\item
+					stereo reconstruction enables more precise investigation
+			\end{itemize}
+	\end{itemize}
+}
+
+\appendix
+
+\frame{\centering \Huge Backup}
+
+\frame{\frametitle{\large Reconstruction of Readout Board Alignment (Single Layer)}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			without correction
+			
+			\includegraphics[width=0.8\textwidth]{eta_in_resMeanVSmdtY_woAdapterBoard_wCorPitch_wCenter.png}
+		
+			\vspace{4mm}
+			\includegraphics[width=0.8\textwidth]{boardPitchDeviation_wLinesNarrows-crop.pdf}
+			\vspace{3mm}
+		\column{.5\textwidth}
+			\centering
+			wrong pitch center
+			
+			\vspace{-0.5mm}
+			\includegraphics[width=0.8\textwidth]{sm2_m0_CRF_eta-in_shiftNpitchCor.pdf}
+			
+			\vspace{1mm}
+			alignment considered
+			
+			\vspace{-0.3mm}
+			\includegraphics[width=0.8\textwidth]{eta_in_resMeanVSmdtY_wNewPitchCor.pdf}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{\large Determination of $t_{\mathrm{mid}}$ (extrapolated signal time spectra)}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			earliest and latest signal
+			
+			\includegraphics[width=0.85\textwidth]{m1_ei_stripTime_firstNlast_20180601_wFWHM_wMaxDist.pdf}
+		\column{.5\textwidth}
+			\centering
+			strip time difference per event
+			
+			\includegraphics[width=0.65\textwidth]{m1_ei_timeDifVsangle_20180601.pdf}
+	\end{columns}
+	\vspace{5mm}	
+		
+	\begin{itemize}
+		\item
+			expected time difference: 106 ns = 5 mm / \SI{47}{\micro\m/ns} ($\mathrel{\hat=}$ 4.2 timebins)
+		\item
+			not yet understood differences between timing distributions
+		\item
+			smaller differences per event
+	\end{itemize}
+}
+
+\end{document}

@@ -1,0 +1,619 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\graphicspath{{ccSNLatexBilder/}}
+\begin{document}
+\title{ccSN and explosive nucleosynthesis}  
+\author{ Maximilian Herrmann}
+\date{24.06.2015} 
+
+\frame{\titlepage} 
+
+\frame{\frametitle{Outline}\tableofcontents}
+
+\section{core collapse supernovae} 
+
+\subsection{motivation}
+
+\frame{\frametitle{motivation} 
+	\begin{columns}
+		\column{.60\textwidth}
+		\includegraphics[width=\textwidth]{abundancetoSiliconPLLUMBIbearbeitet.png}
+		\column{.40\textwidth}
+		\begin{itemize}
+		{\small
+			\item
+				already known sources for abundances of elements up to Fe peak
+			\item
+				but how is the mattter ejected from stars?
+			\item
+				where do the other peaks come from?
+		}
+		\end{itemize}
+	\end{columns}
+	{\small
+		\par\medskip
+			
+		known from nuclear physics:
+			
+		magic numbers N or Z $ \in \{ 2, 8, 20, 8, 50, 82, 126 \} $
+		
+		\par\medskip
+			
+		Fe is the element with the highest binding energy per nucleon, so it is the end product of stellar burning.
+	}
+}
+
+\frame{\frametitle{motivation}
+	\begin{figure}
+		\subfigure[ Cassiopeia A ]{\includegraphics[width=0.49\textwidth]{cassiopeiaaPLLUMBI.png}}
+		\subfigure[ Crab Nebula ]{\includegraphics[width=0.456\textwidth]{crabnebulaPLLUMBI.png}}
+		observation of supernovae (SN):
+		
+		contains hydrogen lines $ \rightarrow $ type II
+		
+		contains NO hydrogen lines $ \rightarrow $ type I
+		
+		weak or NO silicon line $ \rightarrow $ type I b/c
+	\end{figure}
+}
+
+\subsection{core collapse setup}
+
+\frame{\frametitle{initial mass and conditions} 
+	\begin{columns}
+		\column{.50\textwidth}
+		\includegraphics[width=\textwidth]{initialmassLC.png}	
+		
+		\includegraphics[width=\textwidth]{massBHneutronstarCHAPTERCCSNEbearbeitet.png}
+		\column{.50\textwidth}
+		{\small
+			two basic scenarios of stellar death:
+			\begin{itemize}
+				\item
+				thermonuclear runaway at degenerate conditions:
+				destruction of white dwarfs in SN of type I a 
+				\item
+				implosion of stellar cores, known as ccSN
+				of type I b/c and type II
+			\end{itemize}
+		}
+	\end{columns}
+}
+
+\frame{\frametitle{Presupernova} 
+	\begin{columns}
+		\column{.60\textwidth}
+		\includegraphics[width=\textwidth]{presupernovaPLLUMBI.png}
+		\column{.40\textwidth}
+		\grqq onion-skin\grqq  structure in massive stars (stars  with masses $ \gtrsim 8\;\mathrm{M_{\odot}} $), after successive burning stages.
+	\end{columns}
+}
+
+\subsection{from implosion to explosion}
+
+\frame{\frametitle{Initial Phase of Collapse}
+	\begin{columns}
+		\column{.60\textwidth}
+		\includegraphics[width=\textwidth]{initialphaseofcollapseSCRIBT.png}
+		\column{.40\textwidth}
+		{\small
+			when the mass of the iron core becomes large
+			(Chandrasekhar mass $ M \sim 1.4\, \mathrm{M_{\odot}} $) nuclear statistical equilibrium (NSE) favors Fe dissociation to $ \alpha $ particles (photodesintegration) at $ T \gtrsim 7 \cdot 10^{9}\;\mathrm{K} \; (\mathrm{k_{B}}T \sim 1\;\mathrm{MeV})  $ and electron capture. 
+		}
+	\end{columns}
+}
+
+\frame{\frametitle{Bounce and Shock Formation}
+	\begin{columns}
+		\column{.60\textwidth}
+		\includegraphics[width=\textwidth]{bounceandshockformationSCRIPT.png}
+		\column{.40\textwidth}
+		implosion overshoots nuclear saturation density 
+		
+		$ \rho \gtrsim 2.7 \cdot 10^{14} \tfrac{\mathrm{g}}{\mathrm{cm^{3}}} $
+		
+		due to high inward velocities
+		
+		$\rightarrow$ short-range nuclear force (repulsive at short distances) 
+		
+		$\rightarrow$ inner-core bounces
+		
+		$\rightarrow$ shock wave propagates outward
+	\end{columns}
+}
+
+\frame{\frametitle{Shock Propagation and $\nu_{e} $ Burst}
+	\begin{columns}
+		\column{.60\textwidth}
+		\includegraphics[width=\textwidth]{shockpropagationandnuburstSCRIPT.png}
+		\column{.40\textwidth}
+		BUT: shock looses energy quickly by heating the pre-shock-plasma to entropies of several $ \mathrm{k_{B}} $ per nucleon
+		
+		$ \rightarrow $ disintegration of heavy nuclei into free nucleons (consumes roughly $1.7 \cdot 10^{51}\;\mathrm{erg}$ per $0.1\;\mathrm{M_{\odot}}$) 
+	\end{columns}
+}
+
+\frame{\frametitle{Shock Stagnation and $\nu $ Heating}
+	\begin{columns}
+		\column{.60\textwidth}
+		\includegraphics[width=\textwidth]{shockstagnationandnuheatingSCRIBT.png}
+		\column{.40\textwidth}\small
+		{\small
+		neutrinos diffuse on timescale $ \sim 10\, $s out of dense core 
+		
+		{\footnotesize Proto Neutron Star (PNS)
+		
+		$ \rightarrow $ Neutron Star}
+		
+		\par\medskip
+				
+		neutrinos can cool via paircreation (of all types!) and can heat via:
+		\begin{align*}
+			\mathrm{n} + \mathrm{\nu}_{e}\;&\rightarrow\;\mathrm{e}^{-} + \mathrm{p}
+			\\
+			\mathrm{p} + \overline{\mathrm{\nu}}_{e}\;&\rightarrow\;\mathrm{e}^{+} + \mathrm{n}
+		\end{align*}
+		}	
+	\end{columns}
+	\begin{center}
+		neutrinosphere $ \longleftrightarrow $ photosphere
+	\end{center}
+}
+
+\frame{\frametitle{Neutrino Cooling and Neutrino-Driven Wind}
+	\begin{columns}
+		\column{.60\textwidth}
+		\includegraphics[width=\textwidth]{neutrinocoolingPLLUMBI.png}
+		\column{.40\textwidth}
+		$ \nu $-driven wind : flow of neutrons and protons from the region near the surface of the PNS, driven by a strong flux of $ \nu_{e} $ and $ \overline{\nu}_{e} $
+	\end{columns}
+}
+
+\frame{\frametitle{schematic evolution of the induced explosion}
+	\begin{figure}
+		\includegraphics[width=.90\textwidth]{inducedexplosionLC.png}
+	\end{figure}
+	\centering
+	$E_{grav}\;\approx\;2 \cdot 10^{53} \mathrm{erg} \left[M / \mathrm{M}_{\odot}\right] \left[R / 10 \mathrm{km}\right]^{-1}$
+	\par \medskip
+	$ \rightarrow  E_{el.mag.}\;\approx\;10^{49}\mathrm{erg}\; ; \;\;\;   E_{kin}\;\approx\;10^{51}\mathrm{erg}\; ; \;\;\;    E_{\nu}\;\approx\;10^{53}\mathrm{erg}\;\;\; $
+}
+
+\section{explosive nucleosynthesis}
+
+\subsection{explosive burning setup}
+
+\frame{\frametitle{heating process}
+	\begin{columns}
+		\column{.60\textwidth}
+		\includegraphics[width=\textwidth]{shocktemptimeprofile1991APJ.png}
+		
+		\centering
+		{\footnotesize Figure: Aufderheide, Baron, Thielemann 1990}
+		
+		\par\medskip
+				
+		different scaling of the axes!
+		\column{.40\textwidth}
+		{\small
+		shock wave almost adiabatic and radiation dominated 
+		
+		$ \rightarrow $ peak temperature and peak density can be derived at first approximation	
+		\begin{align*}
+			E_{expl}\;&=\;\mathsf{a} \cdot \left(T_{p}\right)^{4} \cdot \tfrac{4}{3} \pi r^{3}
+			\\
+			\rightarrow\;\;\;T_{p}(r)\;&=\;\sqrt[4]{\dfrac{3 E_{expl}}{4 \pi r^{3} \mathsf{a}}}
+		\end{align*}
+		
+		a : Stefan-Boltzmann constant
+		}
+	\end{columns}
+}
+
+\frame{\frametitle{explosive burning volumes}
+	for a given explosion energy we can define \grqq volumes\grqq, which correspond to various explosive burning stages
+	
+	explosion energy of $ 10^{51}\; $erg:
+	
+	\begin{itemize}
+		\item
+			5000 km $ \rightarrow T\;=\;4.0 \cdot 10^{9}\;\mathrm{K} \rightarrow $ explosive Si burning
+		\item
+			6400 km $ \rightarrow T\;=\;3.3 \cdot 10^{9}\;\mathrm{K} \rightarrow $ explosive O burning
+		\item
+			11750 km $ \rightarrow T\;=\;2.1 \cdot 10^{9}\;\mathrm{K} \rightarrow $ explosive Ne burning
+		\item
+			13400 km $ \rightarrow T\;=\;1.9 \cdot 10^{9}\;\mathrm{K} \rightarrow $ explosive C burning
+	\end{itemize}
+	
+	$ \rightarrow $ independent of the structure of the presupernova star
+}
+
+\frame{\frametitle{explosive burning}
+	\begin{figure}
+		\includegraphics[width=0.70\textwidth]{presupernovaexplosionJOSEILIADIS.png}
+			
+		in NSE $ \rightarrow $ abundance independent of initial composition and thermonuclear reaction rates, but depend on nuclear binding energies
+	\end{figure}
+}
+
+\frame{\frametitle{explosvie burning setup}
+	the abundance of any nuclide in NSE is determined only by
+			
+	temperature, density and neutron excess $ \eta $
+	\begin{align*}
+		\eta\;&=\sum \left( N_{i} - Z_{i} \right) \dfrac{X_{i}}{M_{i}}\;=\;1 - 2 Y_{e}
+	\end{align*}
+	where $ N_{i} $ number of neutrons, $ Z_{i} $ number of protons, $ X_{i} $ mass fraction and $ M_{i} $ mass (in atomic units), of nuclide i in the plasma, 
+	$ Y_{e} $ is the electron to baryon ratio
+}
+
+\frame{\frametitle{explosvie burning setup}
+	necessary condition for explosive modification of the pre-explosive composition:
+	\begin{align*}
+		\tau_{nuclear} < \tau_{HD}
+	\end{align*}
+	where 
+	\begin{itemize}
+		\item
+			$ \tau_{nuclear}\;\equiv\;\dfrac{\mathrm{nuclear\,energy}}{\mathrm{nuclear\,energy\,generation\,rate}} $
+		\item
+			$ \tau_{HD}\;=\;\dfrac{446}{\sqrt{\rho}}\; $s  $ \rightarrow $ exponential decline of the density 
+			
+			by assuming that matter expands adiabatically ( $ T \propto \rho^{\gamma - 1} $ ) at the escape velocity $( v = \sqrt{2 G M / R}\;)$
+	\end{itemize}
+}
+
+\subsection{explosive burning stages}
+
+\frame{\frametitle{explosive silicon burning}
+	in $ {}^{28} $Si shell: $ T > 5 $GK and $ \rho \sim 10^{8} \tfrac{\mathrm{g}}{\mathrm{cm}^{3}} $
+	
+	expansion $ \rightarrow $ temperature decreases $ \rightarrow $ nuclear reactions freeze out, at specific freeze-out temperature:
+	
+	\begin{itemize}
+		\item
+			\grqq sufficiently large\grqq  $ \;\rho $ and $ \tau_{HD} $
+			
+			$ \rightarrow $ composition mainly made of Fe peak nuclei
+		\item
+			\grqq sufficiently small\grqq  $ \;\rho $ and $\tau_{HD} $ 
+				
+			$ \rightarrow \alpha $ rich freeze-out
+			
+			$ \rightarrow $ small amount of observable $ \gamma $ ray emitter $ {}^{44} $Ti ($ \tau_{\tiny 1/ 2} = 60 $yr)
+	\end{itemize}
+	
+	at $ T \sim (4-5)  $GK : $ {}^{28} $Si burns in quasi-NSE (QSE)
+	
+	$ \rightarrow $ burning incomplete, a lot of $ {}^{28} $Si is left over
+}
+
+\frame{\frametitle{explosive oxygen burning}
+	$ T \sim (2-4) $GK : $ {}^{16} $O is dissociated $ \rightarrow $ two QSE-cluster: 
+	
+	one in the Si mass region, the other in the Fe peak nuclei region
+	
+	\grqq low\grqq $ T $ $ \rightarrow $ more material locked near Si than near Fe
+	
+	\par\medskip
+	
+	driving reactions:
+	{\small
+	\begin{align*}
+		{}^{16}\mathrm{O}({}^{16}\mathrm{O}, \alpha){}^{28}\mathrm{Si}
+		\\
+		{}^{16}\mathrm{O}({}^{16}\mathrm{O}, n){}^{31}\mathrm{Si}
+		\\
+		{}^{16}\mathrm{O}({}^{16}\mathrm{O}, p){}^{31}\mathrm{P}
+		\\
+		{}^{16}\mathrm{O}({}^{16}\mathrm{O}, d){}^{30}\mathrm{P}
+	\end{align*}
+	} 
+	
+	higher $ T $ and lower $ \rho $ favours:
+	${}^{16}\mathrm{O}(\gamma, \alpha){}^{12}\mathrm{C}$
+	
+	\par\medskip
+	
+	most abundant, after freeze out: ${}^{28}\mathrm{Si}, {}^{32}\mathrm{S}, {}^{36}\mathrm{Ar}, {}^{40}\mathrm{Ca}$
+}
+
+\frame{\frametitle{explosive neon and carbon burning}
+{\small
+	$ T \sim 3 - 4 $GK : $ T $ and $ \rho $ too small for QSE
+	
+	$ \rightarrow $ nuclear reactions far from equilibrium 
+	
+	$ \rightarrow $ sensitive to many parameters (additional: initial conditions and nuclear reaction rates)
+	
+	main reactions: 
+	\begin{align*}
+		{}^{20}\mathrm{Ne}(\gamma, \alpha){}^{16}\mathrm{O}
+		\;\;\rightarrow\;\;(\alpha, \mathrm{p})\;\;\mathsf{and}\;\;(\alpha, \mathrm{n})
+	\end{align*}
+	p and n are captured leading to many rare (or neutron rich) isotopes
+	{\small
+	\begin{align*}
+		{}^{12}\mathrm{C}({}^{12}\mathrm{C}, n){}^{23}\mathrm{Mg}
+		\\
+		{}^{12}\mathrm{C}({}^{12}\mathrm{C}, p){}^{23}\mathrm{Na}
+		\\
+		{}^{12}\mathrm{C}({}^{12}\mathrm{C}, \alpha){}^{20}\mathrm{Ne}
+	\end{align*}
+	} 	
+	most abundant, after freeze out: ${}^{16}\mathrm{O}, {}^{20}\mathrm{Ne}, {}^{24}\mathrm{Mg}, {}^{28}\mathrm{Si}$
+	
+	\par \medskip
+	
+	synthesizes $ {}^{26} $Al $ \rightarrow\;\gamma$-ray emitter ($ \tau_{\tiny 1/ 2} = 7.17 \cdot 10^{5} $yr)
+	
+	$ 10^{10} $yr $ \sim $ galactic chemical evolution $ \rightarrow $ direct evidence
+}
+}
+
+\section{explosion simulation}
+
+\subsection{simulation methods}
+
+\frame{\frametitle{simulation of convective explosion}
+	\begin{columns}
+		\column{.50\textwidth}
+		\includegraphics[width=\textwidth]{neutrinodrivenconvectionREVMODPHYS.png}
+		
+		\centering
+		Figure: Woosley, Heger, Weaver 2002
+		\column{.50\textwidth}
+		{\small
+			until now not considered:
+			\begin{itemize}
+				\item
+					rotation
+				\item
+					metallicity $ Z $ : 
+					
+					initial fraction of the elements heavier than Helium in the star
+					
+					(solar $ \mathrm{Z}_{\odot} \approx 0.02 $)
+				\item
+					convective motion
+			\end{itemize}
+		}
+	\end{columns}
+}
+
+\frame{\frametitle{driving explosions}
+	to drive convection enhanced explosions in ccSN, three recipes are used for simplicity in simulations:
+	
+	{\small
+	\begin{itemize}
+		\item piston:
+			
+			hard surface at the inner boundary that is pushed outward
+		\item neutrino opacity:
+			
+			arteficially increase the neutrino opacity
+		\item energy injection:
+			
+			(also entropy injection) uniformly inject energy across the convective region
+	\end{itemize}
+	}
+}
+
+\frame{\frametitle{yields for different metallicities}
+	\begin{columns}
+		\column{.50\textwidth}
+		\includegraphics[width=\textwidth]{productionfactorCL.png}
+		
+		\centering
+		{\footnotesize Figure: Chieffi, Limongi 2004}
+		\column{.50\textwidth}
+		{\small
+			production factor (PF):
+				
+			ratio of the mass fractions in the ejecta divided by the correspondend mass fraction in the sun
+			
+			\par\medskip
+			
+			PF decreases as metallicity increase 
+			
+			$ \rightarrow $ the larger the metallicity the more difficult is further chemical enrichment
+			
+			\par\medskip
+						
+			$ odd-even-effect $ : difference between odd and even nuclei decreases as metallicity increases
+		}
+	\end{columns}
+}
+
+\subsection{comparison of simulation and observation}
+
+\frame{\frametitle{final nucleosynthesis from a 25$ \mathrm{M}_{\odot} $ SN}
+	\begin{columns}
+		\column{.50\textwidth}
+		\includegraphics[width=\textwidth]{nucleosynthesis25MsolREVMODPHYS.png}
+				
+		\centering
+		{\footnotesize Figure: Woosley, Heger, Weaver 2002}
+		\column{.50\textwidth}
+		{\small
+			Yields from a 25$ \mathrm{M}_{\odot} $ SN compared to solar abundances
+			
+			\par\medskip
+			
+			in order to explaine observations one has to integrate the yields over an inital mass function (IMF) of the stars
+		}
+	\end{columns}
+}
+
+\frame{\frametitle{integrated nucleosynthesis}
+	\begin{columns}
+		\column{.50\textwidth}
+		\includegraphics[width=\textwidth]{integratednucleosynthesisREVMODPHYS.png}
+						
+		\centering
+		{\footnotesize Figure: Woosley, Heger, Weaver 2002}
+		\column{.50\textwidth}
+		{\small
+			integrated nucleosynthesis from a grid of massive stars ($ 11-40\mathrm{M}_{\odot} $) and of various metallicities ($ 0\mathrm{Z}_{\odot} $, $ 10^{-4}\mathrm{Z}_{\odot} $, $ 0.01\mathrm{Z}_{\odot} $, $ 0.1\mathrm{Z}_{\odot} $ and $ \mathrm{Z}_{\odot} $) compared to solar abundances
+		}
+	\end{columns}
+	
+	\par\bigskip
+	
+	\centering
+	{\small
+	$ \rightarrow $ some of the larger deviations could be explained by including SN of type Ia
+	}
+}
+
+\frame{\frametitle{References} 
+	\begin{enumerate}
+		{\tiny
+			\item 
+				Explosive nucleosynthesis in core-collapse-Supernovae  -  Else Pllumbi
+			\item 
+				Explosive nucleosynthesis in massive stars  -  Marco Limongi and Alessandro Chieffi
+			\item
+				Nucleosynthesis Calculations from Core-Collapse Supernovae  -  Christopher L. Fryer et al.
+			\item
+				Detailed Nucleosynthesis Yields from the Explosion of Massive Stars  -  Carla Fr\"ohlich et al.
+			\item
+				Explosive Yields of Massive Stars from $Z = 0$ TO $Z = Z_{\odot}$  -  Alessandro Chieffi and Marco Limongi
+			\item
+				Explosion Mechanisms of Core-Collapse Supernovae  -  Hans-Thomas Janka
+			\item
+				The Deaths of Very Massive Stars  -  Stan. E. Woosley and Alexander Heger
+			\item
+				The evolution and explosion of Massive Stars  -  II. Explosive Hydrodynamics and Nucleosynthesis  -  S.E.Woosley and Thomas A. Weaver
+			\item
+				The evolution and explosion of Massive Stars - S. E. Woosley and A. Heger
+			\item
+				The physics of core-collapse supernovae - Stan Woosley and Thomas Janka
+			\item
+				Nuclear Astrophysics: the unfinished quest for the origin of the elements - Jordi Jos\'e and Christian Iliadis
+			\item
+				Shock waves and nucleosynthesis in type II supernovae - M.B. Aufderheide and E. Baron and F.-K. Thielemann	
+		}
+	\end{enumerate}
+}
+
+\frame{\frametitle{Regards} 
+	\begin{figure}
+	{\Large
+		Thank you for your attention!
+	}
+	\end{figure}
+}
+
+\frame{\frametitle{additional: Neutrino trapping}
+	\begin{figure}
+		\includegraphics[width=.65\textwidth]{neutrinotrappingSCRIPT.png}
+	\end{figure}
+}
+
+\frame{\frametitle{additional: explosion overview}
+	\begin{columns}
+		\column{.33\textwidth}
+		\includegraphics[width=\textwidth]{initialphaseofcollapseSCRIBT.png}
+		\column{.34\textwidth}
+		\includegraphics[width=\textwidth]{neutrinotrappingSCRIPT.png}
+		\column{.33\textwidth}
+		\includegraphics[width=\textwidth]{bounceandshockformationSCRIPT.png}
+	\end{columns}
+	\begin{columns}
+		\column{.33\textwidth}
+		\includegraphics[width=\textwidth]{shockpropagationandnuburstSCRIPT.png}
+		\column{.34\textwidth}
+		\includegraphics[width=\textwidth]{shockstagnationandnuheatingSCRIBT.png}
+		\column{.33\textwidth}
+		\includegraphics[width=\textwidth]{neutrinocoolingPLLUMBI.png}
+	\end{columns}
+}
+
+\frame{\frametitle{additional: $ \nu $p - process}
+{\small
+	galactic enrichment of Sr, Y and Zr $ \rightarrow $ not explained by single r-process
+	
+	candidate for a lighter element production process (LEPP) $ \rightarrow $  $ \nu $p-process
+}
+	
+	\begin{columns}
+		\column{.40\textwidth}
+		\includegraphics[width=\textwidth]{earlynudrivenwindJOSEILIADIS.png}
+		\column{.60\textwidth}
+		{\footnotesize
+		early $ \nu $-wind is proton rich ($ Y_{e} > 0.5 $) and is ejectd at $ T > 5 $GK
+		
+		$ \nu $p nucleosynthesis in four steps:
+		\begin{enumerate}
+			\item
+				$ T = (10-5) $GK:
+				
+				n and p give $ \alpha $ (and residual p)
+			\item
+				$ T = (5-3) $GK	: 
+				
+				$ \alpha $ combine to N=Z nuclei e.g. $ {}^{64} $Ge
+			\item
+				$ T = (3-1) $GK	: p + $ \overline{\nu}_{e} \rightarrow $ n + e$ {}^{+} $
+				
+				important for fast (n,p) reactions
+			\item
+				$ T = 1.5 $GK	: (p,$\gamma$) freeze out
+				
+				(n,p) reactions and $ \beta $ decay convert heavy nuclei into stable n-deficient doughters
+		\end{enumerate}
+		}
+	\end{columns}
+}
+
+\frame{\frametitle{additional: $ \nu $p - process}
+	acounts for solar abundance of some elements, e.g. Mo, Ru which are significantly underproduced in other scenarios 
+	
+	\par\medskip
+	
+	but $ \nu $p-process is sensitive to:
+	\begin{enumerate}
+		\item
+			details of explosion mechanism
+		\item
+			mass of the PNS
+		\item
+			$ Y_{e} $
+		\item
+			$ \nu $ luminosity and energy
+		\item
+			nuclear physics uncertainties:
+			\begin{enumerate}
+				\item[a)]
+					slow 3$ \alpha $ reaction rate 
+					
+					(bottleneck for the seed nuclei)
+				\item[b)]
+					(n,p) reaction rates on the waiting point nuclei
+			\end{enumerate}
+	\end{enumerate}
+}
+
+\frame{\frametitle{additional: s- and r-process}
+	\begin{figure}
+		\includegraphics[width=.80\textwidth]{sandrprocessPLLUMBI.png}
+	\end{figure}
+}
+
+\frame{\frametitle{additional: integrated yields}
+	\begin{figure}
+		\includegraphics[width=.80\textwidth]{integratednucleosynthesiswithSNtypeIaREVMODPHYS.png}
+	\end{figure}
+}
+
+\end{document}

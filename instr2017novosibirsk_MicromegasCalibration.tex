@@ -1,0 +1,558 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{spruce}
+\definecolor{green(pigment)}{rgb}{0.0, 0.65, 0.31}
+\setbeamercolor*{item}{fg=green(pigment)}
+\definecolor{Green}{rgb}{0.00, 1.00, 0.00}
+\definecolor{Red}{rgb}{1.00, 0.00, 0.00}
+\definecolor{Blue}{rgb}{0.00, 0.00, 1.00}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{multirow,bigdelim,dcolumn,booktabs}
+%\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+\usepackage{siunitx}
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\beamertemplatenavigationsymbolsempty
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+
+\graphicspath{
+	%{pictures/}
+	{/home/m/Maximilian.Herrmann/Bilder/forLatex/plots/}
+	{/home/m/Maximilian.Herrmann/Bilder/forLatex/sketches/}
+	{/home/m/Maximilian.Herrmann/Bilder/forLatex/pictures/}
+}
+\begin{document}
+\title[Calibration of Micromegas]{Calibration of Precise Large Area Micromegas Detectors Using Cosmic Rays}  
+\author[M. Herrmann]{Maximilian Herrmann}
+\institute[LMU Munich]{Ludwig-Maximilians-Universit\"at M\"unchen - Lehrstuhl Schaile}
+\date{02.03.2017, Novosibirsk} 
+
+\frame{\titlepage
+	\centering
+	Instrumentation for Colliding Beam Physics
+	
+	\includegraphics[width=0.5\textwidth]{LMUlogo.jpg}
+	\hspace{2cm}
+	\includegraphics[width=0.3\textwidth]{BMBFlogo.png}
+} 
+
+\frame{\frametitle{Outline}
+	\tableofcontents
+}
+
+\section{Micromegas Principle}
+
+\frame{\frametitle{MICROMEsh GAseous Structure}
+	\centering
+	
+	\begin{columns}
+		\column{.6\textwidth}
+			\centering
+			\only<1>{\includegraphics[width=\textwidth]{RSMM_principle5-crop.pdf}}
+			%\only<2>{\includegraphics[width=\textwidth]{RSMM_principle5_withtimes-crop.pdf}}
+		\column{.4\textwidth}
+			\centering
+			\begin{itemize}
+				{\small
+				\item
+					ionized electrons drift between cathode and grounded mesh 
+				\item
+					gas amplification between mesh and anode
+				\item
+					charge collection on resistive strips
+				\item
+					charge detection on readout strips
+				\item
+					positioning of strips with high accuracy mandatory
+				}
+			\end{itemize}
+	\end{columns}
+%	\vspace{0.5cm}
+%	\centering
+%	\begin{tabular}{lcl}
+%		$\Rightarrow$ position reconstruction & : & centroid method
+%		\\
+%			& & charge average over cluster of strips
+%		\\
+%		$\Rightarrow$ track reconstruction & : & TPC-like analysis
+%		\\
+%			& & with $t_{\mathrm{drift}} = \mathrm{f}(\mathrm{strip})$
+%	\end{tabular}
+	\vspace{7mm}
+	
+	\textbf{calibration $\Rightarrow$ determine position of strips using cosmic muons}
+}
+
+\frame{\frametitle{Construction of a \SI{1}{\m\squared} Prototype Micromegas}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.6\textwidth]{L1_PCB_sketch-crop.pdf}
+			\begin{itemize}
+				\item
+					two readout anode boards
+					
+					(due to photolithographic limitations)
+					%
+					%(maximal width $\sim$ \SI{50}{\cm})
+				\item
+					no alignment tooling used during gluing on Al plate
+				\item 
+					active area: 0.92 $\times$ \SI{1.02}{\m\squared}
+			\end{itemize}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{mmconstruction2-crop.pdf}
+			
+			\begin{itemize}
+				\item
+					stiffening panels as support structure for anode and cathode
+				\item
+					mesh mounted on drift panel
+				\item
+					gas volume enclosed by anode and cathode
+				\item
+					potential deformation due to overpressure of Ar:CO$_{2}$
+			\end{itemize}
+	\end{columns}
+}
+
+%\subsection{Signal Properties}
+
+\frame{\frametitle{Time Evolution of the Signal on a Single Strip}
+	beginning of the signal : fit by an inverse Fermi function
+	\vspace{5mm}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{pulseheight_withExtrapolationLine_wPoint3.pdf}
+		\column{.50\textwidth}
+			{\small
+			\centering
+			\hspace{3mm} $ \mathrm{f}_{\mathrm{Fermi}} = \dfrac{p_{0}}{1 + \exp[(p_{1} - x)/p_{2}]} + p_{3}$
+			
+			
+			%\hspace{3mm} $ \dfrac{p_{0}}{1 + e^{(p_{1} - x)/p_{2}}} + p_{3}$
+			\begin{itemize}
+				\item
+					$p_{0}$ : maximal pulse height 
+					
+					\hspace{8mm} $\Rightarrow$ charge of signal
+				\item
+					$p_{1}$ : time of 50\% 
+					
+					\hspace{5.5mm} maximal pulse height
+				\item
+					$p_{2}$ : $\propto$ rise time
+				\item
+					$p_{3}$ : pedestal
+			\end{itemize}
+			}
+	\end{columns}
+	\vspace{5mm}
+	\centering
+	$\Rightarrow$ {\color{green}3 values} of $\mathrm{f}_{\mathrm{Fermi}}$ at 10\% , 50\% and 90\% define 
+	
+	{\color{teal}start time} of signal by {\color{blue}extrapolation}
+}
+
+\subsection{Position and Track Reconstruction}
+
+\frame{\frametitle{Position and Track Reconstruction}
+	\begin{columns}
+			\column{.50\textwidth}
+				\centering
+				\includegraphics[width=1.1\textwidth]{eventdisplay.png}
+				
+				drift time measurement
+				
+				\includegraphics[width=0.9\textwidth]{timevsstrip2.pdf}
+			\column{.50\textwidth}
+				\small
+				\begin{itemize}
+					\item
+						centroid method
+						
+						$\Rightarrow$ charge average over strips
+						
+						\vspace{3mm}$
+							 {\bf \color{violet}x_{\bf \mathrm{centroid}}} 
+								 = 
+							\dfrac{
+								\sum\limits_{\scriptscriptstyle\mathrm{strips}} x_{\scriptscriptstyle\mathrm{strip}} \cdot q_{\scriptscriptstyle\mathrm{strip}}
+							}
+							{\sum\limits_{\scriptscriptstyle\mathrm{strips}} q_{\scriptscriptstyle\mathrm{strip}} }
+						$\vspace{4mm}
+					\item
+						TPC-like method
+						
+						angle reconstruction by drift time measurement
+						
+						${\color{blue}\alpha} = \arctan\left(\dfrac{\mathrm{pitch}}{{\color{red}\mathrm{slope}_{\mathrm{fit}}} \cdot v_{\mathrm{drift}}}\right)$
+				\end{itemize}
+	\end{columns}
+}
+
+\section{Cosmic Ray Facility}
+
+\frame{\frametitle{Cosmic Ray Facility: Calibration}
+	
+	\centering
+	\includegraphics[width=0.8\textwidth]{CRFprinciple-crop.pdf}
+%	\begin{columns}
+%		\column{.60\textwidth}
+%			\centering
+%			\includegraphics[width=\textwidth]{CRF_sketch2-crop.pdf}
+%		\column{.40\textwidth}
+%			\centering
+%			\includegraphics[width=\textwidth]{CRFpictureLoesel.png}
+%	\end{columns}
+	
+	
+	\begin{itemize}
+		\item
+			2D track reconstruction with two Monitored Drift Tube (MDT) chambers
+		\item
+			trigger via Scintillator hodoscope with coarse resolution ($\approx$ \SI{10}{cm}) in orthogonal direction
+	\end{itemize}
+}
+
+\frame{\frametitle{Cosmic Ray Facility}
+	\centering
+	facility to calibrate detectors in Garching near Munich
+	\vspace{1mm}
+	
+	\includegraphics[width=0.8\textwidth]{CRF_small.JPG}
+	
+	\vspace{1mm}
+	MDT chambers : \SI{2.2}{\m} $\times$ \SI{4}{\m} $\Rightarrow$ active area : \SI{9}{\m\squared}
+	
+	angular acceptance : $\pm30^{\circ}$
+}
+
+\subsection{Calibration and Potential Alignment \newline by use of $\mu$ reference tracks and \newline by partitioning of the detector area}
+
+\frame{\frametitle{Alignment by Use of Reference Tracks}
+	\centering \textbf{Idea:}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.90\textwidth]{positionshift2-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.90\textwidth]{verticalshift-crop.pdf}
+	\end{columns}
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+			
+			%{\rotatebox{90}{\textbf{\tiny \hspace{3mm} residual = measured - reference position}}}
+			\includegraphics[width=0.93\textwidth]{residualVSslope_newest.pdf}
+		\column{.45\textwidth}
+			\small
+			\textbf{Implementation:}
+			\begin{itemize}
+				\item
+					%residual = measured - reference position
+					\textbf{residual} = $\mathrm{pos}_{\mathrm{measured}} - \mathrm{pos}_{\mathrm{reference}}$
+				\item
+					residual vs. slope 
+					
+					 of reference track 
+					 
+					$\Rightarrow$ {\color{red}linear fit}
+				\item	
+					$\mathrm{shift}_{\mathrm{horizontal}} = \mathrm{intercept}_{\mathrm{fit}}$
+				\item						
+					$\mathrm{shift}_{\mathrm{vertical}} \;\;\; = \mathrm{slope}_{\mathrm{fit}}$
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{Partitioning of the Detector Area}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{L1_partitions4-crop.pdf}
+		\column{.50\textwidth}
+			\small
+			\begin{itemize}
+				\item
+					two readout boards 
+					
+					with in 2048 strips
+				\item
+					16 APV25 frontend boards 
+					
+					$\Rightarrow$ 16 segments in y direction
+				\item
+					\SI{10}{\cm} resolution of scintillator hodoscope
+										
+					$\Rightarrow$ 10 segments  in x direction
+			\end{itemize}
+			\centering
+			{\large$\Rightarrow$ 160 partitions}
+			
+			\hspace{2.1mm} \`{a} 100 $\times$ \SI{57.6}{\mm\squared} 
+	\end{columns}
+	\vspace{12mm}
+	$\Rightarrow$ calibration and alignment for each of the 160 partitions individually
+}
+
+\section{Calibration Results}
+\section{Homogeneity and Efficiency of Large Area Micromegas}
+
+\frame{\frametitle{Deformation of the Drift Region due to Overpressure}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{deltaZ__apv_scin_font-crop.pdf}
+			%\includegraphics[width=\textwidth]{L1_deformation_znew_richtigKlein.pdf}
+			
+			\includegraphics[width=0.7\textwidth]{L1_simDif-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{iglu_10mbar_new.pdf}
+			
+			\begin{itemize}
+				\item
+					drift gap deformation due to small overpressure
+				\item
+					maximum deviation of \SI{0.8}{\mm}
+					from central plane
+					
+					$\Rightarrow$ \SI{1.6}{\mm} at cathode 
+					
+					(stiff base plate support)
+				\item
+					deformation in agreement with finite element simulation (ANSYS)
+			\end{itemize}
+			
+	\end{columns}
+}
+
+\frame{\frametitle{Result of Calibration: \\ Shift and Rotation between Readout Boards}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{deltaY__apv_scin_font-crop.pdf}
+			\vspace{1mm}
+			
+			\includegraphics[width=0.8\textwidth]{L1BoardTilt_sketch.png}
+		\column{.50\textwidth}
+			
+			\begin{itemize}
+				\item
+					analysis of all 160 partitions individually
+				\item
+					alignment of the right half of the detector
+					
+					$\Rightarrow$ misalignment between PCBs 
+					
+					\hspace{4mm} becomes visible
+				\item
+					\textbf{shift : } \SI{0.1}{\mm}
+				\item
+					\textbf{rotation : } \SI{0.35}{\mm/\m}
+				\item
+					\SI{50}{\micro\m} effects are clearly observable
+			\end{itemize}
+			
+	\end{columns}
+}
+
+\frame{\frametitle{Impact of Calibration on Spatial Resolution}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{doppelGausCut-crop_bunt.pdf}
+
+			\includegraphics[width=0.9\textwidth]{residualVSangle_calibration_narrow_woOutliers.pdf}
+		\column{.50\textwidth}
+			\begin{itemize}
+				\item
+					centroid position reconstruction 
+%					show residual distribution for each angle
+				\item
+					%fit with double Gaussian
+					
+					fit residual distribution for each angle with double Gaussian
+				\item
+					plot narrow Gaussian width as function of angle
+			\end{itemize}
+			$\Rightarrow$ calibration improves resolution
+			
+			\vspace{3mm}
+			
+			improvement @ $0^{\circ}$ :
+			
+			\centering
+			$\approx$ \SI{100}{\micro\m}
+	\end{columns}
+}
+
+\frame{\frametitle{Investigation of Multiple Scattering}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			weighted width
+			
+			\includegraphics[width=0.9\textwidth]{residualVSangle_cutMDTslopeNewest.pdf}
+			
+			\includegraphics[width=0.9\textwidth]{doppelgaus_scat.pdf}
+		\column{.50\textwidth}
+			assumption: 
+			
+			multiple scattering of muons
+			
+			$\Rightarrow$ broadening of residual 
+			
+			\hspace{4mm} distributions
+			
+			\begin{itemize}
+				\item
+					centroid residual distribution
+				\item
+					fit with double Gaussian
+					
+					$\Rightarrow$ weighted sigma
+				\item
+					cut on slope difference of reference tracks decreases residual width by \SI{350}{\micro\m}
+					\vspace{3mm}
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{Homogeneity of Pulse Height and Efficiency}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\small MPV of charge distribution 
+			
+			[ADC counts]
+			
+			\includegraphics[width=0.9\textwidth]{MPVclusterChargeL1.pdf}
+			\vspace{-2mm}
+			
+			efficiency [\%]
+			
+			\includegraphics[width=0.9\textwidth]{efficiencyL1.pdf}
+		\column{.50\textwidth}
+			\begin{itemize}
+				\item
+					charge average : 
+					
+					1440 $\pm$ 310 ADC channel
+				\item
+					efficiency average : 
+					
+					91.5 $\pm$ 0.9 \%
+				\item
+					no significant difference between readout boards
+					\vspace{3mm}
+				\item
+					master-slave differences of APV25 frontend boards
+					\vspace{3mm}
+				\item
+					homogeneous 3$\sigma$ efficiency (deviations due to border effects)
+					
+					91.5 \% limited by multiple scattering
+			\end{itemize}
+	\end{columns}
+}
+
+\section{Summary}
+
+\frame{\frametitle{Summary}
+	\begin{itemize}
+		\item
+			Cosmic Ray Facility
+		\item
+			position and track reconstruction
+		\item
+			investigation of \SI{1}{\m\squared} Micromegas detector
+			\begin{itemize}
+				\item
+					offline calibration by partitioning of detector plane
+				\item
+					deformation due to overpressure (\SI{1.6}{\mm} @ \SI{10}{mbar})
+				\item
+					misalignment of the readout PCBs during assembly (100 - \SI{450}{\micro\m})
+					
+					(no alignment tool available)
+				\item
+					broadening of the residual distribution due to multiple scattering of muons
+				\item
+					homogeneous pulse height and high efficiency over large area
+			\end{itemize}
+		\item
+			results of calibration:
+			\begin{itemize}
+				\item
+					deviation of micro-strips detectable with sensitivity $<$ \SI{50}{\micro\m}
+				\item
+					deformations of the active volume perpendicular to the readout area are measurable with sensitivity $<$ \SI{100}{\micro\m}
+			\end{itemize}
+	\end{itemize}
+}
+
+\appendix
+
+\frame[noframenumbering]{
+	\Huge
+	\centering
+	Backup
+}
+
+\frame[noframenumbering]{\frametitle{APV25 Frontend Readout Chips}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{APV25_chip_bluebackground.png}
+			
+			\includegraphics[width=0.9\textwidth]{APV25_circuit_sketch.png}
+		\column{.50\textwidth}
+			\begin{itemize}
+				\item
+					charge integration over \SI{25}{\ns} 
+				\item
+					pairwise connection as master-slave to reduce output channels 
+			\end{itemize}
+	\end{columns}
+}
+
+\frame[noframenumbering]{\frametitle{Angle Reconstruction by Single Plane TPC Analysis}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{reconstructedVSrefAngle_wNwoQcor.pdf}
+			
+			\includegraphics[width=0.7\textwidth]{capacitiveCoupling2-crop.pdf}
+		\column{.50\textwidth}
+			\begin{itemize}
+				\item
+					angular reconstruction via TPC like method [ $t_{\mathrm{Drift}} = \mathrm{f}(\mathrm{strip})$ ]
+				\item
+					reference track angle by MDT chambers
+				\item
+					larger angles reconstructed due to capacitive coupling between \SI{1}{\m} long strips
+				\item
+					 $\Rightarrow$ correction improves angular resolution  
+			\end{itemize}
+	\end{columns}
+}
+
+
+\end{document}

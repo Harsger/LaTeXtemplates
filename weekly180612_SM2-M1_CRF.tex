@@ -1,0 +1,865 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{spruce}
+\definecolor{green(pigment)}{rgb}{0.0, 0.65, 0.31}
+\setbeamercolor*{item}{fg=green(pigment)}
+\definecolor{Green}{rgb}{0.00, 1.00, 0.00}
+\definecolor{Red}{rgb}{1.00, 0.00, 0.00}
+\definecolor{Blue}{rgb}{0.00, 0.00, 1.00}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{textcomp}
+\usepackage{multirow,bigdelim,dcolumn,booktabs}
+%\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+\usepackage{siunitx}
+\usepackage{appendixnumberbeamer}
+\usepackage{hyperref}
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\beamertemplatenavigationsymbolsempty
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+
+\graphicspath{
+	{pictures/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/plots/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/sketches/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/pictures/}
+}
+
+\begin{document}
+\title[SM2 Module 1 in CRF]{Performance and Calibration \\ of SM2 Module 1 in the Munich CRF}
+\author[M. Herrmann]{speaker : Maximilian Herrmann}
+\institute[LMU Munich]{Ludwig-Maximilians-Universit\"at M\"unchen - Lehrstuhl Schaile}
+\date[12.06.2018]{12.06.2018, Weekly NSW Micromegas Meeting} 
+
+\frame{
+	\centering
+	\vspace{2mm}
+
+	\titlepage
+	\vspace{-6mm}
+	
+	\includegraphics[width=0.35\textwidth]{LMUlogo.jpg}
+	\hspace{4cm}
+	\includegraphics[width=0.3\textwidth]{BMBFlogo.png}
+} 
+
+%\frame{\frametitle{Outline}
+%	\tableofcontents
+%} 
+
+\section{LMU Cosmic Ray Facility}
+
+\frame{\frametitle{LMU Cosmic Ray Facility}
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{CRFprinciple3-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{CRF_small.JPG}
+	\end{columns}
+	
+	\footnotesize
+			
+	\begin{itemize}
+		\item
+			2D track reconstruction with two Monitored Drift Tube (MDT) chambers
+		\item
+			trigger via scintillator hodoscope with $\approx$ \SI{10}{cm} resolution 
+			
+			in direction along the wires
+		\item
+			MDT chambers : \SI{2.2}{\m} $\times$ \SI{4}{\m} 
+			
+			$\Rightarrow$ active area : \SI{8}{\m\squared}, angular acceptance : $\pm30^{\circ}$
+		\item
+			readout of the full module (12288 channels) 
+			
+			with 96 APVs connected to 6 FECs @ full \SI{130}{Hz} \textmu -rate
+			
+			(tested up to \SI{500}{Hz} with random trigger)
+	\end{itemize}
+}
+
+\frame{\frametitle{SM2 Module 1 in the Cosmic Ray Facility}
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{sm2_m1_inCRF_wL1_0.jpg}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{sm2_m1_inCRF_wL1_1.jpg}
+	\end{columns}
+	\vspace{5mm}
+	
+	\begin{tabular}{llcccc}
+		stereo & out & : & gluing side 1 & (on top)
+		\\
+		stereo & in & :  & gluing side 2 & 
+		\\
+		\hline
+		eta & in & :  & gluing side 1 & lost vacuum during gluing
+		\\
+		eta & out & :  & gluing side 2 & (on bottom)
+	\end{tabular}
+}
+
+\frame{\frametitle{Measurement Overview : 11$\times 10^6$ muon trigger / day}
+\scriptsize
+	\begin{tabular}{ccccc}
+		date & amplification [V] & drift [V] & trigger [$10^6$] & merged events [$10^6$]
+		\\
+		\hline
+		28.05. & {\color{orange}550} & {\color{blue}300} & 6.4 & 3.4
+		\\
+		29.05. & 560 & {\color{blue}300} & 10.9 & 5.6
+		\\
+		30.05. & 570 & {\color{blue}300} & 3.7 & 2.0
+		\\
+		30.05. & 570 & {\color{blue}300} & 7.3 & 3.9
+		\\
+		31.05. & {\color{orange}580} & {\color{blue}300} & 2.7 & 1.4
+		\\
+		31.05. & 570 & {\color{blue}300} & 8.8 & 4.7
+		\\
+		01.06. & 570 & {\color{blue}300} & 7.9 & 4.2
+		\\
+		\hline
+		02.06. & 550 & {\color{green}150} & 4.2 & 2.2
+		\\
+		02.06. & 560 & {\color{green}150} & 6.7 & 2.2
+		\\
+		03.06. & {\color{orange}540} & {\color{green}150} & 4.2 & 2.2
+		\\
+		03.06. & {\color{orange}570} & {\color{green}150} & 5.2 & 2.7
+		\\
+		\hline
+		03.06. & 570 & {\color{blue}300} & 4.9 & 2.6
+		\\
+		04.06. & 570 & {\color{blue}300} & 11.5 & 5.3
+		\\
+		05.06. & 570 & {\color{blue}300} & 4.0 & 2.1
+		\\
+		05.06. & 570 & {\color{blue}300} & 7.9 & 4.2
+		\\
+		06.06. & 560 & {\color{blue}300} & 3.7 & 1.9
+		\\
+		06.06. & 570 & {\color{green}150} & 6.8 & 3.6
+		\\
+		07.06. & 570 & {\color{blue}300} & 4.1 & 2.2
+		\\
+		07.06. & 570 & {\color{blue}300} & 7.2 & 3.8
+		\\
+		08.06. & 570 & {\color{blue}300} & 12.1 & 2.8
+		\\
+		09.06. & 560 & {\color{blue}300} & 11.0 & 2.8
+		\\
+		10.06. & 570 & {\color{blue}300} & 5.4 & 
+		\\
+		10.06. & 570 & {\color{blue}300} & 5.4 & 
+	\end{tabular}
+}
+
+\section{Full Area Pulse Height}
+
+\frame{\frametitle{Anode : \SI{570}{V}, Cathode : \SI{300}{V}, Ar:CO$_2$ 93:7 vol\% \\ Mean Cluster Charge}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			eta out
+			
+			\includegraphics[width=0.7\textwidth]{m1_etaout_A570V_C300V_clusterQmean_scaled.png}
+		\column{.50\textwidth}
+			\centering
+			eta in
+			
+			\includegraphics[width=0.7\textwidth]{m1_etain_A570V_C300V_clusterQmean_scaled_APVnotworking.pdf}
+	\end{columns}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			stereo in
+			
+			\includegraphics[width=0.7\textwidth]{m1_stereoin_A570V_C300V_clusterQmean_scaled.png}
+		\column{.50\textwidth}
+			\centering
+			stereo out
+			
+			\includegraphics[width=0.7\textwidth]{m1_stereoout_A570V_C300V_clusterQmean_scaled_badHV.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{Most Probable Value of Cluster Charge by Landau Fit}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			eta out
+			
+			\includegraphics[width=0.7\textwidth]{m1_etaout_A570V_C300V_clusterQmpv_scaled.png}
+		\column{.50\textwidth}
+			\centering
+			eta in
+			
+			\includegraphics[width=0.7\textwidth]{m1_etain_A570V_C300V_clusterQmpv_scaled.png}
+	\end{columns}
+	\vspace{2.3mm}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			stereo in
+			
+			\includegraphics[width=0.7\textwidth]{m1_stereoin_A570V_C300V_clusterQmpv_scaled.png}
+		\column{.50\textwidth}
+			\centering
+			stereo out
+			
+			\includegraphics[width=0.7\textwidth]{m1_stereoout_A570V_C300V_clusterQmpv_scaled.png}
+	\end{columns}
+}
+
+\frame{\frametitle{Cluster Analysis for Eta Out Board 6}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			cluster charge ($U_{\mathrm{drift}} =$ \SI{150}{V})
+			
+			\includegraphics[width=0.8\textwidth]{m1_eo_board6_clusterQ_ampScan_C150V.pdf}
+		\column{.50\textwidth}
+			\centering
+			cluster charge ($U_{\mathrm{drift}} =$ \SI{300}{V})
+			
+			\includegraphics[width=0.8\textwidth]{m1_eo_board6_clusterQ_ampScan_C300V.pdf}
+	\end{columns}
+	\vspace{2.3mm}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			strips in leading cluster 
+			
+			{\scriptsize $U_{\mathrm{drift}} =$ \SI{150}{V}, $U_{\mathrm{amp}} =$ \SI{550}{V}}
+			
+			\includegraphics[width=0.6\textwidth]{m1_eo_board6_nStripsVSslope.pdf}
+		\column{.50\textwidth}
+			\centering
+			mean \# of strips ($U_{\mathrm{drift}} =$ \SI{300}{V})
+			
+			\includegraphics[width=0.8\textwidth]{m1_eo_board6_meanNumberOfStripsVSslope.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{Cluster Analysis for Stereo Out Board 7}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			cluster charge ($U_{\mathrm{drift}} =$ \SI{150}{V})
+			
+			\includegraphics[width=0.8\textwidth]{m1_so_board7_clusterQ_ampScan_C150V.pdf}
+		\column{.50\textwidth}
+			\centering
+			cluster charge ($U_{\mathrm{drift}} =$ \SI{300}{V})
+			
+			\includegraphics[width=0.8\textwidth]{m1_so_board7_clusterQ_ampScan_C300V.pdf}
+	\end{columns}
+	\vspace{2.3mm}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			strips in leading cluster 
+			
+			{\scriptsize $U_{\mathrm{drift}} =$ \SI{150}{V}, $U_{\mathrm{amp}} =$ \SI{550}{V}}
+			
+			\includegraphics[width=0.6\textwidth]{m1_so_board7_nStripsVSslope.pdf}
+		\column{.50\textwidth}
+			\centering
+			mean \# of strips ($U_{\mathrm{drift}} =$ \SI{300}{V})
+			
+			\includegraphics[width=0.8\textwidth]{m1_so_board7_meanNumberOfStripsVSslope.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{Strip Signal for Eta Out Board 6}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.68\textwidth]{m1_etaout_board6_risetimeVScharge.png}
+			
+			\vspace{-1.3mm}
+			signal maximum
+			
+			\includegraphics[width=0.9\textwidth]{m1_eo_board6_A570V_C300V_stripCharge.pdf}
+		\column{.50\textwidth}
+			\centering
+			risetime
+			
+			\includegraphics[width=0.9\textwidth]{m1_etaout_board6_risetime.png}
+			
+			\begin{itemize}
+				\item
+					anode : \SI{570}{V}
+					
+					cathode : \SI{300}{V}
+				\item
+					only strips in cluster within \SI{5}{mm} to track prediction
+				\item
+					reasonable risetime distribution
+				\item
+					dynamic range up to \SI{1700}{ADC} channel
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{Strip Signal for Stereo Out Board 7}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.68\textwidth]{m1_stereoout_board7_risetimeVScharge.png}
+			
+			\vspace{-1.2mm}
+			signal maximum
+						
+			\includegraphics[width=0.9\textwidth]{m1_so_board7_A570V_C300V_stripCharge.pdf}
+		\column{.50\textwidth}
+			\centering
+			risetime
+			
+			\includegraphics[width=0.9\textwidth]{m1_so_board7_A570V_C300V_risetime.pdf}
+		
+			\begin{itemize}
+				\item
+					anode : \SI{570}{V}
+					
+					cathode : \SI{300}{V}
+				\item
+					only strips in cluster within \SI{5}{mm} to track prediction
+				\item
+					slightly larger risetimes
+				\item
+					dynamic range up to {\color{red}\SI{1500}{ADC}} channel $\Rightarrow$ lower saturation
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{Efficiency (Preliminary)}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			amplification \SI{570}{V}, drift \SI{150}{V}
+			
+			cluster efficiency
+			
+			\includegraphics[width=0.6\textwidth]{m1_eo_clusterEfficiency.pdf}
+			
+			\vspace{-0.5mm}
+			\SI{5}{mm} efficiency
+			
+			\includegraphics[width=0.6\textwidth]{m1_eo_5mmEfficiency.pdf}
+		\column{.50\textwidth}
+		\scriptsize
+			\begin{itemize}
+				\item
+					preliminary results
+					
+					$\Rightarrow$ cuts have to be checked 
+				\item
+					cluster efficiency:
+					
+					number of cluster with at least 2 strips
+					
+					divided by number all of tracks going trough partition
+				\item
+					\SI{5}{mm} efficiency:
+					
+					number of cluster within \SI{5}{mm} to track prediction
+										
+					divided by number of all tracks going trough partition
+				\item
+					efficiency spoiled by connection of zebra connectors
+			\end{itemize}
+			
+			\centering
+			\includegraphics[width=0.8\textwidth]{m1_5mmEfficiency_C300V_selectedPartitions.pdf}
+	\end{columns}
+}
+
+%\frame{\frametitle{HV Behavior - Voltages}
+%	measurement duration : 06.06. 10:00 to 11.06. 10:00
+%		
+%	\vspace{5mm}
+%
+%	\hspace{35mm} board 6 \hspace{18mm} board 7 \hspace{18mm} board 8
+%	\begin{columns}
+%		\column{.20\textwidth}
+%		stereo out (GS1)
+%		\vspace{6mm}
+%		
+%		stereo in (GS2)
+%		\vspace{6mm}
+%		
+%		eta in (GS1)
+%		\vspace{6mm}
+%		
+%		eta out (GS2)
+%		\column{.80\textwidth}
+%			\centering
+%			\includegraphics[width=\textwidth]{m1_voltages.pdf}
+%	\end{columns}
+%}
+%
+%\frame{\frametitle{HV Behavior - Currents}
+%	measurement duration : 06.06. 10:00 to 11.06. 10:00
+%	
+%	\vspace{5mm}
+%	
+%	\hspace{35mm} board 6 \hspace{18mm} board 7 \hspace{18mm} board 8
+%	\begin{columns}
+%		\column{.20\textwidth}
+%		stereo out (GS1)
+%		\vspace{6mm}
+%		
+%		stereo in (GS2)
+%		\vspace{6mm}
+%		
+%		eta in (GS1)
+%		\vspace{6mm}
+%		
+%		eta out (GS2)
+%		\column{.80\textwidth}
+%			\centering
+%			\includegraphics[width=\textwidth]{m1_currents.pdf}
+%	\end{columns}
+%}
+
+\section{Calibration Using Reference Tracks over Whole Area}
+
+\frame{\frametitle{Reconstructed Pitch Error and Board Alignment per Plane}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			eta out
+			
+			\includegraphics[width=0.8\textwidth]{m1_eo_resVSstrip.pdf}
+		\column{.50\textwidth}
+			\centering
+			eta in
+			
+			\includegraphics[width=0.8\textwidth]{m1_ei_resVSstrip.pdf}
+	\end{columns}
+	\vspace{2.3mm}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			stereo in
+			
+			\includegraphics[width=0.8\textwidth]{m1_si_resVSstrip.pdf}
+			
+			\vspace{5mm}
+		\column{.50\textwidth}
+			\centering
+			stereo out
+			
+			\includegraphics[width=0.8\textwidth]{m1_so_resVSstrip_pitchError.pdf}
+			
+			{\color{red} misaligned during gluing}
+	\end{columns}
+}
+
+\frame{\frametitle{Strip Shape - Eta Out Board 6}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{m1_eo_board6_resVSscinX.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{m1_eo_board6_resMeanVSscinX.pdf}
+	\end{columns}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\scriptsize
+			\begin{itemize}
+				\item
+					residual as function of the position along the strips given by the scintillator hodoscopes
+				\item
+					``banana shape''-like behavior similar to observation in Saclay
+				\item
+					different shapes for different boards
+					
+					$\Rightarrow$ has to be investigated further
+			\end{itemize}
+		\column{.50\textwidth}
+			\centering
+			corresponds to
+			
+			\includegraphics[width=\textwidth]{bananaStripSketch-crop.pdf}
+	\end{columns}
+}
+
+\section{Position Reconstruction for Various Incident Angle}
+
+\frame{\frametitle{Position Resolution as Function of the Incident Angle}
+	\vspace{-1mm}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\footnotesize
+			\textbf{eta out}
+			\includegraphics[width=0.9\textwidth]{m1_eo_resolutionVSangle_wCluTimeCor.pdf}
+			
+			\vspace{-0.5mm}
+			\textbf{eta in}
+			\includegraphics[width=0.9\textwidth]{m1_ei_resolutionVSangle_wCluTimeCor.pdf}
+		\column{.50\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					residual distribution for each angle separately
+				\item
+					fit with double Gaussian
+					
+					analysis sigma narrow Gaussian only
+					
+					\hspace{3.5mm}(reject multiple scattering)
+				\item
+					consider track uncertainty of reference chambers: 
+				
+					$\sigma_{\mathrm{micromegas}} = \sqrt{\sigma_{\mathrm{res}}^2 - \sigma_{\mathrm{track}}^2}$
+				\item
+					resolution is for perpendicular incident close to expectation
+				\item
+					charge weighted clustertime correction improves residual distribution considerably
+					
+					analysis ongoing: 
+					
+					\SI{0.2}{mm} @ 20$^{\circ}$ expected
+					
+					(see B.Flierl PhD thesis - Particle Tracking with Micro-Pattern Gaseous Detectors)
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{Summary}
+	\footnotesize
+	investigation of the SM2 module 1 in the Cosmic Ray Facility in Garching
+	\begin{itemize}
+		\footnotesize
+		\item
+			pulse height is not homogeneous over area and layers
+			
+			$\Rightarrow$ has to be further investigated
+			
+			lower APV saturation values for the type 7 boards
+			
+			$\Rightarrow$ closer look on APV/FEC interplay with the board capacity is needed
+		\item
+			efficiency $>$ 90\% observed, but regions with considerably lower efficiency exit
+			
+			$\Rightarrow$ closer look at cuts and zerosuppression
+		\item
+			efficiency spoiled by rare trips of a few HV sectors (P. Arruba $\Rightarrow$ HV Monitoring) and zebra connection
+		\item
+			calibration shows smaller defects due to humidity,
+			
+			misalignment during gluing reconstructible
+		\item
+			some boards show ``Saclay banana shape'' 
+			
+			(preliminary, systematics have to be excluded)
+		\item
+			resolution for perpendicular incident near expectation
+		
+			$\Rightarrow$ resolution for inclined incident has to be further investigated
+		\item
+			measurements and investigations ongoing
+	\end{itemize}
+}
+
+\appendix
+
+\frame{\centering \Huge Backup}
+
+\frame{\frametitle{HV Behavior Eta Out Board 7}
+	\vspace{-0.5mm}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			voltage left sector
+			
+			\includegraphics[width=0.9\textwidth]{m1_voltage42.pdf}
+		\column{.50\textwidth}
+			\centering
+			voltage right sector
+			
+			\includegraphics[width=0.9\textwidth]{m1_voltage43.pdf}
+	\end{columns}
+	\vspace{-1mm}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			current left sector
+			
+			\includegraphics[width=0.9\textwidth]{m1_current42.pdf}
+		\column{.50\textwidth}
+			\centering
+			current right sector
+			
+			\includegraphics[width=0.9\textwidth]{m1_current43.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{Strip Charge Per Board}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			eta out
+			
+			\includegraphics[width=0.9\textwidth]{m1_eo_stripCharge_perBoard.pdf}
+		\column{.50\textwidth}
+			\centering
+			eta in
+			
+			\includegraphics[width=0.9\textwidth]{m1_ei_stripCharge_perBoard.pdf}
+	\end{columns}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			stereo in
+			
+			\includegraphics[width=0.9\textwidth]{m1_si_stripCharge_perBoard.pdf}
+		\column{.50\textwidth}
+			\centering
+			stereo out
+			
+			\includegraphics[width=0.9\textwidth]{m1_so_stripCharge_perBoard.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{Mean Cluster Charge Individual Scale}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			eta out
+			
+			\includegraphics[width=0.7\textwidth]{m1_etaout_A570V_C300V_clusterQmean.png}
+		\column{.50\textwidth}
+			\centering
+			eta in
+			
+			\includegraphics[width=0.7\textwidth]{m1_etain_A570V_C300V_clusterQmean.png}
+	\end{columns}
+	\vspace{2.3mm}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			stereo in
+			
+			\includegraphics[width=0.7\textwidth]{m1_stereoin_A570V_C300V_clusterQmean.png}
+		\column{.50\textwidth}
+			\centering
+			stereo out
+			
+			\includegraphics[width=0.7\textwidth]{m1_stereoout_A570V_C300V_clusterQmean.png}
+	\end{columns}
+}
+
+\frame{\centering \Huge Module Zero Results}
+
+\frame{\frametitle{Full Area Pulse Height and Efficiency for Module Zero}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			eta in cluster charge
+			
+			\includegraphics[width=0.7\textwidth]{SM2-M0_CRFafterH8_eta-in_MPVclusterQ.pdf}
+		\column{.50\textwidth}
+			\centering
+			eta in \SI{5}{mm} efficiency
+			
+			\includegraphics[width=0.7\textwidth]{SM2-M0_CRFafterH8_eta-in_5mmEfficiency600V.pdf}
+	\end{columns}
+	\vspace{2.3mm}
+	\centering
+	amplification scan for the central area of all layer
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{SM2-M0_CRF_MPVclusterQvsAmplificationVoltage_errorWidth_halfLines.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{SM2-M0_CRFafterH8_5mmEfficiency_allCluster_halfLines.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{Alignment using Reference Tracks}
+	\centering \textbf{Idea:}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.90\textwidth]{positionshift2-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.90\textwidth]{verticalshift-crop.pdf}
+	\end{columns}
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+			
+			%{\rotatebox{90}{\textbf{\tiny \hspace{3mm} residual = measured - reference position}}}
+			\includegraphics[width=0.93\textwidth]{resVSslope_blue.pdf}
+		\column{.45\textwidth}
+			\small
+			\textbf{Implementation:}
+			\begin{itemize}
+				\item
+					%residual = measured - reference position
+					\textbf{residual} = $\mathrm{pos}_{\mathrm{measured}} - \mathrm{pos}_{\mathrm{reference}}$
+				\item
+					residual vs. slope 
+					
+					 of reference track 
+					 
+					$\Rightarrow$ {\color{red}linear fit}
+				\item	
+					$\mathrm{shift}_{\mathrm{horizontal}} = \mathrm{intercept}_{\mathrm{fit}}$
+				\item						
+					$\mathrm{shift}_{\mathrm{vertical}} \;\;\; = \mathrm{slope}_{\mathrm{fit}}$
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{Reconstructed Deviations per Partition \\ Module Zero Eta In}
+	\small
+
+	$\Rightarrow$ subdivide the active area into smaller partitions
+	
+	$\Rightarrow$ reconstruct separate for each partition the horizontal and the vertical shift
+	
+	\vspace{3mm}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			horizontal shift
+			
+			\includegraphics[width=0.90\textwidth]{sm2_m0_CRF_eta-out_deltaYperPartition.pdf}
+			\scriptsize
+			
+			$\Rightarrow$ shifts between PCBs have to be investigated
+			
+			$\Rightarrow$ rotations on this scale are hardly recognizable
+		\column{.50\textwidth}
+			\centering
+			vertical shift
+			
+			\includegraphics[width=0.90\textwidth]{sm2_m0_CRF_eta-out_deltaZperPartition.pdf}
+			
+			\scriptsize
+			$\Rightarrow$ gravitational sag deforms all layers the same way
+	\end{columns}
+}
+
+\frame{\frametitle{Reconstructed Pitch Error and Board Alignment per Plane \\ Module Zero Eta In}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			{\color{blue}pitch error} and {\color{red}misaligned electronic adapter board}
+			
+			\includegraphics[width=0.90\textwidth]{sm2_m0_CRF_eta-in_color.pdf}
+			
+			\vspace{3mm}
+			
+			pitch error [10$^{-4}$]
+			\scriptsize
+			\begin{tabular}{cc|ccc}
+			panel & side & small & middle & large
+			\\
+			\hline
+			stereo & out & 0.8 & -2.4 & 2.7
+			\\
+			stereo & in &  & 1.4 & 
+			\\
+			\hline
+			eta & in & 1.0 & 2.9 & 3.6
+			\\
+			eta & out & 2.3 & 4.4 & 4.7
+			\end{tabular}
+		\column{.50\textwidth}
+			\centering
+			corrected pitch and shifted adapter board
+			
+			\includegraphics[width=0.90\textwidth]{SM2-M0_CRFafterH8_eta-in_resMeanVSmdtY.pdf}
+			
+			\vspace{3mm}
+						
+			center shift [mm]
+			\scriptsize
+			\begin{tabular}{cc|cc}
+			panel & side & small & large
+			\\
+			\hline
+			stereo & out & 0.09 & -0.06
+			\\
+			stereo & in & -0.18 & 0.25
+			\\
+			\hline
+			eta & in & -0.07 & 0.13
+			\\
+			eta & out & 0.00 & 0.24
+			\end{tabular}
+	\end{columns}
+}
+
+\frame{\frametitle{Position Resolution as Function of the Incident Angle}
+	\vspace{-1mm}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\footnotesize
+			\textbf{resolution eta layer}
+			\includegraphics[width=0.9\textwidth]{sm2_m0_etas_resolutionVSangle.pdf}
+			
+			\vspace{-0.5mm}
+			\textbf{eta out resolution {\color{red}timing corrected}}
+			\includegraphics[width=0.9\textwidth]{SM2-M0_eta-out_CRFafterH8_resolution_wTimeCor.pdf}
+		\column{.50\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					residual distribution for each angle separate
+				\item
+					fit with double Gaussian
+					
+					$\Rightarrow$ sigma narrow Gaussian 
+					
+					\hspace{3.5mm}(reject multiple scattering)
+				\item
+					consider track uncertainty of reference chambers: 
+				
+					$\sigma_{\mathrm{micromegas}} = \sqrt{\sigma_{\mathrm{res}}^2 - \sigma_{\mathrm{track}}^2}$
+				\item
+					resolution reaches for perpendicular incident about \SI{110}{\micro\m} (eta in),
+					
+					close to expectation
+				\item
+					timing correction (see B.Flierl PhD thesis - Particle Tracking with Micro-Pattern Gaseous Detectors)
+					improves resolution
+			\end{itemize}
+	\end{columns}
+}
+
+\end{document}

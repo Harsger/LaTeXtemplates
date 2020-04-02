@@ -1,0 +1,765 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{spruce}
+\definecolor{green(pigment)}{rgb}{0.0, 0.65, 0.31}
+\setbeamercolor*{item}{fg=green(pigment)}
+\definecolor{Green}{rgb}{0.00, 1.00, 0.00}
+\definecolor{Red}{rgb}{1.00, 0.00, 0.00}
+\definecolor{Blue}{rgb}{0.00, 0.00, 1.00}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{textcomp}
+\usepackage{multirow,bigdelim,dcolumn,booktabs}
+%\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+\usepackage{siunitx}
+\usepackage{appendixnumberbeamer}
+\usepackage{hyperref}
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\beamertemplatenavigationsymbolsempty
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+
+\graphicspath{
+	{pictures/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/plots/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/sketches/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/pictures/}
+}
+
+\begin{document}
+\title[Calibration of 2 m$^2$ 4-layered Micromegas]{Calibration of Detector Parameters and Detector Geometry of Large Area Micromegas using Cosmic Rays}
+\author[M. Herrmann]{speaker : Maximilian Herrmann}
+\institute[LMU Munich]{Ludwig-Maximilians-Universit\"at M\"unchen - Lehrstuhl Schaile}
+\date[19.06.2018, RD51]{19.06.2018, RD51 Collaboration Meeting} 
+
+\frame{
+	\centering
+	\vspace{2mm}
+
+	\titlepage
+	\vspace{-6mm}
+	
+	\includegraphics[width=0.35\textwidth]{LMUlogo.jpg}
+	\hspace{4cm}
+	\includegraphics[width=0.3\textwidth]{BMBFlogo.png}
+} 
+
+%\frame{\frametitle{Outline}\tableofcontents} 
+
+\section{\SI{2}{\square\m}-sized 4-layered Micromegas \newline for the NSW upgrade of the ATLAS Experiment}
+
+\frame{\frametitle{LHC Upgrade Status}
+	\centering
+	\includegraphics[width=0.8\textwidth]{HL_LHC_PlanUpdateJuly2015_wLumi.pdf}
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{ATLASnewer.jpg}
+		\column{.45\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{MDTefficiencyPerHitRate_NSW-TDR_edited.png}
+	\end{columns}
+}
+
+\frame{\frametitle{Upgrade of the Muon Small Wheels}
+
+	replacement of the current end caps of the muon spectrometer by small-strip Thin Gap Chamber (sTGC) and Micromegas quadruplets
+	
+	\vspace{3mm}
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+			\textbf{New Small Wheel Sectors}
+			\vspace{7mm}
+			
+			\includegraphics[width=1\textwidth]{sectorsDimensions.png}
+		\column{.45\textwidth}
+			\centering
+			\textbf{Micromegas quadruplets}
+			
+			\includegraphics[width=1\textwidth]{sectorsNsides.png}
+	\end{columns}
+}
+
+\frame{\frametitle{\normalsize Micromegas Quadruplets for track reconstruction in the NSW}
+	\textbf{MICROMEGAS - MICROMEesh GAseous Structure}
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=1.1\textwidth]{RSMM_principle7-crop.pdf}
+		\column{.5\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					drift region for electron and ion transport
+				\item	
+					high field in amplification region to create electron avalanches
+				\item
+					position reconstruction using charge weighted mean of hit strips
+				\item
+					reconstruction of incident angle using drift time measurements
+			\end{itemize}
+	\end{columns}
+	\vspace{3mm}
+	
+	\textbf{Micromegas Quadruplet}
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+			\includegraphics[width=1\textwidth]{sandwichassembly.png}
+		\column{.45\textwidth}
+			\footnotesize
+			4 active layers of Micromegas
+			
+			\vspace{5mm}
+			
+			$\Rightarrow$ 2 $\times$ back-to-back
+	\end{columns}
+}
+
+\frame{\frametitle{Design of Readout Anodes}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{quadrupletStripOrientation3-crop.pdf}
+		\column{.5\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					{\color{red}eta planes} for precision reconstruction in pseudorapidity direction perpendicular to anode strips
+				\item	
+					{\color{blue}stereo planes} for additional coarse position information along the anode strips
+			\end{itemize}
+	\end{columns}
+	\vspace{5mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{ROboardMechanicalAlignment2-crop.pdf}
+		\column{.5\textwidth}
+			\footnotesize
+			limitations by industry
+			
+			micropattern readout anode: width $\le$ \SI{50}{cm}
+			\begin{itemize}
+				\item[$\Rightarrow$] 
+					
+					3 printed circuit boards (PCB) 
+					
+					per active layer
+				\item[$\Rightarrow$] 	
+					reconstruction and calibration of alignment errors (during production) required
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{Precision Reconstruction of Geometrical Properties}
+	Boards of the Readout Anode can have:
+
+	\hspace{20mm} $\Rightarrow$ {\color{red}rotations} and {\color{orange}shifts} w.r.t. each other
+	
+	\hspace{20mm} $\Rightarrow$ {\color{blue}non-straight strip shape} and {\color{green}pitch deviation}
+	
+	\vspace{3mm}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			{\centering
+			\textbf{residual mean VS \\ non-precision direction}
+			
+			\includegraphics[width=0.80\textwidth]{stripShapeNrotation-crop.pdf}
+			}
+			
+			\scriptsize
+			$\Rightarrow$ slope indicates rotations
+			
+			$\Rightarrow$ strip shape is given by 
+			
+			\hspace{3mm} deviation from straight line
+		\column{.50\textwidth}
+			{\centering
+			\textbf{residual mean VS \\ precision direction}
+			
+			\vspace{7mm}
+			
+			\includegraphics[width=0.9\textwidth]{boardAlignmentNpitchError-crop.pdf}
+			}
+			
+			\scriptsize
+			$\Rightarrow$ shift between boards is given by 
+			
+			\hspace{3mm} difference of the centers
+			
+			$\Rightarrow$ slope indicates deviation to nominal pitch 
+	\end{columns}
+}
+
+\section{LMU Cosmic Ray Facility}
+
+\frame{\frametitle{LMU Cosmic Ray Facility in Garching}
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{CRFprinciple3-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{CRF_small.JPG}
+	\end{columns}
+	
+	\footnotesize
+			
+	\begin{itemize}
+		\item
+			2D track reconstruction with two Monitored Drift Tube (MDT) chambers
+		\item
+			trigger via scintillator hodoscope with $\approx$ \SI{10}{cm} resolution 
+			
+			in direction along the wires
+		\item
+			MDT chambers : \SI{2.2}{\m} $\times$ \SI{4}{\m} 
+			
+			$\Rightarrow$ active area : \SI{8}{\m\squared}, angular acceptance : $\pm30^{\circ}$
+		\item
+			readout of the full module (12288 channels) 
+			
+			with 96 APVs connected to 6 FECs @ full \SI{130}{Hz} \textmu -rate
+			
+			(tested up to \SI{500}{Hz} with random trigger)
+	\end{itemize}
+}
+
+\frame{\frametitle{Alignment using Reference Tracks}
+	\centering 
+	\textbf{Idea:}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.90\textwidth]{positionshift2-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.90\textwidth]{verticalshift-crop.pdf}
+	\end{columns}
+	\vspace{2mm}
+	\textbf{Implementation:}
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+			
+			\includegraphics[width=0.8\textwidth]{resVSslope_blue.pdf}
+		\column{.45\textwidth}
+			\small
+			\textbf{residual} = pos\textsubscript{measured} - pos\textsubscript{reference}
+%					\textbf{residual} = $\mathrm{pos}_{\mathrm{measured}} - \mathrm{pos}_{\mathrm{reference}}$
+
+			\vspace{3mm}
+			$\Rightarrow$ residual vs. slope {\scriptsize(reference track)}
+	 
+	 		\vspace{3mm}
+			$\Rightarrow$ {\color{red}linear fit}
+			
+	 		\vspace{3mm}
+			shift\textsubscript{horizontal} = intercept\textsubscript{fit}
+%					$\mathrm{shift}_{\mathrm{horizontal}} = \mathrm{intercept}_{\mathrm{fit}}$
+
+			\vspace{3mm}
+			shift\textsubscript{vertical} = slope\textsubscript{fit}	
+%					$\mathrm{shift}_{\mathrm{vertical}} \;\;\; = \mathrm{slope}_{\mathrm{fit}}$
+	\end{columns}
+}
+
+\frame{\frametitle{Measurement Overview}
+	\begin{itemize}
+		\item
+			\SI{1}{\square\m}-sized prototype detector called L1
+			
+			$\Rightarrow$ proof of principles
+			
+			\vspace{5mm}
+		\item
+			\SI{2}{\square\m}-sized 4-layer prototype chamber called Module 0
+			
+			$\Rightarrow$ first working quadruplet
+			
+			\vspace{5mm}
+		\item
+			\SI{2}{\square\m}-sized 4-layer series chamber for NSW called Module 1
+			
+			$\Rightarrow$ first series module
+	\end{itemize}
+}
+
+\section{Calibration Using Reference Tracks over Whole Active Area}
+
+\subsection{\SI{1}{\square\m}-sized prototype detector - L1 \newline $\Rightarrow$ Proof of Principles}
+
+\frame{
+	\LARGE
+	\centering
+	
+	L1
+	\vspace{10mm}
+	
+	\SI{1}{\square\m}-sized Micromegas
+}
+
+\frame{\frametitle{Deformation of the Drift Region due to Overpressure (L1)}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{L1_blowUp_reconstructed.png}
+			
+			\includegraphics[width=0.7\textwidth]{L1_simDif-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{L1blowUpSketch.pdf}
+			
+			\scriptsize
+			\begin{itemize}
+				\item
+					drift gap deformation due to 
+					
+					small overpressure (no interconnections)
+				\item
+					maximum deviation of \SI{0.8}{\mm}
+					from central plane
+					
+					$\Rightarrow$ \SI{1.6}{\mm} at cathode 
+					
+					\hspace{3mm} (stiff base plate support)
+				\item
+					deformation in agreement with 
+					
+					finite element simulation (ANSYS)
+				\item
+					for NSW Micromegas interconnections will reduce deformation to about \SI{50}{\micro\m}
+			\end{itemize}
+			
+	\end{columns}
+}
+
+\frame{\frametitle{Rotations and Shifts between Anode Boards (L1)}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\textbf{residual mean VS \\ non-precision direction}
+			
+			\scriptsize
+			board 1
+			
+			\includegraphics[width=0.8\textwidth]{L1_board1_resMeanVSscinX.pdf}
+			
+			\vspace{-2mm}
+			board 2 (\textbf{not aligned during assembly})
+			
+			\includegraphics[width=0.8\textwidth]{L1_board2_resMeanVSscinX_wFit.pdf}
+		\column{.50\textwidth}
+			\centering
+			\textbf{residual mean VS \\ precision direction}
+			
+			\includegraphics[width=0.8\textwidth]{L1_resMeanVSmdtY_wFit.pdf}
+			
+			\scriptsize
+			\begin{itemize}
+				\item
+					board 1 shows deformed strip shape of about \SI{50}{\micro\m}
+				\item
+					board 2 is rotated w.r.t. board 1 of about \SI{470}{\micro\m/\m} ($\mathrel{\hat=}$ \SI{0.027}{\degree})
+				\item
+					board 2 is shifted w.r.t. board 1 of about \SI{320}{\micro\m}
+				\item
+					board 2 has a pitch deviation 
+					
+					of about 0.2\textperthousand 
+					
+					($\mathrel{\hat=}$ \SI{80}{\nano\m} @ nominal pitch of \SI{450}{\micro\m})
+			\end{itemize}
+			
+	\end{columns}
+}
+
+\subsection{\SI{2}{\square\m}-sized 4-layered prototype chamber - Module 0 \newline $\Rightarrow$ Pulse Height and Efficiency over whole Area}
+
+\frame{
+	\LARGE
+	\centering
+	
+	Module 0 
+	\vspace{10mm}
+	
+	\SI{2}{\square\m}-sized Micromegas Quadruplet Prototype
+}
+
+\frame{\frametitle{Reconstruction of the Gravitational Sag (Module 0)}
+
+	\begin{columns}
+		\column{.7\textwidth}
+			\centering
+			\textbf{eta in}
+			
+			\includegraphics[width=0.72\textwidth]{SM2-M0_CRFafterH8_eta-in_deltaZ.pdf}
+		\column{.1\textwidth}
+			\centering
+			\textbf{stereo in}
+			\vspace{10mm}
+			
+			\textbf{stereo out}
+			\vspace{10mm}	
+					
+			\textbf{eta out}
+		\column{.2\textwidth}
+			\centering
+			
+			\includegraphics[width=0.85\textwidth]{SM2-M0_CRFafterH8_stereo-in_deltaZ.pdf}
+			
+			\includegraphics[width=0.85\textwidth]{SM2-M0_CRFafterH8_stereo-out_deltaZ.pdf}
+			
+			\includegraphics[width=0.85\textwidth]{SM2-M0_CRFafterH8_eta-out_deltaZ.pdf}
+	\end{columns}
+
+	\vspace{1mm}	
+	$\Rightarrow$ all layers show gravitational sag due to insufficient support structure, 
+	
+	\hspace{3.5mm} detectors at the experiment will be used vertical
+}
+
+\frame{\frametitle{Full Area Pulse Height and Efficiency (Module 0)}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			eta in cluster charge
+			
+			\includegraphics[width=0.7\textwidth]{SM2-M0_CRFafterH8_eta-in_MPVclusterQ.pdf}
+		\column{.50\textwidth}
+			\centering
+			eta in \SI{5}{mm} efficiency
+			
+			\includegraphics[width=0.7\textwidth]{SM2-M0_CRFafterH8_eta-in_5mmEfficiency600V.pdf}
+	\end{columns}
+	\vspace{2.3mm}
+	\centering
+	amplification scan for the central area of all layers
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{SM2-M0_CRF_MPVclusterQvsAmplificationVoltage_errorWidth_halfLines.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{SM2-M0_CRFafterH8_5mmEfficiency_allCluster_halfLines.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{\normalsize Reconstructed Pitch Deviation and Board Alignment per Plane (Module 0)}
+	\begin{columns}
+		\column{.50\textwidth}
+			\small
+			\centering
+			{\color{green}pitch deviation}
+			
+			\includegraphics[width=0.90\textwidth]{eta_in_resMeanVSmdtY_woAdapterBoard_wPitchLine.pdf}
+			
+			\vspace{1.5mm}
+			
+			pitch deviation [10$^{-4}$]
+			\scriptsize
+			\begin{tabular}{cc|ccc}
+			panel & side & small & middle & large
+			\\
+			\hline
+			stereo & out &  & 1.4 & 0.7
+			\\
+			stereo & in & 5.2 & 4.7 & 5.4
+			\\
+			\hline
+			eta & in & 0.7 & 2.8 & 3.3
+			\\
+			eta & out & 1.4 & 3.8 & 4.9
+			\end{tabular}
+		\column{.50\textwidth}
+			\small
+			\centering
+			corrected pitch
+			
+			\includegraphics[width=0.90\textwidth]{eta_in_resMeanVSmdtY_wNewPitchCor_boards.pdf}
+			
+			\vspace{1.5mm}
+						
+			shift [mm]
+			
+			\scriptsize
+			\begin{tabular}{cc|cc}
+			panel & side & small & large
+			\\
+			\hline
+			stereo & out & 0.10 & -0.06
+			\\
+			stereo & in & -0.16 & 0.22
+			\\
+			\hline
+			eta & in & -0.08 & 0.02
+			\\
+			eta & out & -0.17 & 0.11
+			\end{tabular}
+	\end{columns}
+	\vspace{1mm}
+	\small
+	
+	$\Rightarrow$ better construction equipment will be used for series detectors to avoid shifts
+	
+	$\Rightarrow$ humidity control of readout boards to avoid pitch deviation
+}
+
+\frame{
+	\LARGE
+	\centering
+	
+	Module 1 
+	\vspace{10mm}
+	
+	first Series \SI{2}{\square\m}-sized Micromegas Quadruplet
+}
+
+\frame{\frametitle{\normalsize Reconstructed Pitch Deviation and Board Alignment per Plane (Module 1)}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			eta out
+			
+			\includegraphics[width=0.8\textwidth]{m1_eo_resVSstrip.pdf}
+		\column{.50\textwidth}
+			\centering
+			eta in
+			
+			\includegraphics[width=0.8\textwidth]{m1_ei_resVSstrip.pdf}
+	\end{columns}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			stereo in
+			
+			\includegraphics[width=0.8\textwidth]{m1_si_resVSstrip.pdf}
+			
+			\vspace{5mm}
+		\column{.50\textwidth}
+			\centering
+			stereo out
+			
+			\includegraphics[width=0.8\textwidth]{m1_so_resVSstrip_pitchError.pdf}
+			
+			{\color{red} misaligned during gluing}
+	\end{columns}
+}
+
+\subsection{\SI{2}{\square\m}-sized 4-layered series chamber - Module 1 \newline $\Rightarrow$ Position Reconstruction}
+
+\frame{\frametitle{Strip Shape (Module 1)}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{m1_eo_board6_resVSscinX.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{m1_eo_board6_resMeanVSscinX.pdf}
+	\end{columns}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					residual VS position along strips 
+					
+					(by scintillator hodoscopes)
+				\item
+					deformed strip shape 
+					
+					also measured by optical inspection (CMM Saclay)
+				\item
+					further investigation required
+			\end{itemize}
+		\column{.50\textwidth}
+			\centering
+			corresponds to
+			
+			\includegraphics[width=\textwidth]{bananaStripSketch-crop.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{\normalsize Most Probable Value of Cluster Charge by Landau Fit (Module 1)}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			eta out
+			
+			\includegraphics[width=0.7\textwidth]{m1_etaout_A570V_C300V_clusterQmpv_scaled.png}
+		\column{.50\textwidth}
+			\centering
+			eta in
+			
+			\includegraphics[width=0.7\textwidth]{m1_etain_A570V_C300V_clusterQmpv_scaled.png}
+	\end{columns}
+	\vspace{2.3mm}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			stereo in
+			
+			\includegraphics[width=0.7\textwidth]{m1_stereoin_A570V_C300V_clusterQmpv_scaled.png}
+		\column{.50\textwidth}
+			\centering
+			stereo out
+			
+			\includegraphics[width=0.7\textwidth]{m1_stereoout_A570V_C300V_clusterQmpv_scaled.png}
+	\end{columns}
+}
+
+\frame{\frametitle{\normalsize Position Resolution as Function of the Incident Angle (Module 1)}
+	\vspace{-1mm}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\footnotesize
+			\textbf{eta out}
+			\includegraphics[width=0.9\textwidth]{m1_eo_resolutionVSangle_wCluTimeCor.pdf}
+			
+			\vspace{-0.5mm}
+			\textbf{eta in}
+			\includegraphics[width=0.9\textwidth]{m1_ei_resolutionVSangle_wCluTimeCor.pdf}
+		\column{.50\textwidth}
+			\footnotesize
+			\begin{itemize}
+				\item
+					residual distribution for each angle separately
+				\item
+					fit with double Gaussian
+					
+					analysis sigma narrow Gaussian only
+					
+					(reject multiple scattering)
+				\item
+					consider track uncertainty of reference chambers: 
+				
+					$\sigma_{\mathrm{micromegas}} = \sqrt{\sigma_{\mathrm{res}}^2 - \sigma_{\mathrm{track}}^2}$
+				\item
+					resolution is for perpendicular incident close to expectation
+				\item
+					charge weighted clustertime correction improves residual distribution considerably
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{Summary}
+	\scriptsize
+	\begin{itemize}
+		\scriptsize
+		\item
+			replacement of the ATLAS muon spectrometer inner end cap
+			\begin{itemize}
+				\scriptsize
+				\item
+					sTGC and Micromegas quadruplets
+				\item
+					Micromegas SM2 Modules will be built by a German collaboration
+				\item
+					segmented readout structure due to limitations by industry
+					
+					$\Rightarrow$ reconstruction and calibration is required after construction
+			\end{itemize}
+		\item
+			Investigation at the Cosmic Ray Facility in Garching
+			\begin{itemize}
+				\scriptsize
+				\item
+					\SI{1}{\square\m}-size Micromegas (L1) for proof of principles
+					\begin{itemize}
+						\scriptsize
+						\item
+							reconstruction of deformation due to overpressure
+						\item
+							rotation of about \SI{0.027}{\degree} and shift of about \SI{320}{\micro\m} reconstructed
+						\item
+							deviation to nominal pitch of about 0.2\textperthousand
+					\end{itemize}
+				\item
+					\SI{2}{\square\m}-size 4-layered Micromegas Prototype (Module 0)
+					\begin{itemize}
+						\scriptsize
+						\item
+							gravitational sag due to insufficient support
+							
+							$\Rightarrow$ modules used vertical  in ATLAS
+						\item
+							pulse height and efficiency behave as expected
+							
+							$\Rightarrow$ \SI{5}{mm} efficiency reaches more than 90\% for all layers 
+					\end{itemize}
+				\item
+					first \SI{2}{\square\m}-size 4-layered Micromegas series module (Module 1)
+					\begin{itemize}
+						\scriptsize
+						\item
+							alignment better than for prototype module
+						\item
+							measured strip shape in agreement with optical inspection
+							
+							$\Rightarrow$ further investigation required
+						\item
+							homogeneous pulse height over large area
+						\item
+							position reconstruction for perpendicular incident below \SI{100}{\micro\m}
+							
+							$\Rightarrow$ resolution for inclined incident behave as expected, 
+							
+							\hspace{3mm} but can be improved further
+					\end{itemize}
+			\end{itemize}
+	\end{itemize}
+}
+
+\appendix
+
+\frame{\centering \Huge Backup}
+
+\frame{\frametitle{Anode : \SI{570}{V}, Cathode : \SI{300}{V}, Ar:CO$_2$ 93:7 vol\% \\ Mean Cluster Charge}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			eta out
+			
+			\includegraphics[width=0.7\textwidth]{m1_etaout_A570V_C300V_clusterQmean_scaled.png}
+		\column{.50\textwidth}
+			\centering
+			eta in
+			
+			\includegraphics[width=0.7\textwidth]{m1_etain_A570V_C300V_clusterQmean_scaled_APVnotworking.pdf}
+	\end{columns}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			stereo in
+			
+			\includegraphics[width=0.7\textwidth]{m1_stereoin_A570V_C300V_clusterQmean_scaled.png}
+		\column{.50\textwidth}
+			\centering
+			stereo out
+			
+			\includegraphics[width=0.7\textwidth]{m1_stereoout_A570V_C300V_clusterQmean_scaled_badHV.pdf}
+	\end{columns}
+}
+
+\end{document}

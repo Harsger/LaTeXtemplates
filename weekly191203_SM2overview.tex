@@ -1,0 +1,788 @@
+\documentclass[usenamees,dvipsnames]{beamer}
+\usetheme{Madrid}
+\usecolortheme{spruce}
+\definecolor{green(pigment)}{rgb}{0.0, 0.65, 0.31}
+\setbeamercolor*{item}{fg=green(pigment)}
+\definecolor{Green}{rgb}{0.00, 1.00, 0.00}
+\definecolor{Red}{rgb}{1.00, 0.00, 0.00}
+\definecolor{Blue}{rgb}{0.00, 0.00, 1.00}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{textcomp}
+\usepackage{multirow,bigdelim,dcolumn,booktabs}
+%\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+\usepackage{siunitx}
+\usepackage{appendixnumberbeamer}
+\usepackage{hyperref}
+\usepackage{mdframed}
+\usepackage{xcolor}
+\usepackage[absolute,overlay]{textpos}
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\beamertemplatenavigationsymbolsempty
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.text}
+%\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+
+\graphicspath{
+	{pictures/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/plots/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/sketches/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/pictures/}
+}
+
+\title[SM2 in CRF]{SM2 Micromegas Modules in the Cosmic Ray Facility}  
+\author[M. Herrmann]{Maximilian Herrmann}
+\institute[LMU Munich]{Ludwig-Maximilians-Universit\"at M\"unchen - Lehrstuhl Schaile}
+\date[03.12.2019]{Micromegas Weekly Meeting 03.12.2019} 
+
+\begin{document}
+
+\frame{
+	\titlepage
+}
+
+\frame{\frametitle{First Wheel}
+	\Large
+%	\centering
+	16 modules validated and delivered
+    
+    \vspace{10mm} 
+     
+	\begin{tabular}{lcl}
+		{\color{blue} M5 - M8} & , & {\color{red} M9} , {{\color{red} M11 - M21}}
+		\\
+		& &
+		\\
+		{\color{blue} 4 no passivation} & , & {\color{red} 12 incl. passivation}
+	\end{tabular}
+	    
+	\vspace{10mm} 
+       
+    \large
+    QAQC-plots see Ralf's H. talk at Muon Week:
+    \vspace{2mm}
+    
+    \scriptsize
+    \url{https://indico.cern.ch/event/856527/contributions/3605312/attachments/1939339/3214964/muon_week_sm2_nov_2019.pdf}
+}
+
+\frame{\frametitle{Second Wheel}
+	\large
+	     
+	\begin{tabular}{lcl}
+		M4 & : & former eltx. module
+		\\
+		& & passivated, assembled
+		\\
+		& & CRF passed
+	\end{tabular}
+    
+    \vspace{10mm} 
+     
+	\begin{tabular}{cccll}
+		module & eta & stereo & status & plan
+		\\
+		\hline
+		22 & 22 & 22 & assembled $\Rightarrow$ HV-test & CRF this week
+		\\
+		23 & 23 & 24 & RO-panel finalisation & 
+		\\
+		24 & 24 & 25 & RO-panel finalisation & assembly next week
+		\\
+		25 & 25 & 26 & RO-panel finalisation &
+	\end{tabular}
+	    
+	\vspace{5mm} 
+       
+    $\Rightarrow$ M22 - M25 will be finished this year
+     	    
+   	\vspace{5mm} 
+     
+    RO-boards for panels of two more quadruplets available
+    
+    $\Rightarrow$ will be glued until end of year
+}
+
+\frame{\frametitle{Efficiency Investigation (example M19, eta-out)}
+	
+	\centering
+	maps @ $U_{\mathrm{amp}} = $ \SI{580}{V}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{MMS200019L1efficiency.png}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{MMS200019L1gain.png}
+	\end{columns}
+	\vspace{2mm}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			turn on curve
+			
+			\includegraphics[width=0.8\textwidth]{MMS200019L1ampScan.png}
+		\column{.5\textwidth}
+			\centering
+			H8 testbeam 2018
+			
+			\includegraphics[width=0.8\textwidth]{m1_H8_2018_board7efficiency.png}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Effects on Efficiency}
+	\centering
+	\small
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			efficiency VS noise level (M7)
+			
+			\includegraphics[width=0.8\textwidth]{m7_5mmEffiVSsigmaPerAPV_wFit.png}
+		\column{.5\textwidth}
+			\centering
+			pulse height VS pillar height (M1,M3,M6,M7)
+			
+			\includegraphics[width=0.9\textwidth]{meanClusterQvsPillarHeight_etaNstereo_wFit.png}
+	\end{columns}
+	\vspace{2mm}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			efficiency per APV 
+			
+			(M7, $U_{\mathrm{amp}} = $ \SI{570}{V})
+			
+			\includegraphics[width=0.8\textwidth]{m7_5mmEffiVSnormedClusterQperAPV.pdf}
+		\column{.5\textwidth}
+%		\normalsize
+			\begin{itemize}
+				\item
+					noise level individual 
+					
+					for front-end eltx.
+				\vspace{4mm}
+				\item
+					pillar height variation
+				
+					$\Rightarrow$ pulse height inhomogeneities 
+				\vspace{4mm}
+			\end{itemize}
+			
+			$\Rightarrow$ new master student (Sebastian Trost)
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Tracking in the Cosmic Ray Facility}
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=1.0\textwidth]{CRFprinciple5-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{CRF_small.JPG}
+	\end{columns}
+	
+	\vspace{7mm}
+	\begin{columns}
+		\column{.70\textwidth}
+			\centering
+%			\setlength{\tabcolsep}{0pt}
+			\begin{tabular}[]{ccccc}
+				residual & = & {\color{blue}measured} & - & {\color{red}reference}
+				\\
+				 & & & & 
+				\\
+				 & = & centroid $\times$ pitch & - & track$_{\mathrm{MDTs}}$ @ MM
+			\end{tabular}
+		\column{.30\textwidth}
+			\centering
+			$\Rightarrow$ mean residual 
+			
+			VS position
+			
+			\includegraphics[width=0.7\textwidth]{m1_ei_residaul_nearZero.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{\large Alignment Investigation Eta-panel 3 $\Rightarrow$ Consistent Reconstruction}
+	\centering
+		
+	\begin{columns}
+		\column{.05\textwidth}
+		\column{.3\textwidth}
+			\centering
+			September 2018, 
+			
+			in M3
+		\column{.3\textwidth}
+			\centering
+			January 2019, 
+			
+			as doublet
+		\column{.3\textwidth}
+			\centering
+			May 2019, 
+			
+			as doublet
+	\end{columns}
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.05\textwidth}
+			\rotatebox{90}{board 8}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3inM3_b8_resMeanVsscinX.pdf}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3withM6_b8_resMeanVsscinX.pdf}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3withM8_b8_resMeanVsscinX.pdf}
+	\end{columns}
+	\vspace{2mm}
+
+	\begin{columns}
+		\column{.05\textwidth}
+			\rotatebox{90}{board 7}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3inM3_b7_resMeanVsscinX.pdf}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3withM6_b7_resMeanVsscinX.pdf}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3withM8_b7_resMeanVsscinX.pdf}
+	\end{columns}
+	\vspace{2mm}
+
+	\begin{columns}
+		\column{.05\textwidth}
+			\rotatebox{90}{board 6}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3inM3_b6_resMeanVsscinX.pdf}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3withM6_b6_resMeanVsscinX.pdf}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3withM8_b6_resMeanVsscinX.pdf}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{\large Layer-to-Layer Alignment Investigation Eta-panel 3 \\ (direct Comparison to Rasfork-measurement)}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			mean residual
+			
+			back-to-back
+			
+			\includegraphics[width=0.95\textwidth]{m3_201809_etaDifZcor.pdf}
+		\column{.5\textwidth}
+			\centering
+			Rasfork
+			
+			\includegraphics[width=0.8\textwidth]{RS2E00003_GluingSide1_plot.pdf}
+	\end{columns}
+	\vspace{2mm}
+	
+	comparison aggravated by 
+	
+	\begin{itemize}
+		\item
+			strip shape
+		\item
+			mechanical placement in the CRF (deformation and illumination)
+	\end{itemize}
+	
+}
+
+\frame{\frametitle{\large Layer-to-Layer Alignment Investigation Eta-panels 8 and 9}
+	
+	\begin{columns}
+		\column{.05\textwidth}
+			\rotatebox{90}{Eta 8}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{m8_8020_etaDifZcor.pdf}
+		\column{.45\textwidth}
+			\centering
+			\includegraphics[width=0.65\textwidth]{RS2E00008_GluingSide2_plot.pdf}
+	\end{columns}
+%	\vspace{2mm}
+
+	\begin{columns}
+		\column{.05\textwidth}
+			\rotatebox{90}{Eta 9}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{m9_etaDifZcor.pdf}
+		\column{.45\textwidth}
+			\centering
+			\includegraphics[width=0.65\textwidth]{RS2E00009_GluingSide2_plot.pdf}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{\large Layer-to-Layer Alignment Investigation last Eta-panels}
+	
+	\centering
+	\includegraphics[width=0.9\textwidth]{rotationEtaLayersPerBoard.png}
+	
+	$\Rightarrow$ new master student (Fabian Vogel), also working on Jig-Calibration
+	
+}
+
+\frame{\frametitle{Summary}
+	\small
+	\begin{itemize}
+		\item
+			all 16 SM2 modules for the first wheel investigated in the CRF
+		\item
+			reference-tracking
+			\begin{itemize}
+				\item
+					efficiency influenced by 
+					
+					\begin{itemize}
+						\item
+							noise level (preliminary eltx.)
+						\item
+							pulse height $\leftrightarrow$ pillar height
+						\item
+							dead strips ($\Rightarrow$ QAQC)
+					\end{itemize}
+				\item
+					alignment-reconstruction aggravated by
+										
+					\begin{itemize}
+						\item
+							strip shape
+						\item
+							illumination
+						\item
+							placement in CRF
+					\end{itemize}
+					
+					despite this:
+					
+					correlation between Rasfork and Cosmics observed
+			\end{itemize}
+	\end{itemize}
+		
+	\vspace{5mm}
+	
+	\tiny
+	
+	last talk : 
+	
+	\url{https://indico.cern.ch/event/843298/contributions/3552706/attachments/1902301/3140652/SM2inCRF_20190904_mherrmann.pdf} 
+	
+	\vspace{2mm}
+	
+	thesis : 
+	
+	\url{https://www.etp.physik.uni-muenchen.de/publications/theses/download/phd_mherrmann.pdf}
+}
+
+\appendix
+
+\frame{\centering \Huge Backup}
+
+\frame{\frametitle{In-Plane Alignment Investigation Eta-panels 8 and 9}
+	
+	\begin{columns}
+		\column{.05\textwidth}
+		\column{.475\textwidth}
+			\centering
+			gluing side 1
+		\column{.475\textwidth}
+			\centering
+			gluing side 2
+	\end{columns}
+	
+	\begin{columns}
+		\column{.05\textwidth}
+			\rotatebox{90}{Eta 8}
+		\column{.475\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{m8_ei_8020_meanResidualMap.pdf}
+		\column{.475\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{m8_eo_8020_meanResidualMap.pdf}
+	\end{columns}
+%	\vspace{2mm}
+
+	\begin{columns}
+		\column{.05\textwidth}
+			\rotatebox{90}{Eta 9}
+		\column{.475\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{m9_ei_alignedEI_meanResidualMap.pdf}
+		\column{.475\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{m9_eo_meanResidualMap.pdf}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Cosmic Ray Facility}
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=1.0\textwidth]{CRFprinciple7-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{CRFwModuleNdoublet.jpg}
+	\end{columns}
+	
+	\vspace{2mm}
+	\centering
+	\footnotesize
+	\begin{tabular}{ll}
+		trigger & 2 $\times$ scintillator hodoscopes
+		\\
+		track reconstruction & 2 $\times$ Monitored Drift Tube chambers (MDTs)
+		\\
+		active area & \SI{2}{m} $\times$ \SI{4}{m}
+		\\
+		angular acceptance & $\pm$ \SI{30}{\degree} to zenith
+		\\
+		energy cut (hardware) & iron absorber (\SI{34}{cm}) $\to E_{\mu} >$ \SI{600}{MeV} 
+		\\
+		readout & 12288 channels
+		\\
+		 & $\to$ 96 APVs (frontend electronics)
+		\\
+		 & $\to$ 6 FECs (scalable readout system)
+		\\
+		readout rate & 100 Hz (muon rate)
+	\end{tabular}
+}
+
+\frame{\frametitle{\large Charge and Time Resolved Readout using APV25 Electronics}
+	\scriptsize
+	
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			96 $\times$ APV25-chips
+			
+			\includegraphics[width=0.95\textwidth]{APV25.jpg}
+		\column{.32\textwidth}
+			\centering
+			6 $\times$ FEC-cards
+			
+			\includegraphics[width=0.82\textwidth]{FECcabling.jpg}
+		\column{.32\textwidth}
+			\centering
+			strips parallel to MDT-wires
+			
+			\includegraphics[width=0.95\textwidth]{moduleInCRF.jpg}
+	\end{columns}
+		
+	\vspace{3mm}
+	\begin{columns}
+		\column{.32\textwidth}
+			128 channel 
+			
+			charge sensitive preamplifier
+			
+			\SI{40}{MHz} signal sampling
+		\column{.32\textwidth}
+			jitter recorded individually 
+			
+			$\Rightarrow$ unbiased time-evaluation
+		\column{.32\textwidth}
+			reference track
+			
+			$\Rightarrow$ efficiency and resolution
+	\end{columns}
+	
+	\vspace{3mm}
+	\begin{columns}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{eventdisplay_m5_570V.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{FECjitter.pdf}
+		\column{.32\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{trackFitFourLayers.png}
+	\end{columns}
+} 
+
+\frame{\frametitle{Measurement Overview}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{CRFintegratedCountsActiveArea.pdf}
+			
+			\includegraphics[width=\textwidth]{temperatureNpressure_Garching2018to19_edited.png}
+		\column{.5\textwidth}
+			\small
+					
+			\begin{itemize}
+				\footnotesize
+				\item
+					central part of active area
+					
+					$\Rightarrow$ \SI[product-units = repeat]{96 x 78}{cm}
+					
+					overall more than $\tfrac{1}{2}$ billion trigger
+				\item
+					counts integrated over all amplification voltages
+					
+					$\Rightarrow$ also low gain measurements
+				\item
+					CRF average {\color{blue}pressure} :  \SI{960}{\hecto\pascal} 
+					
+					ATLAS-cavern : \SI{980}{\hecto\pascal} 
+					
+					$\Rightarrow$ different gain
+				\item
+					CRF {\color{red}temperature} : \SI{21}{\degreeCelsius} 
+					
+					controlled to about $\pm$\SI{2}{\degreeCelsius}
+				\item
+					modules measured: 0, 1, 3 (spare) 
+					
+					5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21 (first wheel)
+					
+					4 (for second wheel)
+			\end{itemize}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{\large Reconstruction of Pitch Deviations and Readout Board Alignment}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			without correction
+			
+			\includegraphics[width=0.8\textwidth]{eta_in_resMeanVSmdtY_woAdapterBoard_wCorPitch_wCenter.png}
+		\column{.5\textwidth}
+			\centering
+			pitch deviation considered
+			
+			\vspace{-0.3mm}
+			\includegraphics[width=0.8\textwidth]{eta_in_resMeanVSmdtY_wNewPitchCor_shifts.pdf}
+	\end{columns}
+	
+	\vspace{4mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[angle=-90,width=0.55\textwidth]{ROboardsAligned1_wRingsNlines-crop.pdf}
+			\vspace{3mm}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{boardPitchDeviation_wLinesNdesNarrows-crop.pdf}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{\large Gain Dependencies}
+
+	\begin{align*}
+		G &= \exp\left( \alpha \cdot d \right)
+		\\[10pt]
+		&= \exp\left[ \;\; \dfrac{A p d}{T} \; \cdot \; \exp\!\left(\; -\dfrac{B p d}{T U} \; \right) \;\; \right].
+		\label{gainParametrization}
+	\end{align*}
+	
+	Taylor-series-expansion up to first order:
+	
+	\begin{align*}
+		G(d) &= 
+				\exp\left( a \cdot d_0 \cdot e^{- b \cdot d_0} \right) 
+				\nonumber
+				\\
+				&\qquad + a \cdot ( 1 - b \cdot d_0 ) \cdot \exp\left( - b \cdot d_0 + a \cdot d_0 \cdot e^{- b \cdot d_0} \right) \cdot ( d - d_0 )
+				\nonumber
+				\\
+				&\qquad + \mathcal{O}\left( ( d - d_0 )^2\right) \;\; ,
+	\end{align*}
+	
+	where 
+	
+	\begin{align*}
+		a = \dfrac{A \cdot p}{T} \;\;\; \text{and} \;\;\; b = \dfrac{B \cdot p}{T \cdot U} \;\; .
+	\end{align*}
+	
+}
+
+\frame{\frametitle{\normalsize Position Reconstruction using Charge and Drift-Time Measurements (M1)}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			residual normal tracks
+			
+			\includegraphics[width=0.8\textwidth]{m1_ei_residaul_nearZero.pdf}
+		\column{.5\textwidth}
+			\centering
+			angle reconstruction
+			
+			\includegraphics[width=0.65\textwidth]{m1_ei_uTPCangleVSangle_20180601_uptime_sameRange.pdf}
+	\end{columns}
+	
+	\vspace{1mm}
+		
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			simulation
+			
+			\includegraphics[width=0.7\textwidth]{inhomogeneousIonization_bE_cNm_timeNcentroidShift.pdf}
+		\column{.5\textwidth}
+			\centering
+			resolution VS angle
+			
+			\includegraphics[width=0.8\textwidth]{m1_ei_allResolutionsVSangle_20180601.pdf}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Position Reconstruction using two Layers of Inclined Strips}
+			
+	\begin{columns}
+		\column{.5\textwidth}
+			\includegraphics[width=0.9\textwidth]{stereoBoards_angleNshift_centerNcoord-crop.pdf}
+			\vspace{2mm}
+			
+			\textcolor{blue}{precision} 
+			
+			\hspace{1mm} = stereos mean / $\cos \alpha$ 
+			\vspace{1.5mm}
+						
+			\textcolor{red}{non-precision}
+			
+			\hspace{1mm} = stereos difference / 2 $/ \sin \alpha$
+			\vspace{1.5mm}
+						
+			$\Rightarrow$ \textcolor{Brown}{alignment} 
+			
+			\hspace{4.5mm} non-precision coordinate
+			
+			\vspace{5mm}
+			$\Rightarrow$ non-precision residual spoiled 
+			
+			\hspace{4.5mm} by coarse scintillator resolution
+		\column{.5\textwidth}
+			\centering	
+			\includegraphics[width=0.65\textwidth]{m1_stereo_posDifVSscinX_wCenter.pdf}
+			
+			\vspace{2mm}
+			\includegraphics[width=0.95\textwidth]{m1_stereoResiduals_nonNprecision_BF.pdf}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{\large Stereo-Reconstruction Dependencies on Track-Inclination}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.6\textwidth]{m1_stereo_resXvsPhi_woAddTerm_rebin.pdf}
+		\column{.5\textwidth}
+			\centering
+			\vspace{-0.3mm}
+			\includegraphics[width=0.6\textwidth]{m1_stereo_resXvsTheta_woAddTerm_rebin.pdf}
+	\end{columns}
+	
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.65\textwidth]{stereoBoards_angleNshift_centerNcoord-crop.pdf}
+			\vspace{2mm}
+			
+			\includegraphics[width=0.43\textwidth]{Kugelkoord-def.pdf}
+		\column{.5\textwidth}
+			\small
+			\textcolor{blue}{precision}  = mean / $\cos \alpha$ 
+			\vspace{2mm}
+					
+			\textcolor{red}{non-precision} = difference / 2 $/ \sin \alpha$
+			\vspace{2mm}
+			
+			track-inclination-correction :
+			
+			$-\dfrac{1}{2 \tan\!\alpha} \cdot \bigtriangleup\!z \cdot \tan\!\Theta \cdot \sin\!\Phi$
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Timing Resolution }
+	\footnotesize
+	\centering
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			M11, eta-in
+			
+			$U_{\mathrm{amp}} =$ \SI{570}{V} , $U_{\mathrm{drift}} =$ \SI{300}{V}
+			
+			\includegraphics[width=0.6\textwidth]{m11_ei_meanFirstTimeMap.pdf}
+		\column{.5\textwidth}
+			\centering
+			M1, eta-in
+			
+			$U_{\mathrm{amp}} =$ \SI{570}{V} , $U_{\mathrm{drift}} =$ \SI{300}{V}
+			
+			\includegraphics[width=0.8\textwidth]{m1_ei_stripTime_firstNlast_20180601_turntime_wDifferences.pdf}
+	\end{columns}
+	
+	\vspace{1mm}
+	
+	module 3 , board 7
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			single layer first-strip time-width (eta-in)
+			
+			\includegraphics[width=0.78\textwidth]{m3_ei_b7_driftScan_firstTimeWidths.pdf}
+		\column{.5\textwidth}
+			\centering
+			eta-layers first-strips time-difference
+			
+			\includegraphics[width=0.78\textwidth]{m3_etas_b7_driftScan_firstTimeDifferenceWidths.pdf}
+	\end{columns}
+	
+	$\Rightarrow$ resistivity effects not yet considered
+	
+}
+
+\end{document}

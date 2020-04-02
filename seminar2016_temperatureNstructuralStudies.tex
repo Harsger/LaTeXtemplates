@@ -1,0 +1,1307 @@
+\documentclass{beamer}
+%\usetheme{Montpellier}
+\usetheme{CambridgeUS}
+\usecolortheme{spruce}
+\definecolor{green(pigment)}{rgb}{0.0, 0.65, 0.31}
+\setbeamercolor*{item}{fg=green(pigment)}
+\definecolor{Green}{rgb}{0.00, 1.00, 0.00}
+\definecolor{Red}{rgb}{1.00, 0.00, 0.00}
+\definecolor{Blue}{rgb}{0.00, 0.00, 1.00}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{multirow,bigdelim,dcolumn,booktabs}
+%\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\beamertemplatenavigationsymbolsempty
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+
+\graphicspath{
+	{LatexBilder/}
+	{LatexBilder/pics/}
+	{LatexBilder/sketches/}
+	{LatexBilder/Temp/}
+	{LatexBilder/Temp/TempCalibration/}
+	{LatexBilder/Temp/TempTest_20151030_1800/}
+	{LatexBilder/Temp/TempTest_20151109_1550/}
+	{LatexBilder/Temp/TempTest_20151113_1740/}
+	{LatexBilder/Temp/bbrm_correction/}
+	{LatexBilder/Temp/repeatedMeasurements/}
+	{LatexBilder/ANSYS/deform_mesh/}
+	{LatexBilder/ANSYS/L1/}
+	{LatexBilder/ANSYS/MicroMeGas/}
+	{LatexBilder/ANSYS/SM2_6int/}
+	{LatexBilder/ANSYS/stiff/}
+}
+
+\begin{document}
+\title{Construction of Large Area Micromegas}  
+\author{ Maximilian Herrmann}
+\date{22.06.2016} 
+
+\part{1}
+
+\frame{\titlepage
+	\includegraphics[width=0.5\textwidth]{logo.jpg}
+} 
+
+\frame{\frametitle{Outline}\tableofcontents[part=1]}
+
+%\section{Calibration of the Temperature Sensors} 
+
+\section{Getting started with Temperature Measurements} 
+
+\frame{\frametitle{Camparison of the Temperature Sensors} 
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			ATLAS Hall (front room)
+			
+			temperature vs time			
+			%\vspace{3mm}
+			\begin{columns}
+				\column{.05\textwidth}
+					{\scriptsize $ 23 ^\circ $C}
+						
+					\vspace{23mm}	
+					%\begin{turn}{90}
+					%	{\tiny
+					%		temperature [$ ^\circ $C]
+					%	}
+					%\end{turn}
+						
+					{\scriptsize $ 20 ^\circ $C}
+				\column{.95\textwidth}
+					\includegraphics[width=\textwidth]{temp_calib_20151005_1225_tempvstime_SensAll_better.pdf}
+					
+					{\scriptsize 14h - 05.10. \hspace{16mm} 14h - 08.10.}
+			\end{columns}
+			 
+			{\small
+				\vspace{3mm}
+				measurement accuracy : 
+								
+				$ \pm $0.5 $^{\circ}$C (from datasheet)
+				
+				$ \pm $0.06 $^{\circ}$C (from digitization)
+			}
+		\column{.50\textwidth}
+			\centering
+			temperature differences to mean
+			
+			\begin{columns}
+				\column{.50\textwidth}
+					\includegraphics[width=\textwidth]{temp_calib_20151005_1225_tempDiffToMean_Sens0.pdf}
+				\column{.50\textwidth}
+					\includegraphics[width=\textwidth]{temp_calib_20151005_1225_tempDiffToMean_Sens1.pdf}
+			\end{columns}
+			
+			\begin{columns}
+				\column{.50\textwidth}
+					\includegraphics[width=\textwidth]{temp_calib_20151005_1225_tempDiffToMean_Sens2.pdf}
+				\column{.50\textwidth}
+					\includegraphics[width=\textwidth]{temp_calib_20151005_1225_tempDiffToMean_Sens3.pdf}
+			\end{columns}
+						
+			\begin{columns}
+				\column{.50\textwidth}
+					\includegraphics[width=\textwidth]{temp_calib_20151005_1225_tempDiffToMean_Sens4.pdf}
+				\column{.50\textwidth}
+					\includegraphics[width=\textwidth]{temp_calib_20151005_1225_tempDiffToMean_Sens5.pdf}
+			\end{columns}
+			
+			{\small
+				\vspace{3mm}
+				means and sigmas around 0.04 $^{\circ}$C 
+				
+				$\rightarrow$ below measurement accuracy
+				\vspace{6mm}
+			}
+	\end{columns}
+}
+
+\frame{\frametitle{ATLAS Hall : granit table with CMM}
+	\centering
+	\begin{tikzpicture}
+		\node[anchor=south west,inner sep=0] (image) at (0,0) {\includegraphics[width=\textwidth]{granittableleft.JPG}};
+		\begin{scope}[x={(image.south east)},y={(image.north west)}]
+			\draw[arrows=->,red,ultra thick](0.6,0)--(0.45,0.05);
+			\draw[arrows=->,red,ultra thick](1,0.3)--(0.92,0.39);
+			\draw[arrows=->,red,ultra thick](0.8,0.9)--(0.65,0.7);
+			\draw[arrows=->,red,ultra thick](0.3,0.71)--(0.13,0.68);
+			\draw[arrows=->,red,ultra thick](0.4,0.72)--(0.58,0.75);
+			\draw[arrows=->,red,ultra thick](0.3,0.65)--(0.17,0.55);
+			\draw[arrows=->,red,ultra thick](0.4,0.65)--(0.52,0.64);
+		\end{scope}
+	\end{tikzpicture}
+}
+
+\frame{\frametitle{Measurement Conditions} 
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[angle=90, width=\textwidth]{granittable_CNC.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[angle=90, width=\textwidth]{granittable_CNC_sideview.pdf}
+	\end{columns}
+	{\small
+	\begin{tabular}{ccl}
+		$ h_{g } \simeq 30 $cm &  & 
+		\\
+		$ h_{lh} \simeq 37 $cm & : & movable mounted for different height measurements $ \rightarrow h_{m} $ 
+		\\
+		$ h_{al} \simeq 68 $cm & : & the bridge stands on a linear bearing unit 
+		\\
+		$ h_{m } \simeq 2.5 $cm & : & measureing distance to laserhead (dynamic range 2mm) 
+	\end{tabular}
+	}
+}
+
+\frame{\frametitle{Calculated Thermal Expansion for our Setup} 
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[angle=90, width=\textwidth]{granittable_CNC.pdf}
+			
+			linear thermal expansion coefficient for 
+			\begin{tabular}{lcr}
+				aluminum & : & 23.1 $\mu$m/m K
+				\\	
+				granite & : & 3\,-\,7 $\mu$m/m K
+			\end{tabular}
+		\column{.50\textwidth}
+			\vspace{5mm}
+			\begin{align*}
+				 \bigtriangleup\!h_{m} &= {\color{green}+} \bigtriangleup\!h_{al} {\color{red}-} \bigtriangleup\!h_{lh} {\color{red}- \tfrac{1}{2}} \bigtriangleup\!h_{g} 
+				 \\
+				 \Rightarrow \; \bigtriangleup h_{m} / \mathrm{K} &= \left( h_{al} {\color{red}-} h_{lh} \right)  \alpha_{alu} {\color{red}- \tfrac{1}{2}} h_{g} \alpha_{granite}
+			\end{align*}
+			\begin{align*}
+				\;\;\;\;\dfrac{\bigtriangleup\!h_{m}}{\mathrm{K}} & = 6 - 7\;\dfrac{\mu \mathrm{m}}{\mathrm{K}}
+			\end{align*}	
+			$\boxed{h_{corrected} = h_{measured} - \dfrac{\bigtriangleup h_{m}}{\mathrm{K}} \left( T - T_{ref} \right)}$	
+	\end{columns}
+}
+
+\section{Reference Measurement for Temperature Correction} 
+
+\frame{\frametitle{Measuring the Height at One Point} 
+	\hspace{5.5cm}
+	temperature vs time
+	\vspace{1mm}
+	\begin{columns}
+		\column{.33\textwidth}
+			\vspace{10mm}
+			
+			\centering	
+			height vs time
+			
+			\includegraphics[width=\textwidth]{outerPCB_TempTest_20151030_1800_tempAtOnePoint_heightvstime.pdf}
+						
+			{\small
+				$ \bigtriangleup h_{max}\;\simeq\;20 \mu $m 
+				\vspace{13mm}
+				
+				slope : $ \bigtriangleup h / \bigtriangleup\!T $
+			}
+		\column{.33\textwidth}
+			\centering
+			sensor at the alu leg
+			
+			\includegraphics[width=\textwidth]{outerPCB_TempTest_20151030_1800_tempAtOnePoint_tempvstime_Sens0.pdf}
+			
+			{\small
+				$ T \; : \; 19.6 ^{\circ}$C - $ 21.4 ^{\circ}$C
+			}
+			\vspace{2mm}
+			
+			\includegraphics[width=\textwidth]{outerPCB_TempTest_20151030_1800_tempAtOnePoint_heightandtempvstime_sens0.pdf}
+			
+			{\small
+				11 $ \mu $m/ K
+			}
+		\column{.33\textwidth}
+			\centering	
+			sensor in the laser
+			
+			\includegraphics[width=\textwidth]{outerPCB_TempTest_20151030_1800_tempAtOnePoint_tempvstime_SensLH.pdf}
+		
+			{\small
+				$ T \; : \; 26.25 ^{\circ}$C - $ 29 ^{\circ}$C
+			}
+			\vspace{2mm}
+			
+			\includegraphics[width=\textwidth]{outerPCB_TempTest_20151030_1800_tempAtOnePoint_heightandtempvstime_sensLH.pdf}
+						
+			{\small
+				7.3 $ \mu $m/ K
+			}
+	\end{columns}
+}
+
+\frame{\frametitle{Height against Temperature} 
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			sensor at aluminum leg
+		\column{.50\textwidth}
+			\centering
+			sensor in the laser head
+	\end{columns}
+	\centering
+	height vs temperature
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{outerPCB_TempTest_20151030_1800_tempAtOnePoint_heightvstemp_sens0_graph_fit.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{outerPCB_TempTest_20151030_1800_tempAtOnePoint_heightvstemp_sensLH_graph_fit.pdf}
+	\end{columns}
+	\centering
+	temperature projected along fitted function
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{outerPCB_TempTest_20151030_1800_tempAtOnePoint_tempHeightCorr_Sens0.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{outerPCB_TempTest_20151030_1800_tempAtOnePoint_tempHeightCorr_SensLH.pdf}
+	\end{columns}
+	\centering
+	height increase per temperature
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			7.0 $ \mu $m / K
+		\column{.50\textwidth}
+			\centering
+			5.9 $ \mu $m / K
+	\end{columns}
+}
+
+\frame{\frametitle{Compairing Height Measurements (at One Point)} 
+	\centering
+	{\large height vs time}
+	\vspace{5mm}
+	
+	\begin{columns}
+		\column{.33\textwidth}
+			\centering
+			servo motors on
+			\vspace{6mm}
+		
+			\includegraphics[width=\textwidth]{outerPCB_TempTest_20151030_1800_tempAtOnePoint_heightvstime_font.pdf}
+			
+			{\small
+				$ \bigtriangleup h_{max}\;\simeq\;20 \mu $m 
+				
+				at $ \bigtriangleup T_{max}\;\simeq\;1.8 $K
+			}
+					
+			\includegraphics[width=\textwidth]{outerPCB_TempTest_20151030_1800_tempAtOnePoint_heighttempcorrvstime_0.pdf}
+		\column{.33\textwidth}
+			\centering
+			servo motors off
+			\vspace{6mm}
+			
+			\includegraphics[width=\textwidth]{outerPCB_TempTest_20151109_1550_tempAtOnePoint_heightvstime_font.pdf}
+		
+			{\small
+				$ \bigtriangleup h_{max}\;\simeq\;17 \mu $m 
+				
+				at $ \bigtriangleup T_{max}\;\simeq\;1.7 $K
+			}
+						
+			\includegraphics[width=\textwidth]{outerPCB_TempTest_20151109_1550_tempAtOnePoint_heighttempcorrvstime_0.pdf}
+		\column{.33\textwidth}
+			\centering
+			servo motors off and position prepared
+		
+			\includegraphics[width=\textwidth]{outerPCB_TempTest_20151113_1740_tempAtOnePoint_heightvstime_font.pdf}
+					
+			{\small							
+				$ \bigtriangleup h_{max}\;\simeq\;12 \mu $m 
+				
+				at $ \bigtriangleup T_{max}\;\simeq\;1.3 $K
+			}
+					
+			\includegraphics[width=\textwidth]{outerPCB_TempTest_20151113_1740_tempAtOnePoint_heighttempcorrvstime_0.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{Compairing Height Measurements (at One Point)} 
+	\begin{tabular}{l|ccc} 
+		 & \multicolumn{3}{c}{slope from height-temperature fit [$\mu$m/K] }
+		\\
+		\hline
+		 measurement & 18:00 30.10. & 15:50 09.11. & 17:40 13.11.
+		\\
+		\cline{1-1}
+		sensor at &  & engine off & engine off, tape
+		\\
+		\hline
+		granite (upper left) & 11 & 11 & 11
+		\\
+		granite (upper right) & 9 & 10 & 10
+		\\
+		granite (lower left) & 10 & 11 & 10
+		\\
+		granite (lower right) & 9 & 7 & 8
+		\\
+		alu (left leg) & 4 & 7 & 7
+		\\
+		alu (right leg) & 7 & 8 & 9
+		\\
+		alu (plate at LH) & 6 & 7 & 8
+		\\
+		laser head (LH) & 6 & 6 & 6
+	\end{tabular}
+}
+
+\section{Temperature Correction and Comparison} 
+
+\frame{\frametitle{Measurement of the Granite Table (from Ralph M\"uller)} 
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			Measurement 03.08.15
+		\column{.50\textwidth}
+			\centering
+			Measurement 01.12.15
+	\end{columns}
+	\centering
+	topology
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{bbrm1_onPlane.pdf}
+					
+			$ \bigtriangleup\!h_{max} \simeq 400 \mu $m
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{bbrm2_onPlane.pdf}
+					
+			$ \bigtriangleup\!h_{max} \simeq 400 \mu $m
+	\end{columns}
+	\centering
+	temperature vs time
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{bbrm_tempvstime.pdf}
+			
+			$ \bigtriangleup\!T_{max} = 4 $K
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{bbrm2_tempvstime.pdf}
+			
+			$ \bigtriangleup\!T_{max} = 2.25 $K
+	\end{columns}
+}
+
+\frame{\frametitle{Before and After Temperature Correction}
+	\centering
+	{\Large height difference} 
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			before temperature correction
+			
+			$ h_{1,i} - h_{2,i} $
+			%\vspace{15mm}
+
+			\includegraphics[width=\textwidth]{heightDiff_fit.pdf}
+							
+			$ \sigma = 6.9 \mu $m
+		\column{.50\textwidth}
+			\centering
+			after temperature correction 
+			
+			$ h_{1,i}^{corr} - h_{2,i}^{corr} $
+			
+			\includegraphics[width=\textwidth]{heightDiffTempCorr_fit.pdf}
+											
+			$ \sigma = 5.6 \mu $m
+	\end{columns}
+	\vspace{2.5mm}
+	
+	\centering
+	with :  $ \;\; h_{j,i}^{corr} = h_{j,i} - \alpha \cdot \left( T_{j,i} - T_{j,ref} \right) $
+						
+	\hspace{17mm} \footnotesize ( $ \alpha : $ slope from height-temperature fit at one point )
+}
+
+\frame{\frametitle{Means of Repeated Height Measurements} 
+	50 surface scans of the granite table with 1.5 h per measurement
+	\vspace{3mm}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{repmeas_bbrm_1030_heightOnPlane_0_besser.pdf}
+		\column{.50\textwidth}
+			$ \rightarrow $ compare with reference measurement $ \left( h_{ref,i} - h_{j,i} \right) $ 
+			and get mean and sigma of the difference (histogram fitted with Gaussian)
+	\end{columns}
+	
+	\begin{columns}
+		\column{.33\textwidth}
+			%\vspace{3mm}
+		
+			\centering			
+			{\small
+				height mean vs repetition
+			}
+							
+			\includegraphics[width=\textwidth]{repmeas_bbrm_1030_heightmeanvsrepetition_BIG_line_label.pdf}
+		\column{.66\textwidth}
+		%\begin{columns}
+		%	\column{.50\textwidth}			
+		%		\centering
+		%	\column{.50\textwidth}		
+		%		\centering	
+		%\end{columns}
+		\vspace{1mm}
+		
+		\centering
+		{\small
+			temperature mean vs repetition
+		}
+		\vspace{1mm}
+		\begin{columns}
+			\column{.50\textwidth}
+				\centering
+				{\small
+					sensor at alu plate
+				}
+				\includegraphics[width=\textwidth]{repmeas_bbrm_1030_tempmeanvsrep_Alu_BIG_line_label.pdf}
+			\column{.50\textwidth}
+				\centering
+				{\small
+					sensor in the laser head
+				}
+				\includegraphics[width=\textwidth]{repmeas_bbrm_1030_tempmeanvsrep_LH_BIG_line_label.pdf}
+		\end{columns}
+	\end{columns}
+}
+
+\frame{\frametitle{Means and Sigmas after Temperature Correction} 
+	\begin{columns}
+		\column{.50\textwidth}	
+			\centering			
+			{\small
+				sensor at aluminum plate
+			}
+		\column{.50\textwidth}	
+			\centering			
+			{\small
+				sensor in the laser head
+			}
+	\end{columns}
+	\vspace{3mm}
+	\centering
+	height mean temperature corrected vs repetition
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{repmeas_bbrm_1030_heightmeanvsrepetition_Alu_BIG_line_label.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{repmeas_bbrm_1030_heightmeanvsrepetition_LH_BIG_line_label.pdf}
+	\end{columns}
+	\vspace{3mm}
+	\centering
+	height sigma difference : $ \sigma_{j} - \sigma_{j}^{corr} $
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{repmeas_bbrm_1030_heightsigmadiff_Alu_marked.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{repmeas_bbrm_1030_heightsigmadiff_LH_marked.pdf}
+	\end{columns}
+}
+
+\section{Summery and Outlook} 
+
+\frame{\frametitle{Summery and Outlook} 
+	summary : 
+	\begin{itemize}
+				\item
+					height difference at the border of our measurement accuracy (5-15$\mu$m) for observed temperature changes (2$^\circ$C/day)
+				\item
+					temperature correction possible
+				\item
+					only useful for measurements over extended times (and with higher temperature differences)
+	\end{itemize}
+	outlook : 
+	\begin{itemize}
+				\item
+					measure at different reference points and compare their temperature correction possibilities
+				\item
+					repeat temperature sensor calibration measurement with all used sensors
+				\item
+					 calculate errors
+	\end{itemize}
+}
+
+\part{2}
+
+\setcounter{section}{0}
+
+\title{Structural and Electric Simulations of Detector Parts with ANSYS}
+
+\frame{\titlepage} 
+
+\frame{\frametitle{Outline}\tableofcontents[part=2]}
+
+\section{Introduction to ANSYS} 
+
+\frame{\frametitle{Making Simulations with ANSYS} 
+	\begin{columns}
+		\column{.50\textwidth}
+			simulations in 3 steps : 
+			\begin{enumerate}[I.]
+				\item
+					preprocessing
+				\item
+					solving
+				\item
+					postprocessing
+			\end{enumerate}
+		\column{.50\textwidth}
+			$\rightarrow$ preprocessing
+			\begin{enumerate}[a.]
+				{\small
+					\item
+						choose elements specified for your problem
+					\item
+						define material constants
+					\item
+						setup geometry $\rightarrow$ assign element specifications and material constants to volumes, areas etc.
+					\item
+						meshing $\rightarrow$ get a finite element model (FEM)
+					\item
+						define constraints / forces ... on nodes of the FEM
+				}
+			\end{enumerate}
+	\end{columns}
+}
+
+\section{Stiffback Deformation due to Weight} 
+
+\frame{\frametitle{Stiffback}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[angle=90, width=\textwidth]{stiffback_sizes.pdf}
+			
+			\includegraphics[height=3cm]{stiffback_beamprofile-crop.pdf}
+		\column{.50\textwidth}
+			\begin{itemize}
+			\item
+				layered structure 
+				
+				$ \rightarrow $ SHELL element
+				\vspace{5mm}
+				
+				\begin{tabular}{lcr}
+					aluminum plate & : & 1.12mm
+					\\
+					glue & : & 0.1mm
+					\\
+					honeycomb & : & 80mm
+					\\
+					glue & : & 0.1mm
+					\\
+					aluminum plate & : & 1.12mm
+				\end{tabular}
+				\vspace{5mm}
+				
+			\item
+				borders aluminum frame 
+				
+				$ \rightarrow $ BEAM element
+								
+				approximate with a hollow rectangle profile
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{Stiffback - on One Distance Piece} 
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{stiff4_centroiddisall_grav_beamfullrect_bigfont.png}
+					
+			\centering			
+			{\small
+				stiffback - simulated deformation
+				
+				$ \bigtriangleup h_{max}\;=\;117 \mu $m
+			}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{stiffback_9distpieces.pdf}
+						
+			\centering			
+			{\small
+				(from Ralph M\"uller)
+				\vspace{2mm}
+				
+				stiffback - measured deformation
+								
+				$ \bigtriangleup h_{max}\;\simeq\;170 \mu $m
+			}
+	\end{columns}
+}
+
+\frame{\frametitle{Stiffback - on Several Distance Pieces} 
+	\begin{columns}
+		\column{.33\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{stiff4_8holdingsdisZ_centroiddisXYRZ_grav_bigfont.png}
+					
+			\centering			
+			{\small
+				stiffback - simulated on eight distance pieces
+				\vspace{4mm}
+				
+				$ \bigtriangleup h_{max}\;=\;12 \mu $m
+			}
+		\column{.33\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{stiff4_cornersdisZ_centroiddisXYRZ_grav_hrec_bigfont.png}
+						
+			\centering			
+			{\small
+				stiffback - simulated on four distance pieces (at the corners)
+								
+				$ \bigtriangleup h_{max}\;=\;88 \mu $m
+			}
+		\column{.33\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{stiff4_4holdingsdisZ_centroiddisXYRZ_grav_hrec_bigfont.png}
+								
+			\centering			
+			{\small			
+				stiffback - simulated on four distance pieces (at the borders)
+											
+				$ \bigtriangleup h_{max}\;=\;19 \mu $m
+			}
+	\end{columns}
+}
+
+\section{SM2 with 6 Interconnections Deformation due to Pressure} 
+
+\frame{\frametitle{SM2}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[angle=90, width=1.2\textwidth]{SM2_6int_sizes-crop.pdf}
+			
+			\vspace{3mm}
+			\includegraphics[angle=90, width=\textwidth]{SM2_6int_beamprofile-crop.pdf}
+		\column{.50\textwidth}
+			\begin{itemize}
+			\item
+				layered structure 
+				
+				$ \rightarrow $ SHELL element
+				\vspace{5mm}
+				
+				\begin{tabular}{lcr}
+					FR4 & : & 0.5mm
+					\\
+					glue & : & 0.1mm
+					\\
+					honeycomb & : & 10mm
+					\\
+					glue & : & 0.1mm
+					\\
+					FR4 & : & 0.5mm
+				\end{tabular}
+				\vspace{5mm}
+				
+			\item
+				frame and diagonal struts aluminum bars 
+				
+				$ \rightarrow $ BEAM element
+				
+				approximate with a hollow rectangle profile
+			\end{itemize}
+	\end{columns}
+}
+
+\frame{\frametitle{SM2 with 6 Interconnections - after Meshing and Deformed} 
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{SM2_6int_3_mesh.png}
+					
+			\centering			
+			{\small
+				SM2 with 6 interconnections - meshed
+				\vspace{4mm}
+			}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{SM2_6int_3_nodesdisall_bordersdisall_press200_beam3.png}
+						
+			\centering			
+			{\small
+				SM2 with 6 interconnections - deformed due to pressure
+								
+				$ \bigtriangleup h_{max}\;=\;69 \mu $m
+			}
+	\end{columns}
+}
+
+\section{Panel Deformation due to Mesh Tension} 
+
+\frame{\frametitle{Panel - model for Mesh Tension}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{panel_bending_parts.pdf}
+		\column{.50\textwidth}
+			mesh tension : $ 10 \tfrac{\mathrm{N}}{\mathrm{cm}} $
+			
+			$ \rightarrow $ bending moment per strip : 
+			\begin{align*}
+				M &= F \cdot d
+				\\
+				&= 10 \mathrm{N} \cdot 1 \mathrm{cm} = 0.1 \mathrm{Nm}
+			\end{align*}
+			
+	\end{columns}
+}
+
+\frame{\frametitle{Panel - Simplified Model} 
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			{\small simplifying the model of the panel}
+			\vspace{3mm}
+			
+			\includegraphics[angle=90, width=\textwidth]{deform_mesh_simplemodel-crop.pdf}
+			
+			\vspace{3mm}	
+			{\small
+				bending moment acts as force over lever arm on the inner of the panel
+			}
+		\column{.50\textwidth}
+			\vspace{4mm}
+			\centering
+			\includegraphics[width=\textwidth]{deform_mesh1_linesdisZ_cornernodedisXYRZ_forcelength100divnodes_grav_bigfont.png}
+						
+			\centering			
+			{\small
+				panel - simulated deformation
+								
+				$ \bigtriangleup h_{max}\;=\;1.55 $mm
+			}
+	\end{columns}
+}
+
+\frame{\frametitle{Panel - Better Model, Position Dependend Force} 
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{deform_mesh2_MESH.png}
+					
+			\centering			
+			{\small
+				panel - meshed, with boundary conditions
+			}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{deform_mesh2_linesdisXYZ_tableforcelength_grav_bigfont.png}
+						
+			\centering			
+			{\small
+				panel - simulated deformation
+								
+				$ \bigtriangleup h_{max}\;=\;1.90 $mm
+			}
+	\end{columns}
+}
+
+\frame{\frametitle{Panel - Evolved Model, Bending Moment instead of Force} 
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{deform_mesh6_MESH.png}
+					
+			\centering			
+			{\small
+				panel - meshed, with boundary conditions
+			}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{deform_mesh6_linsdisZ_centroiddisXYRZ_moment_grav_bigfont.png}
+						
+			\centering			
+			{\small
+				panel - simulated deformation
+								
+				$ \bigtriangleup h_{max}\;=\;1.63 $mm
+			}
+	\end{columns}
+}
+
+\frame{\frametitle{Panel - Measured Deformation} 
+	\begin{columns}
+		\column{.50\textwidth}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{paneldeformation_meshtension_measured.pdf}
+						
+			\centering			
+			{\small
+				(from Ralph M\"uller)
+				\par\smallskip
+				panel - measured deformation
+								
+				$ \bigtriangleup h_{max}\;=\;1.8 $mm
+			}
+	\end{columns}
+}
+
+\section{L1 Deformation due to Pressure} 
+
+\frame{\frametitle{L1 - Setup}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			L1 detector supported by two beams
+			
+			\includegraphics[width=\textwidth]{L1_sizes.pdf}
+		\column{.50\textwidth}
+			layered structure 
+					
+			$ \rightarrow $ SHELL element : 
+			\vspace{3mm}
+					
+			\begin{tabular}{lcrc}
+				FR4 & : & 1mm & \rdelim\}{3}{17.5mm}[\parbox{12.5mm}{top\\side}]
+				\\
+				honeycomb & : & 10mm & 
+				\\
+				FR4 & : & 1mm
+				\\
+				vacuum & : & 5mm & 
+				\\
+				FR4 & : & 2mm & \rdelim\}{4}{17.5mm}[\parbox{12.5mm}{bottom\\side}]
+				\\
+				aluminum & : & 2mm & 
+				\\
+				honeycomb & : & 10mm & 
+				\\
+				FR4 & : & 1mm & 
+			\end{tabular}
+	\end{columns}
+}
+
+\frame{\frametitle{L1 - bottom and top side} 
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			{\small 
+				L1 - top
+			}
+			
+			\includegraphics[width=0.7\textwidth]{L1_deformup_linesdisall_press1000_grav_bigfont.png}
+						
+			\centering			
+			{\small				
+				$ \bigtriangleup h_{simulated}\;=\;1.5 $mm
+			}
+			\vspace{6mm}
+			
+			\includegraphics[width=0.7\textwidth]{L1_deformation_znew_richtig.pdf}
+		\column{.50\textwidth}
+			\centering
+			{\small 
+				L1 - bottom
+			}
+			
+			\includegraphics[width=0.7\textwidth]{L1_deformdown_linesdisall_press1000_grav_bigfont.png}
+					
+			\centering			
+			{\small	
+				$ \bigtriangleup h_{simulated}\;=\;311 \mu $m
+			}
+			\vspace{6mm}
+						
+			{\small
+				L1 - deformation measured by data in cosmic ray facility 
+				
+				(from Philipp L\"osel)
+															
+				$ \bigtriangleup h_{measured}\;\simeq\;2 \cdot 0.7 $mm
+			}
+			\vspace{5mm}
+	\end{columns}
+}
+
+\section{MicroMeGas : Strip Structure with Voltages and Charges} 
+
+\frame{\frametitle{MicroMeGas - Unit Cell of a 2D Strip Structure with Height} 
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			sizes of a unit cell
+			
+			\includegraphics[width=\textwidth]{MicroMeGas_topview.pdf}
+			
+			{\small
+			\begin{tabular}{lcr}
+				gas (neon C0$ _2 $) & : & 125 $ \mu $m
+				\\
+				floating strip (and gas) & : & 35 $ \mu $m
+				\\
+				FR4 & : & 25 $ \mu $m
+				\\
+				X strip (and FR4) & : & 35 $ \mu $m
+				\\
+				FR4 & : & 25 $ \mu $m
+				\\
+				Y strip (and gas) & : & 35 $ \mu $m
+			\end{tabular}
+			}
+		\column{.50\textwidth}
+			\centering
+			volume model
+			
+			\includegraphics[width=\textwidth]{MicroMeGas_com91_volumesColor.png}
+							
+			{\small
+				MicroMeGas - unitcell : 
+				\vspace{2mm}
+				
+				\begin{tabular}{c@{ : }c@{ $ \rightarrow $ }c}
+					strips & copper & orange   
+					\\
+					FR4 & kapton & yellow  
+					\\
+					gas & neon CO$ _2$ & green  
+				\end{tabular}			
+			}
+	\end{columns}
+}
+
+\frame{\frametitle{MicroMeGas - Calculating the Capacities}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{MicroMeGas_topview_areas_letters.pdf}
+			
+			%{\small model for calculating the capacity between the floating- and the Y-strip}	
+			\includegraphics[width=\textwidth]{MicroMeGas_capacities2.pdf}
+		\column{.50\textwidth}
+			formulas for capacities : 
+			\begin{align}
+				C & = \dfrac{Q}{U}
+				\label{chargeOverVolt}
+				\\
+				C & = \epsilon_{0} \epsilon_{r} \dfrac{A}{d}
+				\label{areaOverDist}
+			\end{align}
+			
+			in our case : $ \epsilon_{r} = \epsilon_{kapton} = 4 $ 
+			\vspace{3mm}
+			
+			{\small
+			\begin{tabular}{lcc}
+				combination & areas & distances
+				\\
+				\hline
+				float - X & A, C1, C2 & 25 $ \mu $m
+				\\
+				X - Y & A & 25 $ \mu $m
+				\\
+				float - Y & B1, B2 & 85 $ \mu $m
+				\\
+				 & 2 $\times$ A & 25 $ \mu $m
+			\end{tabular}
+			}
+	\end{columns}
+}
+
+\frame{\frametitle{MicroMeGas - Calculated and Simulated Capacities} 
+	\begin{columns}
+		\column{.33\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{MicroMeGas_com91_charge_NegBotFloat_PosTopX_NegBotX_PosTopY_voltages.png}
+									
+			\centering			
+			{\small
+				MicroMeGas - Voltages 
+				\vspace{3mm} 
+							
+				$ 10^6 $ negative charges on floating strip and positive on Y strip
+			}
+		\column{.66\textwidth}
+		\begin{columns}
+			\column{.50\textwidth}	
+				{\small
+					calculated capacities (\ref{areaOverDist}) 
+					%\vspace{1mm}
+					\begin{align*}		
+						C_{fx} &= 5.7 \cdot 10^{-14} \mathrm{F} 
+						\\			
+						C_{xy} &= 4.5 \cdot 10^{-14} \mathrm{F}  
+						\\			
+						C_{fy} &= 6.0 \cdot 10^{-14} \mathrm{F} 
+					\end{align*}	
+				}
+			\column{.50\textwidth}	
+				{\small
+					simulated capacities (\ref{chargeOverVolt}) 
+					%\vspace{1mm}
+					\begin{align*}		
+						C_{fx} &= 6.2 \cdot 10^{-14} \mathrm{F} 
+						\\			
+						C_{xy} &= 5.1 \cdot 10^{-14} \mathrm{F}  
+						\\			
+						C_{fy} &= 4.7 \cdot 10^{-14} \mathrm{F} 
+					\end{align*}	
+				}
+		\end{columns}
+		different capacities ratios as expected 
+		
+		$ \rightarrow $ hint for observed signal behavior
+	\end{columns}
+}
+
+\section{Outlook} 
+
+\frame{\frametitle{Outlook} 
+	\begin{itemize}
+				\item
+					 calculate the current / fluxes in the strips 
+				\item
+					 expand the model to several unit cells 
+				\item
+					 build MicroMeGas
+	\end{itemize}
+	\begin{figure}
+	{\Large
+		Thank you 
+		\par\bigskip
+		for your attention!
+	}
+	\end{figure}
+}
+
+\frame{\frametitle{Additional : Simultaneously Measureing Temperature and Height} 
+	\begin{columns}
+		\column{.33\textwidth}
+			\includegraphics[width=\textwidth]{outerPCB_TempTest_20151021_1823_bbrm_tempvstime.pdf}
+	
+			\centering					
+			{\small
+				temperature vs time
+			}
+		\column{.33\textwidth}
+			\includegraphics[width=\textwidth]{outerPCB_TempTest_20151021_1823_bbrm_tempOnPlane.pdf}
+
+			\centering			
+			{\small
+				temperature on plane
+			}
+		\column{.33\textwidth}
+			\includegraphics[width=\textwidth]{outerPCB_TempTest_20151021_1823_bbrm_topologyHeightCorr.pdf}
+
+			\centering			
+			{\small
+				height on plane
+			}
+	\end{columns}
+}
+
+\frame{\frametitle{Additional : Measureing the Height at one Point (Engine turned off)} 
+	\begin{columns}
+		\column{.33\textwidth}
+			\includegraphics[width=\textwidth]{outerPCB_TempTest_20151109_1550_tempAtOnePoint_tempvstime_Sens0.pdf}
+
+			\centering			
+			{\tiny
+				height and temperature vs time
+				\smallskip
+				(sensor 0)
+			}
+		\column{.33\textwidth}
+			\includegraphics[width=\textwidth]{outerPCB_TempTest_20151109_1550_tempAtOnePoint_tempvstime_SensLH.pdf}
+
+			\centering			
+			{\tiny
+				height and temperature vs time
+				\smallskip
+				(sensor at laser head)
+			}
+		\column{.33\textwidth}
+			\includegraphics[width=\textwidth]{outerPCB_TempTest_20151109_1550_tempAtOnePoint_heightvstime.pdf}
+			
+			\centering			
+			{\tiny
+				height vs time
+				\vspace{6mm}
+			}
+	\end{columns}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=.7\textwidth]{outerPCB_TempTest_20151109_1550_tempAtOnePoint_heightandtempvstime_sens0.pdf}
+
+			\centering			
+			{\tiny
+				height and temperature vs time
+				\smallskip
+				(sensor 0)
+			}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=.7\textwidth]{outerPCB_TempTest_20151109_1550_tempAtOnePoint_heightandtempvstime_sensLH.pdf}
+
+			\centering			
+			{\tiny
+				height and temperature vs time
+				\smallskip		
+				(sensor at laser head)
+			}
+	\end{columns}
+}
+
+\frame{\frametitle{Additional : ploting Height against Temperature (Engine turned off)} 
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{outerPCB_TempTest_20151109_1550_tempAtOnePoint_heightvstemp_sens0_graph_fit.pdf}
+
+			\centering
+			\includegraphics[width=0.7\textwidth]{outerPCB_TempTest_20151109_1550_tempAtOnePoint_heightvstemp_sens0_hist.pdf}
+			
+			\centering			
+			{\small
+				height vs temperature
+				
+				(sensor 0)
+			}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{outerPCB_TempTest_20151109_1550_tempAtOnePoint_heightvstemp_sensLH_graph_fit.pdf}
+
+			\centering
+			\includegraphics[width=0.7\textwidth]{outerPCB_TempTest_20151109_1550_tempAtOnePoint_heightvstemp_sensLH_hist.pdf}
+			
+			\centering			
+			{\small
+				height vs temperature
+							
+				(sensor at laser head)
+			}
+	\end{columns}
+}
+
+\frame{\frametitle{Additional : Measureing the Height at one Point (Engine turned off and Position prepaired)} 
+	\begin{columns}
+		\column{.33\textwidth}
+			\includegraphics[width=\textwidth]{outerPCB_TempTest_20151113_1740_tempAtOnePoint_tempvstime_Sens0.pdf}
+
+			\centering			
+			{\tiny
+				height and temperature vs time
+				\smallskip
+				(sensor 0)
+			}
+		\column{.33\textwidth}
+			\includegraphics[width=\textwidth]{outerPCB_TempTest_20151113_1740_tempAtOnePoint_tempvstime_SensLH.pdf}
+
+			\centering			
+			{\tiny
+				height and temperature vs time
+				\smallskip
+				(sensor at laser head)
+			}
+		\column{.33\textwidth}
+			\includegraphics[width=\textwidth]{outerPCB_TempTest_20151113_1740_tempAtOnePoint_heightvstime.pdf}
+			
+			\centering			
+			{\tiny
+				height vs time
+				\vspace{6mm}
+			}
+	\end{columns}
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=.7\textwidth]{outerPCB_TempTest_20151113_1740_tempAtOnePoint_heightandtempvstime_sens0.pdf}
+
+			\centering			
+			{\tiny
+				height and temperature vs time
+				\smallskip
+				(sensor 0)
+			}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=.7\textwidth]{outerPCB_TempTest_20151113_1740_tempAtOnePoint_heightandtempvstime_sensLH.pdf}
+
+			\centering			
+			{\tiny
+				height and temperature vs time
+				\smallskip		
+				(sensor at laser head)
+			}
+	\end{columns}
+}
+
+\frame{\frametitle{Additional : ploting Height against Temperature (Engine turned off and Position prepaired)} 
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{outerPCB_TempTest_20151113_1740_tempAtOnePoint_heightvstemp_sens0_graph_fit.pdf}
+
+			\centering
+			\includegraphics[width=0.7\textwidth]{outerPCB_TempTest_20151113_1740_tempAtOnePoint_heightvstemp_sens0_hist.pdf}
+			
+			\centering			
+			{\small
+				height vs temperature
+				
+				(sensor 0)
+			}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{outerPCB_TempTest_20151113_1740_tempAtOnePoint_heightvstemp_sensLH_graph_fit.pdf}
+
+			\centering
+			\includegraphics[width=0.7\textwidth]{outerPCB_TempTest_20151113_1740_tempAtOnePoint_heightvstemp_sensLH_hist.pdf}
+			
+			\centering			
+			{\small
+				height vs temperature
+							
+				(sensor at laser head)
+			}
+	\end{columns}
+}
+
+\end{document}

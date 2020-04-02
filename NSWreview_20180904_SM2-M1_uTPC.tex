@@ -1,0 +1,483 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usecolortheme{spruce}
+\definecolor{green(pigment)}{rgb}{0.0, 0.65, 0.31}
+\setbeamercolor*{item}{fg=green(pigment)}
+\definecolor{Green}{rgb}{0.00, 1.00, 0.00}
+\definecolor{Red}{rgb}{1.00, 0.00, 0.00}
+\definecolor{Blue}{rgb}{0.00, 0.00, 1.00}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{textcomp}
+\usepackage{multirow,bigdelim,dcolumn,booktabs}
+%\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+\usepackage{siunitx}
+\usepackage{appendixnumberbeamer}
+\usepackage{hyperref}
+%\usepackage{xmpmulti}
+\usepackage{animate}
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\beamertemplatenavigationsymbolsempty
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+
+\graphicspath{
+	{pictures/}
+	{pictures/resVScluTimeVSslope/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/plots/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/sketches/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/pictures/}
+}
+
+\begin{document}
+\title[SM2 Module 1 in CRF]{Investigation of the \textmu TPC mode \\ with SM2 Module 1 in the Munich CRF}
+\author[M. Herrmann]{speaker : Maximilian Herrmann}
+\institute[LMU Munich]{Ludwig-Maximilians-Universit\"at M\"unchen - Lehrstuhl Schaile}
+\date[04.09.2018]{04.09.2018, NSW Micromegas Review} 
+
+\frame{
+	\centering
+	\vspace{2mm}
+
+	\titlepage
+	\vspace{-6mm}
+	
+	\includegraphics[width=0.35\textwidth]{LMUlogo.jpg}
+	\hspace{4cm}
+	\includegraphics[width=0.3\textwidth]{BMBFlogo.png}
+} 
+
+\frame{\frametitle{Cosmic Ray Facility LMU Munich}
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{CRFprinciple3-crop.pdf}
+			
+			\tiny
+			\color{red} track prediction accuracy given by multiple scattering
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{CRF_wMicromegas.pdf}
+	\end{columns}
+	
+	\vspace{0mm}
+	\centering
+	\footnotesize
+	\begin{tabular}{ll}
+	track reconstruction & 2 $\times$ Monitored Drift Tube chambers (MDTs)
+%	\\
+%	 & single tube resolution $\sim$ \SI{100}{\micro\m}
+% 	\\
+%	 & six layers $\sim$ \SI{41}{\micro\m}
+	\\
+	trigger & scintillator hodoscope
+	\\
+	active area & \SI{2.2}{m} $\times$ \SI{4}{m}
+	\\
+	angular acceptance & $\pm$ \SI{30}{\degree}
+	\\
+	readout & 12288 channels
+	\\
+	 & $\to$ 96 APVs (frontend electronics)
+	\\
+	 & $\to$ 6 FECs (scalable readout system)
+	\\
+	readout rate & 130 Hz (full muon rate)
+	\\
+	measurement period & 17.10. - 06.12. 2017
+	\end{tabular}
+}
+
+\frame{\frametitle{Measurement Details (for considered run)}
+	\small
+	\begin{tabular}{ll}
+		measurement period & 09:28 01.06.2018 - 02:23 02.06.2018 ($\sim$ 17 h)
+		\\
+		 &
+		\\
+		gas & Ar:CO$_{2}$ (93:7 vol\%)
+		\\
+		 &
+		\\
+		amplification voltage & 570 V
+		\\
+		 &
+		\\
+		drift voltage & -300 V
+		\\
+		 &
+		\\
+		atmospheric pressure & 955 mbar
+		\\
+		 &
+		\\
+		temperature & 15 - 25 $^{\circ}$C
+		\\
+		 &
+		\\
+		readout & online zerosuppressed (raw data NOT available)
+		\\
+		 &
+		\\
+		events & trigger 7.9 M
+		\\
+		 & $\Rightarrow$ MDT merged 4.2 M 
+		\\
+		 & $\Rightarrow$ in active area 1.7 M
+		\\
+		 &
+		\\
+		considered layer & eta in (mesh lying on anode)
+	\end{tabular}
+}
+
+\frame{\frametitle{Signal Properties}
+
+	\small
+	\centering
+	
+	strip multiplicity
+	
+	\begin{columns}
+		\column{.33\textwidth}
+			\centering
+			
+			\includegraphics[width=0.85\textwidth]{m1_ei_b6_nStripsVsangle_20180601.pdf}
+		\column{.33\textwidth}
+			\centering
+			
+			\includegraphics[width=0.85\textwidth]{m1_ei_b7_nStripsVsangle_20180601.pdf}
+		\column{.33\textwidth}
+			\centering
+			
+			\includegraphics[width=0.85\textwidth]{m1_ei_b8_nStripsVsangle_20180601.pdf}
+	\end{columns}
+	
+	time difference of last and first strip in cluster (in 25 ns)
+	
+	\begin{columns}
+		\column{.33\textwidth}
+			\centering
+			
+			\includegraphics[width=0.85\textwidth]{m1_ei_b6_timeDifVsangle_20180601.pdf}
+		\column{.33\textwidth}
+			\centering
+			
+			\includegraphics[width=0.85\textwidth]{m1_ei_b7_timeDifVsangle_20180601.pdf}
+		\column{.33\textwidth}
+			\centering
+			
+			\includegraphics[width=0.85\textwidth]{m1_ei_b8_timeDifVsangle_20180601.pdf}
+	\end{columns}
+	
+	\begin{columns}
+		\column{.33\textwidth}
+			\centering
+			
+			board 6
+		\column{.33\textwidth}
+			\centering
+						
+			board 7
+		\column{.33\textwidth}
+			\centering
+						
+			board 8
+	\end{columns}
+	
+}
+
+\frame{\frametitle{\textmu TPC Analysis - Classic Approach}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			
+			NSW - TDR
+						
+			\includegraphics[width=1.1\textwidth]{uTPC_alaTDR.png}
+		\column{.5\textwidth}
+			\centering
+			
+			CERN-THESIS-2016-019 (K.Ntekas)
+						
+			\includegraphics[width=0.7\textwidth]{uTPC_alaKostas.png}
+	\end{columns}
+		
+		\vspace{3mm}
+		
+		reconstruction of position in drift gap
+		
+		linear with strip time measurement : $z_{s} = v_{\mathrm{drift}} \cdot \underbrace{\left( t_{s} - t_{\mathrm{offset}} \right)}_{ = t_{s,\mathrm{drift}}}$
+		
+		\vspace{2mm}
+		
+		$\Rightarrow$ biased reconstruction if wrong drift velocity is assumed 
+		
+		\hspace{4.5mm} (e.g. water, air in gas mixture)
+	
+}
+
+\frame{\frametitle{Drift Time Measurement}
+	\centering
+
+	Ar:CO$_{2}$ (93:7 vol\%) , $U_{\mathrm{drift}}$ -300 V @ 5 mm gap
+	
+	\vspace{5mm}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+						
+			\includegraphics[width=\textwidth]{m1_ei_stripTime_firstNlast_20180601_wFWHM_wMaxDist.pdf}
+		\column{.50\textwidth}
+			\centering
+			simulation
+						
+			\includegraphics[width=\textwidth]{driftTime_sim_loesel.png}
+	\end{columns}
+	\vspace{5mm}
+				
+	$\Rightarrow$ reconstructed drift time not in agreement with simulation
+	
+	\hspace{4.5mm} or expectation ( 5 mm / \SI[per-mode=fraction]{0.047}{\mm\per\ns} $\simeq$ 106 ns)
+	
+}
+
+\frame{\frametitle{\textmu TPC Analysis - Drift Velocity Agnostic}
+
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+						
+			\includegraphics[width=1.1\textwidth]{timevsstrip_description.pdf}
+		\column{.45\textwidth}
+			\begin{itemize}
+				\item
+					angle reconstruction: 
+						
+					\vspace{3mm}
+					
+					$\theta = \arctan \left( \tfrac{\mathrm{pitch}}{m_{\mu \mathrm{TPC}} \;\cdot\; v_{\mathrm{drift}}} \right)$
+						
+					\vspace{3mm}
+					
+					$m_{\mu \mathrm{TPC}}$ : slope \textmu TPC fit
+					
+					\vspace{3mm}
+				\item
+					position reconstruction:
+						
+					\vspace{3mm}
+								
+					$
+					\mathrm{pos}_{\mu\mathrm{TPC}}
+					=
+					\dfrac{t_{0} - t_{\mu \mathrm{TPC}}}{m_{\mu \mathrm{TPC}}}
+					$
+					
+					\vspace{3mm}
+					
+					$t_{\mu \mathrm{TPC}}$ : intercept $\mu \mathrm{TPC}$ fit
+			\end{itemize}
+	\end{columns}
+	
+	\vspace{5mm}
+	
+	$\Rightarrow$ position reconstruction independent of drift velocity
+	
+	$\Rightarrow$ probe drift velocity for right angle reconstruction
+	
+}
+
+\frame{\frametitle{\textmu TPC Angle Reconstruction}
+
+	\small
+
+	\begin{columns}
+		\column{.6\textwidth}
+			\centering
+			angle reconstructed VS reference
+			
+			\includegraphics[width=0.9\textwidth]{m1_ei_uTPCangleVSangle_20180601.pdf}
+		\column{.4\textwidth}
+			\centering
+			
+			mean angle
+			
+			\includegraphics[width=0.85\textwidth]{m1_ei_uTPCmeanAngleVSangle_20180601.pdf}
+			
+			standard deviation
+			
+			\includegraphics[width=0.85\textwidth]{m1_ei_uTPCstdvAngleVSangle_20180601.pdf}
+	\end{columns}
+	
+	\vspace{2mm}
+	
+	$\Rightarrow$ missing statistics for large angles ( $>$ 20$^{\circ}$ )
+	
+	$\Rightarrow$ drift velocity may be spoiled due to gas impurities (water, air)
+	
+}
+
+\frame{\frametitle{\textmu TPC Angle Reconstruction}
+
+	\small
+
+	\begin{columns}
+		\column{.6\textwidth}
+			\centering
+			angle reconstructed 
+			
+			for 20$^{\circ}$ to 22$^{\circ}$ reference angle
+			
+			\includegraphics[width=\textwidth]{m1_ei_uTPCangle_20-22degree_20180601.pdf}
+		\column{.4\textwidth}
+			\centering
+			
+			MPV angle
+			
+			\includegraphics[width=0.9\textwidth]{m1_ei_uTPCmpvAngleVSangle_20180601.pdf}
+			
+			gaus sigma
+			
+			\includegraphics[width=0.9\textwidth]{m1_ei_uTPCwidthAngleVSangle_20180601.pdf}
+	\end{columns}
+	
+	fit angular distribution for each slice with gaussian (landau does not work)
+	
+	fit range: maximum bin $\pm$ 15$^{\circ}$
+	
+}
+
+\frame{\frametitle{Determination of $t_{0}$}
+
+%	\small
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+						
+			\includegraphics[width=0.9\textwidth]{m1_ei_uTPCresVSuTPCslope_20180601.pdf}
+		\column{.50\textwidth}
+			\centering
+						
+			\includegraphics[width=0.9\textwidth]{m1_ei_uTPCresVSuTPCslope_zoomed_20180601.pdf}
+	\end{columns}
+	\centering
+	\vspace{5mm}
+				
+	$
+		\mathrm{res} = 
+		\underbrace{
+			\tfrac{0 - \mathrm{intercept}_{\mu\mathrm{TPC}}}{\mathrm{slope}_{\mu\mathrm{TPC}}}
+		}_{\mu \mathrm{TPC \;\; position} \;\; t_{0}=0} 
+		 - \;\mathrm{pos}_\mathrm{ref}
+		\;\;\;\Rightarrow\;\;\; t_{0} = - \mathrm{slope}_\mathrm{distribution} / \mathrm{pitch}
+	$ 
+	
+}
+
+\frame{\frametitle{\textmu TPC Position Reconstruction}
+
+%	\small
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+						
+			\includegraphics[width=0.9\textwidth]{m1_ei_uTPCresVSangle_20180601.pdf}
+		\column{.50\textwidth}
+			\centering
+						
+			\includegraphics[width=\textwidth]{m1_ei_bothResolutionsVSangle_20180601.pdf}
+	\end{columns}
+	\vspace{5mm}
+				
+	$\Rightarrow$ \textmu TPC reconstruction much more sensitive 
+	
+	\hspace{4.5mm} to inhomogeneous clustering of ionizing particles
+	
+}
+
+\appendix
+
+\frame{\centering \Huge Backup}
+
+%\begin{frame}
+%	\transduration<0-29>{0}
+%	\multiinclude[<+->][format=png,start=1,graphics={width=\textwidth}]{resVSclustertimeVSangleM1eiC100V}
+%\end{frame}
+
+\begin{frame}{Residual VS Clustertime VS Slope}
+  \animategraphics[loop,controls,width=\linewidth]{1}{resVSclustertimeVSangleM1eiC100V-}{0}{29}
+\end{frame}
+
+\frame{\frametitle{Influence of Multiple Scattering}
+	\footnotesize
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			MDT extrapolated residual VS angle
+						
+			\includegraphics[width=0.65\textwidth]{MDTintDifVSangle.pdf}
+		\column{.50\textwidth}
+			\centering
+			MDT residual perpendicular incident
+			\vspace{4mm}
+						
+			\includegraphics[width=0.8\textwidth]{MDTresidual_slopeDifCuts.pdf}
+	\end{columns}
+	\vspace{3mm}
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			Module 0 residual narrow width VS angle
+			\vspace{2.5mm}
+						
+			\includegraphics[width=0.75\textwidth]{SM2-M0_CRFafterH8_eta-out_residualVSangle_slopeDifCuts.pdf}
+		\column{.50\textwidth}
+			\centering
+			Module 0 residual perpendicular incident
+						
+			\includegraphics[width=0.8\textwidth]{SM2-M0_CRFafterH8_eta-out_residual_cutsMDTslopeDif.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{Usage of Multiple Scattering - Muon Tomography (L1)}
+
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.85\textwidth]{trackIntercept_yz_3e-2_1e-1_blackWhite.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{CRFmounTomography_yz-crop.pdf}
+	\end{columns}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{scatteredFraction_xy_blackWhite.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{L1inCRF_muonTomoTop-crop.pdf}
+	\end{columns}
+	
+}
+
+\end{document}
