@@ -1,0 +1,1125 @@
+\documentclass[usenamees,dvipsnames]{beamer}
+\usetheme{Madrid}
+\usecolortheme{spruce}
+\definecolor{green(pigment)}{rgb}{0.0, 0.65, 0.31}
+\setbeamercolor*{item}{fg=green(pigment)}
+\definecolor{Green}{rgb}{0.00, 1.00, 0.00}
+\definecolor{Red}{rgb}{1.00, 0.00, 0.00}
+\definecolor{Blue}{rgb}{0.00, 0.00, 1.00}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{textcomp}
+\usepackage{multirow,bigdelim,dcolumn,booktabs}
+%\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+\usepackage{siunitx}
+\usepackage{appendixnumberbeamer}
+\usepackage{hyperref}
+\usepackage{mdframed}
+\usepackage{xcolor}
+\usepackage[absolute,overlay]{textpos}
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\beamertemplatenavigationsymbolsempty
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.text}
+%\usetikzlibrary{trees}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+
+\graphicspath{
+	{pictures/}
+	{pictures/passivationComparison/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/plots/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/sketches/}
+%	{/home/m/Maximilian.Herrmann/Bilder/forLatex/pictures/}
+}
+
+\title[SM2 in CRF]{SM2 Micromegas Modules in the Cosmic Ray Facility}  
+\author[M. Herrmann]{Maximilian Herrmann}
+\institute[LMU Munich]{Ludwig-Maximilians-Universit\"at M\"unchen - Lehrstuhl Schaile}
+\date[12.05.2020]{Muon Week 12.05.2020} 
+
+\begin{document}
+
+\frame{
+	\titlepage
+}
+
+\frame{
+	\frametitle{Validation using Cosmic Muons - \textbf{C}osmic \textbf{R}ay \textbf{F}acility}
+	
+	\begin{columns}
+		\column{.40\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{CRFprinciple3-crop.pdf}
+		\column{.60\textwidth}
+			\centering
+			\scriptsize
+			\only<1>{
+				\begin{tabular}{ll}
+					trigger & scintillator hodoscope
+					\\
+					& resolution $\sim$ \SI{10}{cm}
+					\\
+					track reconstruction & Monitored Drift Tubes (MDTs)
+					\\
+					& resolution $\sim$ \SI{0.2}{mm}
+					\\
+					active area & \SI{2.2}{m} $\times$ \SI{4}{m}
+					\\
+					angular acceptance & $\pm$ \SI{30}{\degree}
+					\\
+					energy cut & iron plate $\to E_{\mu} > $ \SI{600}{MeV} 
+					\\
+					readout (full module) & 12288 channels
+					\\
+					readout rate & 100 Hz (online zerosuppression)
+				\end{tabular}
+			}
+	\end{columns}
+	\vspace{5mm}		
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{CRFwModuleNdoublet.jpg}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.85\textwidth]{moduleInCRF.jpg}
+	\end{columns}
+}
+
+%\frame{\frametitle{\large Pulse Height and Efficiency (Ar:CO$_2$ 93:7 vol\%, $U_{\mathrm{amp}} =$ \SI{580}{V})}
+%	\footnotesize
+%	
+%	\begin{columns}
+%		\column{.5\textwidth}
+%			\centering
+%			full area map
+%		\column{.5\textwidth}
+%			\centering
+%			VS amplification voltage
+%	\end{columns}
+%	\vspace{2mm}
+%
+%	\begin{columns}
+%		\column{.5\textwidth}
+%			\centering
+%			\rotatebox{90}{$\;\;\;\;\;\;\;\;\;\;\;\;$\textbf{signal height}}
+%			\includegraphics[width=0.85\textwidth]{MMS200024L1gain.png}
+%		\column{.5\textwidth}
+%			\centering
+%			\includegraphics[width=0.8\textwidth]{MMS200024L1ClusterQampScan.png}
+%	\end{columns}
+%	\vspace{3mm}
+%	
+%	\begin{columns}
+%		\column{.5\textwidth}
+%			\centering
+%			\rotatebox{90}{$\;\;\;\;\;\;\;\;\;\;\;\;$\textbf{efficiency}}
+%			\includegraphics[width=0.85\textwidth]{MMS200024L1efficiency.png}
+%		\column{.5\textwidth}
+%			\centering
+%			\includegraphics[width=0.8\textwidth]{MMS200024L1ampScan.png}
+%	\end{columns}
+%	
+%}
+
+\frame{\frametitle{\large Pulse Height and Efficiency (Ar:CO$_2$ 93:7 vol\%) Module 21}
+
+	\begin{columns}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{MMS200021L1gain.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{MMS200021L2gain.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{MMS200021L3gain.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{MMS200021L4gain.png}
+	\end{columns}
+	
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{MMS200021L1efficiency.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{MMS200021L2efficiency.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{MMS200021L3efficiency.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{MMS200021L4efficiency.png}
+	\end{columns}
+		
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{MMS200021L1ClusterQampScan.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{MMS200021L2ClusterQampScan.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{MMS200021L3ClusterQampScan.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{MMS200021L4ClusterQampScan.png}
+	\end{columns}
+		
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{MMS200021L1ampScan.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{MMS200021L2ampScan.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{MMS200021L3ampScan.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{MMS200021L4ampScan.png}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Typical Pulse-Height Distributions (M27)}
+	\footnotesize
+
+	\begin{columns}
+		\column{.6\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{m27_eo_580V_chargeVSstrip.png}
+		\column{.4\textwidth}
+			\centering
+			single APV (128 strips)
+			\vspace{2mm}
+			
+			\includegraphics[width=0.95\textwidth]{m27_eo_580V_stripCharge.pdf}
+	\end{columns}
+
+	\vspace{3mm}
+
+	\begin{columns}
+		\column{.33\textwidth}
+			\centering
+			efficient cluster
+			\vspace{2mm}
+			
+			\includegraphics[width=\textwidth]{m27_ei_580V_clusterQboards.pdf}
+		\column{.33\textwidth}
+			\centering
+			mean map
+			\vspace{2mm}
+			
+			\includegraphics[width=\textwidth]{m27_ei_580V_meanClusterQmap.pdf}
+		\column{.33\textwidth}
+			\centering
+			MPV map
+			\vspace{2mm}
+			
+			\includegraphics[width=\textwidth]{m27_ei_580V_MPVclusterQmap.pdf}
+	\end{columns}
+		
+}
+	
+\frame{\frametitle{CRF measurements for Pulse-Height Comparisons}
+	\scriptsize
+	\vspace{5mm}
+	
+%	\hspace{-5mm}
+	\setlength\tabcolsep{1.5pt}
+	\begin{tabular}{ccccccccc}
+		\hline
+		\hline
+		module &  & \hspace{1mm} & \multicolumn{2}{c}{before} & \hspace{1mm} & \multicolumn{2}{c}{after} & modification
+		\\
+		 & voltage [V] & \hspace{1mm} & measurement & events ($10^6$) & \hspace{1mm} & measurement & events ($10^6$) &
+		\\
+		\hline
+		12 & 570 & & 19.06.-20:09 & 4.8 & & 30.08.-11:29 & 9.8 & passivated
+		\\
+		13 & 570 & & 28.08.-09:32 & 3.9 & & 02.10.-16:34 & 7.0 & taped
+		\\
+		17 & 570 & & 18.09.-08:12 & 3.9 & & 12.10.-18:26 & {\color{red}0.5} & taped
+		\\
+		18 & 580 & & 09.09.-20:01 & N/A & & 07.10.-19:52 & 4.6 & taped
+		\\
+		\hline
+		\hline
+	\end{tabular}
+	\vspace{5mm}
+
+	problems : 
+	\begin{itemize}
+		\item[]
+			m12 : upside down (before) , flushing (after) , other mesh on outer layers
+		\item[]
+			m13 : slowcontrol stopped (after)
+		\item[]
+			m17 : not all sectors at nominal voltage (before)
+		\item[]
+			m18 : wrongly connected $\Rightarrow$ mapping has to be adjusted (before)
+		\item[]
+			for all measurements : pressure yet not considered
+	\end{itemize}
+
+}
+
+\frame{
+	\textbf{M12 @ 570 V}
+	\centering 
+	
+	\textbf{before passivation} 
+	\vspace{1mm}
+	
+	\begin{columns}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M12_570before/MMS200012L1gain.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M12_570before/MMS200012L2gain.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M12_570before/MMS200012L3gain.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M12_570before/MMS200012L4gain.png}
+	\end{columns}
+	\vspace{1mm}
+	918 - 920 mBar
+	\vspace{5mm}
+	
+	\textbf{after passivation} 
+	\vspace{1mm}
+	
+	\begin{columns}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M12_570after/MMS200012L1gain.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M12_570after/MMS200012L2gain.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M12_570after/MMS200012L3gain.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M12_570after/MMS200012L4gain.png}
+	\end{columns}
+	\vspace{1mm}
+	927 - 933 mBar
+
+}
+
+\frame{
+	\textbf{M13 @ 570 V}
+	\centering 
+	
+	\textbf{before taping}  
+	\vspace{1mm}
+	
+	\begin{columns}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M13_570before/MMS200013L1gain.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M13_570before/MMS200013L2gain.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M13_570before/MMS200013L3gain.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M13_570before/MMS200013L4gain.png}
+	\end{columns}
+	\vspace{1mm}
+	927 - 929 mBar
+	\vspace{5mm}
+	
+	\textbf{after taping}  
+	\vspace{1mm}
+	
+	\begin{columns}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M13_570after/MMS200013L1gain.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M13_570after/MMS200013L2gain.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M13_570after/MMS200013L3gain.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M13_570after/MMS200013L4gain.png}
+	\end{columns}
+	\vspace{1mm}
+	922 - 931 mBar
+
+}
+
+\frame{
+	\textbf{M17 @ 570 V}
+	\centering 
+	
+	\textbf{before taping}  
+	\vspace{1mm}
+	
+	\begin{columns}
+		\column{.25\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{M17_570before/MMS200017L1gain.png}
+		\column{.25\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{M17_570before/MMS200017L2gain.png}
+		\column{.25\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{M17_570before/MMS200017L3gain.png}
+		\column{.25\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{M17_570before/MMS200017L4gain.png}
+	\end{columns}
+	\vspace{1mm}
+	934 - 936 mBar
+	\vspace{5mm}
+	
+	\textbf{after taping}  
+	\vspace{1mm}
+	
+	\begin{columns}
+		\column{.25\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{M17_570after/MMS200017L1gain.png}
+		\column{.25\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{M17_570after/MMS200017L2gain.png}
+		\column{.25\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{M17_570after/MMS200017L3gain.png}
+		\column{.25\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{M17_570after/MMS200017L4gain.png}
+	\end{columns}
+	\vspace{1mm}
+	926 - 927 mBar
+	\vspace{6mm}
+
+	stereo\_out board8 right repaired after this measurement
+
+}
+
+\frame{
+	\textbf{M18 @ 580 V}
+	\centering 
+
+	\textbf{before taping} 
+	\vspace{1mm}
+	
+	\begin{columns}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M18_580before_remapped/MMS200018L1gain.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M18_580before_remapped/MMS200018L2gain.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M18_580before_remapped/MMS200018L3gain.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M18_580before_remapped/MMS200018L4gain.png}
+	\end{columns}
+	\vspace{1mm}
+	N/A
+	\vspace{5mm}
+
+	\textbf{after taping}  
+	\vspace{1mm}
+	
+	\begin{columns}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M18_580after/MMS200018L1gain.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M18_580after/MMS200018L2gain.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M18_580after/MMS200018L3gain.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{M18_580after/MMS200018L4gain.png}
+	\end{columns}
+	\vspace{1mm}
+	925 - 929 mBar
+
+}
+	
+\frame{\frametitle{Pulse-Height Pressure Dependence (M3 long term test)}
+%	\centering
+
+	\begin{columns}
+		\scriptsize
+		\column{.4\textwidth}
+			\centering
+			pressure
+			
+			\includegraphics[width=0.95\textwidth]{m3_pressureVStime_Xmas.pdf}
+			
+			\vspace{2mm}
+			mean cluster charge
+			
+			\includegraphics[width=0.95\textwidth]{m3_eo_b8_meanClusterQvsTime_Xmas.pdf}
+		\column{.6\textwidth}
+			\centering
+			\includegraphics[width=1.0\textwidth]{m3_570V_xmas_meanClusterQvsPressure_allBoards_otherColors.pdf}
+	\end{columns}
+	
+	\vspace{5mm}
+		
+	$\Rightarrow$ clear pressure dependence, as expected
+			
+	\vspace{3mm}
+	
+	$\Rightarrow$ dependence on pillar-height NOT straight forward
+	
+	\vspace{5mm}
+	\scriptsize
+	(pressure biased: offset about 30 mBar)
+}
+	
+\frame{\frametitle{Pulse-Height Amplification-Gap Dependence}
+%	\centering
+	\small
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			M8 and Eta3-Doublet
+			
+			(same measurement period)
+		\column{.5\textwidth}
+			\centering
+			modules 1,3,6,7
+	\end{columns}
+	\vspace{3mm}
+
+	\begin{columns}
+		\column{.45\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{m8_9307_A570V_C300V_clusterQvsPillarHeight.pdf}
+		\column{.55\textwidth}
+			\centering
+			\includegraphics[width=0.95\textwidth]{meanClusterQvsPillarHeight_etaNstereo_wFit.png}
+	\end{columns}
+	
+	\vspace{5mm}
+	
+	$\Rightarrow$ for a single measurement period a good correlation is given
+		
+	\vspace{3mm}
+	
+	$\Rightarrow$ comparison of different periods require pressure compensation
+	
+}
+	
+\frame{
+	\centering \textbf{cluster charge} @ 580 V
+	
+	(modules 4 , 13 , 14, 15 , 17 , 18 , 20 - 25)
+%	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.04\textwidth}
+		\column{.48\textwidth}
+			\centering
+			mean
+		\column{.48\textwidth}
+			\centering
+			MPV
+	\end{columns}
+%	\vspace{1mm}
+	
+	\begin{columns}
+		\column{.04\textwidth}
+			\rotatebox{90}{pillar height}
+		\column{.48\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{meanClusterQvsPillarHeight_passivatedModules.pdf}
+		\column{.48\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{MPVclusterQvsPillarHeight_passivatedModules.pdf}
+	\end{columns}
+%	\vspace{3mm}
+
+	\begin{columns}
+		\column{.04\textwidth}
+			\rotatebox{90}{pressure}
+		\column{.48\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{meanClusterQvsPressure_passivatedModules.pdf}
+		\column{.48\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{MPVclusterQvsPressure_passivatedModules.pdf}
+	\end{columns}
+%	\vspace{3mm}
+
+	\begin{columns}
+		\column{.04\textwidth}
+			\rotatebox{90}{product}
+		\column{.48\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{meanClusterQvsPressurePillarHeight_passivatedModules.pdf}
+		\column{.48\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{MPVclusterQvsPressurePillarHeight_passivatedModules.pdf}
+	\end{columns}
+
+}
+
+\frame{\frametitle{Alignment Reconstruction Using Cosmic Muon Tracks}
+	\footnotesize		
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			difference of reconstructed hit 
+			
+			and reference track interpolation
+			\vspace{1mm}
+			
+			\includegraphics[width=0.8\textwidth]{m1_ei_residaul_nearZero.pdf}
+			\vspace{1mm}
+				
+			deviations of inter-strip distance
+			\vspace{1mm}
+			
+			\includegraphics[width=0.8\textwidth]{eta_in_resMeanVSmdtY_woAdapterBoard_wCorPitch_wCenter.png}
+		\column{.50\textwidth}
+			\centering
+			board rotation and strip deformations
+			\vspace{1mm}
+			
+			\includegraphics[width=0.8
+			\textwidth]{m3_eo_resMeanVSscinX_allBoards.pdf}
+			\vspace{1mm}
+				
+			bend strip shape
+			\vspace{1mm}
+				
+			\includegraphics[width=0.95\textwidth]{ROboardsBendStrips-crop.png}
+			\vspace{13mm}
+	\end{columns}
+}
+
+\frame{\frametitle{\large Alignment Investigation Eta-panel 3 $\Rightarrow$ Consistent Reconstruction}
+	\centering
+	
+	\begin{columns}
+		\column{.05\textwidth}
+		\column{.3\textwidth}
+			\centering
+			September 2018, 
+			
+			in M3
+		\column{.3\textwidth}
+			\centering
+			January 2019, 
+			
+			as doublet
+		\column{.3\textwidth}
+			\centering
+			May 2019, 
+			
+			as doublet
+	\end{columns}
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.05\textwidth}
+			\rotatebox{90}{board 8}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3inM3_b8_resMeanVsscinX.pdf}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3withM6_b8_resMeanVsscinX.pdf}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3withM8_b8_resMeanVsscinX.pdf}
+	\end{columns}
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.05\textwidth}
+			\rotatebox{90}{board 7}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3inM3_b7_resMeanVsscinX.pdf}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3withM6_b7_resMeanVsscinX.pdf}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3withM8_b7_resMeanVsscinX.pdf}
+	\end{columns}
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.05\textwidth}
+			\rotatebox{90}{board 6}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3inM3_b6_resMeanVsscinX.pdf}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3withM6_b6_resMeanVsscinX.pdf}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3withM8_b6_resMeanVsscinX.pdf}
+	\end{columns}
+
+}
+
+\frame{\frametitle{Alignment Comparison Production Modules}
+	\footnotesize
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			shifts
+			
+			\includegraphics[width=0.95\textwidth]{shiftsWRTboard7_summary.pdf}
+		\column{.5\textwidth}
+			\centering
+			rotations
+			
+			\includegraphics[width=0.95\textwidth]{rotationsWRTboard7_summary_100umPERm.pdf}
+	\end{columns}
+
+	\vspace{3mm}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			pitch deviations
+			
+			\includegraphics[width=0.95\textwidth]{pitchDeviations_summary.pdf}
+		\column{.5\textwidth}
+			\centering
+			bendings
+			
+			\includegraphics[width=0.95\textwidth]{bendings_summary.pdf}
+	\end{columns}
+		
+}
+
+\frame{\frametitle{Timing Investigation using FEC-APV-Readout}
+	\footnotesize
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			signal evaluation points
+			
+			\includegraphics[width=\textwidth]{m16_eo_FEC0_earliestStripTime_signalScan.pdf}
+		\column{.5\textwidth}
+			\centering
+			capacitive coupling correction
+			
+			\includegraphics[width=\textwidth]{m16_eo_FEC0_earliestStripTime_CCCtest.pdf}
+	\end{columns}
+
+	\vspace{3mm}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			effect of jitter correction
+			
+			\includegraphics[width=\textwidth]{m16_eo_FEC0_earliestStripTime_jitterScan_zoomed.pdf}
+		\column{.5\textwidth}
+			\centering
+			magnitude of jitter correction
+			
+			\includegraphics[width=\textwidth]{m16_earliestStripTimeWidth_subtractedVSwoJitter_eachAdapterBoard.pdf}
+	\end{columns}
+
+	\vspace{3mm}
+
+	$\Rightarrow$ narrowest time distribution : inflection , without CCC , jitter subtracted
+	
+	\vspace{2mm}
+	
+	$\Rightarrow$ jitter correction : about 3\% or about 0.039 $\cdot$ \SI{25}{ns}
+
+}
+
+\frame{\frametitle{Timing Investigation using FEC-APV-Readout}
+	\centering 
+		
+	layer cabeling
+	
+	\vspace{1mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			odd (stereo\_out , eta\_in)
+			
+			\includegraphics[width=0.7\textwidth]{ROboardFECmappingColored-crop.pdf}
+		\column{.5\textwidth}
+			\centering
+			even (stereo\_in , eta\_out)
+			
+			\includegraphics[width=0.7\textwidth]{ROboardFECmappingColored_odd-crop.pdf}
+	\end{columns}
+		
+	\vspace{4mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			all layer FEC3 (same direction)
+			
+			\includegraphics[width=\textwidth]{m16_earliestStripTimeVSposition_allLayers_FEC3.pdf}
+		\column{.5\textwidth}
+			\centering
+			alternating FECs (left-right)
+			
+			\includegraphics[width=\textwidth]{m16_earliestStripTimeVSposition_allLayers_alternatingFECs.pdf}
+	\end{columns}
+
+}
+
+\frame{
+	\centering 
+	expected : \SI{6}{ns / m} $=$ 0.24 $\cdot$ \SI{25}{ns / m}
+	
+	opposite readout $\Rightarrow$ \textbf{0.48} $\cdot$ \SI{25}{ns / m}
+	
+	\vspace{8mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			layer time difference
+			
+			\includegraphics[width=\textwidth]{m16_eo_FEC4_earliestTimeDiffVSposition_sameNotherFEC_fit.pdf}
+		\column{.5\textwidth}
+			\centering
+			signal propagation time
+			
+			\includegraphics[width=\textwidth]{m16_signalPropagationTime_layerVSfec.pdf}
+	\end{columns}
+	
+	\vspace{8mm}
+
+	$\Rightarrow$ mean reconstructed : $\left( \mathrm{\textbf{0.10}} \pm 0.03 \right) \cdot$ \SI{25}{ns / m}
+
+}
+
+\frame{\frametitle{Summary}
+	\scriptsize
+	investigation of the full active area using reference tracker for cosmic muons
+	\begin{itemize}
+		\item
+			information about pulse-height and efficiency send together with modules to CERN
+		\item
+			comparison of measurements for same modules show
+			\begin{itemize}
+				\scriptsize
+				\item
+					similar features $\Rightarrow$ consistent reconstruction
+				\item
+					inhomogeneities arise mainly due to pillar-height variations
+			\end{itemize}
+		\item
+			pulse-height dependence:
+			\begin{itemize}
+				\scriptsize
+				\item
+					amplification gap size (pillar-height)
+				\item
+					pressure
+				\item
+					micro-mesh
+			\end{itemize}
+		\item
+			timing-evaluation difficult using local setup
+			
+			$\Rightarrow$ systematic effects under investigation
+	\end{itemize}
+
+	\centering
+	\includegraphics[width=0.6\textwidth]{CRFintegratedSeriesProduction_moduleNumbers_finish.pdf}
+	
+}
+
+\appendix
+
+\frame[noframenumbering]{
+	\Huge
+	\centering
+	Backup
+}
+
+\frame{\frametitle{SRS-based Data-Acquisition}
+
+	\begin{columns}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{APV25.png}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{FECcabling.jpg}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eventdisplay_m5_570V.pdf}
+		\column{.25\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{pulseheight_differentSignaltimes.pdf}
+	\end{columns}
+	
+	\vspace{4mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{CRF_TDAQ-crop.pdf}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{CRFdataStreams-crop.pdf}
+	\end{columns}
+
+}
+
+\frame{\frametitle{Precision Reconstruction of Geometrical Properties}
+	Boards of the Readout Anode can have:
+
+	\hspace{20mm} $\Rightarrow$ {\color{red}rotations} and {\color{orange}shifts} w.r.t. each other
+	
+	\hspace{20mm} $\Rightarrow$ {\color{blue}non-straight strip shape} and {\color{OliveGreen}pitch deviation}
+	
+	\vspace{3mm}
+	
+	\begin{columns}
+		\column{.50\textwidth}
+			{\centering
+			\textbf{residual mean VS \\ non-precision direction}
+			
+			\includegraphics[width=0.80\textwidth]{stripShapeNrotation-crop.pdf}
+			}
+			
+			\scriptsize
+			$\Rightarrow$ slope indicates rotations
+			
+			$\Rightarrow$ strip shape is given by 
+			
+			\hspace{3mm} deviation from straight line
+		\column{.50\textwidth}
+			{\centering
+			\textbf{residual mean VS \\ precision direction}
+			
+			\vspace{7mm}
+			
+			\includegraphics[width=0.9\textwidth]{boardAlignmentNpitchError-crop.pdf}
+			}
+			
+			\scriptsize
+			$\Rightarrow$ shift between boards is given by 
+			
+			\hspace{3mm} difference of the centers
+			
+			$\Rightarrow$ slope indicates deviation to nominal pitch 
+	\end{columns}
+}
+
+\frame{\frametitle{CRF hit distribution}
+	\centering
+	
+	\includegraphics[width=0.7\textwidth]{m3_CRFhits_Xmas.pdf}
+	
+	\vspace{2mm}
+	
+	M3 eta\_out, 5 mm efficient
+	\vspace{1mm}
+	
+	\includegraphics[width=0.7\textwidth]{m3_5mmHits_Xmas.pdf}
+
+}
+
+\frame{\frametitle{Theoretical Gain Description}
+
+	\scriptsize
+	\begin{columns}
+		\column{.5\textwidth}
+			Gain by Townsend (1910) :
+			\vspace{1mm}
+			
+			$G = \exp\left[\boldsymbol{d} \cdot \alpha \right]$
+			\vspace{3mm}
+			
+			$\alpha$ by Rose and Korff (1941) :
+			\vspace{1mm}
+			
+			$
+				G = 
+					\exp\left[ \;\; 
+						\textcolor{red}{d} \cdot
+						\dfrac{ \textcolor{red}{p} A }{T} 
+						\; \cdot \; \exp\!\left(\; -\dfrac{\textcolor{red}{d p} B}{T \textcolor{blue}{U}} \; \right) 
+						\;\; 
+					\right]
+			$
+			\vspace{3mm}
+			
+			effective description :
+			\vspace{1mm}
+			
+			$G = \mathrm{f}\left(\textcolor{red}{d p} ; \textcolor{blue}{U}\right)$
+		\column{.5\textwidth}
+			\centering
+			fieldsimulation, Kuger (2017)
+			\includegraphics[width=\textwidth]{micromegasFieldSimulation_Kuger2017.png}
+	\end{columns}
+	\vspace{5mm}
+	
+	paper by Giomataris mentioning the prospects of a large sample 
+	
+	of gap widths ($d \mathrel{\hat=}$ pillar heights):
+	\vspace{1mm}
+	
+	\url{https://www.slac.stanford.edu/pubs/icfa/fall99/paper1/paper1.pdf}
+
+}
+
+\frame{
+	\centering 
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			525 V
+			
+			\includegraphics[width=\textwidth]{meanClusterQvsPressurePillarHeight_passivatedModules_525V_ranged.pdf}
+		\column{.5\textwidth}
+			\centering
+			540 V
+			
+			\includegraphics[width=\textwidth]{meanClusterQvsPressurePillarHeight_passivatedModules_540V_ranged.pdf}
+	\end{columns}
+
+	\vspace{8mm}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			560 V
+			
+			\includegraphics[width=\textwidth]{meanClusterQvsPressurePillarHeight_passivatedModules_560V_ranged.pdf}
+		\column{.5\textwidth}
+			\centering
+			570 V
+			
+			\includegraphics[width=\textwidth]{meanClusterQvsPressurePillarHeight_passivatedModules_570V_ranged.pdf}
+	\end{columns}
+
+}
+	
+\frame{\frametitle{CRF measurements with module 3 (high statistics)}
+%	\scriptsize
+	\vspace{5mm}
+%	\centering
+	
+%	\hspace{-5mm}
+%	\setlength\tabcolsep{1.5pt}
+	\begin{tabular}{ccc}
+		\hline
+		\hline
+		measurement & events ($10^6$) & remark
+		\\
+		\hline
+		20.12.19-15:21 & 19.2 &
+		\\
+		22.12.19-11:32 & 20.0 &
+		\\
+		24.12.19-10:19 & 20.0 & slowcontrol stopped
+		\\
+		26.12.19-18:26 & 18.0 &
+		\\
+		28.12.19-13:30 & 8.8 &
+		\\
+		29.12.19-10:47 & 19.6 &
+		\\
+		31.12.19-10:06 & 20.0 &
+		\\
+		02.01.20-14:07 & 8.7 &
+		\\
+		03.01.20-10:54 & 20.0 &
+		\\
+		\hline
+		\hline
+	\end{tabular}
+	\vspace{8mm}
+
+	$\Rightarrow$ in total \textbf{154} $\cdot 10^6$ events
+	\vspace{2mm}
+	
+	$\Rightarrow$ usable after MDT-analysis \textbf{70} $\cdot 10^6$ events
+
+}
+	
+\frame{\frametitle{\normalsize CRF measurements with module 16 (drift scan @ $U_{\mathrm{amp}} =$ 570 V)}
+%	\scriptsize
+%	\vspace{5mm}
+	\centering
+	
+%	\hspace{-5mm}
+%	\setlength\tabcolsep{1.5pt}
+	\begin{tabular}{ccc}
+		\hline
+		\hline
+		drift voltage [V] & measurement & events ($10^6$) 
+		\\
+		\hline
+		125 & 02.08.-08:55 & 4.1
+		\\
+		150 & 02.08.-19:53 & 6.5
+		\\
+		175 & 03.08.-13:20 & 2.5
+		\\
+		200 & 03.08.-20:03 & 5.2
+		\\
+		300 & 31.07.-19:46 & 4.7
+		\\
+		450 & 04.08.-10:06 & 2.5
+		\\
+		\hline
+		\hline
+	\end{tabular}
+
+}
+
+\end{document}
