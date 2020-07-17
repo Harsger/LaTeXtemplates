@@ -1,0 +1,676 @@
+\documentclass[usenames,dvipsnames]{beamer}
+\usetheme{Madrid}
+\usecolortheme{spruce}
+\definecolor{green(pigment)}{rgb}{0.0, 0.65, 0.31}
+\setbeamercolor*{item}{fg=green(pigment)}
+\definecolor{Green}{rgb}{0.00, 1.00, 0.00}
+\definecolor{Red}{rgb}{1.00, 0.00, 0.00}
+\definecolor{Blue}{rgb}{0.00, 0.00, 1.00}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{textcomp}
+\usepackage{multirow,bigdelim,dcolumn,booktabs}
+%\usepackage{beamerthemeshadow}
+\usepackage{subfigure} 
+\usepackage{siunitx}
+\usepackage{appendixnumberbeamer}
+\usepackage{hyperref}
+\usepackage{mdframed}
+\usepackage{xcolor}
+\usepackage{transparent}
+\usepackage[absolute,overlay]{textpos}
+%\beamersetuncovermixins{\opaqueness<1>{25}}{\opaqueness<2->{15}}
+\beamertemplatenavigationsymbolsempty
+
+\usepackage{tikz}
+%\usetikzlibrary{decorations.text}
+%\usetikzlibrary{trees}
+%\usetikzlibrary{decorations.pathmorphing}
+%\usetikzlibrary{decorations.markings}
+%\usetikzlibrary{patterns}
+
+\newcommand{\hidecontent}[2][0.25]{{% \hidecontent[<transparency>]{<stuff>}
+	\setbox9=\hbox{#2}% Store <stuff> in \box9 to obtain height/width
+	\transparent{#1}\ooalign{\usebox9\cr\color{white}\rule{\wd9}{\ht9}\cr}}}
+
+\graphicspath{
+	{pictures/}
+}
+\begin{document}
+\title[Muon Detectors]{Construction and Commissioning of Detectors for the ATLAS Muon Spectrometer}  
+\author[M. Herrmann]{Maximilian Herrmann}
+\institute[]{Ludwig-Maximilians-Universit\"at M\"unchen - Lehrstuhl Schaile}
+\date[06.05.2020]{06.05.2020, LS Schaile, Groupseminar} 
+
+\frame{\titlepage
+	\centering
+	\vspace{-3mm}
+%	Fr\"uhjahrstagung der Deutschen Physikalischen Gesellschaft
+	
+	\hspace{-1.1cm}
+%	\includegraphics[width=0.5\textwidth]{LMUlogo.jpg}
+	\hspace{2cm}
+%	\includegraphics[width=0.3\textwidth]{BMBFlogo.png}
+	\vspace{2mm}
+} 
+
+%\frame{\frametitle{Outline}\tableofcontents}
+
+\frame{
+%	\frametitle{LHC}
+	\frametitle{LHC\only<1>{\hidecontent{ - ATLAS}}\only<2->{ - ATLAS}\only<1,2>{\hidecontent{ - NSW}}\only<3->{ - New Small Wheels}}
+	
+	\only<2>{
+		\begin{textblock*}{5cm}(3.3cm,0.95cm) 
+			\begin{tikzpicture}
+				\draw[red,-,line width=0.5mm] (0,1) rectangle (0.8,1.4);
+				\draw[red,-,line width=0.5mm] (0.8,1.4) -- (3.4,3.7);
+				\draw[red,-,line width=0.5mm] (0.8,1.0) -- (3.4,0);
+				\draw[red,-,line width=0.5mm] (3.4,0) rectangle (9.1,3.7);
+			\end{tikzpicture}
+		\end{textblock*}
+	}
+		
+	\only<3>{
+		
+%		\begin{textblock*}{5cm}(6.3cm,5cm) 
+%			\begin{tikzpicture}
+%%				\hidecontent[0.25]{
+%					\draw[fill=white,fill opacity=0.6,draw=white] (0,0) rectangle (4.2,4);
+%%				}
+%			\end{tikzpicture}
+%		\end{textblock*}
+						
+		\begin{textblock*}{5cm}(5cm,2.2cm) 
+			\begin{tikzpicture}
+				\draw[red,-,line width=0.5mm] (4.2,5.5) ellipse (0.3 and 0.6);
+				\draw[red,-,line width=0.5mm] (5.5,5.7) ellipse (0.3 and 0.6);
+				\draw[red,-,line width=0.5mm] (0,3.5) -- (4.2,6.1);
+				\draw[red,-,line width=0.5mm] (0,0) -- (4.2,4.9);
+			\end{tikzpicture}
+		\end{textblock*}
+		
+	}
+
+	\centering
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{LHCunderground.jpg}
+		\column{.5\textwidth}
+			\centering
+			\mbox{\only<1>{\hidecontent{\includegraphics[width=0.9\textwidth]{ATLASnewer.jpg}}}}
+			\mbox{\only<2,3>{\includegraphics[width=0.9\textwidth]{ATLASnewer.jpg}}}
+			
+	\end{columns}
+				
+	\vspace{2mm}
+	\mbox{\only<1,2>{\hidecontent{\includegraphics[width=0.65\textwidth]{NSWexplodedView.jpg}}}}
+	\mbox{\only<3>{\includegraphics[width=0.65\textwidth]{NSWexplodedView.jpg}}}
+	
+}
+
+\frame{\frametitle{Motivation for the Detector Upgrade}
+	\centering
+	\includegraphics[width=0.8\textwidth]{HL_LHC_PlanUpdateJuly2015.PNG}
+	\vspace{3mm}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{MDTefficiencyPerHitRate_NSW-TDR_edited.png}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{smallWheelTrackRejection.png}
+	\end{columns}
+
+}
+
+\frame{\frametitle{Micromegas Concept and Realization}
+	
+	\only<2>{			
+		\begin{textblock*}{5cm}(3.9cm,3cm) 
+			\begin{tikzpicture}
+				\draw[gray,->,line width=0.5mm] (3,5) -- (1.45,4.65);
+				\draw[gray,->,line width=0.5mm] (3,5) -- (0.5,1.9);
+				\draw[RawSienna,->,line width=0.5mm] (3,0.8) -- (1.4,4.0);
+				\draw[RawSienna,->,line width=0.5mm] (3,0.8) -- (0,0);
+			\end{tikzpicture}
+		\end{textblock*}
+	}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{RSMM_principle8-crop.pdf}
+			
+			\vspace{3mm}
+			\includegraphics[width=0.55\textwidth]{dryCleaningAtRuis.jpeg}
+		\column{.5\textwidth}
+%			\small
+			\only<1>{
+				five stable sandwich panels
+				
+				$\Rightarrow$ four active layers per module
+				\vspace{1mm}
+				\centering
+				\includegraphics[width=\textwidth]{sandwichassemblyWarrows.png}
+				
+				\vspace{3mm}
+				\includegraphics[width=0.85\textwidth]{ROboardsAligned3-crop.pdf}
+			}
+			\only<2>{
+				\centering
+				\includegraphics[width=0.9\textwidth]{meshCloseUp.pdf}
+				
+				\vspace{3mm}
+				\hspace{2.5mm} \includegraphics[width=0.9\textwidth]{anodeCorner.pdf}
+			}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Tasks of the German Collaboration}
+	
+	\footnotesize
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.65\textwidth]{sectorsNsides.png}
+		\column{.5\textwidth}
+			\begin{itemize}
+				\item[]
+				2 Wheels
+				\item[]
+				with 8 small and 8 large wedges
+				\item[]
+				per wedge: 2 MM layer
+				\item[]
+				per layer: 2 Module types
+				\item[]
+				$\Rightarrow$ \textbf{32 Micromegas Modules} per type  
+			\end{itemize}
+	\end{columns}
+	\vspace{3mm}
+	
+	\LARGE	
+	\begin{tabular}{lcl}
+		1. Construction & \normalsize $\Rightarrow$ & \normalsize planarity and alignment
+		\vspace{5mm}
+		\\
+		2. Commissioning & \normalsize $\Rightarrow$ & \normalsize HV-stability
+		\vspace{5mm}
+		\\
+		3. Validation & \normalsize $\Rightarrow$ & \normalsize full area efficiency
+	\end{tabular}
+}
+
+\frame{\frametitle{Panel \textbf{Construction} $\Rightarrow$ Two Step Gluing}		
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			alignment
+		\column{.50\textwidth}
+			\centering
+			planarity
+	\end{columns}
+	
+	\vspace{2mm}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{alignmentFrameOnBoards-crop.pdf}
+			
+			\vspace{3mm}
+			\includegraphics[width=\textwidth]{alignmentFrameOnBoards.jpg}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{panelGlueing2steps.png}
+			
+			\vspace{3mm}
+			\includegraphics[width=0.9\textwidth]{halfpanelOnStiffback.jpg}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{\textbf{Commissioning} of Micromegas Quadruplets}
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			4 layers
+			
+			\`a 6 HV-sectors
+			
+			\vspace{5mm}
+			
+			\includegraphics[width=0.9\textwidth]{ModuleHVsectors-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics[width=0.7\textwidth]{HVsectorContact.jpg}
+			\vspace{2mm}
+			
+			\includegraphics[width=0.55\textwidth]{HVdistributionsBoxesAtModule.jpg}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{HV-Behavior with too low Resistivity}
+	\centering
+	\includegraphics[width=\textwidth]{hv_beforePassivation.png}
+}
+
+\frame{\frametitle{Passivation of low Resistive Areas}
+
+	\begin{columns}
+		\column{.55\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{ROpanelPassivation.png}
+			\vspace{1mm}
+			
+			\includegraphics[width=0.75\textwidth]{passivationMicroHolesAtPillars.png}
+		\column{.45\textwidth}
+			\centering
+			\includegraphics[width=0.65\textwidth]{RSMM_principle_bare-crop.pdf}
+			\vspace{1mm}
+			
+			\includegraphics[width=0.75\textwidth]{driftpanelMeshWithKaptonPassivation.png}
+	\end{columns}
+}
+
+\frame{\frametitle{HV-Behavior after Passivation}
+	\centering
+	\includegraphics[width=\textwidth]{hv_afterPassivation.png}
+}
+
+\frame{
+	\frametitle{\textbf{Validation} using Cosmic Muons - \textbf{C}osmic \textbf{R}ay \textbf{F}acility}
+%	\only<2>{\frametitle{\textbf{Validation} using Cosmic Muons - Data Acquisition}
+	
+	\begin{columns}
+		\column{.40\textwidth}
+		\centering
+		\includegraphics[width=0.95\textwidth]{CRFprinciple3-crop.pdf}
+		\column{.60\textwidth}
+		\centering
+		\scriptsize
+		\only<1>{
+			\begin{tabular}{ll}
+				trigger & scintillator hodoscope
+				\\
+				& resolution $\sim$ \SI{10}{cm}
+				\\
+				track reconstruction & Monitored Drift Tubes (MDTs)
+				\\
+				& resolution $\sim$ \SI{0.2}{mm}
+				\\
+				active area & \SI{2.2}{m} $\times$ \SI{4}{m}
+				\\
+				angular acceptance & $\pm$ \SI{30}{\degree}
+				\\
+				energy cut & iron plate $\to E_{\mu} > $ \SI{600}{MeV} 
+				\\
+				readout (full module) & 12288 channels
+				\\
+				readout rate & 100 Hz (online zerosuppression)
+			\end{tabular}
+		}
+		\includegraphics<2>[angle=90,width=0.3\textwidth]{APV25.png}
+		\includegraphics<2>[width=0.45\textwidth]{FECcabling.jpg}
+	\end{columns}
+	\vspace{5mm}		
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics<1>[width=0.75\textwidth]{CRFwModuleNdoublet.jpg}
+			
+			\includegraphics<2>[width=0.9\textwidth]{CRF_TDAQ-crop.pdf}
+		\column{.50\textwidth}
+			\centering
+			\includegraphics<1>[width=0.85\textwidth]{moduleInCRF.jpg}
+			
+			\includegraphics<2>[width=0.8\textwidth]{CRFdataStreams-crop.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{\large Pulse Height and Efficiency (Ar:CO$_2$ 93:7 vol\%, $U_{\mathrm{amp}} =$ \SI{580}{V})}
+	\footnotesize
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			full area map
+		\column{.5\textwidth}
+			\centering
+			VS amplification voltage
+	\end{columns}
+	\vspace{2mm}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\rotatebox{90}{$\;\;\;\;\;\;\;\;\;\;\;\;$\textbf{signal height}}
+			\includegraphics[width=0.85\textwidth]{MMS200024L1gain.png}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{MMS200024L1ClusterQampScan.png}
+	\end{columns}
+	\vspace{3mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\rotatebox{90}{$\;\;\;\;\;\;\;\;\;\;\;\;$\textbf{efficiency}}
+			\includegraphics[width=0.85\textwidth]{MMS200024L1efficiency.png}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{MMS200024L1ampScan.png}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Effects on Efficiency}
+	\centering
+	\small
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			efficiency VS noise level (M7)
+			
+			\includegraphics[width=0.8\textwidth]{m7_5mmEffiVSsigmaPerAPV_wFit.png}
+		\column{.5\textwidth}
+			\centering
+			pulse height VS pillar height (M1,M3,M6,M7)
+			
+			\includegraphics[width=0.9\textwidth]{meanClusterQvsPillarHeight_etaNstereo_wFit.png}
+	\end{columns}
+	\vspace{2mm}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			series production average
+			
+			\includegraphics[width=0.8\textwidth]{averageEfficiencyVSmeanClusterQperNoiseLevel_rangedFit.pdf}
+		\column{.5\textwidth}
+%		\normalsize
+			\begin{itemize}
+				\item
+					noise level individual 
+					
+					for front-end eltx.
+				\vspace{4mm}
+				\item
+					pillar height variation
+				
+					$\Rightarrow$ pulse height inhomogeneities 
+				\vspace{4mm}
+			\end{itemize}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Efficiency Revised}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			H8 testbeam 2018 (module 1)
+			
+			9 cm $\times$ 9 cm
+		\column{.5\textwidth}
+			\centering
+			CRF (module 19)
+			
+			32 cm $\times$ 18.6 cm
+	\end{columns}
+	\vspace{3mm}
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{m1_H8_2018_board7efficiency.png}
+		\column{.5\textwidth}
+			\centering	
+			\includegraphics[width=\textwidth]{MMS200019L1ampScan.png}
+	\end{columns}
+
+}
+
+\frame{\frametitle{Alignment Reconstruction Using Cosmic Muon Tracks}
+	\footnotesize		
+		
+	\begin{columns}
+		\column{.50\textwidth}
+			\centering
+			difference of reconstructed hit 
+			
+			and track interpolation
+			\vspace{1mm}
+			
+			\includegraphics[width=0.8\textwidth]{m1_ei_residaul_nearZero.pdf}
+			\vspace{1mm}
+				
+			deviations of inter-strip distance
+			\vspace{1mm}
+			
+			\includegraphics[width=0.8\textwidth]{eta_in_resMeanVSmdtY_woAdapterBoard_wCorPitch_wCenter.png}
+		\column{.50\textwidth}
+			\centering
+			board rotation and strip deformations
+			\vspace{1mm}
+			
+			\includegraphics[width=0.8
+			\textwidth]{m3_eo_resMeanVSscinX_allBoards.pdf}
+			\vspace{1mm}
+				
+			strip bending
+			\vspace{1mm}
+				
+			\includegraphics[width=0.95\textwidth]{ROboardsBendStrips-crop.png}
+			\vspace{13mm}
+	\end{columns}
+}
+
+\frame{\frametitle{\large Alignment Investigation Eta-panel 3 $\Rightarrow$ Consistent Reconstruction}
+	\centering
+	
+	\begin{columns}
+		\column{.05\textwidth}
+		\column{.3\textwidth}
+			\centering
+			September 2018, 
+			
+			in M3
+		\column{.3\textwidth}
+			\centering
+			January 2019, 
+			
+			as doublet
+		\column{.3\textwidth}
+			\centering
+			May 2019, 
+			
+			as doublet
+	\end{columns}
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.05\textwidth}
+			\rotatebox{90}{board 8}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3inM3_b8_resMeanVsscinX.pdf}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3withM6_b8_resMeanVsscinX.pdf}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3withM8_b8_resMeanVsscinX.pdf}
+	\end{columns}
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.05\textwidth}
+			\rotatebox{90}{board 7}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3inM3_b7_resMeanVsscinX.pdf}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3withM6_b7_resMeanVsscinX.pdf}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3withM8_b7_resMeanVsscinX.pdf}
+	\end{columns}
+	\vspace{2mm}
+	
+	\begin{columns}
+		\column{.05\textwidth}
+			\rotatebox{90}{board 6}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3inM3_b6_resMeanVsscinX.pdf}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3withM6_b6_resMeanVsscinX.pdf}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=0.9\textwidth]{eta3withM8_b6_resMeanVsscinX.pdf}
+	\end{columns}
+
+}
+
+\frame{\frametitle{Muon Tomography using Track Intersection Reconstruction}
+
+	\begin{columns}
+		\column{.6\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{CRFprinciple2_scattered-crop.pdf}
+		\column{.4\textwidth}
+			\centering
+			\includegraphics[angle=270,width=0.8\textwidth]{CRF_woMdoule_FECsNcaen.jpg}
+	\end{columns}
+
+}
+
+\frame{\frametitle{Weighted Track Intersections}
+	\footnotesize
+	\centering 
+	16 days measurement
+	
+	\vspace{3mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			z in $[-200,-100]$ mm
+			
+			\includegraphics[width=\textwidth]{m3_xmas_intersectionsWeightedXYperZ8.pdf}
+		\column{.5\textwidth}
+			\centering
+			z in $[-100,0]$ mm
+			
+			\includegraphics[width=\textwidth]{m3_xmas_intersectionsWeightedXYperZ9.pdf}
+	\end{columns}
+	
+	\vspace{3mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			z in $[0,100]$ mm
+			
+			\includegraphics[width=\textwidth]{m3_xmas_intersectionsWeightedXYperZ10.pdf}
+		\column{.5\textwidth}
+			\centering
+			z in $[100,200]$ mm
+			
+			\includegraphics[width=\textwidth]{m3_xmas_intersectionsWeightedXYperZ11.pdf}
+	\end{columns}
+
+}
+
+\frame{\frametitle{Summary}
+	\scriptsize
+	\begin{itemize}
+		\item
+			Upgrade of the ATLAS Muon Spectrometer Inner End Caps
+			
+			\begin{tabular}{lcl}			
+				sTGC and Micromegas & $\Rightarrow$ & triggering and precision tracking
+				\\
+				Micromegas & $\Rightarrow$ & German participation in construction
+			\end{tabular}
+%			\vspace{3mm}
+		\item
+			\textbf{Construction} of \SI{2}{\square\meter}-sized electrode panels
+			
+			\begin{tabular}{lcl}
+				narrow amplification gap ($\sim$ 0.12 mm) & $\Rightarrow$ & superior planarity required ($\sim$ 0.02 mm)
+				\\
+				threefold anode & $\Rightarrow$ & precise alignment required ($\sim$ 0.05 mm)
+			\end{tabular}
+%			\vspace{3mm}
+		\item
+			\textbf{Commissioning} of four-layerd Micromegas Modules
+					
+			\begin{tabular}{lcl}	
+				wet cleaning & $\Rightarrow$ & removal of production remnants
+				\\
+				dry cleaning & $\Rightarrow$ & removal of immediate dust
+				\\
+				active area preparation & $\Rightarrow$ & HV-stability ($<$ 20 nA @ 580 V)
+			\end{tabular}
+%			\vspace{3mm}
+		\item
+			\textbf{Validation} using cosmic muons
+				
+			\begin{tabular}{lcl}						
+				high efficiency ($>$ 90 \%) & $\Rightarrow$ & function of amplification
+				\\
+				good resolution ($<$ 0.2 mm) & $\Rightarrow$ & alignment reconstruction
+			\end{tabular}
+%			\vspace{3mm}
+	\end{itemize}
+
+	\centering
+	\includegraphics[width=0.6\textwidth]{CRFintegratedSeriesProduction_moduleNumbers_finish.pdf}
+	
+}
+
+\appendix
+
+\frame[noframenumbering]{
+	\Huge
+	\centering
+	Backup
+}
+
+\frame{\frametitle{Reconstruction Planes}
+
+	\centering
+	module and FECs
+	\vspace{0.5mm}
+	
+	\includegraphics[width=0.6\textwidth]{m3_Xmas_muonTomo_YZweightedX15.pdf}
+	
+	\vspace{1mm}
+	
+	CAEN power supply
+%	\vspace{0.5mm}
+	
+	\includegraphics[width=0.6\textwidth]{m3_Xmas_muonTomo_YZweightedX27.pdf}
+
+}
+
+\end{document}
