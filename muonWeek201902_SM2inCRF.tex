@@ -41,10 +41,10 @@
 }
 
 \begin{document}
-\title[SM2 in CRF]{SM2 Micromegas in the Cosmic Ray Facility}  
+\title[SM2 in CRF]{SM2 Micromegas Modules \\ in the LMU Cosmic Ray Facility}  
 \author[M. Herrmann]{ Maximilian Herrmann}
 \institute[LMU Munich]{Ludwig-Maximilians-Universit\"at M\"unchen - Lehrstuhl Schaile}
-\date[17.01.2019]{MM Analysis Meeting 17.01.2019} 
+\date[06.02.19]{Muon Week 06.02.2019} 
 
 \frame{\titlepage} 
 
@@ -52,748 +52,506 @@
 	\tableofcontents
 } 
 
-\section{Measurement Setup \& Data Processing}
+\section{Cosmic Ray Facility}
 
-\frame{\frametitle{CRF Trigger Scheme and Data Streams}
+\frame{\frametitle{Cosmic Ray Facility}
 		
 	\begin{columns}
 		\column{.50\textwidth}
 			\centering
-			trigger logic
-			\vspace{2mm}
-			
-			\includegraphics[width=0.95\textwidth]{CRFtriggerScheme-crop.pdf}
+			\includegraphics[width=1.0\textwidth]{CRFprinciple3-crop.pdf}
 		\column{.50\textwidth}
 			\centering
-			data streams
-			\vspace{2mm}
-			
-			\includegraphics[width=0.95\textwidth]{CRFdataStreams-crop.pdf}
+			\includegraphics[width=0.9\textwidth]{CRF_small.JPG}
 	\end{columns}
-	\vspace{3mm}
+	
+	\vspace{2mm}
 	\footnotesize
-	
-	\begin{itemize}
-		\item
-			MDT and Scintillator data recorded separately (with TDC data)
-		\item
-			UDP packages for each FEC collected and online zerosuppressed
-	\end{itemize}
-	
-	\centering
-	$\Rightarrow$ data stream alignment crucial
-		
-	\begin{itemize}
-		\item
-			MDT and Scintillator analysis $\Rightarrow$ root trees with 3D track
-		\item
-			sorting of APV root trees for combination with MDT data
-	\end{itemize}
+	\begin{tabular}{ll}
+		trigger & scintillator hodoscope
+		\\
+		track reconstruction & 2 $\times$ Monitored Drift Tube chambers (MDTs)
+		\\
+		active area & \SI{2.2}{m} $\times$ \SI{4}{m}
+		\\
+		angular acceptance & $\pm$ \SI{30}{\degree}
+		\\
+		readout (full SM2) & 12288 channels
+		\\
+	 & $\to$ 96 APVs (frontend electronics)
+		\\
+	 & $\to$ 6 FECs (scalable readout system)
+		\\
+		readout rate & 130 Hz (online zerosuppression)
+	\end{tabular}
 }
 
-\frame{\frametitle{CRF Data - Reference Tracks}
-		
-	\begin{columns}
-		\column{.50\textwidth}
-			\centering
-			hit distribution
-			\vspace{2mm}
-			
-			\includegraphics[width=0.9\textwidth]{CRF_hits.pdf}
-		\column{.50\textwidth}
-			\centering
-			slope distribution
-			\vspace{2mm}
-			
-			\includegraphics[width=0.9\textwidth]{CRF_slopes.pdf}
-	\end{columns}
-	
-	\footnotesize
-	\begin{itemize}
-		\item
-			coarse resolution in X due to \SI{10}{cm} scintillators
-		\item
-			missing upper part of Y axis due to Phase 2 tests (C. Valderanis)
-		\item
-			separate segments in X due to trigger-logic
-		\item
-			not centered slope distribution 
-			
-			due to missing area (Y) and scintillator placement (X)
-	\end{itemize}
-	
-}
-
-\frame{\frametitle{Analysis 3 Step Approach\only<2,3>{ - 1. Step}\only<4>{ - 2. Step}\only<5>{ - 3. Step}}
-	\begin{itemize}
-		\item[1]
-			\only<1,4,5>{signal fit and clustering}
-			\only<2,3>{\textbf{signal fit and clustering}}
-		\item[2]
-			\only<1,2,3,5>{tracking}
-			\only<4>{\textbf{tracking}}
-		\item[3]
-			\only<1,2,3,4>{evaluation of variable distributions}
-			\only<5>{\textbf{evaluation of variable distributions}}
-	\end{itemize}
-	\footnotesize
-	\vspace{4mm}
-	
-	\only<2,3>{MM data tree}
-	
-	\only<2>{
-		$\Rightarrow$ strip data
-		\begin{itemize}
-			\item
-				check for maximum charge
-			\item
-				inverse Fermi fit
-				
-				$\Rightarrow$ discard noise
-				
-				$\Rightarrow$ evaluate timing
-			\item
-				clustering
-		\end{itemize}
-	}
-	
-	
-	\only<3>{
-		$\Rightarrow$ cluster data
-		\begin{itemize}
-			\item
-				calculate basic properties:
-				\begin{itemize}
-					\footnotesize
-					\item
-						charge sum
-					\item
-						centroid
-					\item
-						first and last signaltime
-					\item
-						charge averaged signaltime
-				\end{itemize}
-			\item
-				\textmu TPC fit
-				\begin{itemize}
-					\footnotesize
-					\item
-						time (in 25 ns) VS stripnumber (without pitch)
-					\item
-						time error from fermi fit
-					\item
-						position error \`a la Kostas
-				\end{itemize}
-		\end{itemize}
-	}		
-		
-	\only<2,3>{$\Rightarrow$ fill basic histograms and save trees to be further processed}
-	
-	\only<4>{
-		for each layer
-		\begin{itemize}
-			\item
-				select leading cluster
-			\item
-				calculate residual:
-				\begin{itemize}
-					\footnotesize
-					\item
-						evaluate CRF track at layer
-					\item	
-						transform the layer hit into the CRF coordinate system
-				\end{itemize}
-				$\Rightarrow$ residual = CT( centroid $\cdot$ pitch ) - track @ layer
-			\item
-				fill residuals as function of:
-				\begin{itemize}
-					\footnotesize
-					\item
-						reference track slope (by MDTs)
-					\item
-						position (precision and non-precision)
-					\item
-						charge averaged signaltime (separate for angles)
-				\end{itemize}
-		\end{itemize}
-	}
-	
-	\only<5>{
-		alignment
-		\begin{itemize}
-			\footnotesize
-			\item
-				shift : residual mean 
-			\item
-				rotation : residual as function of non-precision coordinate
-			\item
-				shift perpendicular to anode : 
-				
-				slope of residual VS track slope distribution
-			\item
-				other alignment parameter explained on next slides
-		\end{itemize}
-		
-		repeat step 2 and 3 until data is aligned ( $\hat{=}$ residual width minimized)
-		
-		afterwards evaluate timing , charge and efficiency
-	}
-}
-
-\section{3D Alignment}
-
-\frame{\frametitle{Concept of 3D Alignment with 1D Detector}
-	\begin{columns}
-		\column{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{CRF_tracks-crop.pdf}
-			\hspace{2mm}
-		\column{.5\textwidth}
-			\footnotesize
-			rotation matrix to describe active area
-			
-			$\mathbf{R} = 
-			\mathbf{R}_{z}(\alpha_z) \cdot \mathbf{R}_{y}(\alpha_y) \cdot \mathbf{R}_{x}(\alpha_x)$
-			
-			(in combination with detector origin $\vec{d}$)
-			
-			\vspace{3mm}
-			intersection of line with plane (at $\vec{p}$)
-			
-			$ \mathbf{R} \left[ \vec{p} - \vec{d} \right] \stackrel{!}= \vec{0} $
-			\vspace{2mm}
-			
-			$ \mathbf{R} \left[ 
-				\begin{pmatrix} m_x \\ m_y \\ 1 \end{pmatrix} \cdot z + \begin{pmatrix} t_x \\ t_y \\ 0 \end{pmatrix} - \vec{d}\; 
-			\right] \stackrel{!}= \vec{0}$
-			\vspace{2mm}
-			
-			$\Rightarrow$ z calculated for each track
-	\end{columns}
-	\vspace{6mm}
-
-	residual is calculated with respect to Y coordinate (MDT precision) 
-	\vspace{2mm}
-	
-	$\Rightarrow$ plot as function of $m_y$ to extract z position of detector
-	
-}
-
-\frame{\frametitle{Alignment using Reference Tracks}
-	\centering 
-	\textbf{Concept:}
-	\begin{columns}
-		\column{.50\textwidth}
-			\centering
-			\includegraphics[width=0.90\textwidth]{positionshift2-crop.pdf}
-		\column{.50\textwidth}
-			\centering
-			\includegraphics[width=0.90\textwidth]{verticalshift-crop.pdf}
-	\end{columns}
-	\vspace{2mm}
-	\textbf{Implementation:}
-	\begin{columns}
-		\column{.55\textwidth}
-			\centering
-			\footnotesize before alignment
-			
-			\includegraphics[width=0.75\textwidth]{resVSslope_blue.pdf}
-		\column{.45\textwidth}
-			\small
-			\textbf{residual} = pos\textsubscript{measured} - pos\textsubscript{reference}
-%					\textbf{residual} = $\mathrm{pos}_{\mathrm{measured}} - \mathrm{pos}_{\mathrm{reference}}$
-
-			\vspace{3mm}
-			$\Rightarrow$ residual vs. slope {\scriptsize(reference track)}
-	 
-	 		\vspace{3mm}
-			$\Rightarrow$ {\color{red}linear fit}
-			
-	 		\vspace{3mm}
-			shift\textsubscript{horizontal} = intercept\textsubscript{fit}
-%					$\mathrm{shift}_{\mathrm{horizontal}} = \mathrm{intercept}_{\mathrm{fit}}$
-
-			\vspace{3mm}
-			shift\textsubscript{vertical} = slope\textsubscript{fit}	
-%					$\mathrm{shift}_{\mathrm{vertical}} \;\;\; = \mathrm{slope}_{\mathrm{fit}}$
-	\end{columns}
-}
-
-\frame{\frametitle{Impact of 3D Alignment}
-	\begin{columns}
-		\column{.5\textwidth}
-			\centering
-			before
-			
-			\includegraphics[width=0.65\textwidth]{m3_ei_deltaZ_beforeAlignment.pdf}
-		\column{.5\textwidth}
-			\centering
-			after
-			
-			\includegraphics[width=0.65\textwidth]{m3_ei_deltaZ_afterAlignment_out.pdf}
-	\end{columns}
-	
-	\vspace{2mm}
-	\begin{columns}
-		\column{.5\textwidth}
-			\centering
-			rotation around strips
-			
-			\includegraphics[width=0.7\textwidth]{m3_ei_deltaZvsX_beforeAlignment.pdf}
-		\column{.5\textwidth}
-			\centering
-			\includegraphics[width=0.75\textwidth]{m3_ei_residual_beforeNafterAlignment.pdf}
-	\end{columns}
-
-	$\Rightarrow$ alignment of rotation around X and Y axis
-}
-
-\section{Stereo Reconstruction}
-
-\frame{\frametitle{Position Reconstruction with Stereo Readout}
-	\centering
-	\includegraphics<1>[width=0.8\textwidth]{stereoBoards_angleNshift-crop.pdf}
-	\includegraphics<2>[width=0.8\textwidth]{stereoBoards_angleNshift_centerNcoord-crop.pdf}
-	\vspace{2mm}
-			
-	\begin{columns}
-		\column{.5\textwidth}
-			\centering
-			\includegraphics<1>[width=0.9\textwidth]{m1_stereo_posDifVSscinX.pdf}
-			\includegraphics<2>[width=0.9\textwidth]{m1_stereo_posDifVSscinX_wCenter.pdf}
-		\column{.5\textwidth}
-			\textcolor{blue}{precision} 
-			
-			\hspace{1mm} = stereos mean / $\tan \alpha$ 
-			\vspace{1.5mm}
-						
-			\textcolor{red}{non-precision}
-			
-			\hspace{1mm} = stereos difference / 2 $/ \tan \textcolor{Brown}{\alpha}$
-			\vspace{1.5mm}
-						
-			$\Rightarrow$ \textcolor{Brown}{alignment} 
-			
-			\hspace{4.5mm} non-precision coordinate
-	\end{columns}
-}
-
-\frame{\frametitle{Stereo Residual Dependence on Track Inclination}
-	
-	\begin{columns}
-		\column{.5\textwidth}
-			\centering
-			spherical coordinates
-			
-			\includegraphics[width=0.8\textwidth]{Kugelkoord-def.pdf}
-			
-			{\tiny (image: wikipedia)}
-			
-			\vspace{5mm}
-			non-precision correction
-			\vspace{1.5mm}
-						
-			= $\dfrac{\bigtriangleup z \cdot \tan \theta \cdot \sin \phi}{2 \cdot \tan \alpha}$
-			
-		\column{.5\textwidth}
-			\centering
-			\includegraphics<1>[width=0.7\textwidth]{m1_stereo_resXvsTheta_woAddTerm_rebin.pdf}
-			\includegraphics<2>[width=0.7\textwidth]{m1_stereo_resXvsTheta_likeBF_zcor.pdf}
-						
-			\includegraphics<1>[width=0.7\textwidth]{m1_stereo_resXvsPhi_woAddTerm_rebin.pdf}
-			\includegraphics<2>[width=0.7\textwidth]{m1_stereo_resXvsPhi_likeBF_zcor.pdf}
-	\end{columns}
-}
-
-\frame{\frametitle{\large Influence of Scintillator Resolution on Stereo Layer Residual}
-	\footnotesize
-	\begin{columns}
-		\column{.5\textwidth}
-%			\centering	
-			\includegraphics[width=0.9\textwidth]{m1_si_resVSposAlongStripsByStereos_slopeX1e-2.pdf}
-			\vspace{3mm}
-			
-			scintillator information ONLY
-			
-			 $\Rightarrow$ segmentation visible
-		\column{.5\textwidth}
-%			\centering	
-			\includegraphics[width=\textwidth]{m1_si_resdiual_wNwoNewXtrack.pdf}
-			\vspace{10mm}
-			
-			improved X track by stereo information
-			
-			$\Rightarrow$ only required if module not aligned well
-	\end{columns}
-}
-
-\section{Signal Time Evaluation}
-
-\frame{\frametitle{Influence of (Online) Zerosuppression}
-	\centering	
-	\large
-	event-wise zerosuppression
-	\vspace{2mm}
-	
-	\begin{columns}
-		\column{.33\textwidth}
-			\centering	
-			\includegraphics[width=0.85\textwidth]{m3_ei_hits_550V_1201.pdf}
-		\column{.33\textwidth}
-			\centering	
-			\includegraphics[width=0.85\textwidth]{m6_eo_chargeVSsignalSTDV_oldZeroSup.pdf}
-		\column{.33\textwidth}
-			\centering	
-			\includegraphics[width=0.85\textwidth]{m6_ei_risetimeVScharge_550V_1201.pdf}
-	\end{columns}
-	
-	\vspace{2mm}
-	pedestal by rawdata
-	\vspace{2mm}
-	
-	\begin{columns}
-		\column{.33\textwidth}
-			\centering	
-			\includegraphics[width=0.85\textwidth]{m3_ei_hits_560V_1401.pdf}
-		\column{.33\textwidth}
-			\centering	
-			\includegraphics[width=0.85\textwidth]{m6_eo_chargeVSsignalSTDV_pedestalFile.pdf}
-		\column{.33\textwidth}
-			\centering	
-			\includegraphics[width=0.85\textwidth]{m6_ei_risetimeVScharge_560V_1401.pdf}
-	\end{columns}
-}
-
-\frame{\frametitle{Strip Time Spectra for Ar:CO$_{2}$ 93:7 vol\% @ $U_{\mathrm{drift}} = $\SI{300}{V}}
-%		\column{.5\textwidth}
-%			\centering
-%			single strip signal
-%			
-%			\includegraphics[width=0.75\textwidth]{pulseheight_differentSignaltimes.pdf}
-	
-	\begin{columns}
-		\column{.33\textwidth}
-			\centering
-			inflection
-			
-			\includegraphics[width=\textwidth]{m1_ei_stripTime_firstNlast_20180601_turntime_wDifferences.pdf}
-			
-			\includegraphics[width=0.8\textwidth]{m1_ei_timeDifVsangle_20180601_turntime.pdf}
-		\column{.33\textwidth}
-			\centering
-			baseline
-			
-			\includegraphics[width=\textwidth]{m1_ei_stripTime_firstNlast_20180601_wFWHM_wMaxDist.pdf}
-			
-			\includegraphics[width=0.8\textwidth]{m1_ei_timeDifVsangle_20180601.pdf}
-		\column{.33\textwidth}
-			\centering
-			maximum
-			
-			\includegraphics[width=\textwidth]{m1_ei_stripTime_firstNlast_20180601_up_differences.pdf}
-			
-			\includegraphics[width=0.8\textwidth]{m1_ei_timeDifVsangle_20180601_up.pdf}
-	\end{columns}
-	
-}
-
-\frame{\frametitle{\textmu TPC Angle Reconstruction (nominal $v_{\mathrm{drift}}$)}
-	
-	\begin{columns}
-		\column{.33\textwidth}
-			\centering
-			inflection
-			
-			\includegraphics[width=0.9\textwidth]{m1_ei_uTPCangleVSangle_20180601_turntime.pdf}
-		\column{.33\textwidth}
-			\centering
-			baseline
-			
-			\includegraphics[width=0.9\textwidth]{m1_ei_uTPCangleVSangle_20180601.pdf}
-		\column{.33\textwidth}
-			\centering
-			maximum
-			
-			\includegraphics[width=0.9\textwidth]{m1_ei_uTPCangleVSangle_20180601_uptime.pdf}
-	\end{columns}
-		
-	\vspace{5mm}
-	\begin{columns}
-		\column{.33\textwidth}
-			\centering
-			\footnotesize
-			reference angle $\in $ [ \SI{20}{\degree} , \SI{22}{\degree} ]
-			
-			\includegraphics[width=\textwidth]{m1_ei_uTPCangle_20-22degree_20180601_differentSignaltimes.pdf}
-		\column{.33\textwidth}
-			\centering
-			most probable value
-			
-			\includegraphics[width=\textwidth]{m1_ei_20180601_uTPCangleMPVvsAngle_differentSignaltimes.pdf}
-		\column{.33\textwidth}
-			\centering
-			width
-			
-			\includegraphics[width=\textwidth]{m1_ei_20180601_uTPCangleWidthVSangle_differentSignaltimes.pdf}
-	\end{columns}
-}
+\section{Noise Study with preliminary APV25 Electronics}
 
 \frame{
+	\Huge
+	\centering
+	Noise Study \\ with preliminary \\ APV25 Electronics
+}
+
+\frame{\frametitle{Intrinsic APV Noise}
+	\centering
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			event-wise zero-suppression
+		\column{.5\textwidth}
+			\centering
+			averaged sigma (10k trigger)
+	\end{columns}
 	
-	code can be found at:
+	hit APV channel
+
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{FEC0_APVchannel_eventwise.pdf}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{FEC0_APVchannel_wPedestal.pdf}
+	\end{columns}
 	
-	https://github.com/Harsger/analysis
+	\vspace{2mm}
+	hit distribution
 	
-	\vspace{10mm}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.6\textwidth]{m3_ei_hits_550V_1201.pdf}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.6\textwidth]{m3_ei_hits_560V_1401.pdf}
+			\vspace{1mm}
+	\end{columns}
 	
-	talk on last muon week
+}
+
+\frame{\frametitle{Influence of APV Noise on Efficiency (M7 eta layers)}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			eta out
+			
+			\includegraphics[width=0.75\textwidth]{m7_eo_sigmas_perAPV.pdf}
+			\only<1>{\vspace{-2mm}}
+			\only<2>{\vspace{2mm}}
+			
+			\includegraphics<1>[width=0.75\textwidth,angle=-90]{m7_eo_570V_5mmEffi.pdf}
+			\includegraphics<2>[width=0.75\textwidth]{m7_eo_570V_5mmEffi_perAPV.pdf}
+		\column{.5\textwidth}
+			\centering
+			eta in
+			
+			\includegraphics[width=0.75\textwidth]{m7_ei_sigmas_perAPV.pdf}
+			\only<1>{\vspace{-2mm}}
+			\only<2>{\vspace{2mm}}
+			
+			\includegraphics<1>[width=0.75\textwidth,angle=-90]{m7_ei_570V_5mmEffi.pdf}
+			\includegraphics<2>[width=0.75\textwidth]{m7_ei_570V_5mmEffi_perAPV.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{Influence of APV Noise on Efficiency (M7 stereo layers)}
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			stereo out
+			
+			\includegraphics[width=0.75\textwidth]{m7_so_sigmas_perAPV.pdf}
+			\only<1>{\vspace{-2mm}}
+			\only<2>{\vspace{2mm}}
+			
+			\includegraphics<1>[width=0.75\textwidth,angle=-90]{m7_so_570V_5mmEffi.pdf}
+			\includegraphics<2>[width=0.75\textwidth]{m7_so_570V_5mmEffi_perAPV.pdf}
+		\column{.5\textwidth}
+			\centering
+			stereo in
+			
+			\includegraphics[width=0.75\textwidth]{m7_si_sigmas_perAPV.pdf}
+			\only<1>{\vspace{-2mm}}
+			\only<2>{\vspace{2mm}}
+			
+			\includegraphics<1>[width=0.75\textwidth,angle=-90]{m7_si_570V_5mmEffi.pdf}
+			\includegraphics<2>[width=0.75\textwidth]{m7_si_570V_5mmEffi_perAPV.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{Correlation of APV Sigma and Efficiency}
+	\centering
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			etas
+		\column{.5\textwidth}
+			\centering
+			stereos
+	\end{columns}
 	
-	\tiny
-	https://indico.cern.ch/event/763166/contributions/3179490/attachments/1741327/2817416/SM2inCRF\_MH\_MuonWeekOct18.pdf
+	mean sigma per APV
 	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{m7_etas_sigmaVSeffi_570V_ped2019-01-26.pdf}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{m7_stereos_sigmaVSeffi_570V_ped2019-01-26.pdf}
+	\end{columns}
+	
+	variation of sigmas per APV
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{m7_etas_sigmaVarVSeffi_570V_ped2019-01-26.pdf}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.8\textwidth]{m7_stereos_sigmaVarVSeffi_570V_ped2019-01-26.pdf}
+	\end{columns}
+}
+
+\section{Reconstruction of Readout Board Alignment} 
+
+\frame{
+	\Huge
+	\centering
+	Reconstruction of \\ Readout Board Alignment
+}
+
+\frame{\frametitle{\large Comparison of \textbf{Cosmic} \hspace{10mm} and \hspace{10mm} \textbf{Rasfork} Measurements}
+	\begin{textblock*}{1.8cm}(5.8cm,6.9cm)
+		\textbf{\centering \!\!compare \\$\Longleftrightarrow$\\ alignment}
+	\end{textblock*}
+	\small
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			centroid residual VS angle 
+			
+			\includegraphics[width=0.65\textwidth]{m1_ei_resVSangle.pdf}	
+			
+			centroid resolution VS angle
+					
+			\includegraphics[width=0.65\textwidth]{m1_resolutionVSangle_eoNei.pdf}
+			
+			$\Rightarrow$ good resolution achievable
+		\column{.5\textwidth}
+			\centering	
+			rasfork setup
+			
+			\includegraphics[width=0.5\textwidth]{sacleyNov2017_raskfork.JPG}
+			
+			shifts between sides of eta3
+			
+			\includegraphics[width=0.8\textwidth]{RS2E00003_GluingSide1_plot.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{\normalsize Residual Mean VS Position Along Strips for Eta3}
+	\begin{textblock*}{3cm}(5.7cm,2.3cm)
+		\only<2>{
+			\begin{mdframed}[backgroundcolor=white]\textbf{0.03 $\;\;\;$ 0.01}\end{mdframed}
+		}
+	\end{textblock*}
+	
+	\begin{textblock*}{3cm}(5.7cm,5.2cm)
+		\only<2>{
+			\begin{mdframed}[backgroundcolor=white]\textbf{0.09 $\;\;\;$ -0.06}\end{mdframed}
+		}
+	\end{textblock*}
+		
+	\begin{textblock*}{3cm}(6.2cm,8.1cm)
+		\only<2>{
+			\begin{mdframed}[backgroundcolor=white]\textbf{-0.06 $\;\;\;$ 0.00}\end{mdframed}
+		}
+	\end{textblock*}
+	
+	\begin{columns}
+		\column{.3\textwidth}
+			\centering
+			M3 - 08.2018
+		\column{.3\textwidth}
+			\centering
+			M3 - 09.2018
+		\column{.3\textwidth}
+			\centering
+			Doublet - 12.2018
+	\end{columns}
+	\vspace{2mm}
+
+	\begin{columns}
+		\column{.4\textwidth}
+			\centering
+			\rotatebox{90}{board 8}
+			\includegraphics[width=0.75\textwidth]{m3_board8_etas_resMeanVSscinX_distance.pdf}
+			
+			\rotatebox{90}{board 7}
+			\includegraphics[width=0.75\textwidth]{m3_board7_etas_resMeanVSscinX_distance.pdf}
+			
+			\rotatebox{90}{board 6}
+			\includegraphics[width=0.75\textwidth]{m3_board6_etas_resMeanVSscinX_distance.pdf}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{m3_board8_etas_resMeanVSscinX_2019-09_distance.pdf}
+			
+			\includegraphics[width=\textwidth]{m3_board7_etas_resMeanVSscinX_2019-09_distance.pdf}
+			
+			\includegraphics[width=\textwidth]{m3_board6_etas_resMeanVSscinX_2019-09_distance.pdf}
+		\column{.3\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{eta3_resMeanVSscinX_board8_distance.pdf}
+			
+			\includegraphics[width=\textwidth]{eta3_resMeanVSscinX_board7_distance.pdf}
+			
+			\includegraphics[width=\textwidth]{eta3_resMeanVSscinX_board6_distance.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{Residual Per Partition}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			eta out
+			
+			\includegraphics[width=0.7\textwidth]{m3_eo_deltaYperPart_2019-09.pdf}
+		\column{.5\textwidth}
+			\centering
+			eta in
+			
+			\includegraphics[width=0.7\textwidth]{m3_ei_deltaYperPart_2019-09.pdf}
+	\end{columns}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics<1>[width=0.85\textwidth]{m3_etas_resMeanVSapvY_left_2019-09.pdf}
+			\includegraphics<2>[width=0.85\textwidth]{m3_etas_resMeanVSapvY_left_2019-09_distances.pdf}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics<1>[width=0.85\textwidth]{m3_etas_resMeanVSapvY_right_2019-09.pdf}
+			\includegraphics<2>[width=0.85\textwidth]{m3_etas_resMeanVSapvY_right_2019-09_distances.pdf}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Comparison with each Marker (in \SI{10}{\micro\m})}
+\centering
+	\begin{tabular}{ccccc}
+		board & \multicolumn{2}{c}{left} & \multicolumn{2}{c}{right}
+		\\
+		 & rasfork & cosmics & rasfork & cosmics
+		\\
+		\hline
+		 & 3 & 4 & 1 & 5
+		\\
+		8 & 3 & 3 & 1 & 5
+		\\
+		 & 4 & 3 & -1 & 6
+ 		\\
+ 		\hline
+		 & 9 & 1 & -5 & 7
+ 		\\
+ 		7 & 9 & -4 & -6 & 6
+ 		\\
+		 & 9 & -6 & -6 & 6
+ 		\\
+ 		\hline
+		 & -6 & 8 & 0 & 7
+ 		\\
+ 		6 & -6 & 6 & 0 & 10
+ 		\\
+		 & -6 & 11 & 0 & 11
+	\end{tabular}
+	
+	\vspace{3mm}
+	
+	$\Rightarrow$ no correlation observable
+	
+	crucial impact of strip shape on reconstruction 
+}
+
+\section{Ar:CO$_{2}$ Gas Mixture Studies} 
+
+\frame{
+	\Huge
+	\centering
+	Ar:CO$_{2}$ Gas Mixture Studies
+}
+
+\frame{\frametitle{Comparison of Pulse Height and Efficiency}
+	\centering
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			Ar:CO$_{2}$ 93:7 vol\%
+		\column{.5\textwidth}
+			\centering	
+			Ar:CO$_{2}$ 80:20 vol\%
+	\end{columns}
+	\vspace{2mm}
+	
+	MPV cluster charge (not same scale!)
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{eta3_93-7_ampScan_MPVclusterQ.pdf}
+		\column{.5\textwidth}
+			\centering	
+			\includegraphics[width=0.75\textwidth]{eta3_80-20_ampScan_MPVclusterQ.pdf}
+	\end{columns}
+	\vspace{2mm}
+	
+	coincidence efficiency
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{eta3_93-7_ampScan_coinNextEffi.pdf}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.75\textwidth]{eta3_80-20_ampScan_coinNextEffi.pdf}
+	\end{columns}
+}
+
+\frame{\frametitle{Comparison of Position and Time Resolution}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			residual distributions
+			
+			\includegraphics[width=0.8\textwidth]{eta3_residuals_gasMixNvoltages_allStats.pdf}
+			\vspace{10mm}
+			
+			$\Rightarrow$ comparable residuals for both mixtures and drift voltages
+			\vspace{5mm}
+			
+			$\Rightarrow$ better time resolution for 80:20
+		\column{.5\textwidth}
+			\centering
+			\textbf{first strip time}
+			
+			Ar:CO$_{2}$ 93:7 vol\%
+			
+			\includegraphics[width=0.8\textwidth]{m3_eo_fastestTime_driftScan_allStats.pdf}
+			
+			Ar:CO$_{2}$ 80:20 vol\%
+						
+			\includegraphics[width=0.8\textwidth]{etaBot_firstTime_driftScan.pdf}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{Summary}
+	\footnotesize
+	\begin{itemize}
+		\item
+			noise of preliminary APV electronics limits efficiency
+			
+			$\Rightarrow$ improve grounding for next measurements
+			
+			\vspace{4mm}
+		\item
+			no concluding comparison of alignment measurements
+			
+			$\Rightarrow$ more statics will improve understanding of systematics
+						
+			\vspace{4mm}
+		\item
+			very good behavior with different gas mixture of Ar:CO$_{2}$ 80:20 vol\%
+			
+			$\Rightarrow$ resolution (position and time) has to be further investigated
+	\end{itemize}
 }
 
 \appendix
 
 \frame{\centering \Huge Backup}
 
-\frame{\frametitle{Recapitulation \textmu TPC Formulas}
-	\centering
-	\includegraphics[width=0.7\textwidth]{timeVSstrip_meshNcathodeNstrips_fitNtimeNangle.pdf}
+\frame{\frametitle{CRF systematics}
+
+	systematics due to different placement in CRF
 			
-	\begin{itemize}
-		\item
-			angle reconstruction: 
-			{\boldmath$\textcolor{Plum}{\theta}$}$\; = \arctan \left( \tfrac{\mathrm{pitch}}{\textcolor{red}{\mathrm{slope}} \;\cdot\; v_{\mathrm{drift}}\;\cdot\;25 \mathrm{ns}} \right)$
-			
-			\vspace{3mm}
-		\item
-			position reconstruction:
-			$
-			\mathrm{pos}_{\mu\mathrm{TPC}}
-			=
-			\dfrac{\textcolor{Cyan}{t_{\mathrm{mid}}} - \textcolor{red}{\mathrm{intercept}}}{\textcolor{red}{\mathrm{slope}}}
-			\cdot \textcolor{brown}{\mathrm{pitch}}
-			$
-	\end{itemize}
-	
-}
-
-\frame{\frametitle{Determination of $t_{\mathrm{mid}}$ via Residual Dependence}
-	\centering
-	\textmu TPC residual VS $1 /\!$ slope ($\propto \tan(\theta)$)
-	\vspace{2mm}
-	
-	\begin{columns}
-		\column{.5\textwidth}
-			\centering
-			\includegraphics[width=0.8\textwidth]{m1_ei_uTPCresVSuTPCslope_0601_logz.pdf}
-		\column{.5\textwidth}
-			\centering
-			\includegraphics[width=0.8\textwidth]{m1_ei_uTPCresVSuTPCslope_0601_zoom.pdf}
-	\end{columns}
-	\vspace{4mm}
-	
-	$\mathrm{residual} = \dfrac{t_{\mathrm{mid}} - \mathrm{intercept}}{\mathrm{slope}} \cdot \mathrm{pitch}\; - \mathrm{reference}$
-}
-
-\frame{\frametitle{Concept for Charge Weighted Timing Reconstruction}
-
-	\centering
-	\includegraphics<1,2>[width=0.5\textwidth]{inhomogeneousIonization_bE_cNm_timeNcentroidShift_deltaXnTnAngle.pdf}
-	
-	\only<1>{
-		\vspace{4mm}
-		\begin{tabular}{ccccc}
-			$\bigtriangleup x$ & = & $\bigtriangleup z$ & $\cdot$ & $\tan \theta$
-			\\
-			 & & & &
-			\\
-			 & = & $( t_{\mathrm{c}} - t_{\mathrm{mid}} ) \cdot v_{\mathrm{drift}}$ &  $\cdot$ & $\mathrm{slope}_{\mathrm{ref}}$
-		\end{tabular}
-	}
-	\only<2>{
-		\vspace{4mm}
-		\begin{tabular}{ccccc}
-			$\mathrm{centroid}$ & = & $\sum\limits_{\scriptscriptstyle\mathrm{strips}} \mathrm{strip} \cdot q_{\scriptscriptstyle\mathrm{strip}}$ & $/$ & $\sum\limits_{\scriptscriptstyle\mathrm{strips}} q_{\scriptscriptstyle\mathrm{strip}}$
-			\\
-			 & & & &
-			\\
-			$t_{\mathrm{c}}$ & = & $\sum\limits_{\scriptscriptstyle\mathrm{strips}} t_{\scriptscriptstyle\mathrm{strip}} \cdot q_{\scriptscriptstyle\mathrm{strip}}$ &  $/$ & $\sum\limits_{\scriptscriptstyle\mathrm{strips}} q_{\scriptscriptstyle\mathrm{strip}}$
-		\end{tabular}
-	}
-			
-}
-
-\frame{\frametitle{Residual Dependence on Charge Averaged Clustertime}
-	
-	\begin{columns}
-		\column{.5\textwidth}
-			\centering
-			$\mathrm{angle}_{\mathrm{ref}} = -26.4^{\circ}$
-						
-			$\mathrm{slope}_{\mathrm{ref}} = -0.46$
-			\vspace{2.5mm}
-			
-			\includegraphics[width=0.72\textwidth]{m3_ei_C150V_resVSclutime_slope-dot46.pdf}
-		\column{.5\textwidth}
-			\centering
-			fitted correlation VS $\mathrm{slope}_{\mathrm{ref}}$
-			\vspace{5mm}
-			
-			\includegraphics[width=\textwidth]{m3_ei_driftScan_slopeFitresVSclutime.pdf}
-	\end{columns}
-	\vspace{4mm}
-	
-	\centering
-	
-	$\bigtriangleup x = ( t_{\mathrm{c}} - t_{\mathrm{mid}} ) \cdot v_{\mathrm{drift}} \cdot \mathrm{slope}_{\mathrm{ref}}$
-	
-	\vspace{3mm}
-	
-	$\Rightarrow v_{\mathrm{drift}} = \dfrac{\bigtriangleup x}{( t_{\mathrm{c}} - t_{\mathrm{mid}} )}\;\; / \;\; \mathrm{slope}_{\mathrm{ref}}$
-}
-
-\frame{\frametitle{\large Resolution with Charge Averaged Clustertime Correction}
-	
-	\begin{columns}
-		\column{.5\textwidth}
-			\centering
-			\includegraphics[width=0.9\textwidth]{m1_ei_allResolutionsVSangle_20180601.pdf}
-		\column{.5\textwidth}
-			\centering
-			\includegraphics[width=\textwidth]{m3_driftVelocitiesFromCTCnSimulation.pdf}
-	\end{columns}
-	
-	\vspace{4mm}
-	\small
-	
-	improvement of centroid resolution for large angles
-	
-	$\Rightarrow$ better resolution expected (see Bernhard's Thesis)
-	\vspace{4mm}
-	
-	reconstruction of drift velocities fails
-	
-	$\Rightarrow$ systematics can not yet be excluded
-}
-
-\frame{\frametitle{Influence of Multiple Scattering}
-	\footnotesize
-	
-	\begin{columns}
-		\column{.50\textwidth}
-			\centering
-			MDT residual width VS angle
-						
-			\includegraphics[width=0.8\textwidth]{MDTresidualVSangle_slopeDifCuts.pdf}
-		\column{.50\textwidth}
-			\centering
-			MDT residual perpendicular incident
-						
-			\includegraphics[width=0.8\textwidth]{MDTresidual_slopeDifCuts.pdf}
-	\end{columns}
-	\vspace{3mm}
-		
-	\begin{columns}
-		\column{.50\textwidth}
-			\centering
-			Module 0 residual narrow width VS angle
-						
-			\includegraphics[width=0.8\textwidth]{SM2-M0_CRFafterH8_eta-out_residualVSangle_slopeDifCuts.pdf}
-		\column{.50\textwidth}
-			\centering
-			Module 0 residual perpendicular incident
-						
-			\includegraphics[width=0.8\textwidth]{SM2-M0_CRFafterH8_eta-out_residual_cutsMDTslopeDif.pdf}
-	\end{columns}
-}
-
-\frame{\frametitle{Usage of Multiple Scattering - Muon Tomography (L1)}
-
-	\begin{columns}
-		\column{.50\textwidth}
-			\centering
-			\includegraphics[width=0.85\textwidth]{trackIntercept_yz_3e-2_1e-1_blackWhite.pdf}
-		\column{.50\textwidth}
-			\centering
-			\includegraphics[width=0.7\textwidth]{CRFmounTomography_yz-crop.pdf}
-	\end{columns}
-	
-	\begin{columns}
-		\column{.50\textwidth}
-			\centering
-			\includegraphics[width=0.9\textwidth]{scatteredFraction_xy_blackWhite.pdf}
-		\column{.50\textwidth}
-			\centering
-			\includegraphics[width=0.9\textwidth]{L1inCRF_muonTomoTop-crop.pdf}
-	\end{columns}
-	
-}
-
-\frame{\frametitle{\large Correction due to Capacitive Coupling of Neighboring Strips}
-
-	charge spread due to capacitive coupling between resistive/readout strips
-	
-	\vspace{3mm}
-	
-	\begin{columns}
-		\column{.50\textwidth}
-			\centering
-			\textbf{concept} \hspace{8mm}
-			
-			\includegraphics[width=0.9\textwidth]{capacitiveCoupling_withResStrips_smallQ.png}
-		\column{.50\textwidth}
-			\centering
-			\textbf{simulation} \hspace{9mm}
-			\vspace{3mm}
-			
-			\includegraphics[width=0.9\textwidth]{capacitveCoupling_circuit_simulation.png}
-	\end{columns}
+	$\Rightarrow$ investigate effect of CRF tracks
 	
 	\vspace{5mm}
-	
-	\textbf{implementation}
-	
-	\vspace{1mm}
-	
-	\footnotesize
-		
-	\textbf{loop} strips in cluster
-	
-	\hspace{3mm} \textbf{loop} timebins from signalstart to maximum
-	
-	\hspace{3mm} \hspace{3mm} \textbf{loop} neighbors from 1 to 3
-	
-	\hspace{3mm} \hspace{3mm} \hspace{3mm} neighbor charge \hspace{5mm} - 0.29$^n$ central strip charge
-	
-	\hspace{3mm} \hspace{3mm} \hspace{3mm} central strip charge + 0.29$^n$ central strip charge
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			during M3
+			
+			\includegraphics[width=\textwidth]{CRF_MDTdiffVSscinX_perBoard_2019-09.pdf}
+		\column{.5\textwidth}
+			\centering
+			during Doublet
+			
+			\includegraphics[width=\textwidth]{CRF_meanDifferenceMDTsVSscinX_perBoard.pdf}
+	\end{columns}
 	
 }
 
-\frame{\frametitle{Impact of Capacitive Coupling Correction}
+\frame{\frametitle{\large Influence of Multiple Scattering on MDT Track Prediction}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			MDT difference VS angle
+		\column{.5\textwidth}
+			\centering
+			MDT difference, angle $\in$ [ \SI{0}{\degree} , \SI{2}{\degree} ]
+	\end{columns}
+	\vspace{1mm}
+	
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.65\textwidth]{m1_MDTinterceptDifVSangle_at-ei.pdf}
+		\column{.5\textwidth}
+			\centering
+			\includegraphics[width=0.85\textwidth]{m1_MDTinterceptDif_nearZero_at-ei.pdf}
+	\end{columns}
+	\vspace{1mm}
+		
+	\begin{columns}
+		\column{.5\textwidth}
+			\centering
+			
+			\includegraphics[width=0.8\textwidth]{MDTresidualVSangle_slopeDifCuts.pdf}
+		\column{.5\textwidth}
+			\centering
+			
+			\includegraphics[width=0.85\textwidth]{MDTresidual_slopeDifCuts.pdf}
+	\end{columns}
+	
+}
+
+\frame{\frametitle{\small Reconstruction of Readout Board Alignment (Single Layer, example M0 - eta in)}
 
 	\begin{columns}
 		\column{.5\textwidth}
 			\centering
-			reference angle $\in$ $[ 20^{\circ} , 22^{\circ} ]$
+			without correction
 			
-			\includegraphics[width=0.85\textwidth]{m1_ei_uTPCangle_20to22degree_20180601_CCCscan.pdf}
-			
-			\textmu TPC position resolution
-			
-			\includegraphics[width=0.85\textwidth]{m1_ei_uTPCresolutionVSrefAngle_20180601_CCCscan.pdf}
+			\includegraphics[width=0.9\textwidth]{eta_in_resMeanVSmdtY_woAdapterBoard_wCorPitch_wCenter.png}
+		
+			\includegraphics[angle=-90,width=0.5\textwidth]{ROboardsAligned1_wRingsNlines-crop.pdf}
+			\vspace{3mm}
 		\column{.5\textwidth}
 			\centering
+			pitch deviation considered
 			
-			\textmu TPC angular resolution
+			\vspace{-0.3mm}
+			\includegraphics[width=0.9\textwidth]{eta_in_resMeanVSmdtY_wNewPitchCor_shifts.pdf}
 			
-			\includegraphics[width=0.8\textwidth]{m1_ei_uTPCangleWidthVSrefAngle_20180601_CCCscan.pdf}
-			
-			residual dependence on clustertime
-			
-			\includegraphics[width=0.85\textwidth]{m1_ei_uTPCresVSclutimeSlope_20180601_CCCscan_better.pdf}
+			\includegraphics[width=0.8\textwidth]{boardPitchDeviation_wLinesNdesNarrows-crop.pdf}
+			\vspace{5.5mm}
 	\end{columns}
 	
 }
