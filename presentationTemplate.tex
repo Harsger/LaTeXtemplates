@@ -1,0 +1,400 @@
+\documentclass[
+    usenames,
+    dvipsnames,
+    %aspectratio=169
+]{beamer}
+
+\usetheme{Madrid}
+\usecolortheme{spruce}
+\definecolor{green(pigment)}{rgb}{0.0, 0.65, 0.31}
+\setbeamercolor*{item}{fg=green(pigment)}
+\definecolor{Red}{rgb}{1.00, 0.00, 0.00}
+\definecolor{Green}{rgb}{0.00, 1.00, 0.00}
+\definecolor{Blue}{rgb}{0.00, 0.00, 1.00}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[german]{babel}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{textcomp}
+\usepackage{multirow}
+\usepackage{siunitx}
+\usepackage{appendixnumberbeamer}
+\usepackage{hyperref}
+\usepackage{mdframed}
+\usepackage{xcolor}
+\usepackage{transparent}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{xstring}
+\usepackage{tikz}
+\beamertemplatenavigationsymbolsempty
+
+\newcommand{\hidecontent}[2][0.25]{
+    {
+        \setbox9=\hbox{#2}
+        \transparent{#1}
+        \ooalign{\usebox9\cr\color{white}\rule{\wd9}{\ht9}\cr}
+    }
+}
+
+\graphicspath{
+    {../pictures/}
+}
+\begin{document}
+\title[Short Title]{Long Title \\ with addendum}  
+\author[M. Herrmann]{Maximilian Herrmann}
+\institute[Acronyms]{Institute, Working Group}
+\date[\today]{\today, Location \\ Ocassion Event} 
+
+\frame{\titlepage
+    \centering 
+    \vspace{-2mm}
+    
+    \includegraphics[width=0.3\textwidth]{example-image-golden}
+    
+    \includegraphics[width=0.15\textwidth]{example-image-a}
+    \hspace{8.3cm}
+    \includegraphics[width=0.15\textwidth]{example-image-b}
+}
+
+\section{Picture Arrangements}
+
+\subsection{Classic Style}
+
+\frame{\frametitle{Picture with Bullet Points}
+    \centering
+    
+    \begin{columns}                                                   
+        \column{.6\textwidth}
+            \centering
+            \includegraphics[width=0.95\textwidth]{example-image-1x1}   
+        \column{.4\textwidth}                                                  
+            \centering
+            \begin{itemize}
+                \item
+                    first major point
+                \item
+                    second major point
+                    \vspace{2mm}
+                \item
+                    third major point
+                    
+                    \begin{itemize}
+                        \item[\textcolor{black}{\textbullet}]
+                            sub-point a
+                        \item[\textcolor{red}{$\blacktriangle$}]
+                            sub-point b
+                        \item[\textcolor{blue}{$\blacktriangledown$}]
+                            sub-point c
+                    \end{itemize}
+                    
+                    \vspace{2mm}
+                \item
+                    fourth major point
+            \end{itemize}  
+    \end{columns}
+}
+
+\subsection{Wide Style}
+
+\frame{\frametitle{Wide Picture with Bullet Points}
+    \centering
+    \vspace{2mm}
+    
+    \includegraphics[width=0.7\textwidth]{example-image-16x9}
+    \vspace{3mm}
+    
+    \begin{itemize}
+        \item
+            first major point can have longer text
+        \item
+            second major point can also have longer text
+        \item
+            third major point should not be exceeded due to length
+    \end{itemize}  
+}
+
+\subsection{Normal Grid}
+
+\frame{\frametitle{2$\times$2 Grid of Pictures with Headlines}
+    \centering
+    \newcommand{\pictureWidth}{0.6}
+    
+    \begin{columns}
+        \column{.02\textwidth}
+        \column{.49\textwidth}
+            \centering
+            Column A
+        \column{.49\textwidth}
+            \centering
+            Column B
+    \end{columns}
+    
+    \vspace{4mm}
+    
+    \begin{columns}
+        \column{.02\textwidth}
+            \rotatebox[origin=c]{90}{Row 1}
+        \column{.49\textwidth}
+            \centering
+            \includegraphics[width=\pictureWidth\textwidth]
+                {example-image-16x9}
+        \column{.49\textwidth}
+            \centering
+            \includegraphics[width=\pictureWidth\textwidth]{example-image}
+    \end{columns}
+    
+    \vspace{2mm}
+    
+    \begin{columns}
+        \column{.02\textwidth}
+            \rotatebox[origin=c]{90}{Row 2}
+        \column{.49\textwidth}
+            \centering
+            \includegraphics[width=\pictureWidth\textwidth]{example-image}
+        \column{.49\textwidth}
+            \centering
+            \includegraphics[width=\pictureWidth\textwidth]
+                {example-image-1x1}
+    \end{columns}
+    
+}
+
+\frame{\frametitle{2$\times$2 Grid of Pictures without Headlines}
+    \centering
+    \newcommand{\pictureWidth}{0.7}
+    
+    \begin{columns}
+        \column{.5\textwidth}
+            \centering
+            \includegraphics[width=\pictureWidth\textwidth]
+                {example-image-16x9}
+        \column{.5\textwidth}
+            \centering
+            \includegraphics[width=\pictureWidth\textwidth]{example-image}
+    \end{columns}
+    
+    \vspace{4mm}
+    
+    \begin{columns}
+        \column{.5\textwidth}
+            \centering
+            \includegraphics[width=\pictureWidth\textwidth]{example-image}
+        \column{.5\textwidth}
+            \centering
+            \includegraphics[width=\pictureWidth\textwidth]
+                {example-image-1x1}
+    \end{columns}
+    
+}
+
+\subsection{Large Grid}
+
+\frame{\frametitle{3$\times$3 Grid of Pictures with Headlines}
+    \scriptsize
+    \centering
+    \newcommand{\pictureWidth}{0.6}
+    
+    \begin{columns}
+        \column{.01\textwidth}
+        \column{.33\textwidth}
+            \centering
+            Column A
+        \column{.33\textwidth}
+            \centering
+            Column B
+        \column{.33\textwidth}
+            \centering
+            Column C
+    \end{columns}
+    
+    \vspace{4mm}
+    
+    \begin{columns}
+        \column{.01\textwidth}
+            \rotatebox[origin=c]{90}{Row 1}
+        \column{.33\textwidth}
+            \centering
+            \includegraphics[width=\pictureWidth\textwidth]{example-image-a}
+        \column{.33\textwidth}
+            \centering
+            \includegraphics[width=\pictureWidth\textwidth]{example-image-b}
+        \column{.33\textwidth}
+            \centering
+            \includegraphics[width=\pictureWidth\textwidth]{example-image-c}
+    \end{columns}
+    
+    \vspace{2mm}
+    
+    \begin{columns}
+        \column{.01\textwidth}
+            \rotatebox[origin=c]{90}{Row 2}
+        \column{.33\textwidth}
+            \centering
+            \includegraphics[width=\pictureWidth\textwidth]
+                {example-image-1x1}
+        \column{.33\textwidth}
+            \centering
+            \includegraphics[width=\pictureWidth\textwidth]{example-image}
+        \column{.33\textwidth}
+            \centering
+            \includegraphics[width=\pictureWidth\textwidth]{example-image}
+    \end{columns}
+    
+    \vspace{2mm}
+    
+    \begin{columns}
+        \column{.01\textwidth}
+            \rotatebox[origin=c]{90}{Row 3}
+        \column{.33\textwidth}
+            \centering
+            \includegraphics[width=\pictureWidth\textwidth]{example-image}
+        \column{.33\textwidth}
+            \centering
+            \includegraphics[width=\pictureWidth\textwidth]{example-image}
+        \column{.33\textwidth}
+            \centering
+            \includegraphics[width=\pictureWidth\textwidth]
+                {example-image-16x10}
+    \end{columns}
+    
+}
+
+\section{Table}
+
+\frame{\frametitle{Table}
+    \centering
+    
+    \addtolength{\tabcolsep}{-3.5pt}
+    \begin{tabular}{llccc}
+        \hline
+        \hline
+        \multicolumn{2}{c}{\multirow{2}*{\textbf{A}}} 
+            & \multicolumn{3}{c}{\textbf{B}} \\
+        \cline{3-5}
+        \multicolumn{2}{c}{} & B & B & B \\
+        \hline
+        \multirow{2}*{\textbf{a}} 
+          & \multirow{2}*{\textbf{a}} 
+                             & b & b & b \\
+          &                  & b & b & b \\
+        a & a                & b & b & b \\
+        a & a                & b & b & b \\
+        \hline
+        \hline
+    \end{tabular}
+    \addtolength{\tabcolsep}{3.5pt}
+    
+}
+
+\section{Iteration}
+
+\foreach \imageName in {a,b}
+{
+
+\subsection{\imageName}
+
+\newcommand{\modeString}{no mode}
+\ifdefstring{\modeString}{no mode}{\ifdefstring{\imageName}{a}{\renewcommand{\modeString}{A}}{}}{}
+\ifdefstring{\modeString}{no mode}{\ifdefstring{\imageName}{b}{\renewcommand{\modeString}{B}}{}}{}
+
+\frame{\frametitle{Picture with Large Letter \modeString}
+    \centering
+    
+    \begin{columns}                                                   
+        \column{.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{example-image-\imageName}
+        \column{.5\textwidth}
+            \centering
+            \Huge \modeString
+    \end{columns}
+}
+
+}
+
+\section{Overlays}
+
+\frame{
+        \frametitle{First\only<1>{\hidecontent{ - Second}}\only<2->{ - Second}\only<1,2>{\hidecontent{ - Third}}\only<3->{ - Third}}
+
+        \only<2>{
+            \begin{textblock*}{5cm}(3.65cm,1.26cm) 
+                \begin{tikzpicture}
+                    \draw[red,-,line width=0.5mm] 
+                        (0.8,1.4) rectangle (1.6,1.8);
+                    \draw[red,-,line width=0.5mm] (1.6,1.8) -- (4.8,3.2);
+                    \draw[red,-,line width=0.5mm] (1.6,1.4) -- (4.8,0);
+                    \draw[red,-,line width=0.5mm] 
+                        (4.8,0) rectangle (9.15,3.2);
+                    \end{tikzpicture}
+            \end{textblock*}
+        }
+
+        \only<3>{
+            \begin{textblock*}{5cm}(5cm,2cm) 
+                \begin{tikzpicture}
+                    \draw[red,-,line width=0.5mm] 
+                        (4.8,5.6) ellipse (1.2 and 0.9);
+                    \draw[red,-,line width=0.5mm] (0,2.5) -- (3.9,6.2);
+                    \draw[red,-,line width=0.5mm] (3,2.5) -- (5.8,5.1);
+                \end{tikzpicture}
+            \end{textblock*}
+        }
+
+        \centering
+        \begin{columns}
+                \column{.5\textwidth}
+                        \centering
+                        \includegraphics[width=0.5\textwidth]
+                            {example-image-a}
+                \column{.5\textwidth}
+                        \centering
+                        \mbox{
+                            \only<1>{
+                                \hidecontent{
+                                    \includegraphics[width=0.7\textwidth]
+                                        {example-image-b}
+                                }
+                            }
+                        }
+                        \mbox{
+                            \only<2,3>{
+                                \includegraphics[width=0.7\textwidth]
+                                    {example-image-b}
+                            }
+                        }
+                        
+        \end{columns}
+
+        \vspace{2mm}
+        \mbox{
+            \only<1,2>{
+                \hidecontent{
+                    \includegraphics[width=0.6\textwidth]
+                        {example-image-16x9}
+                }
+            }
+        }
+        \mbox{
+            \only<3>{
+                \includegraphics[width=0.6\textwidth]
+                    {example-image-16x9}
+            }
+        }
+
+}
+
+\appendix
+
+\frame[noframenumbering]{
+    \Huge
+    \begin{center}
+        Backup
+    \end{center}
+}
+
+\end{document}
